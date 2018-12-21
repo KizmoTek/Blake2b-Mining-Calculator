@@ -30,7 +30,7 @@
 const siaBlockTime = 600; // all time done in seconds
 const hyperBlockTime = 600;
 const primeBlockTime = 600;
-const classicBlockTime = 600;   // background-color: rgba(115, 132, 142, 0.4)
+const classicBlockTime = 600;
 const hour = 3600;
 const day = hour * 24;
 const week = day * 7;
@@ -764,29 +764,21 @@ function calcProfit() {
 }
 
 function presetUpdate() {
-    A3preset = A3.value.replace(/[^1234567890]|\-/g, "")
-    Baikpreset = Baik.value.replace(/[^1234567890]|\-/g, "")
-    B52preset = B52.value.replace(/[^1234567890]|\-/g, "")
-    iBepreset = iBe.value.replace(/[^1234567890]|\-/g, "")
-    S11preset = S11.value.replace(/[^1234567890]|\-/g, "")
-    SC1preset = SC1.value.replace(/[^1234567890]|\-/g, "")
-    StrongUpreset = StrongU.value.replace(/[^1234567890]|\-/g, "")
+    A3.value = A3.value.replace(/[^1234567890]/g, "")
+    Baik.value = Baik.value.replace(/[^1234567890]/g, "")
+    B52.value = B52.value.replace(/[^1234567890]/g, "")
+    iBe.value = iBe.value.replace(/[^1234567890]/g, "")
+    S11.value = S11.value.replace(/[^1234567890]/g, "")
+    SC1.value = SC1.value.replace(/[^1234567890]/g, "")
+    StrongU.value = StrongU.value.replace(/[^1234567890]/g, "")
     
-   /* let A3preset
-    let Baikpreset
-    let B52preset
-    let iBepreset
-    let S11preset
-    let SC1preset
-    let StrongUpreset
-    
-    let A3presetPower
-    let BaikpresetPower
-    let B52presetPower
-    let iBepresetPower
-    let S11presetPower
-    let SC1presetPower
-    let StrongUpresetPower */
+    A3preset = A3.value
+    Baikpreset = Baik.value
+    B52preset = B52.value
+    iBepreset = iBe.value
+    S11preset = S11.value
+    SC1preset = SC1.value
+    StrongUpreset = StrongU.value
     
     //Antminer A3
     if (A3preset >= 1 && A3preset < 999) {
