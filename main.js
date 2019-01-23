@@ -840,7 +840,7 @@ function getBlockReward(CASH2APIheight)
 }
 
 function cash2Reward(difficulty, hashrate, height, period){
-    return (hashrate/(CASH2APIDifficulty/cash2BlockTime)) * ((getBlockReward(CASH2APIheight)  * (period/cash2BlockTime)))
+    return (hashrate/(CASH2APIDifficulty/cash2BlockTime)) * ((getBlockReward(CASH2APIheight + ((period/cash2BlockTime)/2)))  * (period/cash2BlockTime))
 
 }
 }
