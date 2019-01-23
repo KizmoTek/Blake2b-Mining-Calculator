@@ -291,6 +291,11 @@
                 width: 18px;
                 margin-bottom: -3px;
         }
+        
+        .Cash2Logo {
+                width: 25px;
+                margin-bottom: -3px;
+        }
 
         .preset {
                 background-color: rgba(185, 185, 185, 0.6);
@@ -377,7 +382,7 @@
 
 /* Mobile Scaling */ 
 
-@media only screen and (max-width: 1199px) {
+@media only screen and (max-width: 500px) {
         body {
                 margin: 0px;
                 padding: 0px;
@@ -641,6 +646,371 @@
         
         .classicLogo {
                 width: 14px;
+                margin-bottom: -3px;
+        }
+        
+        .Cash2Logo {
+                width: 25px;
+                margin-bottom: -3px;
+        }
+        
+        .preset {
+                background-color: rgba(185, 185, 185, 0.6);
+                border: 2px #7f7f7f solid;
+                height: 240px;
+                width: 180px;
+                border-radius: 10px;
+                text-align: center;
+                margin:auto;
+        }
+        
+        .preset tr td input {
+                width: 23px;
+                background-color: rgba(185, 185, 185, 0);
+                border-bottom-color: rgba(185, 185, 185, 0);
+                background-color: transparent;
+                border: 0px solid;
+                color: black;
+                
+        }
+        
+        .preset tr td,
+        .preset tr th {
+                width: 0px;
+        }
+        
+        .presetWord {
+                font-size: 25px;
+        
+        }
+        
+        .preset tr td {
+                background-color: rgba(160, 160, 160, 0.6);
+                border: 1px solid rgba(120, 120, 120, 0.8);
+                border-radius: 4px;
+        }
+        
+        input:focus,
+        select:focus,
+        textarea:focus,
+        button:focus {
+                outline: none;
+        }
+        
+        #hashrate,
+        #poolFee,
+        #elecCost,
+        #powerConsumtion {
+                border: 1px solid rgba(120, 120, 120, 1);
+                height: 16px;
+        }
+        
+        #webMsg {
+                margin: 0px;
+                height: 30px;
+                color: red;
+        }
+        
+        #hashPower {
+                background-color: rgba(175, 175, 175, 0.6);
+                border: 1px solid rgba(120, 120, 120, 1);
+                border-bottom-right-radius: 5%;
+                border-top-right-radius: 5%;
+                margin-left: -6px;
+                height: 20px;
+        }
+        
+        #inputArea {
+                padding: 10px;
+                width: 300px;
+                margin:auto;
+        }
+        
+        .logoName {
+                margin: 0px;
+        }
+        
+        #Obelisk {
+                background-color: rgba(115, 132, 142, 0.4)
+        }
+        
+        .github {
+                font-size:12px;
+        }
+}
+
+/* Mobile Wide */ 
+
+@media only screen and (max-width: 1199px) and (min-width: 500px) {
+        body {
+                margin: 0px;
+                padding: 0px;
+                text-align: center;
+                background-color: #cbd0d6;
+                height: 100%;
+                font-family: 'Roboto';
+        }
+        
+        input[type=number]::-webkit-inner-spin-button,
+        input[type=number]::-webkit-outer-spin-button {
+                -webkit-appearance: none;
+                margin: 0;
+        }
+        
+        .TopLine {
+                margin: 0 auto;
+                border-bottom: 2px #b1b6bc solid;
+                background-color: #cbd0d6;
+                margin-top: 0;
+        
+        }
+        
+        .TopLine>h1 {
+                margin-top: 0;
+        }
+        
+        footer {
+                width: 100%;
+                bottom: 0px;
+                border-top: 2px #b1b6bc solid;
+                background-color: #cbd0d6;
+                display: flex;
+                flex-direction:column;
+                align-items:center;
+                justify-content: center;
+        }
+        
+        .main {
+                background-color: #d8d8d8;
+        }
+        
+        .Result {
+                background-color: rgba(96, 193, 181, 0.6);
+                border: 2px #52a59b solid;
+                flex-wrap: nowrap;
+                margin: auto;
+                border-radius: 10px;
+                width: 500px;
+        }
+        
+        .tableCoin {
+                color: white;
+                font-size: 32px;
+        }
+        
+        .time {
+                color: white;
+                font-size: 22px;
+        
+        }
+        
+        th,
+        td {
+                width: 1000px;
+        }
+        
+        .Result th {
+                padding-left: 2px;
+                padding-right: 2px;
+                font-size: 17px;
+        
+        }
+        
+        .siaInfo {
+                font-size: 10px;
+        }
+        
+        .outer {
+                display: flex;
+                flex-direction:column;
+        }
+        
+        .container {
+                max-width: 1000px;
+                margin: auto;
+                padding-top: 30px;
+                padding-bottom: 30px;
+        }
+        
+        .calcNumbers {
+                font-size: 12px;
+                font-weight:bold;
+        }
+        
+        
+        .infoImg {
+                width: 14px;
+                margin-bottom: 8px;
+                margin-left: -5px;
+        }
+        
+        .infoImg2 {
+                width: 11px;
+                margin-bottom: 5px;
+                margin-left: -3px;
+        }
+        
+        .coinLogo {
+                width: 26px;
+                margin-bottom: -3px;
+        }
+        
+        .coinName {
+                color:white;
+        }
+        
+        .tooltip {
+                position: relative;
+                display: inline-block;
+        }
+        
+        .tooltip .tooltiptext {
+                visibility: hidden;
+                width: 120px;
+                font-size: 20px;
+                background-color: rgba(70, 140, 131, 0.9);
+                color: white;
+                text-align: center;
+                border-radius: 6px;
+                padding: 5px 0;
+        
+                /* Position the tooltip */
+                position: absolute;
+                top: -170px;
+                z-index: 1;
+        }
+        
+        .tooltip3 {
+                position: relative;
+                display: inline-block;
+        }
+
+        .tooltip3 .tooltiptext3 {
+                visibility: hidden;
+                width: 220px;
+                font-size: 18px;
+                background-color: rgba(168, 168, 168, 0.9);
+                color: white;
+                text-align: center;
+                border-radius: 6px;
+                padding: 5px 0;
+
+                /* Position the tooltip */
+                position: absolute;
+                top: -90px;
+                left:-220px;
+                z-index: 1;
+        }
+
+        .tooltip3:hover .tooltiptext3 {
+                visibility: visible;
+        }
+        
+        #advert {
+                width:200px;
+                height:100px;
+                margin-top: 10px;
+        }
+        
+        #Highlight {
+                background-color: rgba(184, 188, 193, 0.9);
+                width:10px;
+        }
+        
+        #Pricing {
+                color:#444444;
+        }
+        
+        #rules {
+                text-align: left;
+                margin-left:15px;
+        }
+        
+        .tooltip:hover .tooltiptext {
+                visibility: visible;
+        }
+        
+        .tooltip2 {
+                position: relative;
+                display: inline-block;
+        }
+        
+        .tooltip2 .tooltiptext2 {
+                visibility: hidden;
+                width: 120px;
+                font-size: 18px;
+                background-color: rgba(168, 168, 168, 0.9);
+                color: white;
+                text-align: center;
+                border-radius: 6px;
+                padding: 5px 0;
+        
+                /* Position the tooltip */
+                position: absolute;
+                top: -110px;
+                z-index: 1;
+        }
+        
+        .tooltip2:hover .tooltiptext2 {
+                visibility: visible;
+        }
+        
+        a {
+                text-decoration: none;
+                color: #00A0C6;
+        }
+        
+        .apiLogo {
+                width: 35px;
+        }
+        
+        #API {
+                display: flex;
+        }
+        
+        #addressBTC {
+                color:#a09800;
+        }
+        
+        #addressSIA {
+                color:#00b733;
+        }
+        
+        #addressSCP {
+                color:#0042bc;
+        }
+        
+        #addressXSC {
+                color:#6c00ba;
+        }
+        
+        #address {
+                color:#2d2d2d;
+        }
+        
+        #address:hover {
+                cursor: pointer
+        }
+        
+        #donFlex {
+                display: flex;
+        }
+        
+        #donation {
+                font-size: 9px;
+        }
+        
+        .donMarginOff {
+                margin: 1px;
+        }
+        
+        .classicLogo {
+                width: 14px;
+                margin-bottom: -3px;
+        }
+        
+        .Cash2Logo {
+                width: 25px;
                 margin-bottom: -3px;
         }
         
@@ -992,6 +1362,11 @@
 
         .classicLogo {
                 width: 18px;
+                margin-bottom: -3px;
+        }
+
+        .Cash2Logo {
+                width: 25px;
                 margin-bottom: -3px;
         }
 
