@@ -49,6 +49,9 @@ const cash2PriceAPI = "" //Wait for API to be on CoinGecko
 
 let hshrt = 0
 
+const greenColor = "#30ff30"
+const redColor = "#ff0000"
+
 //Hyperspace-------------------------------------------------------------------
 const XSCcalcHour = document.querySelector("#XSCresultHour")
 const XSCcalcDay = document.querySelector("#XSCresultDay")
@@ -65,33 +68,15 @@ const XSCresultDayProfit = document.querySelector("#XSCresultDayProfit")
 const XSCresultWeekProfit = document.querySelector("#XSCresultWeekProfit")
 const XSCresultMonthProfit = document.querySelector("#XSCresultMonthProfit")
 
-let hyperProfitHour
-let hyperProfitDay
-let hyperProfitWeek
-let hyperProfitMonth
-
-let hyperProfitHourFinal
-let hyperProfitDayFinal
-let hyperProfitWeekFinal
-let hyperProfitMonthFinal
-
 let hyperHourresult
-let hyperHourFinal
 let hyperDayresult
-let hyperDayFinal
 let hyperWeekresult
-let hyperWeekFinal
 let hyperMonthresult
-let hyperMonthFinal
 
 let hyperUSDHourresult
-let hyperUSDHourFinal
 let hyperUSDDayresult
-let hyperUSDDayFinal
 let hyperUSDWeekresult
-let hyperUSDWeekFinal
 let hyperUSDMonthresult
-let hyperUSDMonthFinal
 
 let hyperFeeHour
 let hyperFeeDay
@@ -114,33 +99,15 @@ const SCPresultDayProfit = document.querySelector("#SCPresultDayProfit")
 const SCPresultWeekProfit = document.querySelector("#SCPresultWeekProfit")
 const SCPresultMonthProfit = document.querySelector("#SCPresultMonthProfit")
 
-let primeProfitHour
-let primeProfitDay
-let primeProfitWeek
-let primeProfitMonth
-
-let primeProfitHourFinal
-let primeProfitDayFinal
-let primeProfitWeekFinal
-let primeProfitMonthFinal
-
 let primeHourresult
-let primeHourFinal
 let primeDayresult
-let primeDayFinal
 let primeWeekresult
-let primeWeekFinal
 let primeMonthresult
-let primeMonthFinal
 
 let primeUSDHourresult
-let primeUSDHourFinal
 let primeUSDDayresult
-let primeUSDDayFinal
 let primeUSDWeekresult
-let primeUSDWeekFinal
 let primeUSDMonthresult
-let primeUSDMonthFinal
 
 let primeFeeHour
 let primeFeeDay
@@ -163,33 +130,15 @@ const SCCresultDayProfit = document.querySelector("#SCCresultDayProfit")
 const SCCresultWeekProfit = document.querySelector("#SCCresultWeekProfit")
 const SCCresultMonthProfit = document.querySelector("#SCCresultMonthProfit")
 
-let classicProfitHour
-let classicProfitDay
-let classicProfitWeek
-let classicProfitMonth
-
-let classicProfitHourFinal
-let classicProfitDayFinal
-let classicProfitWeekFinal
-let classicProfitMonthFinal
-
 let sccHourresult
-let sccHourFinal
 let sccDayresult
-let sccDayFinal
 let sccWeekresult
-let sccWeekFinal
 let sccMonthresult
-let sccMonthFinal
 
 let sccUSDHourresult
-let sccUSDHourFinal
 let sccUSDDayresult
-let sccUSDDayFinal
 let sccUSDWeekresult
-let sccUSDWeekFinal
 let sccUSDMonthresult
-let sccUSDMonthFinal
 
 let classicFeeHour
 let classicFeeDay
@@ -212,33 +161,15 @@ const SiaresultDayProfit = document.querySelector("#SiaresultDayProfit")
 const SiaresultWeekProfit = document.querySelector("#SiaresultWeekProfit")
 const SiaresultMonthProfit = document.querySelector("#SiaresultMonthProfit")
 
-let siaProfitHour
-let siaProfitDay
-let siaProfitWeek
-let siaProfitMonth
-
-let siaProfitHourFinal
-let siaProfitDayFinal
-let siaProfitWeekFinal
-let siaProfitMonthFinal
-
 let siaHourresult
-let siaHourFinal
 let siaDayresult
-let siaDayFinal
 let siaWeekresult
-let siaWeekFinal
 let siaMonthresult
-let siaMonthFinal
 
 let siaUSDHourresult
-let siaUSDHourFinal
 let siaUSDDayresult
-let siaUSDDayFinal
 let siaUSDWeekresult
-let siaUSDWeekFinal
 let siaUSDMonthresult
-let siaUSDMonthFinal
 
 let siaFeeHour
 let siaFeeDay
@@ -261,16 +192,6 @@ const Cash2resultDayProfit = document.querySelector("#CASH2resultDayProfit")
 const Cash2resultWeekProfit = document.querySelector("#CASH2resultWeekProfit")
 const Cash2resultMonthProfit = document.querySelector("#CASH2resultMonthProfit")
 
-let Cash2ProfitHour
-let Cash2ProfitDay
-let Cash2ProfitWeek
-let Cash2ProfitMonth
-
-let Cash2ProfitHourFinal
-let Cash2ProfitDayFinal
-let Cash2ProfitWeekFinal
-let Cash2ProfitMonthFinal
-
 let Cash2Hourresult
 let Cash2HourFinal
 let Cash2Dayresult
@@ -281,13 +202,9 @@ let Cash2Monthresult
 let Cash2MonthFinal
 
 let Cash2USDHourresult
-let Cash2USDHourFinal
 let Cash2USDDayresult
-let Cash2USDDayFinal
 let Cash2USDWeekresult
-let Cash2USDWeekFinal
 let Cash2USDMonthresult
-let Cash2USDMonthFinal
 
 let Cash2FeeHour
 let Cash2FeeDay
@@ -341,11 +258,49 @@ let S11presetPower = 0
 let SC1presetPower = 0
 let StrongUpresetPower = 0
 
-const donationAdd = document.getElementById("address")
+var coinAddress
+var coin
+
+var popup
+
+function BTCSet() {
+    coinAddress = "1DNEmupDWC873fDv4Lpy1xY2us6eYKwXTH"
+    coin = "BTC"
+    popup = document.getElementById("myPopup");
+    copyAdd()
+}
+
+function SIASet() {
+    coinAddress = "f7e6b31b7fbfd78894964d81e418ad0d1b9f0a8ae59be37e932e5853670feb89e0f4021df521"
+    coin = "SIA"
+    popup = document.getElementById("myPopup2");
+    copyAdd()
+}
+
+function XSCSet() {
+    coinAddress = "ebe11b2258f11caba02e7d2c1a5766b94175a5155d9e620a7f77a95d4bd1f5856fdb2d513cb3"
+    coin = "XSC"
+    popup = document.getElementById("myPopup3");
+    copyAdd()
+}
+
+function SCPSet() {
+    coinAddress = "bd187fa1c247a297e364d67ee59b66a4cbecec2d4a3cf2c01d4d5540c9d6a03f6279d40657a3"
+    coin = "SCP"
+    popup = document.getElementById("myPopup4");
+    copyAdd()
+}
+
 function copyAdd() {
-    donationAdd.select();
-    document.execCommand("copy");
-    alert("Copied the text: " + donationAdd.textContent);
+      const el = document.createElement('textarea');
+      el.value = coinAddress;
+      document.body.appendChild(el);
+      el.select();
+      document.execCommand('copy');
+      document.body.removeChild(el);
+      popup.classList.toggle("show");
+      setTimeout( () => {popup.classList.toggle("show")}, 3000);
+      
 }
 
 function liveHashrate() {
@@ -592,22 +547,11 @@ function sia(){
         siaDayresult = siaReward(siaAPIDifficulty, hshrt, siaAPIheight, day)
         siaWeekresult = siaReward(siaAPIDifficulty, hshrt, siaAPIheight, week)
         siaMonthresult = siaReward(siaAPIDifficulty, hshrt, siaAPIheight, month)
-        
-        siaProfitHour = siaHourresult
-        siaProfitDay = siaDayresult
-        siaProfitWeek = siaWeekresult
-        siaProfitMonth = siaMonthresult
-        
-        siaHourFinal = numberShortener(siaProfitHour)
-        siaDayFinal = numberShortener(siaProfitDay)
-        siaWeekFinal = numberShortener(siaProfitWeek)
-        siaMonthFinal = numberShortener(siaProfitMonth)
 
-
-        SiacalcHour.innerHTML = siaHourFinal
-        SiacalcDay.innerHTML = siaDayFinal
-        SiacalcWeek.innerHTML = siaWeekFinal
-        SiacalcMonth.innerHTML = siaMonthFinal
+        SiacalcHour.innerHTML = numberShortener(siaHourresult)
+        SiacalcDay.innerHTML = numberShortener(siaDayresult)
+        SiacalcWeek.innerHTML = numberShortener(siaWeekresult)
+        SiacalcMonth.innerHTML = numberShortener(siaMonthresult)
 
 function siaReward(difficulty, hashrate, height, period){
     return (hashrate/(difficulty/siaBlockTime)) * ((300000 - height - ((period/siaBlockTime)/2)) * (period/siaBlockTime));
@@ -616,20 +560,15 @@ function siaReward(difficulty, hashrate, height, period){
 
 function siaPrice() {
 
-        siaUSDHourresult = siaProfitHour * siaPriceAPIData.prices[siaPriceAPIData.prices.length - 1][1]
-        siaUSDDayresult = siaProfitDay * siaPriceAPIData.prices[siaPriceAPIData.prices.length - 1][1]
-        siaUSDWeekresult = siaProfitWeek * siaPriceAPIData.prices[siaPriceAPIData.prices.length - 1][1]
-        siaUSDMonthresult = siaProfitMonth * siaPriceAPIData.prices[siaPriceAPIData.prices.length - 1][1]
+        siaUSDHourresult = siaHourresult * siaPriceAPIData.prices[siaPriceAPIData.prices.length - 1][1]
+        siaUSDDayresult = siaDayresult * siaPriceAPIData.prices[siaPriceAPIData.prices.length - 1][1]
+        siaUSDWeekresult = siaWeekresult * siaPriceAPIData.prices[siaPriceAPIData.prices.length - 1][1]
+        siaUSDMonthresult = siaMonthresult * siaPriceAPIData.prices[siaPriceAPIData.prices.length - 1][1]
         
-        siaUSDHourFinal = numberShortener(siaUSDHourresult)
-        siaUSDDayFinal = numberShortener(siaUSDDayresult)
-        siaUSDWeekFinal = numberShortener(siaUSDWeekresult)
-        siaUSDMonthFinal = numberShortener(siaUSDMonthresult)
-        
-        SiacalcHourUSD.innerHTML = siaUSDHourFinal
-        SiacalcDayUSD.innerHTML = siaUSDDayFinal
-        SiacalcWeekUSD.innerHTML = siaUSDWeekFinal
-        SiacalcMonthUSD.innerHTML = siaUSDMonthFinal
+        SiacalcHourUSD.innerHTML = numberShortener(siaUSDHourresult)
+        SiacalcDayUSD.innerHTML = numberShortener(siaUSDDayresult)
+        SiacalcWeekUSD.innerHTML = numberShortener(siaUSDWeekresult)
+        SiacalcMonthUSD.innerHTML = numberShortener(siaUSDMonthresult)
 }
 
 function siaPriceError() {
@@ -649,20 +588,10 @@ function hyper(){
         hyperWeekresult = hyperReward(hyperAPIDifficulty, hshrt, hyperAPIheight, week)
         hyperMonthresult = hyperReward(hyperAPIDifficulty, hshrt, hyperAPIheight, month)
         
-        hyperProfitHour = hyperHourresult
-        hyperProfitDay = hyperDayresult
-        hyperProfitWeek = hyperWeekresult
-        hyperProfitMonth = hyperMonthresult
-        
-        hyperHourFinal = numberShortener(hyperProfitHour)
-        hyperDayFinal = numberShortener(hyperProfitDay)
-        hyperWeekFinal = numberShortener(hyperProfitWeek)
-        hyperMonthFinal = numberShortener(hyperProfitMonth)
-        
-        XSCcalcHour.innerHTML = hyperHourFinal
-        XSCcalcDay.innerHTML = hyperDayFinal
-        XSCcalcWeek.innerHTML = hyperWeekFinal
-        XSCcalcMonth.innerHTML = hyperMonthFinal
+        XSCcalcHour.innerHTML = numberShortener(hyperHourresult)
+        XSCcalcDay.innerHTML = numberShortener(hyperDayresult)
+        XSCcalcWeek.innerHTML = numberShortener(hyperWeekresult)
+        XSCcalcMonth.innerHTML = numberShortener(hyperMonthresult)
     
 function hyperReward(difficulty, hashrate, height, period){
     return (hashrate/(difficulty/hyperBlockTime)) * ((60000 - (height * 0.2) - ((period/hyperBlockTime)/2)) * (period/hyperBlockTime)) * 0.9;
@@ -672,20 +601,15 @@ function hyperReward(difficulty, hashrate, height, period){
     
 function hyperPrice() {
         
-        hyperUSDHourresult = hyperProfitHour * hyperPriceAPIData.prices[hyperPriceAPIData.prices.length - 1][1]
-        hyperUSDDayresult = hyperProfitDay * hyperPriceAPIData.prices[hyperPriceAPIData.prices.length - 1][1]
-        hyperUSDWeekresult = hyperProfitWeek * hyperPriceAPIData.prices[hyperPriceAPIData.prices.length - 1][1]
-        hyperUSDMonthresult = hyperProfitMonth * hyperPriceAPIData.prices[hyperPriceAPIData.prices.length - 1][1]
+        hyperUSDHourresult = hyperHourresult * hyperPriceAPIData.prices[hyperPriceAPIData.prices.length - 1][1]
+        hyperUSDDayresult = hyperDayresult * hyperPriceAPIData.prices[hyperPriceAPIData.prices.length - 1][1]
+        hyperUSDWeekresult = hyperWeekresult * hyperPriceAPIData.prices[hyperPriceAPIData.prices.length - 1][1]
+        hyperUSDMonthresult = hyperMonthresult * hyperPriceAPIData.prices[hyperPriceAPIData.prices.length - 1][1]
         
-        hyperUSDHourFinal = numberShortener(hyperUSDHourresult)
-        hyperUSDDayFinal = numberShortener(hyperUSDDayresult)
-        hyperUSDWeekFinal = numberShortener(hyperUSDWeekresult)
-        hyperUSDMonthFinal = numberShortener(hyperUSDMonthresult)
-
-        XSCcalcHourUSD.innerHTML = hyperUSDHourFinal
-        XSCcalcDayUSD.innerHTML = hyperUSDDayFinal
-        XSCcalcWeekUSD.innerHTML = hyperUSDWeekFinal
-        XSCcalcMonthUSD.innerHTML = hyperUSDMonthFinal
+        XSCcalcHourUSD.innerHTML = numberShortener(hyperUSDHourresult)
+        XSCcalcDayUSD.innerHTML = numberShortener(hyperUSDDayresult)
+        XSCcalcWeekUSD.innerHTML = numberShortener(hyperUSDWeekresult)
+        XSCcalcMonthUSD.innerHTML = numberShortener(hyperUSDMonthresult)
 }
 
 function hyperPriceError() {
@@ -705,20 +629,10 @@ function classic(){
         sccWeekresult = classicReward(classicAPIDifficulty, hshrt, classicAPIheight, week)
         sccMonthresult = classicReward(classicAPIDifficulty, hshrt, classicAPIheight, month)
         
-        classicProfitHour = sccHourresult
-        classicProfitDay = sccDayresult
-        classicProfitWeek = sccWeekresult
-        classicProfitMonth = sccMonthresult
-        
-        sccHourFinal = numberShortener(sccHourresult)
-        sccDayFinal = numberShortener(sccDayresult)
-        sccWeekFinal = numberShortener(sccWeekresult)
-        sccMonthFinal = numberShortener(sccMonthresult)
-        
-        SCCcalcHour.innerHTML = sccHourFinal
-        SCCcalcDay.innerHTML = sccDayFinal
-        SCCcalcWeek.innerHTML = sccWeekFinal
-        SCCcalcMonth.innerHTML = sccMonthFinal
+        SCCcalcHour.innerHTML = numberShortener(sccHourresult)
+        SCCcalcDay.innerHTML = numberShortener(sccDayresult)
+        SCCcalcWeek.innerHTML = numberShortener(sccWeekresult)
+        SCCcalcMonth.innerHTML = numberShortener(sccMonthresult)
     
 
 function classicReward(difficulty, hashrate, height, period){
@@ -727,21 +641,16 @@ function classicReward(difficulty, hashrate, height, period){
 }
 
 function classicPrice() {
-    
-        sccUSDHourresult = classicProfitHour * classicPriceAPIData.prices[classicPriceAPIData.prices.length - 1][1]
-        sccUSDDayresult = classicProfitDay * classicPriceAPIData.prices[classicPriceAPIData.prices.length - 1][1]
-        sccUSDWeekresult = classicProfitWeek * classicPriceAPIData.prices[classicPriceAPIData.prices.length - 1][1]
-        sccUSDMonthresult = classicProfitMonth * classicPriceAPIData.prices[classicPriceAPIData.prices.length - 1][1]
         
-        sccUSDHourFinal = numberShortener(sccUSDHourresult)
-        sccUSDDayFinal = numberShortener(sccUSDDayresult)
-        sccUSDWeekFinal = numberShortener(sccUSDWeekresult)
-        sccUSDMonthFinal = numberShortener(sccUSDMonthresult)
-    
-        SCCcalcHourUSD.innerHTML = sccUSDHourFinal
-        SCCcalcDayUSD.innerHTML = sccUSDDayFinal
-        SCCcalcWeekUSD.innerHTML = sccUSDWeekFinal
-        SCCcalcMonthUSD.innerHTML = sccUSDMonthFinal
+        sccUSDHourresult = sccHourresult * classicPriceAPIData.prices[classicPriceAPIData.prices.length - 1][1]
+        sccUSDDayresult = sccDayresult * classicPriceAPIData.prices[classicPriceAPIData.prices.length - 1][1]
+        sccUSDWeekresult = sccWeekresult * classicPriceAPIData.prices[classicPriceAPIData.prices.length - 1][1]
+        sccUSDMonthresult = sccMonthresult * classicPriceAPIData.prices[classicPriceAPIData.prices.length - 1][1]
+        
+        SCCcalcHourUSD.innerHTML = numberShortener(sccUSDHourresult)
+        SCCcalcDayUSD.innerHTML = numberShortener(sccUSDDayresult)
+        SCCcalcWeekUSD.innerHTML = numberShortener(sccUSDWeekresult)
+        SCCcalcMonthUSD.innerHTML = numberShortener(sccUSDMonthresult)
 }
 
 function classicPriceAPIError() {
@@ -762,20 +671,10 @@ function prime(){
     primeWeekresult = primeReward(primeAPIDifficulty, hshrt, primeAPIheight, week)
     primeMonthresult = primeReward(primeAPIDifficulty, hshrt, primeAPIheight, month)
     
-    primeProfitHour = primeHourresult
-    primeProfitDay = primeDayresult
-    primeProfitWeek = primeWeekresult
-    primeProfitMonth = primeMonthresult
-    
-    primeHourFinal = numberShortener(primeHourresult)
-    primeDayFinal = numberShortener(primeDayresult)
-    primeWeekFinal = numberShortener(primeWeekresult)
-    primeMonthFinal = numberShortener(primeMonthresult)
-    
-    SCPcalcHour.innerHTML = primeHourFinal
-    SCPcalcDay.innerHTML = primeDayFinal
-    SCPcalcWeek.innerHTML = primeWeekFinal
-    SCPcalcMonth.innerHTML = primeMonthFinal
+    SCPcalcHour.innerHTML = numberShortener(primeHourresult)
+    SCPcalcDay.innerHTML = numberShortener(primeDayresult)
+    SCPcalcWeek.innerHTML = numberShortener(primeWeekresult)
+    SCPcalcMonth.innerHTML = numberShortener(primeMonthresult)
 
 function primeReward(difficulty, hashrate, height, period){
     return (hashrate/(difficulty/primeBlockTime)) * ((300000 - height - ((period/primeBlockTime)/2)) * (period/primeBlockTime) * 0.8);
@@ -784,20 +683,15 @@ function primeReward(difficulty, hashrate, height, period){
 
 function primePrice() {
 
-        primeUSDHourresult = primeProfitHour * primePriceAPIData.prices[primePriceAPIData.prices.length - 1][1]
-        primeUSDDayresult = primeProfitDay * primePriceAPIData.prices[primePriceAPIData.prices.length - 1][1]
-        primeUSDWeekresult = primeProfitWeek * primePriceAPIData.prices[primePriceAPIData.prices.length - 1][1]
-        primeUSDMonthresult = primeProfitMonth * primePriceAPIData.prices[primePriceAPIData.prices.length - 1][1]
+        primeUSDHourresult = primeHourresult * primePriceAPIData.prices[primePriceAPIData.prices.length - 1][1]
+        primeUSDDayresult = primeDayresult * primePriceAPIData.prices[primePriceAPIData.prices.length - 1][1]
+        primeUSDWeekresult = primeWeekresult * primePriceAPIData.prices[primePriceAPIData.prices.length - 1][1]
+        primeUSDMonthresult = primeMonthresult * primePriceAPIData.prices[primePriceAPIData.prices.length - 1][1]
         
-        primeUSDHourFinal = numberShortener(primeUSDHourresult)
-        primeUSDDayFinal = numberShortener(primeUSDDayresult)
-        primeUSDWeekFinal = numberShortener(primeUSDWeekresult)
-        primeUSDMonthFinal = numberShortener(primeUSDMonthresult)
-        
-        SCPcalcHourUSD.innerHTML = primeUSDHourFinal
-        SCPcalcDayUSD.innerHTML = primeUSDDayFinal
-        SCPcalcWeekUSD.innerHTML = primeUSDWeekFinal
-        SCPcalcMonthUSD.innerHTML = primeUSDMonthFinal
+        SCPcalcHourUSD.innerHTML = numberShortener(primeUSDHourresult)
+        SCPcalcDayUSD.innerHTML = numberShortener(primeUSDDayresult)
+        SCPcalcWeekUSD.innerHTML = numberShortener(primeUSDWeekresult)
+        SCPcalcMonthUSD.innerHTML = numberShortener(primeUSDMonthresult)
 }
 
 function primePriceError() {
@@ -817,15 +711,10 @@ function cash2(){
     Cash2Weekresult = cash2Reward(CASH2APIDifficulty, hshrt, CASH2APIheight, week)
     Cash2Monthresult = cash2Reward(CASH2APIDifficulty, hshrt, CASH2APIheight, month)
     
-    Cash2HourFinal = numberShortener(Cash2Hourresult)
-    Cash2DayFinal = numberShortener(Cash2Dayresult)
-    Cash2WeekFinal = numberShortener(Cash2Weekresult)
-    Cash2MonthFinal = numberShortener(Cash2Monthresult)
-    
-    Cash2calcHour.innerHTML = Cash2HourFinal
-    Cash2calcDay.innerHTML = Cash2DayFinal
-    Cash2calcWeek.innerHTML = Cash2WeekFinal
-    Cash2calcMonth.innerHTML = Cash2MonthFinal
+    Cash2calcHour.innerHTML = numberShortener(Cash2Hourresult)
+    Cash2calcDay.innerHTML = numberShortener(Cash2Dayresult)
+    Cash2calcWeek.innerHTML = numberShortener(Cash2Weekresult)
+    Cash2calcMonth.innerHTML = numberShortener(Cash2Monthresult)
     
 function getBlockReward(CASH2APIheight)
 {
@@ -841,7 +730,6 @@ function getBlockReward(CASH2APIheight)
 
 function cash2Reward(difficulty, hashrate, height, period){
     return (hashrate/(CASH2APIDifficulty/cash2BlockTime)) * ((getBlockReward(CASH2APIheight + ((period/cash2BlockTime)/2)))  * (period/cash2BlockTime))
-
 }
 }
 
@@ -874,59 +762,159 @@ function calcProfit() {
         Cash2FeeMonth = ((((powerConsumtion.value * 24) / 1000) * 30) * elecCost.value) * -1
         
         //HyperSpace
-        hyperProfitHour = numberShortener(hyperFeeHour)
-        hyperProfitDay = numberShortener(hyperFeeDay)
-        hyperProfitWeek = numberShortener(hyperFeeWeek)
-        hyperProfitMonth = numberShortener(hyperFeeMonth)
+        XSCresultHourProfit.innerHTML = numberShortener(hyperFeeHour)
+        XSCresultDayProfit.innerHTML = numberShortener(hyperFeeDay)
+        XSCresultWeekProfit.innerHTML = numberShortener(hyperFeeWeek)
+        XSCresultMonthProfit.innerHTML = numberShortener(hyperFeeMonth)
         
-        XSCresultHourProfit.innerHTML = hyperProfitHour
-        XSCresultDayProfit.innerHTML = hyperProfitDay
-        XSCresultWeekProfit.innerHTML = hyperProfitWeek
-        XSCresultMonthProfit.innerHTML = hyperProfitMonth
+        //Hour
+        if (hyperFeeHour > 0) {
+            XSCresultHourProfit.style.color = greenColor
+        } else if (hyperFeeHour < 0) {
+            XSCresultHourProfit.style.color = redColor
+        }
+        //Day
+        if (hyperFeeDay > 0) {
+            XSCresultDayProfit.style.color = greenColor
+        } else if (hyperFeeDay < 0) {
+            XSCresultDayProfit.style.color = redColor
+        }
+        //Week
+        if (hyperFeeWeek > 0) {
+            XSCresultWeekProfit.style.color = greenColor
+        } else if (hyperFeeWeek < 0) {
+            XSCresultWeekProfit.style.color = redColor
+        }
+        //Month
+        if (hyperFeeMonth > 0) {
+            XSCresultMonthProfit.style.color = greenColor
+        } else if (hyperFeeMonth < 0) {
+            XSCresultMonthProfit.style.color = redColor
+        }
         
         //SiaPrime
-        primeProfitHour = numberShortener(primeFeeHour)
-        primeProfitDay = numberShortener(primeFeeDay)
-        primeProfitWeek = numberShortener(primeFeeWeek)
-        primeProfitMonth = numberShortener(primeFeeMonth)
+        SCPresultHourProfit.innerHTML = numberShortener(primeFeeHour)
+        SCPresultDayProfit.innerHTML = numberShortener(primeFeeDay)
+        SCPresultWeekProfit.innerHTML = numberShortener(primeFeeWeek)
+        SCPresultMonthProfit.innerHTML = numberShortener(primeFeeMonth)
         
-        SCPresultHourProfit.innerHTML = primeProfitHour
-        SCPresultDayProfit.innerHTML = primeProfitDay
-        SCPresultWeekProfit.innerHTML = primeProfitWeek
-        SCPresultMonthProfit.innerHTML = primeProfitMonth
+        //Hour
+        if (primeFeeHour > 0) {
+            SCPresultHourProfit.style.color = greenColor
+        } else if (primeFeeHour < 0) {
+            SCPresultHourProfit.style.color = redColor
+        }
+        //Day
+        if (primeFeeDay > 0) {
+            SCPresultDayProfit.style.color = greenColor
+        } else if (primeFeeDay < 0) {
+            SCPresultDayProfit.style.color = redColor
+        }
+        //Week
+        if (primeFeeWeek > 0) {
+            SCPresultWeekProfit.style.color = greenColor
+        } else if (primeFeeWeek < 0) {
+            SCPresultWeekProfit.style.color = redColor
+        }
+        //Month
+        if (primeFeeMonth > 0) {
+            SCPresultMonthProfit.style.color = greenColor
+        } else if (primeFeeMonth < 0) {
+            SCPresultMonthProfit.style.color = redColor
+        }
         
         //SiaClassic
-        classicProfitHour = numberShortener(classicFeeHour)
-        classicProfitDay = numberShortener(classicFeeDay)
-        classicProfitWeek = numberShortener(classicFeeWeek)
-        classicProfitMonth = numberShortener(classicFeeMonth)
+        SCCresultHourProfit.innerHTML = numberShortener(classicFeeHour)
+        SCCresultDayProfit.innerHTML = numberShortener(classicFeeDay)
+        SCCresultWeekProfit.innerHTML = numberShortener(classicFeeWeek)
+        SCCresultMonthProfit.innerHTML = numberShortener(classicFeeMonth)
         
-        SCCresultHourProfit.innerHTML = classicProfitHour
-        SCCresultDayProfit.innerHTML = classicProfitDay
-        SCCresultWeekProfit.innerHTML = classicProfitWeek
-        SCCresultMonthProfit.innerHTML = classicProfitMonth
-
+        //Hour
+        if (classicFeeHour > 0) {
+            SCCresultHourProfit.style.color = greenColor
+        } else if (classicFeeHour < 0) {
+            SCCresultHourProfit.style.color = redColor
+        }
+        //Day
+        if (classicFeeDay > 0) {
+            SCCresultDayProfit.style.color = greenColor
+        } else if (classicFeeDay < 0) {
+            SCCresultDayProfit.style.color = redColor
+        }
+        //Week
+        if (classicFeeWeek > 0) {
+            SCCresultWeekProfit.style.color = greenColor
+        } else if (classicFeeWeek < 0) {
+            SCCresultWeekProfit.style.color = redColor
+        }
+        //Month
+        if (classicFeeMonth > 0) {
+            SCCresultMonthProfit.style.color = greenColor
+        } else if (classicFeeMonth < 0) {
+            SCCresultMonthProfit.style.color = redColor
+        }
+        
         //Sia
-        siaProfitHour = numberShortener(siaFeeHour)
-        siaProfitDay = numberShortener(siaFeeDay)
-        siaProfitWeek = numberShortener(siaFeeWeek)
-        siaProfitMonth = numberShortener(siaFeeMonth)
+        SiaresultHourProfit.innerHTML = numberShortener(siaFeeHour)
+        SiaresultDayProfit.innerHTML = numberShortener(siaFeeDay)
+        SiaresultWeekProfit.innerHTML = numberShortener(siaFeeWeek)
+        SiaresultMonthProfit.innerHTML = numberShortener(siaFeeMonth)
         
-        SiaresultHourProfit.innerHTML = siaProfitHour
-        SiaresultDayProfit.innerHTML = siaProfitDay
-        SiaresultWeekProfit.innerHTML = siaProfitWeek
-        SiaresultMonthProfit.innerHTML = siaProfitMonth
+        //Hour
+        if (siaFeeHour > 0) {
+            SiaresultHourProfit.style.color = greenColor
+        } else if (siaFeeHour < 0) {
+            SiaresultHourProfit.style.color = redColor
+        }
+        //Day
+        if (siaFeeDay > 0) {
+            SiaresultDayProfit.style.color = greenColor
+        } else if (siaFeeDay < 0) {
+            SiaresultDayProfit.style.color = redColor
+        }
+        //Week
+        if (siaFeeWeek > 0) {
+            SiaresultWeekProfit.style.color = greenColor
+        } else if (siaFeeWeek < 0) {
+            SiaresultWeekProfit.style.color = redColor
+        }
+        //Month
+        if (siaFeeMonth > 0) {
+            SiaresultMonthProfit.style.color = greenColor
+        } else if (siaFeeMonth < 0) {
+            SiaresultMonthProfit.style.color = redColor
+        }
         
         //Cash2
-        Cash2ProfitHour = numberShortener(Cash2FeeHour)
-        Cash2ProfitDay = numberShortener(Cash2FeeDay)
-        Cash2ProfitWeek = numberShortener(Cash2FeeWeek)
-        Cash2ProfitMonth = numberShortener(Cash2FeeMonth)
+        Cash2resultHourProfit.innerHTML = numberShortener(Cash2FeeHour)
+        Cash2resultDayProfit.innerHTML = numberShortener(Cash2FeeDay)
+        Cash2resultWeekProfit.innerHTML = numberShortener(Cash2FeeWeek)
+        Cash2resultMonthProfit.innerHTML = numberShortener(Cash2FeeMonth)
         
-        Cash2resultHourProfit.innerHTML = Cash2ProfitHour
-        Cash2resultDayProfit.innerHTML = Cash2ProfitDay
-        Cash2resultWeekProfit.innerHTML = Cash2ProfitWeek
-        Cash2resultMonthProfit.innerHTML = Cash2ProfitMonth
+        //Hour
+        if (Cash2FeeHour > 0) {
+            Cash2resultHourProfit.style.color = greenColor
+        } else if (Cash2FeeHour < 0) {
+            Cash2resultHourProfit.style.color = redColor
+        }
+        //Day
+        if (Cash2FeeDay > 0) {
+            Cash2resultDayProfit.style.color = greenColor
+        } else if (Cash2FeeDay < 0) {
+            Cash2resultDayProfit.style.color = redColor
+        }
+        //Week
+        if (Cash2FeeWeek > 0) {
+            Cash2resultWeekProfit.style.color = greenColor
+        } else if (Cash2FeeWeek < 0) {
+            Cash2resultWeekProfit.style.color = redColor
+        }
+        //Month
+        if (Cash2FeeMonth > 0) {
+            Cash2resultMonthProfit.style.color = greenColor
+        } else if (Cash2FeeMonth < 0) {
+            Cash2resultMonthProfit.style.color = redColor
+        }
         
     }
 }
