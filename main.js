@@ -52,6 +52,16 @@ let hshrt = 0
 const greenColor = "#30ff30"
 const redColor = "#ff0000"
 
+const PowerCostHour = document.querySelector("#PowerCostHour")
+const PowerCostDay = document.querySelector("#PowerCostDay")
+const PowerCostWeek = document.querySelector("#PowerCostWeek")
+const PowerCostMonth = document.querySelector("#PowerCostMonth")
+
+let PowerCostHourResult
+let PowerCostDayResult
+let PowerCostWeekResult
+let PowerCostMonthResult
+
 //Hyperspace-------------------------------------------------------------------
 const XSCcalcHour = document.querySelector("#XSCresultHour")
 const XSCcalcDay = document.querySelector("#XSCresultDay")
@@ -181,7 +191,7 @@ const Cash2calcHour = document.querySelector("#CASH2resultHour")
 const Cash2calcDay = document.querySelector("#CASH2resultDay")
 const Cash2calcWeek = document.querySelector("#CASH2resultWeek")
 const Cash2calcMonth = document.querySelector("#CASH2resultMonth")
-
+/*
 const Cash2calcHourUSD = document.querySelector("#CASH2resultHourUSD")
 const Cash2calcDayUSD = document.querySelector("#CASH2resultDayUSD")
 const Cash2calcWeekUSD = document.querySelector("#CASH2resultWeekUSD")
@@ -191,7 +201,7 @@ const Cash2resultHourProfit = document.querySelector("#CASH2resultHourProfit")
 const Cash2resultDayProfit = document.querySelector("#CASH2resultDayProfit")
 const Cash2resultWeekProfit = document.querySelector("#CASH2resultWeekProfit")
 const Cash2resultMonthProfit = document.querySelector("#CASH2resultMonthProfit")
-
+*/
 let Cash2Hourresult
 let Cash2HourFinal
 let Cash2Dayresult
@@ -736,6 +746,11 @@ function cash2Reward(difficulty, hashrate, height, period){
 
 function calcProfit() {
     if (poolFee.value >= 0 || elecCost.value >= 0 || powerConsumtion.value >= 0) {
+        PowerCostHourResult = (((powerConsumtion.value * 1) / 1000) * elecCost.value) * -1
+        PowerCostDayResult = (((powerConsumtion.value * 24) / 1000) * elecCost.value) * -1
+        PowerCostWeekResult = ((((powerConsumtion.value * 24) / 1000) * 7) * elecCost.value) * -1
+        PowerCostMonthResult = ((((powerConsumtion.value * 24) / 1000) * 30) * elecCost.value) * -1
+        
         hyperFeeHour = (hyperUSDHourresult - (hyperUSDHourresult * (poolFee.value / 100))) - (((powerConsumtion.value * 1) / 1000) * elecCost.value)
         hyperFeeDay = (hyperUSDDayresult - (hyperUSDDayresult * (poolFee.value / 100))) - (((powerConsumtion.value * 24) / 1000) * elecCost.value)
         hyperFeeWeek = (hyperUSDWeekresult - (hyperUSDWeekresult * (poolFee.value / 100))) - ((((powerConsumtion.value * 24) / 1000) * 7) * elecCost.value)
@@ -760,6 +775,12 @@ function calcProfit() {
         Cash2FeeDay = (((powerConsumtion.value * 24) / 1000) * elecCost.value) * -1
         Cash2FeeWeek = ((((powerConsumtion.value * 24) / 1000) * 7) * elecCost.value) * -1
         Cash2FeeMonth = ((((powerConsumtion.value * 24) / 1000) * 30) * elecCost.value) * -1
+        
+        //PowerCost
+        PowerCostHour.innerHTML = numberShortener(PowerCostHourResult)
+        PowerCostDay.innerHTML = numberShortener(PowerCostDayResult)
+        PowerCostWeek.innerHTML = numberShortener(PowerCostWeekResult)
+        PowerCostMonth.innerHTML = numberShortener(PowerCostMonthResult)
         
         //HyperSpace
         XSCresultHourProfit.innerHTML = numberShortener(hyperFeeHour)
@@ -884,7 +905,7 @@ function calcProfit() {
         } else if (siaFeeMonth < 0) {
             SiaresultMonthProfit.style.color = redColor
         }
-        
+        /*
         //Cash2
         Cash2resultHourProfit.innerHTML = numberShortener(Cash2FeeHour)
         Cash2resultDayProfit.innerHTML = numberShortener(Cash2FeeDay)
@@ -915,7 +936,7 @@ function calcProfit() {
         } else if (Cash2FeeMonth < 0) {
             Cash2resultMonthProfit.style.color = redColor
         }
-        
+        */
     }
 }
 
@@ -1028,12 +1049,12 @@ function presetUpdate() {
         
     //StrongU STU-U2
     if (StrongUpreset >= 1 && StrongUpreset < 999) {
-        StrongUpresetFinal = 7000 * StrongUpreset
+        StrongUpresetFinal = 5500 * StrongUpreset
         StrongUpresetPower = 1600 * StrongUpreset
     }
     else if (StrongUpreset >= 999) {
         StrongU.value = 999
-        StrongUpresetFinal = 7000 * StrongUpreset
+        StrongUpresetFinal = 5500 * StrongUpreset
         StrongUpresetPower = 1600 * StrongUpreset
     }
     else if (StrongUpreset <= 0){

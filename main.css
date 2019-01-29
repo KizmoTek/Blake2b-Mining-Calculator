@@ -78,10 +78,9 @@
                 background-color: rgba(96, 193, 181, 0.6);
                 border: 2px #52a59b solid;
                 flex-wrap: nowrap;
-                margin-left: auto;
-                width: 900px;
-                border-radius: 10px;
-                margin-right: -100px;
+                border-radius: 0px 0px 10px 10px;
+                border-top:0px;
+                width: 550px;
         }
 
         .tableCoin {
@@ -98,22 +97,51 @@
         td {
                 width: 1000px;
         }
+        
+        .totalResult {
+                display: flex;
+                flex-direction:column;
+                margin-right: 80px;
+        }
+        
         .Result th {
                 padding-left: 22px;
                 padding-right: 22px;
 
         }
-
+        
+        .PowerResult {
+                background-color: rgba(193, 96, 96, 0.6);
+                border: 2px #a55252 solid;
+                flex-wrap: nowrap;
+                margin: auto;
+                border-radius: 10px 10px 0px 0px;
+                border-bottom:0px;
+                height:25px;
+                width: 550px;
+        }
+        
+        .PowerResult th {
+                padding-left: 2px;
+                padding-right: 2px;
+                font-size: 17px;
+        
+        }
+        
+        .powerNumbers {
+                font-size: 15px;
+        }
+        
         .siaInfo {
                 font-size: 10px;
         }
 
         .outer {
                 display: flex;
+                justify-content:center;
         }
 
         .container {
-                max-width: 1000px;
                 margin: auto;
                 padding-top: 30px;
                 padding-bottom: 30px;
@@ -468,10 +496,10 @@
                 background-color: rgba(185, 185, 185, 0.6);
                 border: 2px #7f7f7f solid;
                 height: 240px;
-                width: 280px;
+                width: 180px;
                 border-radius: 10px;
                 margin-top: 120px;
-                margin-left: -50px;
+                margin-left: 150px;
         }
 
         .preset tr td input {
@@ -531,7 +559,7 @@
 
         #inputArea {
                 padding: 10px;
-                width: 630px;
+                width: 430px;
         }
 
         .logoName {
@@ -597,7 +625,29 @@
                 border: 2px #52a59b solid;
                 flex-wrap: nowrap;
                 margin-left: auto;
-                border-radius: 10px;
+                border-radius: 0px 0px 10px 10px;
+                border-top:0px;
+        }
+        
+        .PowerResult {
+                background-color: rgba(193, 96, 96, 0.6);
+                border: 2px #a55252 solid;
+                flex-wrap: nowrap;
+                margin: auto;
+                border-radius: 10px 10px 0px 0px;
+                border-bottom:0px;
+                height:25px;
+        }
+        
+        .PowerResult th {
+                padding-left: 2px;
+                padding-right: 2px;
+                font-size: 11px;
+        
+        }
+        
+        .powerNumbers {
+                font-size: 15px;
         }
         
         .tableCoin {
@@ -623,6 +673,27 @@
         
         }
         
+        .PowerResult {
+                background-color: rgba(193, 96, 96, 0.6);
+                border: 2px #a55252 solid;
+                flex-wrap: nowrap;
+                margin: auto;
+                border-radius: 10px 10px 0px 0px;
+                border-bottom:0px;
+                height:20px;
+        }
+        
+        .PowerResult th {
+                padding-left: 2px;
+                padding-right: 2px;
+                font-size: 11px;
+        
+        }
+        
+        .powerNumbers {
+                font-size: 11px;
+        }
+        
         .siaInfo {
                 font-size: 10px;
         }
@@ -630,10 +701,10 @@
         .outer {
                 display: flex;
                 flex-direction:column;
+                justify-content:center;
         }
         
         .container {
-                max-width: 1000px;
                 margin: auto;
                 padding-top: 30px;
                 padding-bottom: 30px;
@@ -1117,8 +1188,9 @@
                 border: 2px #52a59b solid;
                 flex-wrap: nowrap;
                 margin: auto;
-                border-radius: 10px;
                 width: 500px;
+                border-radius: 0px 0px 10px 10px;
+                border-top:0px;
         }
         
         .tableCoin {
@@ -1144,6 +1216,28 @@
         
         }
         
+        .PowerResult {
+                background-color: rgba(193, 96, 96, 0.6);
+                border: 2px #a55252 solid;
+                flex-wrap: nowrap;
+                margin: auto;
+                border-radius: 10px 10px 0px 0px;
+                border-bottom:0px;
+                height:20px;
+                width: 500px;
+        }
+        
+        .PowerResult th {
+                padding-left: 2px;
+                padding-right: 2px;
+                font-size: 11px;
+        
+        }
+        
+        .powerNumbers {
+                font-size: 11px;
+        }
+        
         .siaInfo {
                 font-size: 10px;
         }
@@ -1151,10 +1245,10 @@
         .outer {
                 display: flex;
                 flex-direction:column;
+                justify-content:center;
         }
         
         .container {
-                max-width: 1000px;
                 margin: auto;
                 padding-top: 30px;
                 padding-bottom: 30px;
@@ -1635,9 +1729,9 @@
                 border: 2px #52a59b solid;
                 flex-wrap: nowrap;
                 margin-left: auto;
-                width: 900px;
-                border-radius: 10px;
-                margin-right: -100px;
+                width: 550px;
+                border-radius: 0px 0px 10px 10px;
+                border-top:0px;
         }
 
         .tableCoin {
@@ -1659,17 +1753,39 @@
                 padding-right: 22px;
 
         }
-
+        
+        .PowerResult {
+                background-color: rgba(193, 96, 96, 0.6);
+                border: 2px #a55252 solid;
+                flex-wrap: nowrap;
+                margin: auto;
+                border-radius: 10px 10px 0px 0px;
+                border-bottom:0px;
+                height:25px;
+                width: 550px;
+        }
+        
+        .PowerResult th {
+                padding-left: 2px;
+                padding-right: 2px;
+                font-size: 17px;
+        
+        }
+        
+        .powerNumbers {
+                font-size: 15px;
+        }
+        
         .siaInfo {
                 font-size: 10px;
         }
 
         .outer {
                 display: flex;
+                justify-content:center;
         }
 
         .container {
-                max-width: 1000px;
                 margin: auto;
                 padding-top: 30px;
                 padding-bottom: 30px;
@@ -2024,7 +2140,7 @@
                 background-color: rgba(185, 185, 185, 0.6);
                 border: 2px #7f7f7f solid;
                 height: 240px;
-                width: 280px;
+                width: 180px;
                 border-radius: 10px;
                 margin-top: 120px;
                 margin-left: -50px;
@@ -2087,7 +2203,7 @@
 
         #inputArea {
                 padding: 10px;
-                width: 630px;
+                width: 430px;
         }
 
         .logoName {

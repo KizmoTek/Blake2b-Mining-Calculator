@@ -139,190 +139,203 @@
                 <h1>Power consumption (w)</h1>
                 <input type ="text" id="powerConsumtion" onInput="liveHashrate()">
             </div>
-        
-            <div class="Result">
-                <table>
-                     <tr>
-                        <th class="tableCoin" colspan="5">
-                        <img src="Images/hyperLogo.png" class="coinLogo">
-                        <a href="https://hspace.app/" target="_blank" class="coinName">Hyperspace</a>
+            <div class="totalResult">
+                <div class="PowerResult">
+                    <table>
+                        <tr class="powerNumbers">
+                            <th>Power($)</th>
+                            <td id="PowerCostHour">0.00</td>
+                            <td id="PowerCostDay">0.00</td>
+                            <td id="PowerCostWeek">0.00</td>
+                            <td id="PowerCostMonth">0.00</td>
+                        </tr>
+                    </table>
+                </div>
+                
+                <div class="Result">
+                    <table>
+                         <tr>
+                            <th class="tableCoin" colspan="5">
+                            <img src="Images/hyperLogo.png" class="coinLogo">
+                            <a href="https://hspace.app/" target="_blank" class="coinName">Hyperspace</a>
+                            
+                            </th>
+                        </tr>
+                        <tr class="time">
+                            <td></td>
+                            <th>Hour</th>
+                            <th>Day</th>
+                            <th>Week</th>
+                            <th>Month</th>
+                        </tr>
+                        <tr class="calcNumbers">
+                            <th>XSC</th>
+                            <td id="XSCresultHour">0.00</td>
+                            <td id="XSCresultDay">0.00</td>
+                            <td id="XSCresultWeek">0.00</td>
+                            <td id="XSCresultMonth">0.00</td>
+                        </tr>
+                        <tr class="calcNumbers">
+                            <th>Income($)</th>
+                            <td id="XSCresultHourUSD">0.00</td>
+                            <td id="XSCresultDayUSD">0.00</td>
+                            <td id="XSCresultWeekUSD">0.00</td>
+                            <td id="XSCresultMonthUSD">0.00</td>
+                        </tr>
+                        <tr class="calcNumbers">
+                            <th>Profit($)</th>
+                            <td id="XSCresultHourProfit">0.00</td>
+                            <td id="XSCresultDayProfit">0.00</td>
+                            <td id="XSCresultWeekProfit">0.00</td>
+                            <td id="XSCresultMonthProfit">0.00</td>
+                        </tr>
                         
-                        </th>
-                    </tr>
-                    <tr class="time">
-                        <td></td>
-                        <th>Hour</th>
-                        <th>Day</th>
-                        <th>Week</th>
-                        <th>Month</th>
-                    </tr>
-                    <tr class="calcNumbers">
-                        <th>XSC</th>
-                        <td id="XSCresultHour">0.00</td>
-                        <td id="XSCresultDay">0.00</td>
-                        <td id="XSCresultWeek">0.00</td>
-                        <td id="XSCresultMonth">0.00</td>
-                    </tr>
-                    <tr class="calcNumbers">
-                        <th>Income($)</th>
-                        <td id="XSCresultHourUSD">0.00</td>
-                        <td id="XSCresultDayUSD">0.00</td>
-                        <td id="XSCresultWeekUSD">0.00</td>
-                        <td id="XSCresultMonthUSD">0.00</td>
-                    </tr>
-                    <tr class="calcNumbers">
-                        <th>Profit($)</th>
-                        <td id="XSCresultHourProfit">0.00</td>
-                        <td id="XSCresultDayProfit">0.00</td>
-                        <td id="XSCresultWeekProfit">0.00</td>
-                        <td id="XSCresultMonthProfit">0.00</td>
-                    </tr>
-                    
-                     <tr>
-                        <th class="tableCoin" colspan="5">
-                            <img src="Images/primeLogo.png" class="coinLogo">
-                            <a href="https://siaprime.net/" target="_blank" class="coinName">SiaPrime</a>
-                            </th>
-                    </tr>
-                    <tr class="time">
-                        <td></td>
-                        <th>Hour</th>
-                        <th>Day</th>
-                        <th>Week</th>
-                        <th>Month</th>
-                    </tr>
-                    <tr class="calcNumbers">
-                        <th>SCP</th>
-                        <td id="SCPresultHour">0.00</td>
-                        <td id="SCPresultDay">0.00</td>
-                        <td id="SCPresultWeek">0.00</td>
-                        <td id="SCPresultMonth">0.00</td>
-                    </tr>
-                    <tr class="calcNumbers">
-                        <th>Income($)</th>
-                        <td id="SCPresultHourUSD">0.00</td>
-                        <td id="SCPresultDayUSD">0.00</td>
-                        <td id="SCPresultWeekUSD">0.00</td>
-                        <td id="SCPresultMonthUSD">0.00</td>
-                    </tr>
-                    <tr class="calcNumbers">
-                        <th>Profit($)</th>
-                        <td id="SCPresultHourProfit">0.00</td>
-                        <td id="SCPresultDayProfit">0.00</td>
-                        <td id="SCPresultWeekProfit">0.00</td>
-                        <td id="SCPresultMonthProfit">0.00</td>
-                    </tr>
-                    
-                    <tr>
-                        <th class="tableCoin" colspan="5">
-                            <img src="Images/classicLogo.png" class="classicLogo">
-                            <a href="https://siaclassic.org/" target="_blank" class="coinName">SiaClassic</a>
-                            </th>
-                    </tr>
-                    <tr class="time">
-                        <td></td>
-                        <th>Hour</th>
-                        <th>Day</th>
-                        <th>Week</th>
-                        <th>Month</th>
-                    </tr>
-                    <tr class="calcNumbers">
-                        <th>SCA</th>
-                        <td id="SCCresultHour">0.00</td>
-                        <td id="SCCresultDay">0.00</td>
-                        <td id="SCCresultWeek">0.00</td>
-                        <td id="SCCresultMonth">0.00</td>
-                    </tr>
-                    <tr class="calcNumbers">  
-                        <th>Income($)</th>
-                        <td id="SCCresultHourUSD">0.00</td>
-                        <td id="SCCresultDayUSD">0.00</td>
-                        <td id="SCCresultWeekUSD">0.00</td>
-                        <td id="SCCresultMonthUSD">0.00</td>
-                    </tr>
-                    <tr class="calcNumbers">  
-                        <th>Profit($)</th>
-                        <td id="SCCresultHourProfit">0.00</td>
-                        <td id="SCCresultDayProfit">0.00</td>
-                        <td id="SCCresultWeekProfit">0.00</td>
-                        <td id="SCCresultMonthProfit">0.00</td>
-                    </tr>
-                    
-                     <tr>
-                        <th class="tableCoin" colspan="5">
-                            <img src="Images/siaLogo.png" class="coinLogo">
-                            <a href="https://www.sia.tech/" target="_blank" class="coinName">Sia</a>
-                            <div class="tooltip">
-                                <img src="Images/info.png" class="infoImg">
-                                <span class="tooltiptext">Keep in mind that only Obelisk SC1's are able to mine Sia.</span>
-                            </div>
-                            </th>
-
-                    </tr>
-                    <tr class="time">
-                        <td></td>
-                        <th>Hour</th>
-                        <th>Day</th>
-                        <th>Week</th>
-                        <th>Month</th>
-                    </tr>
-                    <tr class="calcNumbers">
-                        <th>SIA</th>
-                        <td id="SiaresultHour">0.00</td>
-                        <td id="SiaresultDay">0.00</td>
-                        <td id="SiaresultWeek">0.00</td>
-                        <td id="SiaresultMonth">0.00</td>
-                    </tr>
-                    <tr class="calcNumbers">
-                        <th>Income($)</th>
-                        <td id="SiaresultHourUSD">0.00</td>
-                        <td id="SiaresultDayUSD">0.00</td>
-                        <td id="SiaresultWeekUSD">0.00</td>
-                        <td id="SiaresultMonthUSD">0.00</td>
-                    </tr>
-                    <tr class="calcNumbers">
-                        <th>Profit($)</th>
-                        <td id="SiaresultHourProfit">0.00</td>
-                        <td id="SiaresultDayProfit">0.00</td>
-                        <td id="SiaresultWeekProfit">0.00</td>
-                        <td id="SiaresultMonthProfit">0.00</td>
-                    </tr>
-                    
-                    <tr>
-                        <th class="tableCoin" colspan="5">
-                            <img src="Images/cash2.png" class="Cash2Logo">
-                            <a href="https://cash2.org/" target="_blank" class="coinName">Cash2</a>
-                            </th>
-                    </tr>
-                    <tr class="time">
-                        <td></td>
-                        <th>Hour</th>
-                        <th>Day</th>
-                        <th>Week</th>
-                        <th>Month</th>
-                    </tr>
-                    <tr class="calcNumbers">
-                        <th>CASH2</th>
-                        <td id="CASH2resultHour">0.00</td>
-                        <td id="CASH2resultDay">0.00</td>
-                        <td id="CASH2resultWeek">0.00</td>
-                        <td id="CASH2resultMonth">0.00</td>
-                    </tr>
-                    <tr class="calcNumbers">  
-                        <th>Income($)</th>
-                        <td id="CASH2resultHourUSD"><i>Not on</i></td>
-                        <td id="CASH2resultDayUSD"><i>exchange</i></td>
-                        <td id="CASH2resultWeekUSD"></td>
-                        <td id="CASH2resultMonthUSD"></td>
-                    </tr>
-                    <tr class="calcNumbers">  
-                        <th>Power($)</th>
-                        <td id="CASH2resultHourProfit">0.00</td>
-                        <td id="CASH2resultDayProfit">0.00</td>
-                        <td id="CASH2resultWeekProfit">0.00</td>
-                        <td id="CASH2resultMonthProfit">0.00</td>
-                    </tr>
-                </table>
+                         <tr>
+                            <th class="tableCoin" colspan="5">
+                                <img src="Images/primeLogo.png" class="coinLogo">
+                                <a href="https://siaprime.net/" target="_blank" class="coinName">SiaPrime</a>
+                                </th>
+                        </tr>
+                        <tr class="time">
+                            <td></td>
+                            <th>Hour</th>
+                            <th>Day</th>
+                            <th>Week</th>
+                            <th>Month</th>
+                        </tr>
+                        <tr class="calcNumbers">
+                            <th>SCP</th>
+                            <td id="SCPresultHour">0.00</td>
+                            <td id="SCPresultDay">0.00</td>
+                            <td id="SCPresultWeek">0.00</td>
+                            <td id="SCPresultMonth">0.00</td>
+                        </tr>
+                        <tr class="calcNumbers">
+                            <th>Income($)</th>
+                            <td id="SCPresultHourUSD">0.00</td>
+                            <td id="SCPresultDayUSD">0.00</td>
+                            <td id="SCPresultWeekUSD">0.00</td>
+                            <td id="SCPresultMonthUSD">0.00</td>
+                        </tr>
+                        <tr class="calcNumbers">
+                            <th>Profit($)</th>
+                            <td id="SCPresultHourProfit">0.00</td>
+                            <td id="SCPresultDayProfit">0.00</td>
+                            <td id="SCPresultWeekProfit">0.00</td>
+                            <td id="SCPresultMonthProfit">0.00</td>
+                        </tr>
+                        
+                        <tr>
+                            <th class="tableCoin" colspan="5">
+                                <img src="Images/classicLogo.png" class="classicLogo">
+                                <a href="https://siaclassic.org/" target="_blank" class="coinName">SiaClassic</a>
+                                </th>
+                        </tr>
+                        <tr class="time">
+                            <td></td>
+                            <th>Hour</th>
+                            <th>Day</th>
+                            <th>Week</th>
+                            <th>Month</th>
+                        </tr>
+                        <tr class="calcNumbers">
+                            <th>SCA</th>
+                            <td id="SCCresultHour">0.00</td>
+                            <td id="SCCresultDay">0.00</td>
+                            <td id="SCCresultWeek">0.00</td>
+                            <td id="SCCresultMonth">0.00</td>
+                        </tr>
+                        <tr class="calcNumbers">  
+                            <th>Income($)</th>
+                            <td id="SCCresultHourUSD">0.00</td>
+                            <td id="SCCresultDayUSD">0.00</td>
+                            <td id="SCCresultWeekUSD">0.00</td>
+                            <td id="SCCresultMonthUSD">0.00</td>
+                        </tr>
+                        <tr class="calcNumbers">  
+                            <th>Profit($)</th>
+                            <td id="SCCresultHourProfit">0.00</td>
+                            <td id="SCCresultDayProfit">0.00</td>
+                            <td id="SCCresultWeekProfit">0.00</td>
+                            <td id="SCCresultMonthProfit">0.00</td>
+                        </tr>
+                        
+                         <tr>
+                            <th class="tableCoin" colspan="5">
+                                <img src="Images/siaLogo.png" class="coinLogo">
+                                <a href="https://www.sia.tech/" target="_blank" class="coinName">Sia</a>
+                                <div class="tooltip">
+                                    <img src="Images/info.png" class="infoImg">
+                                    <span class="tooltiptext">Keep in mind that only Obelisk SC1's are able to mine Sia.</span>
+                                </div>
+                                </th>
+    
+                        </tr>
+                        <tr class="time">
+                            <td></td>
+                            <th>Hour</th>
+                            <th>Day</th>
+                            <th>Week</th>
+                            <th>Month</th>
+                        </tr>
+                        <tr class="calcNumbers">
+                            <th>SIA</th>
+                            <td id="SiaresultHour">0.00</td>
+                            <td id="SiaresultDay">0.00</td>
+                            <td id="SiaresultWeek">0.00</td>
+                            <td id="SiaresultMonth">0.00</td>
+                        </tr>
+                        <tr class="calcNumbers">
+                            <th>Income($)</th>
+                            <td id="SiaresultHourUSD">0.00</td>
+                            <td id="SiaresultDayUSD">0.00</td>
+                            <td id="SiaresultWeekUSD">0.00</td>
+                            <td id="SiaresultMonthUSD">0.00</td>
+                        </tr>
+                        <tr class="calcNumbers">
+                            <th>Profit($)</th>
+                            <td id="SiaresultHourProfit">0.00</td>
+                            <td id="SiaresultDayProfit">0.00</td>
+                            <td id="SiaresultWeekProfit">0.00</td>
+                            <td id="SiaresultMonthProfit">0.00</td>
+                        </tr>
+                        
+                        <tr>
+                            <th class="tableCoin" colspan="5">
+                                <img src="Images/cash2.png" class="Cash2Logo">
+                                <a href="https://cash2.org/" target="_blank" class="coinName">Cash2</a>
+                                </th>
+                        </tr>
+                        <tr class="time">
+                            <td></td>
+                            <th>Hour</th>
+                            <th>Day</th>
+                            <th>Week</th>
+                            <th>Month</th>
+                        </tr>
+                        <tr class="calcNumbers">
+                            <th>CASH2</th>
+                            <td id="CASH2resultHour">0.00</td>
+                            <td id="CASH2resultDay">0.00</td>
+                            <td id="CASH2resultWeek">0.00</td>
+                            <td id="CASH2resultMonth">0.00</td>
+                        </tr>
+                        <!-- <tr class="calcNumbers">  
+                            <th>Income($)</th>
+                            <td id="CASH2resultHourUSD"><i>Not on</i></td>
+                            <td id="CASH2resultDayUSD"><i>exchange</i></td>
+                            <td id="CASH2resultWeekUSD"></td>
+                            <td id="CASH2resultMonthUSD"></td>
+                        </tr>
+                        <tr class="calcNumbers">
+                            <th>Power($)</th>
+                            <td id="CASH2resultHourProfit">0.00</td>
+                            <td id="CASH2resultDayProfit">0.00</td>
+                            <td id="CASH2resultWeekProfit">0.00</td>
+                            <td id="CASH2resultMonthProfit">0.00</td>
+                        </tr> -->
+                    </table>
+                </div>
             </div>
         </div>
     </div>
