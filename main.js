@@ -716,10 +716,10 @@ function cash2(){
     const CASH2APIDifficulty = cash2APIData.difficulty;
     const CASH2APIheight = cash2APIData.height;
     
-    Cash2Hourresult = cash2Reward(CASH2APIDifficulty, hshrt, CASH2APIheight, hour) / 2
-    Cash2Dayresult = cash2Reward(CASH2APIDifficulty, hshrt, CASH2APIheight, day) / 2
-    Cash2Weekresult = cash2Reward(CASH2APIDifficulty, hshrt, CASH2APIheight, week) / 2
-    Cash2Monthresult = cash2Reward(CASH2APIDifficulty, hshrt, CASH2APIheight, month) / 2
+    Cash2Hourresult = cash2Reward(CASH2APIDifficulty, hshrt, CASH2APIheight, hour) * 0.36
+    Cash2Dayresult = cash2Reward(CASH2APIDifficulty, hshrt, CASH2APIheight, day) * 0.36
+    Cash2Weekresult = cash2Reward(CASH2APIDifficulty, hshrt, CASH2APIheight, week) * 0.36
+    Cash2Monthresult = cash2Reward(CASH2APIDifficulty, hshrt, CASH2APIheight, month) * 0.36
     
     Cash2calcHour.innerHTML = numberShortener(Cash2Hourresult)
     Cash2calcDay.innerHTML = numberShortener(Cash2Dayresult)
