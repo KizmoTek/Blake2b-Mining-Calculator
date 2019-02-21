@@ -156,6 +156,7 @@
                 width: 14px;
                 margin-bottom: 8px;
                 margin-left: -5px;
+                margin-right: 70px;
         }
 
         .infoImg2 {
@@ -169,8 +170,25 @@
                 margin-bottom: -3px;
         }
         
+        #hyperName {
+              margin-right: -10px;  
+        }
+        
+        #primeName {
+                margin-right: 25px;
+        }
+        
+        #cash2Name {
+                margin-right: 26px;
+        }
+        
         .coinName {
                 color:white;
+        }
+        
+        .coinPoolList {
+                font-size: 20px;
+                color: #3c75d1;
         }
 
         .tooltip {
@@ -489,7 +507,7 @@
         
         .Cash2Logo {
                 width: 25px;
-                margin-bottom: -3px;
+                margin-bottom: -2px;
         }
 
         .preset {
@@ -571,6 +589,11 @@
         }
         .github {
                 font-size:12px;
+        }
+        
+        .zodiacLink {
+                font-size:12px;
+                color:red;
         }
 }
 
@@ -720,6 +743,7 @@
                 width: 14px;
                 margin-bottom: 8px;
                 margin-left: -5px;
+                margin-right: 30px;
         }
         
         .infoImg2 {
@@ -729,12 +753,29 @@
         }
         
         .coinLogo {
-                width: 26px;
+                width: 20px;
                 margin-bottom: -3px;
+        }
+        
+        #hyperName {
+              margin-right: -10px;  
+        }
+        
+        #primeName {
+                margin-right: 14px;
+        }
+        
+        #cash2Name {
+                margin-right: 16px;
         }
         
         .coinName {
                 color:white;
+        }
+        
+        .coinPoolList {
+                font-size: 12px;
+                color: #3c75d1;
         }
         
         .tooltip {
@@ -1044,13 +1085,13 @@
         }
         
         .classicLogo {
-                width: 14px;
+                width: 12px;
                 margin-bottom: -3px;
         }
         
         .Cash2Logo {
-                width: 25px;
-                margin-bottom: -3px;
+                width: 16px;
+                margin-bottom: -2px;
         }
         
         .preset {
@@ -1135,6 +1176,11 @@
         
         .github {
                 font-size:12px;
+        }
+        
+        .zodiacLink {
+                font-size:12px;
+                color:red;
         }
 }
 
@@ -1264,6 +1310,7 @@
                 width: 14px;
                 margin-bottom: 8px;
                 margin-left: -5px;
+                margin-right: 30px;
         }
         
         .infoImg2 {
@@ -1273,12 +1320,29 @@
         }
         
         .coinLogo {
-                width: 26px;
+                width: 20px;
                 margin-bottom: -3px;
+        }
+        
+        #hyperName {
+              margin-right: -10px;  
+        }
+        
+        #primeName {
+                margin-right: 14px;
+        }
+        
+        #cash2Name {
+                margin-right: 16px;
         }
         
         .coinName {
                 color:white;
+        }
+        
+        .coinPoolList {
+                font-size: 12px;
+                color: #3c75d1;
         }
         
         .tooltip {
@@ -1588,13 +1652,13 @@
         }
         
         .classicLogo {
-                width: 14px;
+                width: 12px;
                 margin-bottom: -3px;
         }
         
         .Cash2Logo {
-                width: 25px;
-                margin-bottom: -3px;
+                width: 16px;
+                margin-bottom: -2px;
         }
         
         .preset {
@@ -1679,6 +1743,11 @@
         
         .github {
                 font-size:12px;
+        }
+        
+        .zodiacLink {
+                font-size:12px;
+                color:red;
         }
 }
 
@@ -1800,6 +1869,7 @@
                 width: 14px;
                 margin-bottom: 8px;
                 margin-left: -5px;
+                margin-right: 70px;
         }
 
         .infoImg2 {
@@ -1813,8 +1883,25 @@
                 margin-bottom: -3px;
         }
         
+        #hyperName {
+              margin-right: -10px;  
+        }
+        
+        #primeName {
+                margin-right: 25px;
+        }
+        
+        #cash2Name {
+                margin-right: 26px;
+        }
+        
         .coinName {
                 color:white;
+        }
+        
+        .coinPoolList {
+                font-size: 20px;
+                color: #3c75d1;
         }
 
         .tooltip {
@@ -2133,7 +2220,7 @@
 
         .Cash2Logo {
                 width: 25px;
-                margin-bottom: -3px;
+                margin-bottom: -2px;
         }
 
         .preset {
@@ -2213,7 +2300,13 @@
         #Obelisk {
                 background-color: rgba(115, 132, 142, 0.4)
         }
+        
         .github {
                 font-size:12px;
+        }
+        
+        .zodiacLink {
+                font-size:12px;
+                color:red;
         }
 }

@@ -39,7 +39,7 @@
     <link href='https://fonts.googleapis.com/css?family=Roboto:300' rel='stylesheet'>
     <title>Blake2b Mining Calculator</title>
 </head>
-<body onload="setTimeout(liveHashrate, 500)">
+<body onload="setTimeout(liveHashrate, 250)">
     <div class="TopLine">
         <a href="index.html"><h1 class="logoName">Blake2b Mining Calculator</h1></a>
     </div>
@@ -155,10 +155,12 @@
                 <div class="Result">
                     <table>
                          <tr>
-                            <th class="tableCoin" colspan="5">
-                            <img src="Images/hyperLogo.png" class="coinLogo">
-                            <a href="https://hspace.app/" target="_blank" class="coinName">Hyperspace</a>
-                            
+                            <th class="tableCoin" colspan="4">
+                                <img src="Images/hyperLogo.png" class="coinLogo">
+                                <a href="https://hspace.app/" target="_blank" class="coinName" id="hyperName">Hyperspace</a>
+                            </th>
+                            <th class="tableCoinPool">
+                                <a href="https://miningpoolstats.stream/spacecash" target="_blank" class="coinPoolList">Pools</a>
                             </th>
                         </tr>
                         <tr class="time">
@@ -191,10 +193,13 @@
                         </tr>
                         
                          <tr>
-                            <th class="tableCoin" colspan="5">
+                            <th class="tableCoin" colspan="4">
                                 <img src="Images/primeLogo.png" class="coinLogo">
-                                <a href="https://siaprime.net/" target="_blank" class="coinName">SiaPrime</a>
-                                </th>
+                                <a href="https://siaprime.net/" target="_blank" class="coinName" id="primeName">SiaPrime</a>
+                            </th>
+                            <th class="tableCoinPool">
+                                <a href="https://miningpoolstats.stream/siaprime" target="_blank" class="coinPoolList">Pools</a>
+                            </th>
                         </tr>
                         <tr class="time">
                             <td></td>
@@ -226,10 +231,13 @@
                         </tr>
                         
                         <tr>
-                            <th class="tableCoin" colspan="5">
+                            <th class="tableCoin" colspan="4">
                                 <img src="Images/classicLogo.png" class="classicLogo">
                                 <a href="https://siaclassic.org/" target="_blank" class="coinName">SiaClassic</a>
-                                </th>
+                            </th>
+                            <th class="tableCoinPool">
+                                <a href="https://miningpoolstats.stream/siaclassic" target="_blank" class="coinPoolList">Pools</a>
+                            </th>
                         </tr>
                         <tr class="time">
                             <td></td>
@@ -261,14 +269,17 @@
                         </tr>
                         
                          <tr>
-                            <th class="tableCoin" colspan="5">
+                            <th class="tableCoin" colspan="4">
                                 <img src="Images/siaLogo.png" class="coinLogo">
                                 <a href="https://www.sia.tech/" target="_blank" class="coinName">Sia</a>
                                 <div class="tooltip">
                                     <img src="Images/info.png" class="infoImg">
                                     <span class="tooltiptext">Keep in mind that only Obelisk SC1's are able to mine Sia.</span>
                                 </div>
-                                </th>
+                            </th>
+                            <th class="tableCoinPool">
+                                <a href="https://miningpoolstats.stream/siacoin" target="_blank" class="coinPoolList">Pools</a>
+                            </th>
     
                         </tr>
                         <tr class="time">
@@ -301,10 +312,13 @@
                         </tr>
                         
                         <tr>
-                            <th class="tableCoin" colspan="5">
+                            <th class="tableCoin" colspan="4">
                                 <img src="Images/cash2.png" class="Cash2Logo">
-                                <a href="https://cash2.org/" target="_blank" class="coinName">Cash2</a>
-                                </th>
+                                <a href="https://cash2.org/" target="_blank" class="coinName" id="cash2Name">Cash2</a>
+                            </th>
+                            <th class="tableCoinPool">
+                                <a href="https://cash2.org/#miningInformation" target="_blank" class="coinPoolList">Pools</a>
+                            </th>
                         </tr>
                         <tr class="time">
                             <td></td>
@@ -351,6 +365,8 @@
             <a href="https://www.coingecko.com/api/docs/v3" target="_blank">Coin Gecko</a>
             <br>
             <a href="https://github.com/ImTooLazyToWriteAUsername/BlakeMining" target="_blank" class="github">Github Repository</a>
+            <br>
+            <a href="https://www.blakemining.com/zodiac.html" target="_blank" class="zodiacLink">Zodiac Calculator</a>
         </div>
         </div>
         <div>

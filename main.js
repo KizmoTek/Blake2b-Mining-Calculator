@@ -39,13 +39,25 @@ const week = day * 7;
 const month = day * 30; // assume month = 30 days
 
 const miningAPI = "https://keops.cc/dbs/pansia_current.json";
+var mineAPILoad = true
+
 const cash2API = "https://blocks.cash2.org:8080/getinfo";
+var cash2APILoad = true
 
 const hyperPriceAPI = "https://api.coingecko.com/api/v3/coins/hyperspace/market_chart?vs_currency=usd&days=1"
+var hyperPriceAPILoad = true
+
 const siaPriceAPI = "https://api.coingecko.com/api/v3/coins/siacoin/market_chart?vs_currency=usd&days=1"
+var siaPriceAPILoad = true
+
 const primePriceAPI = "https://api.coingecko.com/api/v3/coins/siaprime-coin/market_chart?vs_currency=usd&days=1"
+var primePriceAPILoad = true
+
 const classicPriceAPI = "https://api.coingecko.com/api/v3/coins/siaclassic/market_chart?vs_currency=usd&days=1"
+var classicPriceAPILoad = true
+
 const cash2PriceAPI = "" //Wait for API to be on CoinGecko
+var cash2PriceAPILoad = true
 
 let hshrt = 0
 
@@ -313,6 +325,163 @@ function copyAdd() {
       
 }
 
+let miningAPIData = 0
+fetch(miningAPI)
+    .then(function(response) {
+    if (response.ok == true) {
+        return response.json();
+        mineAPILoad = true
+    } else {
+    fetch(miningAPI)
+        .then(function(response) {
+            if (response.ok == true) {
+                return response.json();
+                mineAPILoad = true
+            } else {
+                alert("Error with loading Keops API data for Hyperspace, SiaPrime, SiaClassic, and Sia.")
+                mineAPILoad = false
+            }
+        })
+        .then(function(myJson){
+            miningAPIData = myJson
+        })
+    }
+        
+})
+.then(function(myJson){
+    miningAPIData = myJson
+})
+
+let cash2APIData = 0
+fetch(cash2API)
+    .then(function(response) {
+    if (response.ok == true) {
+        return response.json();
+        cash2APILoad = true
+    } else {
+    fetch(cash2API)
+    .then(function(response) {
+    if (response.ok == true) {
+        return response.json();
+        cash2APILoad = true
+    } else {
+        alert("Error with loading Cash2 API.")
+        cash2APILoad = false
+    }
+    })
+    .then(function(myJson){
+        cash2APIData = myJson
+    })
+    }
+})
+.then(function(myJson){
+    cash2APIData = myJson
+})
+
+let siaPriceAPIData
+fetch(siaPriceAPI)
+    .then(function(response) {
+    if (response.ok == true) {
+        return response.json();
+        siaPriceAPILoad = true
+    } else {
+        fetch(siaPriceAPI)
+    .then(function(response) {
+    if (response.ok == true) {
+        return response.json();
+        siaPriceAPILoad = true
+    } else {
+        alert("Error with loading Sia API for Coingecko.")
+        siaPriceAPILoad = false
+    }
+    })
+    .then(function(myJson){
+        siaPriceAPIData = myJson
+    })
+    }
+})
+.then(function(myJson){
+    siaPriceAPIData = myJson
+})
+
+let hyperPriceAPIData
+fetch(hyperPriceAPI)
+    .then(function(response) {
+    if (response.ok == true) {
+        return response.json();
+        hyperPriceAPILoad = true
+    } else {
+        fetch(hyperPriceAPI)
+    .then(function(response) {
+    if (response.ok == true) {
+        return response.json();
+        hyperPriceAPILoad = true
+    } else {
+        alert("Error with loading Hyperspace API for Coingecko.")
+        hyperPriceAPILoad = false
+    }
+    })
+    .then(function(myJson){
+        hyperPriceAPIData = myJson
+    })
+    }
+})
+.then(function(myJson){
+    hyperPriceAPIData = myJson
+})
+
+let primePriceAPIData
+fetch(primePriceAPI)
+    .then(function(response) {
+    if (response.ok == true) {
+        return response.json();
+        primePriceAPILoad = true
+    } else {
+        fetch(primePriceAPI)
+    .then(function(response) {
+    if (response.ok == true) {
+        return response.json();
+        primePriceAPILoad = true
+    } else {
+        alert("Error with loading SiaPrime API from Coingecko.")
+        primePriceAPILoad = false
+    }
+    })
+    .then(function(myJson){
+        primePriceAPIData = myJson
+    })
+    }
+})
+.then(function(myJson){
+    primePriceAPIData = myJson
+})
+
+let classicPriceAPIData
+fetch(classicPriceAPI)
+    .then(function(response) {
+    if (response.ok == true) {
+        return response.json();
+        classicPriceAPILoad = true
+    } else {
+        fetch(classicPriceAPI)
+    .then(function(response) {
+    if (response.ok == true) {
+        return response.json();
+        classicPriceAPILoad = true
+    } else {
+        alert("Error with loading SiaClassic API from Coingecko.")
+        classicPriceAPILoad = false
+    }
+    })
+    .then(function(myJson){
+        classicPriceAPIData = myJson
+    })
+    }
+})
+.then(function(myJson){
+    classicPriceAPIData = myJson
+})
+
 function liveHashrate() {
 
     userHshrt.value = splitInput(userHshrt.value)
@@ -338,104 +507,33 @@ function liveHashrate() {
         hshrt = hshrt * 1e12
     }
     
-    hyper()
-    hyperPrice()
-    prime()
-    primePrice()
-    classic()
-    classicPrice()
-    sia()
-    siaPrice()
-    cash2()
-    calcProfit()
+    if (mineAPILoad == true) {
+        hyper()
+        if (hyperPriceAPILoad == true) {
+            hyperPrice()
+        }
+        
+        prime()
+        if (primePriceAPILoad == true) {
+            primePrice()
+        }
+        
+        classic()
+        if (classicPriceAPILoad == true) {
+            classicPrice()
+        }
+        
+        sia()
+        if (siaPriceAPILoad == true) {
+            siaPrice()
+        }
+    }
+    
+    if (cash2APILoad == true) {
+        cash2()
+    }
+        calcProfit()
 }
-
-
-let miningAPIData = 0
-fetch(miningAPI)
-    .then(function(response) {
-    return response.json();
-})
-.then(function(myJson){
-    miningAPIData = myJson
-})
-try {
-    reloadAPI()
-} catch (e) {
-    console.log("Error with loading mining API data for Hyperspace, SiaPrime, SiaClassic, and Sia.")
-}
-
-let cash2APIData = 0
-fetch(cash2API)
-    .then(function(response) {
-    return response.json();
-})
-.then(function(myJson){
-    cash2APIData = myJson
-})
-try {
-    reloadAPI()
-} catch (e) {
-    console.log("Error with loading Cash2 API.")
-}
-
-let siaPriceAPIData
-fetch(siaPriceAPI)
-    .then(function(response) {
-    return response.json();
-})
-.then(function(myJson){
-    siaPriceAPIData = myJson
-})
-try {
-    reloadAPI()
-} catch (e) {
-    console.log("Error with loading Sia API for Coingecko.")
-}
-
-
-let hyperPriceAPIData
-fetch(hyperPriceAPI)
-    .then(function(response) {
-    return response.json();
-})
-.then(function(myJson){
-    hyperPriceAPIData = myJson
-})
-try {
-    reloadAPI()
-} catch (e) {
-    console.log("Error with loading Hyperspace API for Coingecko.")
-}
-
-let primePriceAPIData
-fetch(primePriceAPI)
-    .then(function(response) {
-    return response.json();
-})
-.then(function(myJson){
-    primePriceAPIData = myJson
-})
-try {
-    reloadAPI()
-} catch (e) {
-    console.log("Error with loading SiaPrime API from Coingecko.")
-}
-
-let classicPriceAPIData
-fetch(classicPriceAPI)
-    .then(function(response) {
-    return response.json();
-})
-.then(function(myJson){
-    classicPriceAPIData = myJson
-})
-try {
-    reloadAPI()
-} catch (e) {
-    console.log("Error with loading SiaClassic API from Coingecko.")
-}
-
 
 poolFee.value = 1
 elecCost.value = 0.1
@@ -458,7 +556,7 @@ function splitInput(number) {
 }
 
 function reloadAPI() {
-    
+  /*  
     fetch(miningAPI)
         .then(function(response) {
         return response.json();
@@ -508,7 +606,7 @@ function reloadAPI() {
     .then(function(myJson){
         classicPriceAPIData = myJson
     })
-    
+    */
 }
 
 function miningAPIError() {
@@ -739,7 +837,7 @@ function getBlockReward(CASH2APIheight)
 }
 
 function cash2Reward(difficulty, hashrate, height, period){
-    return (hashrate/(CASH2APIDifficulty/cash2BlockTime)) * ((getBlockReward(CASH2APIheight + ((period/cash2BlockTime)/2)))  * (period/cash2BlockTime))
+    return (hashrate/((CASH2APIDifficulty * 1099511627776)/cash2BlockTime)) * ((getBlockReward(CASH2APIheight + ((period/cash2BlockTime)/2)))  * (period/cash2BlockTime))
 }
 }
 
