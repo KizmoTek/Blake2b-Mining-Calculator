@@ -39,25 +39,25 @@ const week = day * 7;
 const month = day * 30; // assume month = 30 days
 
 const miningAPI = "https://keops.cc/dbs/pansia_current.json";
-var mineAPILoad = true
+var mineAPILoad = false
 
 const cash2API = "https://blocks.cash2.org:8080/getinfo";
-var cash2APILoad = true
+var cash2APILoad = false
 
 const hyperPriceAPI = "https://api.coingecko.com/api/v3/coins/hyperspace/market_chart?vs_currency=usd&days=1"
-var hyperPriceAPILoad = true
+var hyperPriceAPILoad = false
 
 const siaPriceAPI = "https://api.coingecko.com/api/v3/coins/siacoin/market_chart?vs_currency=usd&days=1"
-var siaPriceAPILoad = true
+var siaPriceAPILoad = false
 
 const primePriceAPI = "https://api.coingecko.com/api/v3/coins/siaprime-coin/market_chart?vs_currency=usd&days=1"
-var primePriceAPILoad = true
+var primePriceAPILoad = false
 
 const classicPriceAPI = "https://api.coingecko.com/api/v3/coins/siaclassic/market_chart?vs_currency=usd&days=1"
-var classicPriceAPILoad = true
+var classicPriceAPILoad = false
 
 const cash2PriceAPI = "" //Wait for API to be on CoinGecko
-var cash2PriceAPILoad = true
+var cash2PriceAPILoad = false
 
 let hshrt = 0
 
@@ -90,6 +90,9 @@ const XSCresultDayProfit = document.querySelector("#XSCresultDayProfit")
 const XSCresultWeekProfit = document.querySelector("#XSCresultWeekProfit")
 const XSCresultMonthProfit = document.querySelector("#XSCresultMonthProfit")
 
+var hyperAPIDifficulty
+var hyperAPIheight
+
 let hyperHourresult
 let hyperDayresult
 let hyperWeekresult
@@ -120,6 +123,9 @@ const SCPresultHourProfit = document.querySelector("#SCPresultHourProfit")
 const SCPresultDayProfit = document.querySelector("#SCPresultDayProfit")
 const SCPresultWeekProfit = document.querySelector("#SCPresultWeekProfit")
 const SCPresultMonthProfit = document.querySelector("#SCPresultMonthProfit")
+
+var primeAPIDifficulty
+var primeAPIheight
 
 let primeHourresult
 let primeDayresult
@@ -152,6 +158,9 @@ const SCCresultDayProfit = document.querySelector("#SCCresultDayProfit")
 const SCCresultWeekProfit = document.querySelector("#SCCresultWeekProfit")
 const SCCresultMonthProfit = document.querySelector("#SCCresultMonthProfit")
 
+var classicAPIDifficulty
+var classicAPIheight
+
 let sccHourresult
 let sccDayresult
 let sccWeekresult
@@ -182,6 +191,9 @@ const SiaresultHourProfit = document.querySelector("#SiaresultHourProfit")
 const SiaresultDayProfit = document.querySelector("#SiaresultDayProfit")
 const SiaresultWeekProfit = document.querySelector("#SiaresultWeekProfit")
 const SiaresultMonthProfit = document.querySelector("#SiaresultMonthProfit")
+
+var siaAPIDifficulty
+var siaAPIheight
 
 let siaHourresult
 let siaDayresult
@@ -214,6 +226,10 @@ const Cash2resultDayProfit = document.querySelector("#CASH2resultDayProfit")
 const Cash2resultWeekProfit = document.querySelector("#CASH2resultWeekProfit")
 const Cash2resultMonthProfit = document.querySelector("#CASH2resultMonthProfit")
 */
+
+var CASH2APIDifficulty
+var CASH2APIheight
+
 let Cash2Hourresult
 let Cash2HourFinal
 let Cash2Dayresult
@@ -325,31 +341,37 @@ function copyAdd() {
       
 }
 
+var APILoaded = 0
+
 let miningAPIData = 0
 fetch(miningAPI)
     .then(function(response) {
     if (response.ok == true) {
         return response.json();
-        mineAPILoad = true
     } else {
     fetch(miningAPI)
         .then(function(response) {
             if (response.ok == true) {
                 return response.json();
-                mineAPILoad = true
             } else {
-                alert("Error with loading Keops API data for Hyperspace, SiaPrime, SiaClassic, and Sia.")
                 mineAPILoad = false
+                alert("Error with loading Keops API data for Hyperspace, SiaPrime, SiaClassic, and Sia.")
             }
         })
         .then(function(myJson){
             miningAPIData = myJson
+            mineAPILoad = true
+            APILoaded += 1
+            apiLoadVerify()
         })
     }
         
 })
 .then(function(myJson){
     miningAPIData = myJson
+    mineAPILoad = true
+    APILoaded += 1
+    apiLoadVerify()
 })
 
 let cash2APIData = 0
@@ -357,25 +379,29 @@ fetch(cash2API)
     .then(function(response) {
     if (response.ok == true) {
         return response.json();
-        cash2APILoad = true
     } else {
     fetch(cash2API)
     .then(function(response) {
     if (response.ok == true) {
         return response.json();
-        cash2APILoad = true
     } else {
-        alert("Error with loading Cash2 API.")
         cash2APILoad = false
+        alert("Error with loading Cash2 API.")
     }
     })
     .then(function(myJson){
         cash2APIData = myJson
+        cash2APILoad = true
+        APILoaded += 1
+        apiLoadVerify()
     })
     }
 })
 .then(function(myJson){
     cash2APIData = myJson
+    cash2APILoad = true
+    APILoaded += 1
+    apiLoadVerify()
 })
 
 let siaPriceAPIData
@@ -383,25 +409,29 @@ fetch(siaPriceAPI)
     .then(function(response) {
     if (response.ok == true) {
         return response.json();
-        siaPriceAPILoad = true
     } else {
         fetch(siaPriceAPI)
     .then(function(response) {
     if (response.ok == true) {
         return response.json();
-        siaPriceAPILoad = true
     } else {
-        alert("Error with loading Sia API for Coingecko.")
         siaPriceAPILoad = false
+        alert("Error with loading Sia API for Coingecko.")
     }
     })
     .then(function(myJson){
         siaPriceAPIData = myJson
+        siaPriceAPILoad = true
+        APILoaded += 1
+        apiLoadVerify()
     })
     }
 })
 .then(function(myJson){
     siaPriceAPIData = myJson
+    siaPriceAPILoad = true
+    APILoaded += 1
+    apiLoadVerify()
 })
 
 let hyperPriceAPIData
@@ -409,25 +439,29 @@ fetch(hyperPriceAPI)
     .then(function(response) {
     if (response.ok == true) {
         return response.json();
-        hyperPriceAPILoad = true
     } else {
         fetch(hyperPriceAPI)
     .then(function(response) {
     if (response.ok == true) {
         return response.json();
-        hyperPriceAPILoad = true
     } else {
-        alert("Error with loading Hyperspace API for Coingecko.")
         hyperPriceAPILoad = false
+        alert("Error with loading Hyperspace API for Coingecko.")
     }
     })
     .then(function(myJson){
         hyperPriceAPIData = myJson
+        hyperPriceAPILoad = true
+        APILoaded += 1
+        apiLoadVerify()
     })
     }
 })
 .then(function(myJson){
     hyperPriceAPIData = myJson
+    hyperPriceAPILoad = true
+    APILoaded += 1
+    apiLoadVerify()
 })
 
 let primePriceAPIData
@@ -435,13 +469,11 @@ fetch(primePriceAPI)
     .then(function(response) {
     if (response.ok == true) {
         return response.json();
-        primePriceAPILoad = true
     } else {
         fetch(primePriceAPI)
     .then(function(response) {
     if (response.ok == true) {
         return response.json();
-        primePriceAPILoad = true
     } else {
         alert("Error with loading SiaPrime API from Coingecko.")
         primePriceAPILoad = false
@@ -449,11 +481,17 @@ fetch(primePriceAPI)
     })
     .then(function(myJson){
         primePriceAPIData = myJson
+        primePriceAPILoad = true
+        APILoaded += 1
+        apiLoadVerify()
     })
     }
 })
 .then(function(myJson){
     primePriceAPIData = myJson
+    primePriceAPILoad = true
+    APILoaded += 1
+    apiLoadVerify()
 })
 
 let classicPriceAPIData
@@ -461,29 +499,39 @@ fetch(classicPriceAPI)
     .then(function(response) {
     if (response.ok == true) {
         return response.json();
-        classicPriceAPILoad = true
     } else {
         fetch(classicPriceAPI)
     .then(function(response) {
     if (response.ok == true) {
         return response.json();
-        classicPriceAPILoad = true
     } else {
-        alert("Error with loading SiaClassic API from Coingecko.")
         classicPriceAPILoad = false
+        alert("Error with loading SiaClassic API from Coingecko.")
     }
     })
     .then(function(myJson){
         classicPriceAPIData = myJson
+        classicPriceAPILoad = true
+        APILoaded += 1
+        apiLoadVerify()
     })
     }
 })
 .then(function(myJson){
     classicPriceAPIData = myJson
+    classicPriceAPILoad = true
+    APILoaded += 1
+    apiLoadVerify()
 })
 
-function liveHashrate() {
+function apiLoadVerify() {
+    if(APILoaded >= 6) {
+        console.log(APILoaded)
+        liveHashrate()
+    }
+}
 
+function liveHashrate() {
     userHshrt.value = splitInput(userHshrt.value)
     poolFee.value = splitInput(poolFee.value)
     elecCost.value = splitInput(elecCost.value)
@@ -517,7 +565,6 @@ function liveHashrate() {
         if (primePriceAPILoad == true) {
             primePrice()
         }
-        
         classic()
         if (classicPriceAPILoad == true) {
             classicPrice()
@@ -532,12 +579,13 @@ function liveHashrate() {
     if (cash2APILoad == true) {
         cash2()
     }
-        calcProfit()
+    
+    calcProfit()
 }
 
 poolFee.value = 1
 elecCost.value = 0.1
-const randomHshrt = [[815, 1275], [4300, 1350], [550, 500]]
+const randomHshrt = [[815, 1275], [4300, 1350], [550, 500], [3830, 1380], [7000, 2100], [5500, 1600]]
 const randomizer = randomHshrt[Math.floor(Math.random()*randomHshrt.length)]
 userHshrt.value = randomizer[0]
 powerConsumtion.value = randomizer[1]
@@ -553,60 +601,6 @@ function splitInput(number) {
         return tempHshrt.replace(/[^1234567890.]|\-/g, "")
     }
     return number.replace(/[^1234567890.]|\-/g, "")
-}
-
-function reloadAPI() {
-  /*  
-    fetch(miningAPI)
-        .then(function(response) {
-        return response.json();
-    })
-    .then(function(myJson){
-        miningAPIData = myJson
-    })
-    
-    fetch(cash2API)
-        .then(function(response) {
-        return response.json();
-    })
-    .then(function(myJson){
-        cash2APIData = myJson
-    })
-    
-    fetch(siaPriceAPI)
-        .then(function(response) {
-        return response.json();
-    })
-    .then(function(myJson){
-        siaPriceAPIData = myJson
-    })
-    
-    fetch(hyperPriceAPI)
-        .then(function(response) {
-        return response.json();
-    })
-    .then(function(myJson){
-        hyperPriceAPIData = myJson
-    })
-    
-    let primePriceAPIData
-    fetch(primePriceAPI)
-        .then(function(response) {
-        return response.json();
-    })
-    .then(function(myJson){
-        primePriceAPIData = myJson
-    })
-    
-    let classicPriceAPIData
-    fetch(classicPriceAPI)
-        .then(function(response) {
-        return response.json();
-    })
-    .then(function(myJson){
-        classicPriceAPIData = myJson
-    })
-    */
 }
 
 function miningAPIError() {
@@ -647,9 +641,26 @@ function miningAPIError() {
 }
 
 function sia(){
-   
-        const siaAPIDifficulty = miningAPIData[0].difficulty;
-        const siaAPIheight = miningAPIData[0].height;
+        
+        try {
+            siaAPIDifficulty = miningAPIData[0].difficulty
+        } catch(e) {
+            try {
+                siaAPIDifficulty = miningAPIData[0].difficulty
+            } catch(error) {
+                console.log(error)
+            }
+        }
+        
+        try {
+            siaAPIheight = miningAPIData[0].height
+        } catch(e) {
+            try {
+                siaAPIheight = miningAPIData[0].height
+            } catch(error) {
+                console.log(error)
+            }
+        }
         
         siaHourresult = siaReward(siaAPIDifficulty, hshrt, siaAPIheight, hour)
         siaDayresult = siaReward(siaAPIDifficulty, hshrt, siaAPIheight, day)
@@ -667,11 +678,46 @@ function siaReward(difficulty, hashrate, height, period){
 }
 
 function siaPrice() {
-
-        siaUSDHourresult = siaHourresult * siaPriceAPIData.prices[siaPriceAPIData.prices.length - 1][1]
-        siaUSDDayresult = siaDayresult * siaPriceAPIData.prices[siaPriceAPIData.prices.length - 1][1]
-        siaUSDWeekresult = siaWeekresult * siaPriceAPIData.prices[siaPriceAPIData.prices.length - 1][1]
-        siaUSDMonthresult = siaMonthresult * siaPriceAPIData.prices[siaPriceAPIData.prices.length - 1][1]
+        
+        try {
+            siaUSDHourresult = siaHourresult * siaPriceAPIData.prices[siaPriceAPIData.prices.length - 1][1]
+        } catch(e) {
+            try {
+                siaUSDHourresult = siaHourresult * siaPriceAPIData.prices[siaPriceAPIData.prices.length - 1][1]
+            } catch(error) {
+                console.log(error)
+            }
+        }
+        
+        try {
+            siaUSDDayresult = siaDayresult * siaPriceAPIData.prices[siaPriceAPIData.prices.length - 1][1]
+        } catch(e) {
+            try {
+                siaUSDDayresult = siaDayresult * siaPriceAPIData.prices[siaPriceAPIData.prices.length - 1][1]
+            } catch(error) {
+                console.log(error)
+            }
+        }
+        
+        try {
+            siaUSDWeekresult = siaWeekresult * siaPriceAPIData.prices[siaPriceAPIData.prices.length - 1][1]
+        } catch(e) {
+            try {
+                siaUSDWeekresult = siaWeekresult * siaPriceAPIData.prices[siaPriceAPIData.prices.length - 1][1]
+            } catch(error) {
+                console.log(error)
+            }
+        }
+        
+        try {
+            siaUSDMonthresult = siaMonthresult * siaPriceAPIData.prices[siaPriceAPIData.prices.length - 1][1]
+        } catch(e) {
+            try {
+                siaUSDMonthresult = siaMonthresult * siaPriceAPIData.prices[siaPriceAPIData.prices.length - 1][1]
+            } catch(error) {
+                console.log(error)
+            }
+        }
         
         SiacalcHourUSD.innerHTML = numberShortener(siaUSDHourresult)
         SiacalcDayUSD.innerHTML = numberShortener(siaUSDDayresult)
@@ -687,9 +733,26 @@ function siaPriceError() {
 }
 
 function hyper(){
-       
-        const hyperAPIDifficulty = miningAPIData[1].difficulty
-        const hyperAPIheight = miningAPIData[1].height;
+        
+        try {
+            hyperAPIDifficulty = miningAPIData[1].difficulty
+        } catch(e) {
+            try {
+                hyperAPIDifficulty = miningAPIData[1].difficulty
+            } catch(error) {
+                console.log(error)
+            }
+        }
+        
+        try {
+            hyperAPIheight = miningAPIData[1].height
+        } catch(e) {
+            try {
+                hyperAPIheight = miningAPIData[1].height
+            } catch(error) {
+                console.log(error)
+            }
+        }
         
         hyperHourresult = hyperReward(hyperAPIDifficulty, hshrt, hyperAPIheight, hour)
         hyperDayresult = hyperReward(hyperAPIDifficulty, hshrt, hyperAPIheight, day)
@@ -708,11 +771,45 @@ function hyperReward(difficulty, hashrate, height, period){
     }
     
 function hyperPrice() {
+        try {
+            hyperUSDHourresult = hyperHourresult * hyperPriceAPIData.prices[hyperPriceAPIData.prices.length - 1][1]
+        } catch(e) {
+            try {
+                hyperUSDHourresult = hyperHourresult * hyperPriceAPIData.prices[hyperPriceAPIData.prices.length - 1][1]
+            } catch(error) {
+                console.log(error)
+            }
+        }
         
-        hyperUSDHourresult = hyperHourresult * hyperPriceAPIData.prices[hyperPriceAPIData.prices.length - 1][1]
-        hyperUSDDayresult = hyperDayresult * hyperPriceAPIData.prices[hyperPriceAPIData.prices.length - 1][1]
-        hyperUSDWeekresult = hyperWeekresult * hyperPriceAPIData.prices[hyperPriceAPIData.prices.length - 1][1]
-        hyperUSDMonthresult = hyperMonthresult * hyperPriceAPIData.prices[hyperPriceAPIData.prices.length - 1][1]
+        try {
+            hyperUSDDayresult = hyperDayresult * hyperPriceAPIData.prices[hyperPriceAPIData.prices.length - 1][1]
+        } catch(e) {
+            try {
+                hyperUSDDayresult = hyperDayresult * hyperPriceAPIData.prices[hyperPriceAPIData.prices.length - 1][1]
+            } catch(error) {
+                console.log(error)
+            }
+        }
+        
+        try {
+            hyperUSDWeekresult = hyperWeekresult * hyperPriceAPIData.prices[hyperPriceAPIData.prices.length - 1][1]
+        } catch(e) {
+            try {
+                hyperUSDWeekresult = hyperWeekresult * hyperPriceAPIData.prices[hyperPriceAPIData.prices.length - 1][1]
+            } catch(error) {
+                console.log(error)
+            }
+        }
+        
+        try {
+            hyperUSDMonthresult = hyperMonthresult * hyperPriceAPIData.prices[hyperPriceAPIData.prices.length - 1][1]
+        } catch(e) {
+            try {
+                hyperUSDMonthresult = hyperMonthresult * hyperPriceAPIData.prices[hyperPriceAPIData.prices.length - 1][1]
+            } catch(error) {
+                console.log(error)
+            }
+        }
         
         XSCcalcHourUSD.innerHTML = numberShortener(hyperUSDHourresult)
         XSCcalcDayUSD.innerHTML = numberShortener(hyperUSDDayresult)
@@ -728,9 +825,26 @@ function hyperPriceError() {
 }
 
 function classic(){
-
-        const classicAPIDifficulty = miningAPIData[3].difficulty;
-        const classicAPIheight = miningAPIData[3].height;
+        
+        try {
+            classicAPIDifficulty = miningAPIData[3].difficulty
+        } catch(e) {
+            try {
+                classicAPIDifficulty = miningAPIData[3].difficulty
+            } catch(error) {
+                console.log(error)
+            }
+        }
+        
+        try {
+            classicAPIheight = miningAPIData[3].height
+        } catch(e) {
+            try {
+                classicAPIheight = miningAPIData[3].height
+            } catch(error) {
+                console.log(error)
+            }
+        }
         
         sccHourresult = classicReward(classicAPIDifficulty, hshrt, classicAPIheight, hour)
         sccDayresult = classicReward(classicAPIDifficulty, hshrt, classicAPIheight, day)
@@ -750,10 +864,45 @@ function classicReward(difficulty, hashrate, height, period){
 
 function classicPrice() {
         
-        sccUSDHourresult = sccHourresult * classicPriceAPIData.prices[classicPriceAPIData.prices.length - 1][1]
-        sccUSDDayresult = sccDayresult * classicPriceAPIData.prices[classicPriceAPIData.prices.length - 1][1]
-        sccUSDWeekresult = sccWeekresult * classicPriceAPIData.prices[classicPriceAPIData.prices.length - 1][1]
-        sccUSDMonthresult = sccMonthresult * classicPriceAPIData.prices[classicPriceAPIData.prices.length - 1][1]
+        try {
+            sccUSDHourresult = sccHourresult * classicPriceAPIData.prices[classicPriceAPIData.prices.length - 1][1]
+        } catch(e) {
+            try {
+                sccUSDHourresult = sccHourresult * classicPriceAPIData.prices[classicPriceAPIData.prices.length - 1][1]
+            } catch(error) {
+                console.log(error)
+            }
+        }
+        
+        try {
+            sccUSDDayresult = sccDayresult * classicPriceAPIData.prices[classicPriceAPIData.prices.length - 1][1]
+        } catch(e) {
+            try {
+                sccUSDDayresult = sccDayresult * classicPriceAPIData.prices[classicPriceAPIData.prices.length - 1][1]
+            } catch(error) {
+                console.log(error)
+            }
+        }
+        
+        try {
+            sccUSDWeekresult = sccWeekresult * classicPriceAPIData.prices[classicPriceAPIData.prices.length - 1][1]
+        } catch(e) {
+            try {
+                sccUSDWeekresult = sccWeekresult * classicPriceAPIData.prices[classicPriceAPIData.prices.length - 1][1]
+            } catch(error) {
+                console.log(error)
+            }
+        }
+        
+        try {
+            sccUSDMonthresult = sccMonthresult * classicPriceAPIData.prices[classicPriceAPIData.prices.length - 1][1]
+        } catch(e) {
+            try {
+                sccUSDMonthresult = sccMonthresult * classicPriceAPIData.prices[classicPriceAPIData.prices.length - 1][1]
+            } catch(error) {
+                console.log(error)
+            }
+        }
         
         SCCcalcHourUSD.innerHTML = numberShortener(sccUSDHourresult)
         SCCcalcDayUSD.innerHTML = numberShortener(sccUSDDayresult)
@@ -771,8 +920,25 @@ function classicPriceAPIError() {
 
 function prime(){
     
-    const primeAPIDifficulty = miningAPIData[2].difficulty;
-    const primeAPIheight = miningAPIData[2].height;
+    try {
+        primeAPIDifficulty = miningAPIData[2].difficulty
+    } catch(e) {
+        try {
+            primeAPIDifficulty = miningAPIData[2].difficulty
+        } catch(error) {
+            console.log(error)
+        }
+    }
+    
+    try {
+        primeAPIheight = miningAPIData[2].height
+    } catch(e) {
+        try {
+            primeAPIheight = miningAPIData[2].height
+        } catch(error) {
+            console.log(error)
+        }
+    }
     
     primeHourresult = primeReward(primeAPIDifficulty, hshrt, primeAPIheight, hour)
     primeDayresult = primeReward(primeAPIDifficulty, hshrt, primeAPIheight, day)
@@ -790,11 +956,46 @@ function primeReward(difficulty, hashrate, height, period){
 }
 
 function primePrice() {
-
-        primeUSDHourresult = primeHourresult * primePriceAPIData.prices[primePriceAPIData.prices.length - 1][1]
-        primeUSDDayresult = primeDayresult * primePriceAPIData.prices[primePriceAPIData.prices.length - 1][1]
-        primeUSDWeekresult = primeWeekresult * primePriceAPIData.prices[primePriceAPIData.prices.length - 1][1]
-        primeUSDMonthresult = primeMonthresult * primePriceAPIData.prices[primePriceAPIData.prices.length - 1][1]
+        
+        try {
+            primeUSDHourresult = primeHourresult * primePriceAPIData.prices[primePriceAPIData.prices.length - 1][1]
+        } catch(e) {
+            try {
+                primeUSDHourresult = primeHourresult * primePriceAPIData.prices[primePriceAPIData.prices.length - 1][1]
+            } catch(error) {
+                console.log(error)
+            }
+        }
+        
+        try {
+            primeUSDDayresult = primeDayresult * primePriceAPIData.prices[primePriceAPIData.prices.length - 1][1]
+        } catch(e) {
+            try {
+                primeUSDDayresult = primeDayresult * primePriceAPIData.prices[primePriceAPIData.prices.length - 1][1]
+            } catch(error) {
+                console.log(error)
+            }
+        }
+        
+        try {
+            primeUSDWeekresult = primeWeekresult * primePriceAPIData.prices[primePriceAPIData.prices.length - 1][1]
+        } catch(e) {
+            try {
+                primeUSDWeekresult = primeWeekresult * primePriceAPIData.prices[primePriceAPIData.prices.length - 1][1]
+            } catch(error) {
+                console.log(error)
+            }
+        }
+        
+        try {
+            primeUSDMonthresult = primeMonthresult * primePriceAPIData.prices[primePriceAPIData.prices.length - 1][1]
+        } catch(e) {
+            try {
+                primeUSDMonthresult = primeMonthresult * primePriceAPIData.prices[primePriceAPIData.prices.length - 1][1]
+            } catch(error) {
+                console.log(error)
+            }
+        }
         
         SCPcalcHourUSD.innerHTML = numberShortener(primeUSDHourresult)
         SCPcalcDayUSD.innerHTML = numberShortener(primeUSDDayresult)
@@ -811,8 +1012,25 @@ function primePriceError() {
 
 function cash2(){
     
-    const CASH2APIDifficulty = cash2APIData.difficulty;
-    const CASH2APIheight = cash2APIData.height;
+    try {
+        CASH2APIDifficulty = cash2APIData.difficulty
+    } catch(e) {
+        try {
+            CASH2APIDifficulty = cash2APIData.difficulty
+        } catch(error) {
+            console.log(error)
+        }
+    }
+    
+    try {
+        CASH2APIheight = cash2APIData.height
+    } catch(e) {
+        try {
+            CASH2APIheight = cash2APIData.height
+        } catch(error) {
+            console.log(error)
+        }
+    }
     
     Cash2Hourresult = cash2Reward(CASH2APIDifficulty, hshrt, CASH2APIheight, hour) * 0.36
     Cash2Dayresult = cash2Reward(CASH2APIDifficulty, hshrt, CASH2APIheight, day) * 0.36
