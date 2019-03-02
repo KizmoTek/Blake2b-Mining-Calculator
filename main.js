@@ -1154,10 +1154,10 @@ function calcProfit() {
         siaFeeWeekUSD = siaUSDWeekresult - (siaUSDWeekresult * (poolFee.value / 100)) - ((((powerConsumtion.value * 24) / 1000) * 7) * elecCost.value)
         siaFeeMonthUSD = siaUSDMonthresult - (siaUSDMonthresult * (poolFee.value / 100)) - ((((powerConsumtion.value * 24) / 1000) * 30) * elecCost.value)
         
-        siaFeeHour = siaHourresult - (siaUSDHourresult * (poolFee.value / 100))
-        siaFeeDay = siaDayresult - (siaUSDDayresult * (poolFee.value / 100))
-        siaFeeWeek = siaWeekresult - (siaUSDWeekresult * (poolFee.value / 100))
-        siaFeeMonth = siaMonthresult - (siaUSDMonthresult * (poolFee.value / 100))
+        siaFeeHour = siaHourresult - (siaHourresult * (poolFee.value / 100))
+        siaFeeDay = siaDayresult - (siaDayresult * (poolFee.value / 100))
+        siaFeeWeek = siaWeekresult - (siaWeekresult * (poolFee.value / 100))
+        siaFeeMonth = siaMonthresult - (siaMonthresult * (poolFee.value / 100))
         
         Cash2FeeHour = Cash2Hourresult - (Cash2Hourresult * (poolFee.value / 100))
         Cash2FeeDay = Cash2Dayresult - (Cash2Dayresult * (poolFee.value / 100))
