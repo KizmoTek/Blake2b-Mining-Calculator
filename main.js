@@ -90,6 +90,11 @@ const XSCresultDayProfit = document.querySelector("#XSCresultDayProfit")
 const XSCresultWeekProfit = document.querySelector("#XSCresultWeekProfit")
 const XSCresultMonthProfit = document.querySelector("#XSCresultMonthProfit")
 
+const XSCresultHourProfitUSD = document.querySelector("#XSCresultHourProfitUSD")
+const XSCresultDayProfitUSD = document.querySelector("#XSCresultDayProfitUSD")
+const XSCresultWeekProfitUSD = document.querySelector("#XSCresultWeekProfitUSD")
+const XSCresultMonthProfitUSD = document.querySelector("#XSCresultMonthProfitUSD")
+
 var hyperAPIDifficulty
 var hyperAPIheight
 
@@ -108,6 +113,11 @@ let hyperFeeDay
 let hyperFeeWeek
 let hyperFeeMonth
 
+let hyperFeeHourUSD
+let hyperFeeDayUSD
+let hyperFeeWeekUSD
+let hyperFeeMonthUSD
+
 //Sia Prime
 const SCPcalcHour = document.querySelector("#SCPresultHour")
 const SCPcalcDay = document.querySelector("#SCPresultDay")
@@ -123,6 +133,11 @@ const SCPresultHourProfit = document.querySelector("#SCPresultHourProfit")
 const SCPresultDayProfit = document.querySelector("#SCPresultDayProfit")
 const SCPresultWeekProfit = document.querySelector("#SCPresultWeekProfit")
 const SCPresultMonthProfit = document.querySelector("#SCPresultMonthProfit")
+
+const SCPresultHourProfitUSD = document.querySelector("#SCPresultHourProfitUSD")
+const SCPresultDayProfitUSD = document.querySelector("#SCPresultDayProfitUSD")
+const SCPresultWeekProfitUSD = document.querySelector("#SCPresultWeekProfitUSD")
+const SCPresultMonthProfitUSD = document.querySelector("#SCPresultMonthProfitUSD")
 
 var primeAPIDifficulty
 var primeAPIheight
@@ -142,6 +157,11 @@ let primeFeeDay
 let primeFeeWeek
 let primeFeeMonth
 
+let primeFeeHourUSD
+let primeFeeDayUSD
+let primeFeeWeekUSD
+let primeFeeMonthUSD
+
 //Sia Classic
 const SCCcalcHour = document.querySelector("#SCCresultHour")
 const SCCcalcDay = document.querySelector("#SCCresultDay")
@@ -157,6 +177,11 @@ const SCCresultHourProfit = document.querySelector("#SCCresultHourProfit")
 const SCCresultDayProfit = document.querySelector("#SCCresultDayProfit")
 const SCCresultWeekProfit = document.querySelector("#SCCresultWeekProfit")
 const SCCresultMonthProfit = document.querySelector("#SCCresultMonthProfit")
+
+const SCCresultHourProfitUSD = document.querySelector("#SCCresultHourProfitUSD")
+const SCCresultDayProfitUSD = document.querySelector("#SCCresultDayProfitUSD")
+const SCCresultWeekProfitUSD = document.querySelector("#SCCresultWeekProfitUSD")
+const SCCresultMonthProfitUSD = document.querySelector("#SCCresultMonthProfitUSD")
 
 var classicAPIDifficulty
 var classicAPIheight
@@ -176,6 +201,11 @@ let classicFeeDay
 let classicFeeWeek
 let classicFeeMonth
 
+let classicFeeHourUSD
+let classicFeeDayUSD
+let classicFeeWeekUSD
+let classicFeeMonthUSD
+
 //Sia
 const SiacalcHour = document.querySelector("#SiaresultHour")
 const SiacalcDay = document.querySelector("#SiaresultDay")
@@ -191,6 +221,11 @@ const SiaresultHourProfit = document.querySelector("#SiaresultHourProfit")
 const SiaresultDayProfit = document.querySelector("#SiaresultDayProfit")
 const SiaresultWeekProfit = document.querySelector("#SiaresultWeekProfit")
 const SiaresultMonthProfit = document.querySelector("#SiaresultMonthProfit")
+
+const SiaresultHourProfitUSD = document.querySelector("#SiaresultHourProfitUSD")
+const SiaresultDayProfitUSD = document.querySelector("#SiaresultDayProfitUSD")
+const SiaresultWeekProfitUSD = document.querySelector("#SiaresultWeekProfitUSD")
+const SiaresultMonthProfitUSD = document.querySelector("#SiaresultMonthProfitUSD")
 
 var siaAPIDifficulty
 var siaAPIheight
@@ -210,6 +245,11 @@ let siaFeeDay
 let siaFeeWeek
 let siaFeeMonth
 
+let siaFeeHourUSD
+let siaFeeDayUSD
+let siaFeeWeekUSD
+let siaFeeMonthUSD
+
 //Cash2
 const Cash2calcHour = document.querySelector("#CASH2resultHour")
 const Cash2calcDay = document.querySelector("#CASH2resultDay")
@@ -220,11 +260,18 @@ const Cash2calcHourUSD = document.querySelector("#CASH2resultHourUSD")
 const Cash2calcDayUSD = document.querySelector("#CASH2resultDayUSD")
 const Cash2calcWeekUSD = document.querySelector("#CASH2resultWeekUSD")
 const Cash2calcMonthUSD = document.querySelector("#CASH2resultMonthUSD")
+*/
 
 const Cash2resultHourProfit = document.querySelector("#CASH2resultHourProfit")
 const Cash2resultDayProfit = document.querySelector("#CASH2resultDayProfit")
 const Cash2resultWeekProfit = document.querySelector("#CASH2resultWeekProfit")
 const Cash2resultMonthProfit = document.querySelector("#CASH2resultMonthProfit")
+
+/*
+const Cash2resultHourProfitUSD = document.querySelector("#CASH2resultHourProfitUSD")
+const Cash2resultDayProfitUSD = document.querySelector("#CASH2resultDayProfitUSD")
+const Cash2resultWeekProfitUSD = document.querySelector("#CASH2resultWeekProfitUSD")
+const Cash2resultMonthProfitUSD = document.querySelector("#CASH2resultMonthProfitUSD")
 */
 
 var CASH2APIDifficulty
@@ -248,6 +295,11 @@ let Cash2FeeHour
 let Cash2FeeDay
 let Cash2FeeWeek
 let Cash2FeeMonth
+
+let Cash2FeeHourUSD
+let Cash2FeeDayUSD
+let Cash2FeeWeekUSD
+let Cash2FeeMonthUSD
 
 //----------------------------------------------------------------------------
 const calcHour = document.querySelector("#resultHour")
@@ -526,7 +578,7 @@ fetch(classicPriceAPI)
 
 function apiLoadVerify() {
     if(APILoaded >= 6) {
-        console.log(APILoaded)
+        console.log(APILoaded + " API's loaded")
         liveHashrate()
     }
 }
@@ -1067,30 +1119,50 @@ function calcProfit() {
         PowerCostWeekResult = ((((powerConsumtion.value * 24) / 1000) * 7) * elecCost.value) * -1
         PowerCostMonthResult = ((((powerConsumtion.value * 24) / 1000) * 30) * elecCost.value) * -1
         
-        hyperFeeHour = (hyperUSDHourresult - (hyperUSDHourresult * (poolFee.value / 100))) - (((powerConsumtion.value * 1) / 1000) * elecCost.value)
-        hyperFeeDay = (hyperUSDDayresult - (hyperUSDDayresult * (poolFee.value / 100))) - (((powerConsumtion.value * 24) / 1000) * elecCost.value)
-        hyperFeeWeek = (hyperUSDWeekresult - (hyperUSDWeekresult * (poolFee.value / 100))) - ((((powerConsumtion.value * 24) / 1000) * 7) * elecCost.value)
-        hyperFeeMonth = (hyperUSDMonthresult - (hyperUSDMonthresult * (poolFee.value / 100))) - ((((powerConsumtion.value * 24) / 1000) * 30) * elecCost.value)
+        hyperFeeHourUSD = (hyperUSDHourresult - (hyperUSDHourresult * (poolFee.value / 100))) - (((powerConsumtion.value * 1) / 1000) * elecCost.value)
+        hyperFeeDayUSD = (hyperUSDDayresult - (hyperUSDDayresult * (poolFee.value / 100))) - (((powerConsumtion.value * 24) / 1000) * elecCost.value)
+        hyperFeeWeekUSD = (hyperUSDWeekresult - (hyperUSDWeekresult * (poolFee.value / 100))) - ((((powerConsumtion.value * 24) / 1000) * 7) * elecCost.value)
+        hyperFeeMonthUSD = (hyperUSDMonthresult - (hyperUSDMonthresult * (poolFee.value / 100))) - ((((powerConsumtion.value * 24) / 1000) * 30) * elecCost.value)
         
-        primeFeeHour = (primeUSDHourresult - (primeUSDHourresult * (poolFee.value / 100))) - (((powerConsumtion.value * 1) / 1000) * elecCost.value)
-        primeFeeDay = (primeUSDDayresult - (primeUSDDayresult * (poolFee.value / 100))) - (((powerConsumtion.value * 24) / 1000) * elecCost.value)
-        primeFeeWeek = (primeUSDWeekresult - (primeUSDWeekresult * (poolFee.value / 100))) - ((((powerConsumtion.value * 24) / 1000) * 7) * elecCost.value)
-        primeFeeMonth = (primeUSDMonthresult - (primeUSDMonthresult * (poolFee.value / 100))) - ((((powerConsumtion.value * 24) / 1000) * 30) * elecCost.value)
+        hyperFeeHour = hyperHourresult - (hyperHourresult * (poolFee.value / 100))
+        hyperFeeDay = hyperDayresult - (hyperDayresult * (poolFee.value / 100))
+        hyperFeeWeek = hyperWeekresult - (hyperWeekresult * (poolFee.value / 100))
+        hyperFeeMonth = hyperMonthresult - (hyperMonthresult * (poolFee.value / 100))
         
-        classicFeeHour = sccUSDHourresult - (sccUSDHourresult * (poolFee.value / 100)) - (((powerConsumtion.value * 1) / 1000) * elecCost.value)
-        classicFeeDay = sccUSDDayresult - (sccUSDDayresult * (poolFee.value / 100)) - (((powerConsumtion.value * 24) / 1000) * elecCost.value)
-        classicFeeWeek = sccUSDWeekresult - (sccUSDWeekresult * (poolFee.value / 100)) - ((((powerConsumtion.value * 24) / 1000) * 7) * elecCost.value)
-        classicFeeMonth = sccUSDMonthresult - (sccUSDMonthresult * (poolFee.value / 100)) - ((((powerConsumtion.value * 24) / 1000) * 30) * elecCost.value)
+        primeFeeHourUSD = (primeUSDHourresult - (primeUSDHourresult * (poolFee.value / 100))) - (((powerConsumtion.value * 1) / 1000) * elecCost.value)
+        primeFeeDayUSD = (primeUSDDayresult - (primeUSDDayresult * (poolFee.value / 100))) - (((powerConsumtion.value * 24) / 1000) * elecCost.value)
+        primeFeeWeekUSD = (primeUSDWeekresult - (primeUSDWeekresult * (poolFee.value / 100))) - ((((powerConsumtion.value * 24) / 1000) * 7) * elecCost.value)
+        primeFeeMonthUSD = (primeUSDMonthresult - (primeUSDMonthresult * (poolFee.value / 100))) - ((((powerConsumtion.value * 24) / 1000) * 30) * elecCost.value)
         
-        siaFeeHour = siaUSDHourresult - (siaUSDHourresult * (poolFee.value / 100)) - (((powerConsumtion.value * 1) / 1000) * elecCost.value)
-        siaFeeDay = siaUSDDayresult - (siaUSDDayresult * (poolFee.value / 100)) - (((powerConsumtion.value * 24) / 1000) * elecCost.value)
-        siaFeeWeek = siaUSDWeekresult - (siaUSDWeekresult * (poolFee.value / 100)) - ((((powerConsumtion.value * 24) / 1000) * 7) * elecCost.value)
-        siaFeeMonth = siaUSDMonthresult - (siaUSDMonthresult * (poolFee.value / 100)) - ((((powerConsumtion.value * 24) / 1000) * 30) * elecCost.value)
+        primeFeeHour = primeHourresult - (primeHourresult * (poolFee.value / 100))
+        primeFeeDay = primeDayresult - (primeDayresult * (poolFee.value / 100))
+        primeFeeWeek = primeWeekresult - (primeWeekresult * (poolFee.value / 100))
+        primeFeeMonth = primeMonthresult - (primeMonthresult * (poolFee.value / 100))
         
-        Cash2FeeHour = (((powerConsumtion.value * 1) / 1000) * elecCost.value) * -1
-        Cash2FeeDay = (((powerConsumtion.value * 24) / 1000) * elecCost.value) * -1
-        Cash2FeeWeek = ((((powerConsumtion.value * 24) / 1000) * 7) * elecCost.value) * -1
-        Cash2FeeMonth = ((((powerConsumtion.value * 24) / 1000) * 30) * elecCost.value) * -1
+        classicFeeHourUSD = sccUSDHourresult - (sccUSDHourresult * (poolFee.value / 100)) - (((powerConsumtion.value * 1) / 1000) * elecCost.value)
+        classicFeeDayUSD = sccUSDDayresult - (sccUSDDayresult * (poolFee.value / 100)) - (((powerConsumtion.value * 24) / 1000) * elecCost.value)
+        classicFeeWeekUSD = sccUSDWeekresult - (sccUSDWeekresult * (poolFee.value / 100)) - ((((powerConsumtion.value * 24) / 1000) * 7) * elecCost.value)
+        classicFeeMonthUSD = sccUSDMonthresult - (sccUSDMonthresult * (poolFee.value / 100)) - ((((powerConsumtion.value * 24) / 1000) * 30) * elecCost.value)
+        
+        classicFeeHour = sccHourresult - (sccHourresult * (poolFee.value / 100))
+        classicFeeDay = sccDayresult - (sccDayresult * (poolFee.value / 100))
+        classicFeeWeek = sccWeekresult - (sccWeekresult * (poolFee.value / 100))
+        classicFeeMonth = sccMonthresult - (sccMonthresult * (poolFee.value / 100))
+        
+        siaFeeHourUSD = siaUSDHourresult - (siaUSDHourresult * (poolFee.value / 100)) - (((powerConsumtion.value * 1) / 1000) * elecCost.value)
+        siaFeeDayUSD = siaUSDDayresult - (siaUSDDayresult * (poolFee.value / 100)) - (((powerConsumtion.value * 24) / 1000) * elecCost.value)
+        siaFeeWeekUSD = siaUSDWeekresult - (siaUSDWeekresult * (poolFee.value / 100)) - ((((powerConsumtion.value * 24) / 1000) * 7) * elecCost.value)
+        siaFeeMonthUSD = siaUSDMonthresult - (siaUSDMonthresult * (poolFee.value / 100)) - ((((powerConsumtion.value * 24) / 1000) * 30) * elecCost.value)
+        
+        siaFeeHour = siaHourresult - (siaUSDHourresult * (poolFee.value / 100))
+        siaFeeDay = siaDayresult - (siaUSDDayresult * (poolFee.value / 100))
+        siaFeeWeek = siaWeekresult - (siaUSDWeekresult * (poolFee.value / 100))
+        siaFeeMonth = siaMonthresult - (siaUSDMonthresult * (poolFee.value / 100))
+        
+        Cash2FeeHour = Cash2Hourresult - (Cash2Hourresult * (poolFee.value / 100))
+        Cash2FeeDay = Cash2Dayresult - (Cash2Dayresult * (poolFee.value / 100))
+        Cash2FeeWeek = Cash2Weekresult - (Cash2Weekresult * (poolFee.value / 100))
+        Cash2FeeMonth = Cash2Monthresult - (Cash2Monthresult * (poolFee.value / 100))
         
         //PowerCost
         PowerCostHour.innerHTML = numberShortener(PowerCostHourResult)
@@ -1104,29 +1176,34 @@ function calcProfit() {
         XSCresultWeekProfit.innerHTML = numberShortener(hyperFeeWeek)
         XSCresultMonthProfit.innerHTML = numberShortener(hyperFeeMonth)
         
+        XSCresultHourProfitUSD.innerHTML = numberShortener(hyperFeeHourUSD)
+        XSCresultDayProfitUSD.innerHTML = numberShortener(hyperFeeDayUSD)
+        XSCresultWeekProfitUSD.innerHTML = numberShortener(hyperFeeWeekUSD)
+        XSCresultMonthProfitUSD.innerHTML = numberShortener(hyperFeeMonthUSD)
+        
         //Hour
-        if (hyperFeeHour > 0) {
-            XSCresultHourProfit.style.color = greenColor
-        } else if (hyperFeeHour < 0) {
-            XSCresultHourProfit.style.color = redColor
+        if (hyperFeeHourUSD > 0) {
+            XSCresultHourProfitUSD.style.color = greenColor
+        } else if (hyperFeeHourUSD < 0) {
+            XSCresultHourProfitUSD.style.color = redColor
         }
         //Day
-        if (hyperFeeDay > 0) {
-            XSCresultDayProfit.style.color = greenColor
-        } else if (hyperFeeDay < 0) {
-            XSCresultDayProfit.style.color = redColor
+        if (hyperFeeDayUSD > 0) {
+            XSCresultDayProfitUSD.style.color = greenColor
+        } else if (hyperFeeDayUSD < 0) {
+            XSCresultDayProfitUSD.style.color = redColor
         }
         //Week
-        if (hyperFeeWeek > 0) {
-            XSCresultWeekProfit.style.color = greenColor
-        } else if (hyperFeeWeek < 0) {
-            XSCresultWeekProfit.style.color = redColor
+        if (hyperFeeWeekUSD > 0) {
+            XSCresultWeekProfitUSD.style.color = greenColor
+        } else if (hyperFeeWeekUSD < 0) {
+            XSCresultWeekProfitUSD.style.color = redColor
         }
         //Month
-        if (hyperFeeMonth > 0) {
-            XSCresultMonthProfit.style.color = greenColor
-        } else if (hyperFeeMonth < 0) {
-            XSCresultMonthProfit.style.color = redColor
+        if (hyperFeeMonthUSD > 0) {
+            XSCresultMonthProfitUSD.style.color = greenColor
+        } else if (hyperFeeMonthUSD < 0) {
+            XSCresultMonthProfitUSD.style.color = redColor
         }
         
         //SiaPrime
@@ -1135,29 +1212,34 @@ function calcProfit() {
         SCPresultWeekProfit.innerHTML = numberShortener(primeFeeWeek)
         SCPresultMonthProfit.innerHTML = numberShortener(primeFeeMonth)
         
+        SCPresultHourProfitUSD.innerHTML = numberShortener(primeFeeHourUSD)
+        SCPresultDayProfitUSD.innerHTML = numberShortener(primeFeeDayUSD)
+        SCPresultWeekProfitUSD.innerHTML = numberShortener(primeFeeWeekUSD)
+        SCPresultMonthProfitUSD.innerHTML = numberShortener(primeFeeMonthUSD)
+        
         //Hour
-        if (primeFeeHour > 0) {
-            SCPresultHourProfit.style.color = greenColor
-        } else if (primeFeeHour < 0) {
-            SCPresultHourProfit.style.color = redColor
+        if (primeFeeHourUSD > 0) {
+            SCPresultHourProfitUSD.style.color = greenColor
+        } else if (primeFeeHourUSD < 0) {
+            SCPresultHourProfitUSD.style.color = redColor
         }
         //Day
-        if (primeFeeDay > 0) {
-            SCPresultDayProfit.style.color = greenColor
-        } else if (primeFeeDay < 0) {
-            SCPresultDayProfit.style.color = redColor
+        if (primeFeeDayUSD > 0) {
+            SCPresultDayProfitUSD.style.color = greenColor
+        } else if (primeFeeDayUSD < 0) {
+            SCPresultDayProfitUSD.style.color = redColor
         }
         //Week
-        if (primeFeeWeek > 0) {
-            SCPresultWeekProfit.style.color = greenColor
-        } else if (primeFeeWeek < 0) {
-            SCPresultWeekProfit.style.color = redColor
+        if (primeFeeWeekUSD > 0) {
+            SCPresultWeekProfitUSD.style.color = greenColor
+        } else if (primeFeeWeekUSD < 0) {
+            SCPresultWeekProfitUSD.style.color = redColor
         }
         //Month
-        if (primeFeeMonth > 0) {
-            SCPresultMonthProfit.style.color = greenColor
-        } else if (primeFeeMonth < 0) {
-            SCPresultMonthProfit.style.color = redColor
+        if (primeFeeMonthUSD > 0) {
+            SCPresultMonthProfitUSD.style.color = greenColor
+        } else if (primeFeeMonthUSD < 0) {
+            SCPresultMonthProfitUSD.style.color = redColor
         }
         
         //SiaClassic
@@ -1166,29 +1248,34 @@ function calcProfit() {
         SCCresultWeekProfit.innerHTML = numberShortener(classicFeeWeek)
         SCCresultMonthProfit.innerHTML = numberShortener(classicFeeMonth)
         
+        SCCresultHourProfitUSD.innerHTML = numberShortener(classicFeeHourUSD)
+        SCCresultDayProfitUSD.innerHTML = numberShortener(classicFeeDayUSD)
+        SCCresultWeekProfitUSD.innerHTML = numberShortener(classicFeeWeekUSD)
+        SCCresultMonthProfitUSD.innerHTML = numberShortener(classicFeeMonthUSD)
+        
         //Hour
-        if (classicFeeHour > 0) {
-            SCCresultHourProfit.style.color = greenColor
-        } else if (classicFeeHour < 0) {
-            SCCresultHourProfit.style.color = redColor
+        if (classicFeeHourUSD > 0) {
+            SCCresultHourProfitUSD.style.color = greenColor
+        } else if (classicFeeHourUSD < 0) {
+            SCCresultHourProfitUSD.style.color = redColor
         }
         //Day
-        if (classicFeeDay > 0) {
-            SCCresultDayProfit.style.color = greenColor
-        } else if (classicFeeDay < 0) {
-            SCCresultDayProfit.style.color = redColor
+        if (classicFeeDayUSD > 0) {
+            SCCresultDayProfitUSD.style.color = greenColor
+        } else if (classicFeeDayUSD < 0) {
+            SCCresultDayProfitUSD.style.color = redColor
         }
         //Week
-        if (classicFeeWeek > 0) {
-            SCCresultWeekProfit.style.color = greenColor
-        } else if (classicFeeWeek < 0) {
-            SCCresultWeekProfit.style.color = redColor
+        if (classicFeeWeekUSD > 0) {
+            SCCresultWeekProfitUSD.style.color = greenColor
+        } else if (classicFeeWeekUSD < 0) {
+            SCCresultWeekProfitUSD.style.color = redColor
         }
         //Month
-        if (classicFeeMonth > 0) {
-            SCCresultMonthProfit.style.color = greenColor
-        } else if (classicFeeMonth < 0) {
-            SCCresultMonthProfit.style.color = redColor
+        if (classicFeeMonthUSD > 0) {
+            SCCresultMonthProfitUSD.style.color = greenColor
+        } else if (classicFeeMonthUSD < 0) {
+            SCCresultMonthProfitUSD.style.color = redColor
         }
         
         //Sia
@@ -1197,37 +1284,42 @@ function calcProfit() {
         SiaresultWeekProfit.innerHTML = numberShortener(siaFeeWeek)
         SiaresultMonthProfit.innerHTML = numberShortener(siaFeeMonth)
         
+        SiaresultHourProfitUSD.innerHTML = numberShortener(siaFeeHourUSD)
+        SiaresultDayProfitUSD.innerHTML = numberShortener(siaFeeDayUSD)
+        SiaresultWeekProfitUSD.innerHTML = numberShortener(siaFeeWeekUSD)
+        SiaresultMonthProfitUSD.innerHTML = numberShortener(siaFeeMonthUSD)
+        
         //Hour
-        if (siaFeeHour > 0) {
-            SiaresultHourProfit.style.color = greenColor
+        if (siaFeeHourUSD > 0) {
+            SiaresultHourProfitUSD.style.color = greenColor
         } else if (siaFeeHour < 0) {
-            SiaresultHourProfit.style.color = redColor
+            SiaresultHourProfitUSD.style.color = redColor
         }
         //Day
-        if (siaFeeDay > 0) {
-            SiaresultDayProfit.style.color = greenColor
+        if (siaFeeDayUSD > 0) {
+            SiaresultDayProfitUSD.style.color = greenColor
         } else if (siaFeeDay < 0) {
-            SiaresultDayProfit.style.color = redColor
+            SiaresultDayProfitUSD.style.color = redColor
         }
         //Week
-        if (siaFeeWeek > 0) {
-            SiaresultWeekProfit.style.color = greenColor
+        if (siaFeeWeekUSD > 0) {
+            SiaresultWeekProfitUSD.style.color = greenColor
         } else if (siaFeeWeek < 0) {
-            SiaresultWeekProfit.style.color = redColor
+            SiaresultWeekProfitUSD.style.color = redColor
         }
         //Month
-        if (siaFeeMonth > 0) {
-            SiaresultMonthProfit.style.color = greenColor
+        if (siaFeeMonthUSD > 0) {
+            SiaresultMonthProfitUSD.style.color = greenColor
         } else if (siaFeeMonth < 0) {
-            SiaresultMonthProfit.style.color = redColor
+            SiaresultMonthProfitUSD.style.color = redColor
         }
-        /*
+        
         //Cash2
         Cash2resultHourProfit.innerHTML = numberShortener(Cash2FeeHour)
         Cash2resultDayProfit.innerHTML = numberShortener(Cash2FeeDay)
         Cash2resultWeekProfit.innerHTML = numberShortener(Cash2FeeWeek)
         Cash2resultMonthProfit.innerHTML = numberShortener(Cash2FeeMonth)
-        
+        /*
         //Hour
         if (Cash2FeeHour > 0) {
             Cash2resultHourProfit.style.color = greenColor

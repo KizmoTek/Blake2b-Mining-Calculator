@@ -80,12 +80,17 @@
                 flex-wrap: nowrap;
                 border-radius: 0px 0px 10px 10px;
                 border-top:0px;
-                width: 550px;
+                width: 540px;
         }
 
         .tableCoin {
                 color: white;
                 font-size: 32px;
+                text-align: left;
+        }
+        
+        .tableCoinPool {
+                text-align: right;
         }
 
         .time {
@@ -93,21 +98,27 @@
                 font-size: 22px;
 
         }
-        th,
-        td {
-                width: 1000px;
-        }
         
         .totalResult {
                 display: flex;
                 flex-direction:column;
-                margin-right: 80px;
         }
         
         .Result th {
                 padding-left: 22px;
                 padding-right: 22px;
-
+        }
+        
+        .smallName:nth-child(1) {
+                padding-right:0px;
+                padding-left: 0px;
+                text-align: right;
+        }
+        
+        #noPad2:nth-child(2) {
+                padding-right:0px;
+                padding-left: 0px;
+                text-align: right;
         }
         
         .PowerResult {
@@ -118,14 +129,17 @@
                 border-radius: 10px 10px 0px 0px;
                 border-bottom:0px;
                 height:25px;
-                width: 550px;
+                width: 540px;
         }
         
         .PowerResult th {
                 padding-left: 2px;
                 padding-right: 2px;
                 font-size: 17px;
+        }
         
+        .PowerResult table {
+                width:100%;
         }
         
         .powerNumbers {
@@ -513,15 +527,13 @@
         .preset {
                 background-color: rgba(185, 185, 185, 0.6);
                 border: 2px #7f7f7f solid;
-                height: 240px;
-                width: 180px;
+                height: 320px;
+                width: 240px;
                 border-radius: 10px;
-                margin-top: 120px;
-                margin-left: 150px;
         }
 
-        .preset tr td input {
-                width: 23px;
+        .preset tr input {
+                width: 32px;
                 background-color: rgba(185, 185, 185, 0);
                 border-bottom-color: rgba(185, 185, 185, 0);
                 background-color: transparent;
@@ -529,14 +541,21 @@
                 color: black;
         }
 
-        .preset tr td,
         .preset tr th {
                 width: 0px;
         }
 
         .presetWord {
-                font-size: 25px;
-
+                font-size: 32px;
+        }
+        
+        .presetData {
+                font-size: 18px;
+                width:38px;
+        }
+        
+        .presetMiners {
+                font-size: 22px;
         }
 
         .preset tr td {
@@ -557,7 +576,8 @@
         #elecCost,
         #powerConsumtion {
                 border: 1px solid rgba(120, 120, 120, 1);
-                height: 16px;
+                font-size: 18px;
+                width:150px;
         }
 
         #webMsg {
@@ -569,10 +589,10 @@
         #hashPower {
                 background-color: rgba(175, 175, 175, 0.6);
                 border: 1px solid rgba(120, 120, 120, 1);
-                border-bottom-right-radius: 5%;
-                border-top-right-radius: 5%;
-                margin-left: -6px;
-                height: 20px;
+                border-bottom-right-radius: 5px;
+                border-top-right-radius: 5px;
+                margin-left: -5px;
+                font-size: 18px;
         }
 
         #inputArea {
@@ -594,6 +614,27 @@
         .zodiacLink {
                 font-size:12px;
                 color:red;
+        }
+        
+        .smallName {
+                font-size: 14px;
+                padding:0px;
+        }
+        
+        .bold {
+                font-weight: bold;
+        }
+        
+        .resultTable {
+                border-collapse: collapse;
+        }
+        
+        #lineDivider {
+                border-bottom: 2px solid black;
+        }
+        
+        #hideBorder {
+                border-bottom: 2px solid rgba(96, 193, 181, 0);
         }
 }
 
@@ -669,6 +710,10 @@
         
         }
         
+        .PowerResult table {
+                width:100%;
+        }
+        
         .powerNumbers {
                 font-size: 15px;
         }
@@ -676,17 +721,17 @@
         .tableCoin {
                 color: white;
                 font-size: 32px;
+                text-align: left;
+        }
+        
+        .tableCoinPool {
+                text-align: right;
         }
         
         .time {
                 color: white;
                 font-size: 22px;
         
-        }
-        
-        th,
-        td {
-                width: 1000px;
         }
         
         .Result th {
@@ -711,6 +756,10 @@
                 padding-right: 2px;
                 font-size: 11px;
         
+        }
+        
+        .PowerResult table {
+                width:100%;
         }
         
         .powerNumbers {
@@ -1097,15 +1146,15 @@
         .preset {
                 background-color: rgba(185, 185, 185, 0.6);
                 border: 2px #7f7f7f solid;
-                height: 240px;
-                width: 180px;
+                height: 320px;
+                width: 240px;
                 border-radius: 10px;
                 text-align: center;
-                margin:auto;
+                margin: auto;
         }
         
-        .preset tr td input {
-                width: 23px;
+        .preset tr input {
+                width: 32px;
                 background-color: rgba(185, 185, 185, 0);
                 border-bottom-color: rgba(185, 185, 185, 0);
                 background-color: transparent;
@@ -1114,14 +1163,21 @@
                 
         }
         
-        .preset tr td,
         .preset tr th {
                 width: 0px;
         }
         
         .presetWord {
-                font-size: 25px;
+                font-size: 32px;
+        }
         
+        .presetData {
+                font-size: 18px;
+                width:38px;
+        }
+        
+        .presetMiners {
+                font-size: 22px;
         }
         
         .preset tr td {
@@ -1142,7 +1198,8 @@
         #elecCost,
         #powerConsumtion {
                 border: 1px solid rgba(120, 120, 120, 1);
-                height: 16px;
+                font-size: 18px;
+                width:150px;
         }
         
         #webMsg {
@@ -1154,10 +1211,10 @@
         #hashPower {
                 background-color: rgba(175, 175, 175, 0.6);
                 border: 1px solid rgba(120, 120, 120, 1);
-                border-bottom-right-radius: 5%;
-                border-top-right-radius: 5%;
+                border-bottom-right-radius: 5px;
+                border-top-right-radius: 5px;
                 margin-left: -6px;
-                height: 20px;
+                font-size: 18px;
         }
         
         #inputArea {
@@ -1181,6 +1238,28 @@
         .zodiacLink {
                 font-size:12px;
                 color:red;
+        }
+        
+        .smallName {
+                font-size: 14px;
+                padding:0px;
+        }
+        
+        .bold {
+                font-weight: bold;
+        }
+        
+        .resultTable {
+                border-collapse: collapse;
+                width: 100%;
+        }
+        
+        #lineDivider {
+                border-bottom: 2px solid black;
+        }
+        
+        #hideBorder {
+                border-bottom: 2px solid rgba(96, 193, 181, 0);
         }
 }
 
@@ -1234,7 +1313,7 @@
                 border: 2px #52a59b solid;
                 flex-wrap: nowrap;
                 margin: auto;
-                width: 500px;
+                width: 540px;
                 border-radius: 0px 0px 10px 10px;
                 border-top:0px;
         }
@@ -1242,17 +1321,17 @@
         .tableCoin {
                 color: white;
                 font-size: 32px;
+                text-align: left;
+        }
+        
+        .tableCoinPool {
+                text-align: right;
         }
         
         .time {
                 color: white;
                 font-size: 22px;
         
-        }
-        
-        th,
-        td {
-                width: 1000px;
         }
         
         .Result th {
@@ -1270,7 +1349,7 @@
                 border-radius: 10px 10px 0px 0px;
                 border-bottom:0px;
                 height:20px;
-                width: 500px;
+                width: 540px;
         }
         
         .PowerResult th {
@@ -1278,6 +1357,10 @@
                 padding-right: 2px;
                 font-size: 11px;
         
+        }
+        
+        .PowerResult table {
+                width:100%;
         }
         
         .powerNumbers {
@@ -1664,15 +1747,15 @@
         .preset {
                 background-color: rgba(185, 185, 185, 0.6);
                 border: 2px #7f7f7f solid;
-                height: 240px;
-                width: 180px;
+                height: 320px;
+                width: 240px;
                 border-radius: 10px;
                 text-align: center;
-                margin:auto;
+                margin: auto;
         }
         
-        .preset tr td input {
-                width: 23px;
+        .preset tr input {
+                width: 32px;
                 background-color: rgba(185, 185, 185, 0);
                 border-bottom-color: rgba(185, 185, 185, 0);
                 background-color: transparent;
@@ -1681,14 +1764,21 @@
                 
         }
         
-        .preset tr td,
         .preset tr th {
                 width: 0px;
         }
         
         .presetWord {
-                font-size: 25px;
+                font-size: 32px;
+        }
         
+        .presetData {
+                font-size: 18px;
+                width:38px;
+        }
+        
+        .presetMiners {
+                font-size: 22px;
         }
         
         .preset tr td {
@@ -1709,7 +1799,8 @@
         #elecCost,
         #powerConsumtion {
                 border: 1px solid rgba(120, 120, 120, 1);
-                height: 16px;
+                font-size: 18px;
+                width:150px;
         }
         
         #webMsg {
@@ -1721,10 +1812,10 @@
         #hashPower {
                 background-color: rgba(175, 175, 175, 0.6);
                 border: 1px solid rgba(120, 120, 120, 1);
-                border-bottom-right-radius: 5%;
-                border-top-right-radius: 5%;
+                border-bottom-right-radius: 5px;
+                border-top-right-radius: 5px;
                 margin-left: -6px;
-                height: 20px;
+                font-size: 18px;
         }
         
         #inputArea {
@@ -1748,6 +1839,28 @@
         .zodiacLink {
                 font-size:12px;
                 color:red;
+        }
+        
+        .smallName {
+                font-size: 14px;
+                padding:0px;
+        }
+        
+        .bold {
+                font-weight: bold;
+        }
+        
+        .resultTable {
+                border-collapse: collapse;
+                width: 100%;
+        }
+        
+        #lineDivider {
+                border-bottom: 2px solid black;
+        }
+        
+        #hideBorder {
+                border-bottom: 2px solid rgba(96, 193, 181, 0);
         }
 }
 
@@ -1798,7 +1911,7 @@
                 border: 2px #52a59b solid;
                 flex-wrap: nowrap;
                 margin-left: auto;
-                width: 550px;
+                width: 540px;
                 border-radius: 0px 0px 10px 10px;
                 border-top:0px;
         }
@@ -1806,17 +1919,19 @@
         .tableCoin {
                 color: white;
                 font-size: 32px;
+                text-align: left;
         }
-
+        
+        .tableCoinPool {
+                text-align: right;
+        }
+        
         .time {
                 color: white;
                 font-size: 22px;
 
         }
-        th,
-        td {
-                width: 1000px;
-        }
+        
         .Result th {
                 padding-left: 22px;
                 padding-right: 22px;
@@ -1831,7 +1946,7 @@
                 border-radius: 10px 10px 0px 0px;
                 border-bottom:0px;
                 height:25px;
-                width: 550px;
+                width: 540px;
         }
         
         .PowerResult th {
@@ -1839,6 +1954,10 @@
                 padding-right: 2px;
                 font-size: 17px;
         
+        }
+        
+        .PowerResult table {
+                width:100%;
         }
         
         .powerNumbers {
@@ -2226,15 +2345,14 @@
         .preset {
                 background-color: rgba(185, 185, 185, 0.6);
                 border: 2px #7f7f7f solid;
-                height: 240px;
-                width: 180px;
+                height: 320px;
+                width: 240px;
                 border-radius: 10px;
-                margin-top: 120px;
                 margin-left: -50px;
         }
 
-        .preset tr td input {
-                width: 23px;
+        .preset tr input {
+                width: 32px;
                 background-color: rgba(185, 185, 185, 0);
                 border-bottom-color: rgba(185, 185, 185, 0);
                 background-color: transparent;
@@ -2242,14 +2360,21 @@
                 color: black;
         }
 
-        .preset tr td,
         .preset tr th {
                 width: 0px;
         }
 
         .presetWord {
-                font-size: 25px;
-
+                font-size: 32px;
+        }
+        
+        .presetData {
+                font-size: 18px;
+                width:38px;
+        }
+        
+        .presetMiners {
+                font-size: 22px;
         }
 
         .preset tr td {
@@ -2270,7 +2395,8 @@
         #elecCost,
         #powerConsumtion {
                 border: 1px solid rgba(120, 120, 120, 1);
-                height: 16px;
+                font-size: 18px;
+                width:150px;
         }
 
         #webMsg {
@@ -2282,10 +2408,10 @@
         #hashPower {
                 background-color: rgba(175, 175, 175, 0.6);
                 border: 1px solid rgba(120, 120, 120, 1);
-                border-bottom-right-radius: 5%;
-                border-top-right-radius: 5%;
+                border-bottom-right-radius: 5px;
+                border-top-right-radius: 5px;
                 margin-left: -6px;
-                height: 20px;
+                font-size: 18px;
         }
 
         #inputArea {
@@ -2308,5 +2434,26 @@
         .zodiacLink {
                 font-size:12px;
                 color:red;
+        }
+        
+        .smallName {
+                font-size: 14px;
+                padding:0px;
+        }
+        
+        .bold {
+                font-weight: bold;
+        }
+        
+        .resultTable {
+                border-collapse: collapse;
+        }
+        
+        #lineDivider {
+                border-bottom: 2px solid black;
+        }
+        
+        #hideBorder {
+                border-bottom: 2px solid rgba(96, 193, 181, 0);
         }
 }
