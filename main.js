@@ -56,7 +56,7 @@ var primePriceAPILoad = false
 const classicPriceAPI = "https://api.coingecko.com/api/v3/coins/siaclassic/market_chart?vs_currency=usd&days=1"
 var classicPriceAPILoad = false
 
-const cash2PriceAPI = "" //Wait for API to be on CoinGecko
+const cash2PriceAPI = "https://api.coingecko.com/api/v3/coins/cash2/market_chart?vs_currency=usd&days=1"
 var cash2PriceAPILoad = false
 
 let hshrt = 0
@@ -215,24 +215,23 @@ const Cash2calcHour = document.querySelector("#CASH2resultHour")
 const Cash2calcDay = document.querySelector("#CASH2resultDay")
 const Cash2calcWeek = document.querySelector("#CASH2resultWeek")
 const Cash2calcMonth = document.querySelector("#CASH2resultMonth")
-/*
+
 const Cash2calcHourUSD = document.querySelector("#CASH2resultHourUSD")
 const Cash2calcDayUSD = document.querySelector("#CASH2resultDayUSD")
 const Cash2calcWeekUSD = document.querySelector("#CASH2resultWeekUSD")
 const Cash2calcMonthUSD = document.querySelector("#CASH2resultMonthUSD")
-*/
 
 const Cash2resultHourProfit = document.querySelector("#CASH2resultHourProfit")
 const Cash2resultDayProfit = document.querySelector("#CASH2resultDayProfit")
 const Cash2resultWeekProfit = document.querySelector("#CASH2resultWeekProfit")
 const Cash2resultMonthProfit = document.querySelector("#CASH2resultMonthProfit")
 
-/*
+
 const Cash2resultHourProfitUSD = document.querySelector("#CASH2resultHourProfitUSD")
 const Cash2resultDayProfitUSD = document.querySelector("#CASH2resultDayProfitUSD")
 const Cash2resultWeekProfitUSD = document.querySelector("#CASH2resultWeekProfitUSD")
 const Cash2resultMonthProfitUSD = document.querySelector("#CASH2resultMonthProfitUSD")
-*/
+
 
 var CASH2APIDifficulty
 var CASH2APIheight
@@ -298,49 +297,74 @@ let S11presetPower = 0
 let SC1presetPower = 0
 let StrongUpresetPower = 0
 
-var coinAddress
-var coin
-
-var popup
-
 function BTCSet() {
-    coinAddress = "1DNEmupDWC873fDv4Lpy1xY2us6eYKwXTH"
-    coin = "BTC"
-    popup = document.getElementById("myPopup");
-    copyAdd()
+    var coinAddress = "1DNEmupDWC873fDv4Lpy1xY2us6eYKwXTH"
+    var coin = "BTC"
+    var popup = document.getElementById("myPopup");
+    const el = document.createElement('textarea');
+    el.value = coinAddress;
+    document.body.appendChild(el);
+    el.select();
+    document.execCommand('copy');
+    document.body.removeChild(el);
+    popup.classList.toggle("show");
+    setTimeout( () => {popup.classList.toggle("show")}, 3000);
 }
 
 function SIASet() {
-    coinAddress = "f7e6b31b7fbfd78894964d81e418ad0d1b9f0a8ae59be37e932e5853670feb89e0f4021df521"
-    coin = "SIA"
-    popup = document.getElementById("myPopup2");
-    copyAdd()
+    var coinAddress = "f7e6b31b7fbfd78894964d81e418ad0d1b9f0a8ae59be37e932e5853670feb89e0f4021df521"
+    var coin = "SIA"
+    var popup = document.getElementById("myPopup2");
+    const el = document.createElement('textarea');
+    el.value = coinAddress;
+    document.body.appendChild(el);
+    el.select();
+    document.execCommand('copy');
+    document.body.removeChild(el);
+    popup.classList.toggle("show");
+    setTimeout( () => {popup.classList.toggle("show")}, 3000);
 }
 
 function XSCSet() {
-    coinAddress = "ebe11b2258f11caba02e7d2c1a5766b94175a5155d9e620a7f77a95d4bd1f5856fdb2d513cb3"
-    coin = "XSC"
-    popup = document.getElementById("myPopup3");
-    copyAdd()
+    var coinAddress = "ebe11b2258f11caba02e7d2c1a5766b94175a5155d9e620a7f77a95d4bd1f5856fdb2d513cb3"
+    var coin = "XSC"
+    var popup = document.getElementById("myPopup3");
+    const el = document.createElement('textarea');
+    el.value = coinAddress;
+    document.body.appendChild(el);
+    el.select();
+    document.execCommand('copy');
+    document.body.removeChild(el);
+    popup.classList.toggle("show");
+    setTimeout( () => {popup.classList.toggle("show")}, 3000);
 }
 
 function SCPSet() {
-    coinAddress = "bd187fa1c247a297e364d67ee59b66a4cbecec2d4a3cf2c01d4d5540c9d6a03f6279d40657a3"
-    coin = "SCP"
-    popup = document.getElementById("myPopup4");
-    copyAdd()
+    var coinAddress = "bd187fa1c247a297e364d67ee59b66a4cbecec2d4a3cf2c01d4d5540c9d6a03f6279d40657a3"
+    var coin = "SCP"
+    var popup = document.getElementById("myPopup4");
+    const el = document.createElement('textarea');
+    el.value = coinAddress;
+    document.body.appendChild(el);
+    el.select();
+    document.execCommand('copy');
+    document.body.removeChild(el);
+    popup.classList.toggle("show");
+    setTimeout( () => {popup.classList.toggle("show")}, 3000);
 }
 
-function copyAdd() {
-      const el = document.createElement('textarea');
-      el.value = coinAddress;
-      document.body.appendChild(el);
-      el.select();
-      document.execCommand('copy');
-      document.body.removeChild(el);
-      popup.classList.toggle("show");
-      setTimeout( () => {popup.classList.toggle("show")}, 3000);
-      
+function Cash2Set() {
+    var coinAddress = "27xnv8XecrsRBnVau4xinb5kuyMAbthiihVVPmZMJvsJ7Q2bKxwmRC2SaY6tGz57iBXieRarHcoGLFFWzQuVJbYdB2nCD1J"
+    var coin = "Cash2"
+    var popup = document.getElementById("myPopup5");
+    const el = document.createElement('textarea');
+    el.value = coinAddress;
+    document.body.appendChild(el);
+    el.select();
+    document.execCommand('copy');
+    document.body.removeChild(el);
+    popup.classList.toggle("show");
+    setTimeout( () => {popup.classList.toggle("show")}, 3000);
 }
 
 var APILoaded = 0
@@ -402,6 +426,36 @@ fetch(cash2API)
 .then(function(myJson){
     cash2APIData = myJson
     cash2APILoad = true
+    APILoaded += 1
+    apiLoadVerify()
+})
+
+let cash2PriceAPIData = 0
+fetch(cash2PriceAPI)
+    .then(function(response) {
+    if (response.ok == true) {
+        return response.json();
+    } else {
+    fetch(cash2PriceAPI)
+    .then(function(response) {
+    if (response.ok == true) {
+        return response.json();
+    } else {
+        cash2PriceAPILoad = false
+        alert("Error with loading Cash2 API.")
+    }
+    })
+    .then(function(myJson){
+        cash2PriceAPIData = myJson
+        cash2PriceAPILoad = true
+        APILoaded += 1
+        apiLoadVerify()
+    })
+    }
+})
+.then(function(myJson){
+    cash2PriceAPIData = myJson
+    cash2PriceAPILoad = true
     APILoaded += 1
     apiLoadVerify()
 })
@@ -527,7 +581,7 @@ fetch(classicPriceAPI)
 })
 
 function apiLoadVerify() {
-    if(APILoaded >= 6) {
+    if(APILoaded >= 7) {
         console.log(APILoaded + " API's loaded")
         liveHashrate()
     }
@@ -580,6 +634,10 @@ function liveHashrate() {
     
     if (cash2APILoad == true) {
         cash2()
+        
+        if (cash2PriceAPILoad == true) {
+            cash2Price()
+        }
     }
     
     calcProfit()
@@ -1034,10 +1092,10 @@ function cash2(){
         }
     }
     
-    Cash2Hourresult = cash2Reward(CASH2APIDifficulty, hshrt, CASH2APIheight, hour) * 0.36
-    Cash2Dayresult = cash2Reward(CASH2APIDifficulty, hshrt, CASH2APIheight, day) * 0.36
-    Cash2Weekresult = cash2Reward(CASH2APIDifficulty, hshrt, CASH2APIheight, week) * 0.36
-    Cash2Monthresult = cash2Reward(CASH2APIDifficulty, hshrt, CASH2APIheight, month) * 0.36
+    Cash2Hourresult = cash2Reward(CASH2APIDifficulty, hshrt, CASH2APIheight, hour)
+    Cash2Dayresult = cash2Reward(CASH2APIDifficulty, hshrt, CASH2APIheight, day)
+    Cash2Weekresult = cash2Reward(CASH2APIDifficulty, hshrt, CASH2APIheight, week)
+    Cash2Monthresult = cash2Reward(CASH2APIDifficulty, hshrt, CASH2APIheight, month)
     
     Cash2calcHour.innerHTML = numberShortener(Cash2Hourresult)
     Cash2calcDay.innerHTML = numberShortener(Cash2Dayresult)
@@ -1059,6 +1117,53 @@ function getBlockReward(CASH2APIheight)
 function cash2Reward(difficulty, hashrate, height, period){
     return (hashrate/((CASH2APIDifficulty * 1099511627776)/cash2BlockTime)) * ((getBlockReward(CASH2APIheight + ((period/cash2BlockTime)/2)))  * (period/cash2BlockTime))
 }
+}
+
+function cash2Price() {
+        try {
+            Cash2USDHourresult = Cash2Hourresult * cash2PriceAPIData.prices[cash2PriceAPIData.prices.length - 1][1]
+        } catch(e) {
+            try {
+                Cash2USDHourresult = Cash2Hourresult * cash2PriceAPIData.prices[cash2APIData.prices.length - 1][1]
+            } catch(error) {
+                console.log(error)
+            }
+        }
+        
+        try {
+            Cash2USDDayresult = Cash2Dayresult * cash2PriceAPIData.prices[cash2PriceAPIData.prices.length - 1][1]
+        } catch(e) {
+            try {
+                Cash2USDDayresult = Cash2Dayresult * cash2PriceAPIData.prices[cash2PriceAPIData.prices.length - 1][1]
+            } catch(error) {
+                console.log(error)
+            }
+        }
+        
+        try {
+            Cash2USDWeekresult = Cash2Weekresult * cash2PriceAPIData.prices[cash2PriceAPIData.prices.length - 1][1]
+        } catch(e) {
+            try {
+                Cash2USDWeekresult = Cash2Weekresult * cash2PriceAPIData.prices[cash2PriceAPIData.prices.length - 1][1]
+            } catch(error) {
+                console.log(error)
+            }
+        }
+        
+        try {
+            Cash2USDMonthresult = Cash2Monthresult * cash2PriceAPIData.prices[cash2PriceAPIData.prices.length - 1][1]
+        } catch(e) {
+            try {
+                Cash2USDMonthresult = Cash2Monthresult * cash2PriceAPIData.prices[cash2PriceAPIData.prices.length - 1][1]
+            } catch(error) {
+                console.log(error)
+            }
+        }
+        
+        Cash2calcHourUSD.innerHTML = numberShortener(Cash2USDHourresult)
+        Cash2calcDayUSD.innerHTML = numberShortener(Cash2USDDayresult)
+        Cash2calcWeekUSD.innerHTML = numberShortener(Cash2USDWeekresult)
+        Cash2calcMonthUSD.innerHTML = numberShortener(Cash2USDMonthresult)
 }
 
 
@@ -1124,6 +1229,11 @@ function calcProfit() {
         Cash2resultDayProfit.innerHTML = numberShortener(feeCalc(Cash2Dayresult))
         Cash2resultWeekProfit.innerHTML = numberShortener(feeCalc(Cash2Weekresult))
         Cash2resultMonthProfit.innerHTML = numberShortener(feeCalc(Cash2Monthresult))
+        
+        Cash2resultHourProfitUSD.innerHTML = numberShortener(colorProfit(feeCalcUSD(Cash2USDHourresult, 1, 1), Cash2resultHourProfitUSD))
+        Cash2resultDayProfitUSD.innerHTML = numberShortener(colorProfit(feeCalcUSD(Cash2USDDayresult, 24, 1), Cash2resultDayProfitUSD))
+        Cash2resultWeekProfitUSD.innerHTML = numberShortener(colorProfit(feeCalcUSD(Cash2USDWeekresult, 24, 7), Cash2resultWeekProfitUSD))
+        Cash2resultMonthProfitUSD.innerHTML = numberShortener(colorProfit(feeCalcUSD(Cash2USDMonthresult, 24, 30), Cash2resultMonthProfitUSD))
     }
 }
 

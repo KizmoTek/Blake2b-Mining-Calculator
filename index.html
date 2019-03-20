@@ -357,6 +357,10 @@
                             <th class="tableCoin" colspan="5">
                                 <img src="Images/cash2.png" class="Cash2Logo">
                                 <a href="https://cash2.org/" target="_blank" class="coinName" id="cash2Name">Cash2</a>
+                                <div class="tooltip4">
+                                    <img src="Images/info.png" class="infoImg">
+                                    <span class="tooltiptext4">To accurately calculate Cash2 profitability, input your hashrate recorded by the Cash2 pool.</span>
+                                </div>
                             </th>
                             <th class="tableCoinPool">
                                 <a href="https://cash2.org/#miningInformation" target="_blank" class="coinPoolList">Pools</a>
@@ -370,7 +374,7 @@
                             <th>Week</th>
                             <th>Month</th>
                         </tr>
-                        <tr class="calcNumbers" id="lineDivider">
+                        <tr class="calcNumbers">
                             <th rowspan="2" id="hideBorder">Income</th>
                             <th class="smallName" id="noPad2">CASH2</th>
                             <td id="CASH2resultHour">0.00</td>
@@ -378,13 +382,13 @@
                             <td id="CASH2resultWeek">0.00</td>
                             <td id="CASH2resultMonth">0.00</td>
                         </tr>
-                        <!-- <tr class="calcNumbers">  
-                            <th>Income($)</th>
-                            <td id="CASH2resultHourUSD"><i>Not on</i></td>
-                            <td id="CASH2resultDayUSD"><i>exchange</i></td>
-                            <td id="CASH2resultWeekUSD"></td>
-                            <td id="CASH2resultMonthUSD"></td>
-                        </tr> -->
+                        <tr class="calcNumbers" id="lineDivider">
+                            <th class="smallName">USD</th>
+                            <td id="CASH2resultHourUSD">0.00</td>
+                            <td id="CASH2resultDayUSD">0.00</td>
+                            <td id="CASH2resultWeekUSD">0.00</td>
+                            <td id="CASH2resultMonthUSD">0.00</td>
+                        </tr>
                         <tr></tr>
                         <tr class="calcNumbers">
                             <th rowspan="2">Profit</th>
@@ -394,13 +398,13 @@
                             <td id="CASH2resultWeekProfit" class="bold">0.00</td>
                             <td id="CASH2resultMonthProfit" class="bold">0.00</td>
                         </tr>
-                        <!-- <tr class="calcNumbers">
-                            <th>Power($)</th>
-                            <td id="CASH2resultHourProfitUSD">0.00</td>
-                            <td id="CASH2resultDayProfitUSD">0.00</td>
-                            <td id="CASH2resultWeekProfitUSD">0.00</td>
-                            <td id="CASH2resultMonthProfitUSD">0.00</td>
-                        </tr> -->
+                        <tr class="calcNumbers">
+                            <th class="smallName">USD</th>
+                            <td id="CASH2resultHourProfitUSD" class="bold">0.00</td>
+                            <td id="CASH2resultDayProfitUSD" class="bold">0.00</td>
+                            <td id="CASH2resultWeekProfitUSD" class="bold">0.00</td>
+                            <td id="CASH2resultMonthProfitUSD" class="bold">0.00</td>
+                        </tr>
                     </table>
                 </div>
             </div>
@@ -429,36 +433,30 @@
             <h3 id="bottomText">GamingRadar101: HTML, CSS, and JavaScript</h3>
             <h3 id="bottomText">MasterHW: JavaScript Math</h3>
         </div>
-        <div id="donation">
-            <h2 class="donMarginOff">Donations</h2>
-            <div id="donFlex">
-            <h5 class="donMarginOff" id="addressBTC">BTC:</h5>
-            <div class="popup">
-                <span class="popuptext" id="myPopup">Address Copied</span>
-                <h5 class="donMarginOff" id="address" class="BTC" onclick="BTCSet()">1DNEmupDWC873fDv4Lpy1xY2us6eYKwXTH</h5>
-            </div>
-            
-            </div>
-            <div id="donFlex">
-            <h5 class="donMarginOff" id="addressSIA">SIA:</h5>
-            <div class="popup2">
-                <span class="popuptext2" id="myPopup2">Address Copied</span>
-                <h5 class="donMarginOff" id="address" class="SIA" onclick="SIASet()">f7e6b31b7fbfd78894964d81e418ad0d1b9f0a8ae59be37e932e5853670feb89e0f4021df521</h5>
-            </div>
-            </div>
-            <div id="donFlex">
-            <h5 class="donMarginOff" id="addressXSC">XSC:</h5>
-            <div class="popup3">
-                <span class="popuptext3" id="myPopup3">Address Copied</span>
-                <h5 class="donMarginOff" id="address" class="XSC" onclick="XSCSet()">ebe11b2258f11caba02e7d2c1a5766b94175a5155d9e620a7f77a95d4bd1f5856fdb2d513cb3</h5>
-            </div>
-            </div>
-            <div id="donFlex">
-            <h5 class="donMarginOff" id="addressSCP">SCP:</h5>
-             <div class="popup4">
-                <span class="popuptext4" id="myPopup4">Address Copied</span>
-                <h5 class="donMarginOff" id="address" class="SCP" onclick="SCPSet()">bd187fa1c247a297e364d67ee59b66a4cbecec2d4a3cf2c01d4d5540c9d6a03f6279d40657a3</h5>
-            </div>
+        <div id="DonationMain">
+            <h4 id="DonationWord">Donation<br>Addresses:</h4>
+            <div id="donation">
+                <div class="popup">
+                    <span class="popuptext" id="myPopup">Address Copied</span>
+                    <img src="Images/BTC.png" id="address" class="BTC" onclick="BTCSet()">
+                </div>
+                <div class="popup2">
+                    <span class="popuptext2" id="myPopup2">Address Copied</span>
+                    <img src="Images/siaLogo.png" id="address" class="SIA" onclick="SIASet()">
+                </div>
+                <div class="popup3">
+                    <span class="popuptext3" id="myPopup3">Address Copied</span>
+                    <img src="Images/hyperLogo.png" id="address" class="XSC" onclick="XSCSet()">
+                </div>
+                <br>
+                <div class="popup4">
+                    <span class="popuptext4" id="myPopup4">Address Copied</span>
+                    <img src="Images/primeLogo.png" id="address" class="SCP" onclick="SCPSet()">
+                </div>
+                <div class="popup5">
+                    <span class="popuptext5" id="myPopup5">Address Copied</span>
+                    <img src="Images/cash2.png" id="address" class="Cash2" onclick="Cash2Set()">
+                </div>
             </div>
         </div>
     </footer>

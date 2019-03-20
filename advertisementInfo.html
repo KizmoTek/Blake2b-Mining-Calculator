@@ -95,25 +95,31 @@
             <h3 id="bottomText">GamingRadar101: HTML, CSS, and JavaScript</h3>
             <h3 id="bottomText">MasterHW: JavaScript Math</h3>
         </div>
+        <h4 id="DonationWord">Donation<br>Addresses:</h4>
         <div id="donation">
-            <h2 class="donMarginOff">Donations</h2>
-            <div id="donFlex">
-            <h5 class="donMarginOff" id="addressBTC">BTC:</h5>
-            <h5 class="donMarginOff" id="address" onclick="copyAdd()">1DNEmupDWC873fDv4Lpy1xY2us6eYKwXTH</h5>
+            <div class="popup">
+                <span class="popuptext" id="myPopup">Address Copied</span>
+                <img src="Images/BTC.png" id="address" class="BTC" onclick="BTCSet()">
             </div>
-            <div id="donFlex">
-            <h5 class="donMarginOff" id="addressSIA">SIA:</h5>
-            <h5 class="donMarginOff" id="address" onclick="copyAdd()">3be3836c8e3b5757208a955b3f7ca323d4df4b878e7c26c473abe9d94344b343731c5bec71df</h5>
+            <div class="popup2">
+                <span class="popuptext2" id="myPopup2">Address Copied</span>
+                <img src="Images/siaLogo.png" id="address" class="SIA" onclick="SIASet()">
             </div>
-            <div id="donFlex">
-            <h5 class="donMarginOff" id="addressXSC">XSC:</h5>
-            <h5 class="donMarginOff" id="address" onclick="copyAdd()">f75503426932cd648949141c1d29ce6da962959b71f61c8c98eeb851ca0d3cc28782686ead3a</h5>
+            <div class="popup3">
+                <span class="popuptext3" id="myPopup3">Address Copied</span>
+                <img src="Images/hyperLogo.png" id="address" class="XSC" onclick="XSCSet()">
             </div>
-            <div id="donFlex">
-            <h5 class="donMarginOff" id="addressSCP">SCP:</h5>
-            <h5 class="donMarginOff" id="address" onclick="copyAdd()">b17616b067fd33ceb1fee86f1587ad2da0a5d0d1cdd347ebf25d0aa15b5747fe9b1e0e83e5a0</h5>
+            <br>
+            <div class="popup4">
+                <span class="popuptext4" id="myPopup4">Address Copied</span>
+                <img src="Images/primeLogo.png" id="address" class="SCP" onclick="SCPSet()">
+            </div>
+            <div class="popup5">
+                <span class="popuptext5" id="myPopup5">Address Copied</span>
+                <img src="Images/cash2.png" id="address" class="Cash2" onclick="Cash2Set()">
             </div>
         </div>
     </footer>
+    <script type="text/javascript" src="main.js"></script>
 </body>
 </html>
