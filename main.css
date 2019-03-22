@@ -78,8 +78,8 @@
                 background-color: rgba(96, 193, 181, 0.6);
                 border: 2px #52a59b solid;
                 flex-wrap: nowrap;
-                border-radius: 0px 0px 10px 10px;
                 border-top:0px;
+                border-bottom:0px;
                 width: 575px;
         }
 
@@ -109,10 +109,26 @@
                 padding-right: 26px;
         }
         
+        #resultSia {
+                background-color: rgb(112, 132, 165, 0.6);
+                border: 2px rgb(112, 132, 165) solid;
+                flex-wrap: nowrap;
+                border-radius: 0px 0px 10px 10px;
+                border-top: 0px solid;
+                width: 575px;
+        }
+        
+        #resultSia th {
+                padding-left: 26px;
+                padding-right: 26px;
+        }
+        
         .smallName:nth-child(1) {
                 padding-right:0px;
                 padding-left: 0px;
                 text-align: right;
+                width: 44px;
+                font-weight: bolder;
         }
         
         #noPad2:nth-child(2) {
@@ -780,7 +796,7 @@
                 border: 2px #52a59b solid;
                 flex-wrap: nowrap;
                 margin-left: auto;
-                border-radius: 0px 0px 10px 10px;
+                border-bottom:0px;
                 border-top:0px;
         }
         
@@ -832,6 +848,21 @@
         
         }
         
+        #resultSia {
+                background-color: rgb(112, 132, 165, 0.6);
+                border: 2px rgb(112, 132, 165) solid;
+                flex-wrap: nowrap;
+                border-radius: 0px 0px 10px 10px;
+                border-top: 0px solid;
+                margin:auto;
+        }
+        
+        #resultSia th {
+                padding-left: 2px;
+                padding-right: 2px;
+                font-size: 12px;
+        }
+        
         .PowerResult {
                 background-color: rgba(193, 96, 96, 0.6);
                 border: 2px #a55252 solid;
@@ -875,7 +906,6 @@
         
         .calcNumbers {
                 font-size: 12px;
-                font-weight:bold;
         }
         
         
@@ -1481,13 +1511,12 @@
                 flex-wrap: nowrap;
                 margin: auto;
                 width: 575px;
-                border-radius: 0px 0px 10px 10px;
                 border-top:0px;
+                border-bottom: 0px;
         }
         
         .tableCoin {
                 color: white;
-                font-size: 32px;
                 text-align: left;
         }
         
@@ -1497,7 +1526,7 @@
         
         .time {
                 color: white;
-                font-size: 22px;
+                font-size: 12px;
         
         }
         
@@ -1505,7 +1534,22 @@
                 padding-left: 2px;
                 padding-right: 2px;
                 font-size: 12px;
+        }
         
+        #resultSia {
+                background-color: rgb(112, 132, 165, 0.6);
+                border: 2px rgb(112, 132, 165) solid;
+                flex-wrap: nowrap;
+                border-radius: 0px 0px 10px 10px;
+                border-top: 0px solid;
+                width: 575px;
+                margin:auto;
+        }
+        
+        #resultSia th {
+                padding-left: 2px;
+                padding-right: 2px;
+                font-size: 12px;
         }
         
         .PowerResult {
@@ -1552,7 +1596,6 @@
         
         .calcNumbers {
                 font-size: 12px;
-                font-weight:bold;
         }
         
         
@@ -2150,9 +2193,26 @@
                 flex-wrap: nowrap;
                 margin-left: auto;
                 width: 575px;
-                border-radius: 0px 0px 10px 10px;
+                border-radius: 0px 0px 0px 0px;
                 border-top:0px;
+                border-bottom: 0px;
         }
+        
+        #resultSia {
+                background-color: rgb(112, 132, 165, 0.6);
+                border: 2px rgb(112, 132, 165) solid;
+                flex-wrap: nowrap;
+                border-radius: 0px 0px 10px 10px;
+                border-top: 0px solid;
+                width: 575px;
+        }
+        
+        #resultSia th {
+                padding-left: 26px;
+                padding-right: 26px;
+        }
+        
+        
 
         .tableCoin {
                 color: white;
@@ -2174,6 +2234,20 @@
                 padding-left: 26px;
                 padding-right: 26px;
 
+        }
+        
+        #resultSia {
+                background-color: rgb(112, 132, 165, 0.6);
+                border: 2px rgb(112, 132, 165) solid;
+                flex-wrap: nowrap;
+                border-radius: 0px 0px 10px 10px;
+                border-top: 0px solid;
+                width: 575px;
+        }
+        
+        #resultSia th {
+                padding-left: 26px;
+                padding-right: 26px;
         }
         
         .PowerResult {
