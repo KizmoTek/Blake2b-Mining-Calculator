@@ -39,17 +39,47 @@ const week = day * 7;
 const month = day * 30; // assume month = 30 days
 
 const miningAPI = "https://keops.cc/dbs/pansia_current.json";
+var mineAPILoad = false
+
+
 const cash2API = "https://blocks.cash2.org:8080/getinfo";
+var cash2APILoad = false
 
 const hyperPriceAPI = "https://api.coingecko.com/api/v3/coins/hyperspace/market_chart?vs_currency=usd&days=1"
-const siaPriceAPI = "https://api.coingecko.com/api/v3/coins/siacoin/market_chart?vs_currency=usd&days=1"
-const primePriceAPI = "https://api.coingecko.com/api/v3/coins/siaprime-coin/market_chart?vs_currency=usd&days=1"
-const classicPriceAPI = "https://api.coingecko.com/api/v3/coins/siaclassic/market_chart?vs_currency=usd&days=1"
-const cash2PriceAPI = "" //Wait for API to be on CoinGecko
+var hyperPriceAPILoad = false
 
+const siaPriceAPI = "https://api.coingecko.com/api/v3/coins/siacoin/market_chart?vs_currency=usd&days=1"
+var siaPriceAPILoad = false
+
+
+const primePriceAPI = "https://api.coingecko.com/api/v3/coins/siaprime-coin/market_chart?vs_currency=usd&days=1"
+var primePriceAPILoad = false
+
+const classicPriceAPI = "https://api.coingecko.com/api/v3/coins/siaclassic/market_chart?vs_currency=usd&days=1"
+var classicPriceAPILoad = false
+
+const cash2PriceAPI = "https://api.coingecko.com/api/v3/coins/cash2/market_chart?vs_currency=usd&days=1"
+var cash2PriceAPILoad = false
+
+var diffAdjust = false // Toggles adjusting difficulty for added hashrate
 let hshrt = 0
 
+const greenColor = "#30fa30"
+const redColor = "#d20000"
+
+const PowerCostHour = document.querySelector("#PowerCostHour")
+const PowerCostDay = document.querySelector("#PowerCostDay")
+const PowerCostWeek = document.querySelector("#PowerCostWeek")
+const PowerCostMonth = document.querySelector("#PowerCostMonth")
+
+let PowerCostHourResult
+let PowerCostDayResult
+let PowerCostWeekResult
+let PowerCostMonthResult
+
 //Hyperspace-------------------------------------------------------------------
+const XSCVolume = document.querySelector("#XSCVolumeValue")
+
 const XSCcalcHour = document.querySelector("#XSCresultHour")
 const XSCcalcDay = document.querySelector("#XSCresultDay")
 const XSCcalcWeek = document.querySelector("#XSCresultWeek")
@@ -65,40 +95,27 @@ const XSCresultDayProfit = document.querySelector("#XSCresultDayProfit")
 const XSCresultWeekProfit = document.querySelector("#XSCresultWeekProfit")
 const XSCresultMonthProfit = document.querySelector("#XSCresultMonthProfit")
 
-let hyperProfitHour
-let hyperProfitDay
-let hyperProfitWeek
-let hyperProfitMonth
+const XSCresultHourProfitUSD = document.querySelector("#XSCresultHourProfitUSD")
+const XSCresultDayProfitUSD = document.querySelector("#XSCresultDayProfitUSD")
+const XSCresultWeekProfitUSD = document.querySelector("#XSCresultWeekProfitUSD")
+const XSCresultMonthProfitUSD = document.querySelector("#XSCresultMonthProfitUSD")
 
-let hyperProfitHourFinal
-let hyperProfitDayFinal
-let hyperProfitWeekFinal
-let hyperProfitMonthFinal
+var hyperAPIDifficulty
+var hyperAPIheight
 
 let hyperHourresult
-let hyperHourFinal
 let hyperDayresult
-let hyperDayFinal
 let hyperWeekresult
-let hyperWeekFinal
 let hyperMonthresult
-let hyperMonthFinal
 
 let hyperUSDHourresult
-let hyperUSDHourFinal
 let hyperUSDDayresult
-let hyperUSDDayFinal
 let hyperUSDWeekresult
-let hyperUSDWeekFinal
 let hyperUSDMonthresult
-let hyperUSDMonthFinal
-
-let hyperFeeHour
-let hyperFeeDay
-let hyperFeeWeek
-let hyperFeeMonth
 
 //Sia Prime
+const SCPVolume = document.querySelector("#SCPVolumeValue")
+
 const SCPcalcHour = document.querySelector("#SCPresultHour")
 const SCPcalcDay = document.querySelector("#SCPresultDay")
 const SCPcalcWeek = document.querySelector("#SCPresultWeek")
@@ -114,40 +131,27 @@ const SCPresultDayProfit = document.querySelector("#SCPresultDayProfit")
 const SCPresultWeekProfit = document.querySelector("#SCPresultWeekProfit")
 const SCPresultMonthProfit = document.querySelector("#SCPresultMonthProfit")
 
-let primeProfitHour
-let primeProfitDay
-let primeProfitWeek
-let primeProfitMonth
+const SCPresultHourProfitUSD = document.querySelector("#SCPresultHourProfitUSD")
+const SCPresultDayProfitUSD = document.querySelector("#SCPresultDayProfitUSD")
+const SCPresultWeekProfitUSD = document.querySelector("#SCPresultWeekProfitUSD")
+const SCPresultMonthProfitUSD = document.querySelector("#SCPresultMonthProfitUSD")
 
-let primeProfitHourFinal
-let primeProfitDayFinal
-let primeProfitWeekFinal
-let primeProfitMonthFinal
+var primeAPIDifficulty
+var primeAPIheight
 
 let primeHourresult
-let primeHourFinal
 let primeDayresult
-let primeDayFinal
 let primeWeekresult
-let primeWeekFinal
 let primeMonthresult
-let primeMonthFinal
 
 let primeUSDHourresult
-let primeUSDHourFinal
 let primeUSDDayresult
-let primeUSDDayFinal
 let primeUSDWeekresult
-let primeUSDWeekFinal
 let primeUSDMonthresult
-let primeUSDMonthFinal
-
-let primeFeeHour
-let primeFeeDay
-let primeFeeWeek
-let primeFeeMonth
 
 //Sia Classic
+const SCCVolume = document.querySelector("#SCCVolumeValue")
+
 const SCCcalcHour = document.querySelector("#SCCresultHour")
 const SCCcalcDay = document.querySelector("#SCCresultDay")
 const SCCcalcWeek = document.querySelector("#SCCresultWeek")
@@ -163,40 +167,27 @@ const SCCresultDayProfit = document.querySelector("#SCCresultDayProfit")
 const SCCresultWeekProfit = document.querySelector("#SCCresultWeekProfit")
 const SCCresultMonthProfit = document.querySelector("#SCCresultMonthProfit")
 
-let classicProfitHour
-let classicProfitDay
-let classicProfitWeek
-let classicProfitMonth
+const SCCresultHourProfitUSD = document.querySelector("#SCCresultHourProfitUSD")
+const SCCresultDayProfitUSD = document.querySelector("#SCCresultDayProfitUSD")
+const SCCresultWeekProfitUSD = document.querySelector("#SCCresultWeekProfitUSD")
+const SCCresultMonthProfitUSD = document.querySelector("#SCCresultMonthProfitUSD")
 
-let classicProfitHourFinal
-let classicProfitDayFinal
-let classicProfitWeekFinal
-let classicProfitMonthFinal
+var classicAPIDifficulty
+var classicAPIheight
 
 let sccHourresult
-let sccHourFinal
 let sccDayresult
-let sccDayFinal
 let sccWeekresult
-let sccWeekFinal
 let sccMonthresult
-let sccMonthFinal
 
 let sccUSDHourresult
-let sccUSDHourFinal
 let sccUSDDayresult
-let sccUSDDayFinal
 let sccUSDWeekresult
-let sccUSDWeekFinal
 let sccUSDMonthresult
-let sccUSDMonthFinal
-
-let classicFeeHour
-let classicFeeDay
-let classicFeeWeek
-let classicFeeMonth
 
 //Sia
+const SiaVolume = document.querySelector("#SiaVolumeValue")
+
 const SiacalcHour = document.querySelector("#SiaresultHour")
 const SiacalcDay = document.querySelector("#SiaresultDay")
 const SiacalcWeek = document.querySelector("#SiaresultWeek")
@@ -212,40 +203,27 @@ const SiaresultDayProfit = document.querySelector("#SiaresultDayProfit")
 const SiaresultWeekProfit = document.querySelector("#SiaresultWeekProfit")
 const SiaresultMonthProfit = document.querySelector("#SiaresultMonthProfit")
 
-let siaProfitHour
-let siaProfitDay
-let siaProfitWeek
-let siaProfitMonth
+const SiaresultHourProfitUSD = document.querySelector("#SiaresultHourProfitUSD")
+const SiaresultDayProfitUSD = document.querySelector("#SiaresultDayProfitUSD")
+const SiaresultWeekProfitUSD = document.querySelector("#SiaresultWeekProfitUSD")
+const SiaresultMonthProfitUSD = document.querySelector("#SiaresultMonthProfitUSD")
 
-let siaProfitHourFinal
-let siaProfitDayFinal
-let siaProfitWeekFinal
-let siaProfitMonthFinal
+var siaAPIDifficulty
+var siaAPIheight
 
 let siaHourresult
-let siaHourFinal
 let siaDayresult
-let siaDayFinal
 let siaWeekresult
-let siaWeekFinal
 let siaMonthresult
-let siaMonthFinal
 
 let siaUSDHourresult
-let siaUSDHourFinal
 let siaUSDDayresult
-let siaUSDDayFinal
 let siaUSDWeekresult
-let siaUSDWeekFinal
 let siaUSDMonthresult
-let siaUSDMonthFinal
-
-let siaFeeHour
-let siaFeeDay
-let siaFeeWeek
-let siaFeeMonth
 
 //Cash2
+const Cash2Volume = document.querySelector("#Cash2VolumeValue")
+
 const Cash2calcHour = document.querySelector("#CASH2resultHour")
 const Cash2calcDay = document.querySelector("#CASH2resultDay")
 const Cash2calcWeek = document.querySelector("#CASH2resultWeek")
@@ -261,15 +239,15 @@ const Cash2resultDayProfit = document.querySelector("#CASH2resultDayProfit")
 const Cash2resultWeekProfit = document.querySelector("#CASH2resultWeekProfit")
 const Cash2resultMonthProfit = document.querySelector("#CASH2resultMonthProfit")
 
-let Cash2ProfitHour
-let Cash2ProfitDay
-let Cash2ProfitWeek
-let Cash2ProfitMonth
 
-let Cash2ProfitHourFinal
-let Cash2ProfitDayFinal
-let Cash2ProfitWeekFinal
-let Cash2ProfitMonthFinal
+const Cash2resultHourProfitUSD = document.querySelector("#CASH2resultHourProfitUSD")
+const Cash2resultDayProfitUSD = document.querySelector("#CASH2resultDayProfitUSD")
+const Cash2resultWeekProfitUSD = document.querySelector("#CASH2resultWeekProfitUSD")
+const Cash2resultMonthProfitUSD = document.querySelector("#CASH2resultMonthProfitUSD")
+
+
+var CASH2APIDifficulty
+var CASH2APIheight
 
 let Cash2Hourresult
 let Cash2HourFinal
@@ -281,18 +259,9 @@ let Cash2Monthresult
 let Cash2MonthFinal
 
 let Cash2USDHourresult
-let Cash2USDHourFinal
 let Cash2USDDayresult
-let Cash2USDDayFinal
 let Cash2USDWeekresult
-let Cash2USDWeekFinal
 let Cash2USDMonthresult
-let Cash2USDMonthFinal
-
-let Cash2FeeHour
-let Cash2FeeDay
-let Cash2FeeWeek
-let Cash2FeeMonth
 
 //----------------------------------------------------------------------------
 const calcHour = document.querySelector("#resultHour")
@@ -303,6 +272,7 @@ const calcMonth = document.querySelector("#resultMonth")
 const userHshrt = document.getElementById("hashrate")
 const hashPower = document.getElementById("hashPower")
 
+const rejectRate = document.getElementById("rejectRate")
 const poolFee = document.getElementById("poolFee")
 const elecCost = document.getElementById("elecCost")
 const powerConsumtion = document.getElementById("powerConsumtion")
@@ -341,16 +311,331 @@ let S11presetPower = 0
 let SC1presetPower = 0
 let StrongUpresetPower = 0
 
-const donationAdd = document.getElementById("address")
-function copyAdd() {
-    donationAdd.select();
-    document.execCommand("copy");
-    alert("Copied the text: " + donationAdd.textContent);
+const logoDropdown = document.getElementById("logoDropdown")
+function changePage() {
+    if (logoDropdown.selectedIndex == 0) {
+        window.open("index.html", "_top");
+    } else if(logoDropdown.selectedIndex == 1) {
+        window.open("PoC.html", "_top");
+    }
+    
+}
+
+function BTCSet() {
+    var coinAddress = "1DNEmupDWC873fDv4Lpy1xY2us6eYKwXTH"
+    var coin = "BTC"
+    var popup = document.getElementById("myPopup");
+    const el = document.createElement('textarea');
+    el.value = coinAddress;
+    document.body.appendChild(el);
+    el.select();
+    document.execCommand('copy');
+    document.body.removeChild(el);
+    popup.classList.toggle("show");
+    setTimeout( () => {popup.classList.toggle("show")}, 3000);
+}
+
+function SIASet() {
+    var coinAddress = "f7e6b31b7fbfd78894964d81e418ad0d1b9f0a8ae59be37e932e5853670feb89e0f4021df521"
+    var coin = "SIA"
+    var popup = document.getElementById("myPopup2");
+    const el = document.createElement('textarea');
+    el.value = coinAddress;
+    document.body.appendChild(el);
+    el.select();
+    document.execCommand('copy');
+    document.body.removeChild(el);
+    popup.classList.toggle("show");
+    setTimeout( () => {popup.classList.toggle("show")}, 3000);
+}
+
+function XSCSet() {
+    var coinAddress = "ebe11b2258f11caba02e7d2c1a5766b94175a5155d9e620a7f77a95d4bd1f5856fdb2d513cb3"
+    var coin = "XSC"
+    var popup = document.getElementById("myPopup3");
+    const el = document.createElement('textarea');
+    el.value = coinAddress;
+    document.body.appendChild(el);
+    el.select();
+    document.execCommand('copy');
+    document.body.removeChild(el);
+    popup.classList.toggle("show");
+    setTimeout( () => {popup.classList.toggle("show")}, 3000);
+}
+
+function SCPSet() {
+    var coinAddress = "bd187fa1c247a297e364d67ee59b66a4cbecec2d4a3cf2c01d4d5540c9d6a03f6279d40657a3"
+    var coin = "SCP"
+    var popup = document.getElementById("myPopup4");
+    const el = document.createElement('textarea');
+    el.value = coinAddress;
+    document.body.appendChild(el);
+    el.select();
+    document.execCommand('copy');
+    document.body.removeChild(el);
+    popup.classList.toggle("show");
+    setTimeout( () => {popup.classList.toggle("show")}, 3000);
+}
+
+function Cash2Set() {
+    var coinAddress = "27xnv8XecrsRBnVau4xinb5kuyMAbthiihVVPmZMJvsJ7Q2bKxwmRC2SaY6tGz57iBXieRarHcoGLFFWzQuVJbYdB2nCD1J"
+    var coin = "Cash2"
+    var popup = document.getElementById("myPopup5");
+    const el = document.createElement('textarea');
+    el.value = coinAddress;
+    document.body.appendChild(el);
+    el.select();
+    document.execCommand('copy');
+    document.body.removeChild(el);
+    popup.classList.toggle("show");
+    setTimeout( () => {popup.classList.toggle("show")}, 3000);
+}
+
+var APILoaded = 0
+
+let miningAPIData = 0
+fetch(miningAPI)
+    .then(function(response) {
+    if (response.ok == true) {
+        return response.json();
+    } else {
+    fetch(miningAPI)
+        .then(function(response) {
+            if (response.ok == true) {
+                return response.json();
+            } else {
+                mineAPILoad = false
+                alert("Error with loading Keops API data for Hyperspace, SiaPrime, SiaClassic, and Sia.")
+            }
+        })
+        .then(function(myJson){
+            miningAPIData = myJson
+            mineAPILoad = true
+            APILoaded += 1
+            apiLoadVerify()
+        })
+    }
+        
+})
+.then(function(myJson){
+    miningAPIData = myJson
+    mineAPILoad = true
+    APILoaded += 1
+    apiLoadVerify()
+})
+
+let cash2APIData = 0
+fetch(cash2API)
+    .then(function(response) {
+    if (response.ok == true) {
+        return response.json();
+    } else {
+    fetch(cash2API)
+    .then(function(response) {
+    if (response.ok == true) {
+        return response.json();
+    } else {
+        cash2APILoad = false
+        alert("Error with loading Cash2 API.")
+    }
+    })
+    .then(function(myJson){
+        cash2APIData = myJson
+        cash2APILoad = true
+        APILoaded += 1
+        apiLoadVerify()
+    })
+    }
+})
+.then(function(myJson){
+    cash2APIData = myJson
+    cash2APILoad = true
+    APILoaded += 1
+    apiLoadVerify()
+})
+
+let cash2PriceAPIData = 0
+fetch(cash2PriceAPI)
+    .then(function(response) {
+    if (response.ok == true) {
+        return response.json();
+    } else {
+    fetch(cash2PriceAPI)
+    .then(function(response) {
+    if (response.ok == true) {
+        return response.json();
+    } else {
+        cash2PriceAPILoad = false
+        alert("Error with loading Cash2 API.")
+    }
+    })
+    .then(function(myJson){
+        cash2PriceAPIData = myJson
+        cash2PriceAPILoad = true
+        APILoaded += 1
+        Cash2Volume.innerHTML = Math.round((cash2PriceAPIData.total_volumes[cash2PriceAPIData.total_volumes.length - 1][1]) * 100) / 100
+        Cash2Volume.innerHTML = "$" + Cash2Volume.innerHTML.replace(/\B(?=(\d{3})+(?!\d))/g, ",")
+        apiLoadVerify()
+    })
+    }
+})
+.then(function(myJson){
+    cash2PriceAPIData = myJson
+    cash2PriceAPILoad = true
+    APILoaded += 1
+    Cash2Volume.innerHTML = Math.round((cash2PriceAPIData.total_volumes[cash2PriceAPIData.total_volumes.length - 1][1]) * 100) / 100
+    Cash2Volume.innerHTML = "$" + Cash2Volume.innerHTML.replace(/\B(?=(\d{3})+(?!\d))/g, ",")
+    apiLoadVerify()
+})
+
+let siaPriceAPIData
+fetch(siaPriceAPI)
+    .then(function(response) {
+    if (response.ok == true) {
+        return response.json();
+    } else {
+        fetch(siaPriceAPI)
+    .then(function(response) {
+    if (response.ok == true) {
+        return response.json();
+    } else {
+        siaPriceAPILoad = false
+        alert("Error with loading Sia API for Coingecko.")
+    }
+    })
+    .then(function(myJson){
+        siaPriceAPIData = myJson
+        siaPriceAPILoad = true
+        APILoaded += 1
+        SiaVolume.innerHTML = Math.round((siaPriceAPIData.total_volumes[siaPriceAPIData.total_volumes.length - 1][1]) * 100) / 100
+        SiaVolume.innerHTML = "$" + SiaVolume.innerHTML.replace(/\B(?=(\d{3})+(?!\d))/g, ",")
+        apiLoadVerify()
+    })
+    }
+})
+.then(function(myJson){
+    siaPriceAPIData = myJson
+    siaPriceAPILoad = true
+    APILoaded += 1
+    SiaVolume.innerHTML = Math.round((siaPriceAPIData.total_volumes[siaPriceAPIData.total_volumes.length - 1][1]) * 100) / 100
+    SiaVolume.innerHTML = "$" + SiaVolume.innerHTML.replace(/\B(?=(\d{3})+(?!\d))/g, ",")
+    apiLoadVerify()
+})
+
+let hyperPriceAPIData
+fetch(hyperPriceAPI)
+    .then(function(response) {
+    if (response.ok == true) {
+        return response.json();
+    } else {
+        fetch(hyperPriceAPI)
+    .then(function(response) {
+    if (response.ok == true) {
+        return response.json();
+    } else {
+        hyperPriceAPILoad = false
+        alert("Error with loading Hyperspace API for Coingecko.")
+    }
+    })
+    .then(function(myJson){
+        hyperPriceAPIData = myJson
+        hyperPriceAPILoad = true
+        APILoaded += 1
+        XSCVolume.innerHTML = Math.round((hyperPriceAPIData.total_volumes[hyperPriceAPIData.total_volumes.length - 1][1]) * 100) / 100
+        XSCVolume.innerHTML = "$" + XSCVolume.innerHTML.replace(/\B(?=(\d{3})+(?!\d))/g, ",")
+        apiLoadVerify()
+    })
+    }
+})
+.then(function(myJson){
+    hyperPriceAPIData = myJson
+    hyperPriceAPILoad = true
+    APILoaded += 1
+    XSCVolume.innerHTML = Math.round((hyperPriceAPIData.total_volumes[hyperPriceAPIData.total_volumes.length - 1][1]) * 100) / 100
+    XSCVolume.innerHTML = "$" + XSCVolume.innerHTML.replace(/\B(?=(\d{3})+(?!\d))/g, ",")
+    apiLoadVerify()
+})
+
+let primePriceAPIData
+fetch(primePriceAPI)
+    .then(function(response) {
+    if (response.ok == true) {
+        return response.json();
+    } else {
+        fetch(primePriceAPI)
+    .then(function(response) {
+    if (response.ok == true) {
+        return response.json();
+    } else {
+        alert("Error with loading SiaPrime API from Coingecko.")
+        primePriceAPILoad = false
+    }
+    })
+    .then(function(myJson){
+        primePriceAPIData = myJson
+        primePriceAPILoad = true
+        APILoaded += 1
+        SCPVolume.innerHTML = Math.round(primePriceAPIData.total_volumes[primePriceAPIData.total_volumes.length - 1][1] * 100) / 100
+        SCPVolume.innerHTML = "$" + SCPVolume.innerHTML.replace(/\B(?=(\d{3})+(?!\d))/g, ",")
+        apiLoadVerify()
+    })
+    }
+})
+.then(function(myJson){
+    primePriceAPIData = myJson
+    primePriceAPILoad = true
+    APILoaded += 1
+    SCPVolume.innerHTML = Math.round(primePriceAPIData.total_volumes[primePriceAPIData.total_volumes.length - 1][1] * 100) / 100
+    SCPVolume.innerHTML = "$" + SCPVolume.innerHTML.replace(/\B(?=(\d{3})+(?!\d))/g, ",")
+    apiLoadVerify()
+})
+
+
+
+let classicPriceAPIData
+fetch(classicPriceAPI)
+    .then(function(response) {
+    if (response.ok == true) {
+        return response.json();
+    } else {
+        fetch(classicPriceAPI)
+    .then(function(response) {
+    if (response.ok == true) {
+        return response.json();
+    } else {
+        classicPriceAPILoad = false
+        alert("Error with loading SiaClassic API from Coingecko.")
+    }
+    })
+    .then(function(myJson){
+        classicPriceAPIData = myJson
+        classicPriceAPILoad = true
+        APILoaded += 1
+        SCCVolume.innerHTML = Math.round((classicPriceAPIData.total_volumes[classicPriceAPIData.total_volumes.length - 1][1]) * 100) / 100
+        SCCVolume.innerHTML = "$" + SCCVolume.innerHTML.replace(/\B(?=(\d{3})+(?!\d))/g, ",")
+        apiLoadVerify()
+    })
+    }
+})
+.then(function(myJson){
+    classicPriceAPIData = myJson
+    classicPriceAPILoad = true
+    APILoaded += 1
+    SCCVolume.innerHTML = Math.round((classicPriceAPIData.total_volumes[classicPriceAPIData.total_volumes.length - 1][1]) * 100) / 100
+    SCCVolume.innerHTML = "$" + SCCVolume.innerHTML.replace(/\B(?=(\d{3})+(?!\d))/g, ",")
+    apiLoadVerify()
+})
+
+function apiLoadVerify() {
+    if(APILoaded >= 7) {
+        console.log(APILoaded + " API's loaded")
+        liveHashrate()
+    }
 }
 
 function liveHashrate() {
-
     userHshrt.value = splitInput(userHshrt.value)
+    rejectRate.value = splitInput(rejectRate.value)
     poolFee.value = splitInput(poolFee.value)
     elecCost.value = splitInput(elecCost.value)
     powerConsumtion.value = splitInput(powerConsumtion.value)
@@ -360,6 +645,10 @@ function liveHashrate() {
     }
     else {
         hshrt = userHshrt.value
+    }
+    
+    if (rejectRate.value > 100) {
+        rejectRate.value = 100
     }
     
     if (poolFee.value > 100) {
@@ -373,108 +662,41 @@ function liveHashrate() {
         hshrt = hshrt * 1e12
     }
     
-    hyper()
-    hyperPrice()
-    prime()
-    primePrice()
-    classic()
-    classicPrice()
-    sia()
-    siaPrice()
-    cash2()
+    if (mineAPILoad == true) {
+        hyper()
+        if (hyperPriceAPILoad == true) {
+            hyperPrice()
+        }
+        
+        prime()
+        if (primePriceAPILoad == true) {
+            primePrice()
+        }
+        classic()
+        if (classicPriceAPILoad == true) {
+            classicPrice()
+        }
+        
+        sia()
+        if (siaPriceAPILoad == true) {
+            siaPrice()
+        }
+    }
+    
+    if (cash2APILoad == true) {
+        cash2()
+        
+        if (cash2PriceAPILoad == true) {
+            cash2Price()
+        }
+    }
     calcProfit()
 }
 
-
-let miningAPIData = 0
-fetch(miningAPI)
-    .then(function(response) {
-    return response.json();
-})
-.then(function(myJson){
-    miningAPIData = myJson
-})
-try {
-    reloadAPI()
-} catch (e) {
-    console.log("Error with loading mining API data for Hyperspace, SiaPrime, SiaClassic, and Sia.")
-}
-
-let cash2APIData = 0
-fetch(cash2API)
-    .then(function(response) {
-    return response.json();
-})
-.then(function(myJson){
-    cash2APIData = myJson
-})
-try {
-    reloadAPI()
-} catch (e) {
-    console.log("Error with loading Cash2 API.")
-}
-
-let siaPriceAPIData
-fetch(siaPriceAPI)
-    .then(function(response) {
-    return response.json();
-})
-.then(function(myJson){
-    siaPriceAPIData = myJson
-})
-try {
-    reloadAPI()
-} catch (e) {
-    console.log("Error with loading Sia API for Coingecko.")
-}
-
-
-let hyperPriceAPIData
-fetch(hyperPriceAPI)
-    .then(function(response) {
-    return response.json();
-})
-.then(function(myJson){
-    hyperPriceAPIData = myJson
-})
-try {
-    reloadAPI()
-} catch (e) {
-    console.log("Error with loading Hyperspace API for Coingecko.")
-}
-
-let primePriceAPIData
-fetch(primePriceAPI)
-    .then(function(response) {
-    return response.json();
-})
-.then(function(myJson){
-    primePriceAPIData = myJson
-})
-try {
-    reloadAPI()
-} catch (e) {
-    console.log("Error with loading SiaPrime API from Coingecko.")
-}
-
-let classicPriceAPIData
-fetch(classicPriceAPI)
-    .then(function(response) {
-    return response.json();
-})
-.then(function(myJson){
-    classicPriceAPIData = myJson
-})
-try {
-    reloadAPI()
-} catch (e) {
-    console.log("Error with loading SiaClassic API from Coingecko.")
-}
-
-
+rejectRate.value = 0
 poolFee.value = 1
 elecCost.value = 0.1
-const randomHshrt = [[815, 1275], [4300, 1350], [550, 500]]
+const randomHshrt = [[815, 1275], [4300, 1350], [550, 500], [3830, 1380], [7000, 2100], [5500, 1600]]
 const randomizer = randomHshrt[Math.floor(Math.random()*randomHshrt.length)]
 userHshrt.value = randomizer[0]
 powerConsumtion.value = randomizer[1]
@@ -490,60 +712,6 @@ function splitInput(number) {
         return tempHshrt.replace(/[^1234567890.]|\-/g, "")
     }
     return number.replace(/[^1234567890.]|\-/g, "")
-}
-
-function reloadAPI() {
-    
-    fetch(miningAPI)
-        .then(function(response) {
-        return response.json();
-    })
-    .then(function(myJson){
-        miningAPIData = myJson
-    })
-    
-    fetch(cash2API)
-        .then(function(response) {
-        return response.json();
-    })
-    .then(function(myJson){
-        cash2APIData = myJson
-    })
-    
-    fetch(siaPriceAPI)
-        .then(function(response) {
-        return response.json();
-    })
-    .then(function(myJson){
-        siaPriceAPIData = myJson
-    })
-    
-    fetch(hyperPriceAPI)
-        .then(function(response) {
-        return response.json();
-    })
-    .then(function(myJson){
-        hyperPriceAPIData = myJson
-    })
-    
-    let primePriceAPIData
-    fetch(primePriceAPI)
-        .then(function(response) {
-        return response.json();
-    })
-    .then(function(myJson){
-        primePriceAPIData = myJson
-    })
-    
-    let classicPriceAPIData
-    fetch(classicPriceAPI)
-        .then(function(response) {
-        return response.json();
-    })
-    .then(function(myJson){
-        classicPriceAPIData = myJson
-    })
-    
 }
 
 function miningAPIError() {
@@ -583,53 +751,95 @@ function miningAPIError() {
         SCPcalcMonth.innerHTML = ""
 }
 
+
+
 function sia(){
-   
-        const siaAPIDifficulty = miningAPIData[0].difficulty;
-        const siaAPIheight = miningAPIData[0].height;
+        
+        try {
+            siaAPIDifficulty = miningAPIData[0].difficulty
+        } catch(e) {
+            try {
+                siaAPIDifficulty = miningAPIData[0].difficulty
+            } catch(error) {
+                console.log(error)
+            }
+        }
+        
+        try {
+            siaAPIheight = miningAPIData[0].height
+        } catch(e) {
+            try {
+                siaAPIheight = miningAPIData[0].height
+            } catch(error) {
+                console.log(error)
+            }
+        }
         
         siaHourresult = siaReward(siaAPIDifficulty, hshrt, siaAPIheight, hour)
         siaDayresult = siaReward(siaAPIDifficulty, hshrt, siaAPIheight, day)
         siaWeekresult = siaReward(siaAPIDifficulty, hshrt, siaAPIheight, week)
         siaMonthresult = siaReward(siaAPIDifficulty, hshrt, siaAPIheight, month)
-        
-        siaProfitHour = siaHourresult
-        siaProfitDay = siaDayresult
-        siaProfitWeek = siaWeekresult
-        siaProfitMonth = siaMonthresult
-        
-        siaHourFinal = numberShortener(siaProfitHour)
-        siaDayFinal = numberShortener(siaProfitDay)
-        siaWeekFinal = numberShortener(siaProfitWeek)
-        siaMonthFinal = numberShortener(siaProfitMonth)
 
+        SiacalcHour.innerHTML = numberShortener(siaHourresult)
+        SiacalcDay.innerHTML = numberShortener(siaDayresult)
+        SiacalcWeek.innerHTML = numberShortener(siaWeekresult)
+        SiacalcMonth.innerHTML = numberShortener(siaMonthresult)
 
-        SiacalcHour.innerHTML = siaHourFinal
-        SiacalcDay.innerHTML = siaDayFinal
-        SiacalcWeek.innerHTML = siaWeekFinal
-        SiacalcMonth.innerHTML = siaMonthFinal
-
-function siaReward(difficulty, hashrate, height, period){
-    return (hashrate/(difficulty/siaBlockTime)) * ((300000 - height - ((period/siaBlockTime)/2)) * (period/siaBlockTime));
+    function siaReward(difficulty, hashrate, height, period) {
+        if (diffAdjust) {
+            return (hashrate / ((difficulty + hshrt * siaBlockTime) / siaBlockTime)) * ((300000 - height - ((period / siaBlockTime) / 2)) * (period / siaBlockTime));
+        } else {
+            return (hashrate / (difficulty / siaBlockTime)) * ((300000 - height - ((period / siaBlockTime) / 2)) * (period / siaBlockTime));
+        }
 }
 }
 
 function siaPrice() {
-
-        siaUSDHourresult = siaProfitHour * siaPriceAPIData.prices[siaPriceAPIData.prices.length - 1][1]
-        siaUSDDayresult = siaProfitDay * siaPriceAPIData.prices[siaPriceAPIData.prices.length - 1][1]
-        siaUSDWeekresult = siaProfitWeek * siaPriceAPIData.prices[siaPriceAPIData.prices.length - 1][1]
-        siaUSDMonthresult = siaProfitMonth * siaPriceAPIData.prices[siaPriceAPIData.prices.length - 1][1]
         
-        siaUSDHourFinal = numberShortener(siaUSDHourresult)
-        siaUSDDayFinal = numberShortener(siaUSDDayresult)
-        siaUSDWeekFinal = numberShortener(siaUSDWeekresult)
-        siaUSDMonthFinal = numberShortener(siaUSDMonthresult)
+        try {
+            siaUSDHourresult = siaHourresult * siaPriceAPIData.prices[siaPriceAPIData.prices.length - 1][1]
+        } catch(e) {
+            try {
+                siaUSDHourresult = siaHourresult * siaPriceAPIData.prices[siaPriceAPIData.prices.length - 1][1]
+            } catch(error) {
+                console.log(error)
+            }
+        }
         
-        SiacalcHourUSD.innerHTML = siaUSDHourFinal
-        SiacalcDayUSD.innerHTML = siaUSDDayFinal
-        SiacalcWeekUSD.innerHTML = siaUSDWeekFinal
-        SiacalcMonthUSD.innerHTML = siaUSDMonthFinal
+        try {
+            siaUSDDayresult = siaDayresult * siaPriceAPIData.prices[siaPriceAPIData.prices.length - 1][1]
+        } catch(e) {
+            try {
+                siaUSDDayresult = siaDayresult * siaPriceAPIData.prices[siaPriceAPIData.prices.length - 1][1]
+            } catch(error) {
+                console.log(error)
+            }
+        }
+        
+        try {
+            siaUSDWeekresult = siaWeekresult * siaPriceAPIData.prices[siaPriceAPIData.prices.length - 1][1]
+        } catch(e) {
+            try {
+                siaUSDWeekresult = siaWeekresult * siaPriceAPIData.prices[siaPriceAPIData.prices.length - 1][1]
+            } catch(error) {
+                console.log(error)
+            }
+        }
+        
+        try {
+            siaUSDMonthresult = siaMonthresult * siaPriceAPIData.prices[siaPriceAPIData.prices.length - 1][1]
+        } catch(e) {
+            try {
+                siaUSDMonthresult = siaMonthresult * siaPriceAPIData.prices[siaPriceAPIData.prices.length - 1][1]
+            } catch(error) {
+                console.log(error)
+            }
+        }
+        
+        SiacalcHourUSD.innerHTML = numberShortener(siaUSDHourresult)
+        SiacalcDayUSD.innerHTML = numberShortener(siaUSDDayresult)
+        SiacalcWeekUSD.innerHTML = numberShortener(siaUSDWeekresult)
+        SiacalcMonthUSD.innerHTML = numberShortener(siaUSDMonthresult)
 }
 
 function siaPriceError() {
@@ -640,52 +850,92 @@ function siaPriceError() {
 }
 
 function hyper(){
-       
-        const hyperAPIDifficulty = miningAPIData[1].difficulty
-        const hyperAPIheight = miningAPIData[1].height;
+        
+        try {
+            hyperAPIDifficulty = miningAPIData[1].difficulty
+        } catch(e) {
+            try {
+                hyperAPIDifficulty = miningAPIData[1].difficulty
+            } catch(error) {
+                console.log(error)
+            }
+        }
+        
+        try {
+            hyperAPIheight = miningAPIData[1].height
+        } catch(e) {
+            try {
+                hyperAPIheight = miningAPIData[1].height
+            } catch(error) {
+                console.log(error)
+            }
+        }
         
         hyperHourresult = hyperReward(hyperAPIDifficulty, hshrt, hyperAPIheight, hour)
         hyperDayresult = hyperReward(hyperAPIDifficulty, hshrt, hyperAPIheight, day)
         hyperWeekresult = hyperReward(hyperAPIDifficulty, hshrt, hyperAPIheight, week)
         hyperMonthresult = hyperReward(hyperAPIDifficulty, hshrt, hyperAPIheight, month)
         
-        hyperProfitHour = hyperHourresult
-        hyperProfitDay = hyperDayresult
-        hyperProfitWeek = hyperWeekresult
-        hyperProfitMonth = hyperMonthresult
-        
-        hyperHourFinal = numberShortener(hyperProfitHour)
-        hyperDayFinal = numberShortener(hyperProfitDay)
-        hyperWeekFinal = numberShortener(hyperProfitWeek)
-        hyperMonthFinal = numberShortener(hyperProfitMonth)
-        
-        XSCcalcHour.innerHTML = hyperHourFinal
-        XSCcalcDay.innerHTML = hyperDayFinal
-        XSCcalcWeek.innerHTML = hyperWeekFinal
-        XSCcalcMonth.innerHTML = hyperMonthFinal
+        XSCcalcHour.innerHTML = numberShortener(hyperHourresult)
+        XSCcalcDay.innerHTML = numberShortener(hyperDayresult)
+        XSCcalcWeek.innerHTML = numberShortener(hyperWeekresult)
+        XSCcalcMonth.innerHTML = numberShortener(hyperMonthresult)
     
 function hyperReward(difficulty, hashrate, height, period){
-    return (hashrate/(difficulty/hyperBlockTime)) * ((60000 - (height * 0.2) - ((period/hyperBlockTime)/2)) * (period/hyperBlockTime)) * 0.9;
+    if (diffAdjust) {
+        return (hashrate / ((difficulty + hshrt * hyperBlockTime) / hyperBlockTime)) * ((300000 - height - ((period / hyperBlockTime) / 2)) * (period / hyperBlockTime));
+    } else {
+        return (hashrate / (difficulty / hyperBlockTime)) * ((300000 - height - ((period / hyperBlockTime) / 2)) * (period / hyperBlockTime));
+    }
 }
 
     }
     
 function hyperPrice() {
+        try {
+            hyperUSDHourresult = hyperHourresult * hyperPriceAPIData.prices[hyperPriceAPIData.prices.length - 1][1]
+        } catch(e) {
+            try {
+                hyperUSDHourresult = hyperHourresult * hyperPriceAPIData.prices[hyperPriceAPIData.prices.length - 1][1]
+            } catch(error) {
+                console.log(error)
+            }
+        }
         
-        hyperUSDHourresult = hyperProfitHour * hyperPriceAPIData.prices[hyperPriceAPIData.prices.length - 1][1]
-        hyperUSDDayresult = hyperProfitDay * hyperPriceAPIData.prices[hyperPriceAPIData.prices.length - 1][1]
-        hyperUSDWeekresult = hyperProfitWeek * hyperPriceAPIData.prices[hyperPriceAPIData.prices.length - 1][1]
-        hyperUSDMonthresult = hyperProfitMonth * hyperPriceAPIData.prices[hyperPriceAPIData.prices.length - 1][1]
+        try {
+            hyperUSDDayresult = hyperDayresult * hyperPriceAPIData.prices[hyperPriceAPIData.prices.length - 1][1]
+        } catch(e) {
+            try {
+                hyperUSDDayresult = hyperDayresult * hyperPriceAPIData.prices[hyperPriceAPIData.prices.length - 1][1]
+            } catch(error) {
+                console.log(error)
+            }
+        }
         
-        hyperUSDHourFinal = numberShortener(hyperUSDHourresult)
-        hyperUSDDayFinal = numberShortener(hyperUSDDayresult)
-        hyperUSDWeekFinal = numberShortener(hyperUSDWeekresult)
-        hyperUSDMonthFinal = numberShortener(hyperUSDMonthresult)
-
-        XSCcalcHourUSD.innerHTML = hyperUSDHourFinal
-        XSCcalcDayUSD.innerHTML = hyperUSDDayFinal
-        XSCcalcWeekUSD.innerHTML = hyperUSDWeekFinal
-        XSCcalcMonthUSD.innerHTML = hyperUSDMonthFinal
+        try {
+            hyperUSDWeekresult = hyperWeekresult * hyperPriceAPIData.prices[hyperPriceAPIData.prices.length - 1][1]
+        } catch(e) {
+            try {
+                hyperUSDWeekresult = hyperWeekresult * hyperPriceAPIData.prices[hyperPriceAPIData.prices.length - 1][1]
+            } catch(error) {
+                console.log(error)
+            }
+        }
+        
+        try {
+            hyperUSDMonthresult = hyperMonthresult * hyperPriceAPIData.prices[hyperPriceAPIData.prices.length - 1][1]
+        } catch(e) {
+            try {
+                hyperUSDMonthresult = hyperMonthresult * hyperPriceAPIData.prices[hyperPriceAPIData.prices.length - 1][1]
+            } catch(error) {
+                console.log(error)
+            }
+        }
+        
+        XSCcalcHourUSD.innerHTML = numberShortener(hyperUSDHourresult)
+        XSCcalcDayUSD.innerHTML = numberShortener(hyperUSDDayresult)
+        XSCcalcWeekUSD.innerHTML = numberShortener(hyperUSDWeekresult)
+        XSCcalcMonthUSD.innerHTML = numberShortener(hyperUSDMonthresult)
 }
 
 function hyperPriceError() {
@@ -696,52 +946,93 @@ function hyperPriceError() {
 }
 
 function classic(){
-
-        const classicAPIDifficulty = miningAPIData[3].difficulty;
-        const classicAPIheight = miningAPIData[3].height;
+        
+        try {
+            classicAPIDifficulty = miningAPIData[3].difficulty
+        } catch(e) {
+            try {
+                classicAPIDifficulty = miningAPIData[3].difficulty
+            } catch(error) {
+                console.log(error)
+            }
+        }
+        
+        try {
+            classicAPIheight = miningAPIData[3].height
+        } catch(e) {
+            try {
+                classicAPIheight = miningAPIData[3].height
+            } catch(error) {
+                console.log(error)
+            }
+        }
         
         sccHourresult = classicReward(classicAPIDifficulty, hshrt, classicAPIheight, hour)
         sccDayresult = classicReward(classicAPIDifficulty, hshrt, classicAPIheight, day)
         sccWeekresult = classicReward(classicAPIDifficulty, hshrt, classicAPIheight, week)
         sccMonthresult = classicReward(classicAPIDifficulty, hshrt, classicAPIheight, month)
         
-        classicProfitHour = sccHourresult
-        classicProfitDay = sccDayresult
-        classicProfitWeek = sccWeekresult
-        classicProfitMonth = sccMonthresult
-        
-        sccHourFinal = numberShortener(sccHourresult)
-        sccDayFinal = numberShortener(sccDayresult)
-        sccWeekFinal = numberShortener(sccWeekresult)
-        sccMonthFinal = numberShortener(sccMonthresult)
-        
-        SCCcalcHour.innerHTML = sccHourFinal
-        SCCcalcDay.innerHTML = sccDayFinal
-        SCCcalcWeek.innerHTML = sccWeekFinal
-        SCCcalcMonth.innerHTML = sccMonthFinal
+        SCCcalcHour.innerHTML = numberShortener(sccHourresult)
+        SCCcalcDay.innerHTML = numberShortener(sccDayresult)
+        SCCcalcWeek.innerHTML = numberShortener(sccWeekresult)
+        SCCcalcMonth.innerHTML = numberShortener(sccMonthresult)
     
 
 function classicReward(difficulty, hashrate, height, period){
-    return (hashrate/(difficulty/classicBlockTime)) * ((300000 - height - ((period/classicBlockTime)/2)) * (period/classicBlockTime));
+    if (diffAdjust) {
+        return (hashrate / ((difficulty + hshrt * classicBlockTime) / classicBlockTime)) * ((300000 - height - ((period / classicBlockTime) / 2)) * (period / classicBlockTime));
+    } else {
+        return (hashrate / (difficulty / classicBlockTime)) * ((300000 - height - ((period / classicBlockTime) / 2)) * (period / classicBlockTime));
+    }
 }
 }
 
 function classicPrice() {
-    
-        sccUSDHourresult = classicProfitHour * classicPriceAPIData.prices[classicPriceAPIData.prices.length - 1][1]
-        sccUSDDayresult = classicProfitDay * classicPriceAPIData.prices[classicPriceAPIData.prices.length - 1][1]
-        sccUSDWeekresult = classicProfitWeek * classicPriceAPIData.prices[classicPriceAPIData.prices.length - 1][1]
-        sccUSDMonthresult = classicProfitMonth * classicPriceAPIData.prices[classicPriceAPIData.prices.length - 1][1]
         
-        sccUSDHourFinal = numberShortener(sccUSDHourresult)
-        sccUSDDayFinal = numberShortener(sccUSDDayresult)
-        sccUSDWeekFinal = numberShortener(sccUSDWeekresult)
-        sccUSDMonthFinal = numberShortener(sccUSDMonthresult)
-    
-        SCCcalcHourUSD.innerHTML = sccUSDHourFinal
-        SCCcalcDayUSD.innerHTML = sccUSDDayFinal
-        SCCcalcWeekUSD.innerHTML = sccUSDWeekFinal
-        SCCcalcMonthUSD.innerHTML = sccUSDMonthFinal
+        try {
+            sccUSDHourresult = sccHourresult * classicPriceAPIData.prices[classicPriceAPIData.prices.length - 1][1]
+        } catch(e) {
+            try {
+                sccUSDHourresult = sccHourresult * classicPriceAPIData.prices[classicPriceAPIData.prices.length - 1][1]
+            } catch(error) {
+                console.log(error)
+            }
+        }
+        
+        try {
+            sccUSDDayresult = sccDayresult * classicPriceAPIData.prices[classicPriceAPIData.prices.length - 1][1]
+        } catch(e) {
+            try {
+                sccUSDDayresult = sccDayresult * classicPriceAPIData.prices[classicPriceAPIData.prices.length - 1][1]
+            } catch(error) {
+                console.log(error)
+            }
+        }
+        
+        try {
+            sccUSDWeekresult = sccWeekresult * classicPriceAPIData.prices[classicPriceAPIData.prices.length - 1][1]
+        } catch(e) {
+            try {
+                sccUSDWeekresult = sccWeekresult * classicPriceAPIData.prices[classicPriceAPIData.prices.length - 1][1]
+            } catch(error) {
+                console.log(error)
+            }
+        }
+        
+        try {
+            sccUSDMonthresult = sccMonthresult * classicPriceAPIData.prices[classicPriceAPIData.prices.length - 1][1]
+        } catch(e) {
+            try {
+                sccUSDMonthresult = sccMonthresult * classicPriceAPIData.prices[classicPriceAPIData.prices.length - 1][1]
+            } catch(error) {
+                console.log(error)
+            }
+        }
+        
+        SCCcalcHourUSD.innerHTML = numberShortener(sccUSDHourresult)
+        SCCcalcDayUSD.innerHTML = numberShortener(sccUSDDayresult)
+        SCCcalcWeekUSD.innerHTML = numberShortener(sccUSDWeekresult)
+        SCCcalcMonthUSD.innerHTML = numberShortener(sccUSDMonthresult)
 }
 
 function classicPriceAPIError() {
@@ -754,50 +1045,91 @@ function classicPriceAPIError() {
 
 function prime(){
     
-    const primeAPIDifficulty = miningAPIData[2].difficulty;
-    const primeAPIheight = miningAPIData[2].height;
+    try {
+        primeAPIDifficulty = miningAPIData[2].difficulty
+    } catch(e) {
+        try {
+            primeAPIDifficulty = miningAPIData[2].difficulty
+        } catch(error) {
+            console.log(error)
+        }
+    }
+    
+    try {
+        primeAPIheight = miningAPIData[2].height
+    } catch(e) {
+        try {
+            primeAPIheight = miningAPIData[2].height
+        } catch(error) {
+            console.log(error)
+        }
+    }
     
     primeHourresult = primeReward(primeAPIDifficulty, hshrt, primeAPIheight, hour)
     primeDayresult = primeReward(primeAPIDifficulty, hshrt, primeAPIheight, day)
     primeWeekresult = primeReward(primeAPIDifficulty, hshrt, primeAPIheight, week)
     primeMonthresult = primeReward(primeAPIDifficulty, hshrt, primeAPIheight, month)
     
-    primeProfitHour = primeHourresult
-    primeProfitDay = primeDayresult
-    primeProfitWeek = primeWeekresult
-    primeProfitMonth = primeMonthresult
-    
-    primeHourFinal = numberShortener(primeHourresult)
-    primeDayFinal = numberShortener(primeDayresult)
-    primeWeekFinal = numberShortener(primeWeekresult)
-    primeMonthFinal = numberShortener(primeMonthresult)
-    
-    SCPcalcHour.innerHTML = primeHourFinal
-    SCPcalcDay.innerHTML = primeDayFinal
-    SCPcalcWeek.innerHTML = primeWeekFinal
-    SCPcalcMonth.innerHTML = primeMonthFinal
+    SCPcalcHour.innerHTML = numberShortener(primeHourresult)
+    SCPcalcDay.innerHTML = numberShortener(primeDayresult)
+    SCPcalcWeek.innerHTML = numberShortener(primeWeekresult)
+    SCPcalcMonth.innerHTML = numberShortener(primeMonthresult)
 
 function primeReward(difficulty, hashrate, height, period){
-    return (hashrate/(difficulty/primeBlockTime)) * ((300000 - height - ((period/primeBlockTime)/2)) * (period/primeBlockTime) * 0.8);
+    if (diffAdjust) {
+        return (hashrate / ((difficulty + hshrt * primeBlockTime) / primeBlockTime)) * ((300000 - height - ((period / primeBlockTime) / 2)) * (period / primeBlockTime));
+    } else {
+        return (hashrate / (difficulty / primeBlockTime)) * ((300000 - height - ((period / primeBlockTime) / 2)) * (period / primeBlockTime));
+    }
 }
 }
 
 function primePrice() {
-
-        primeUSDHourresult = primeProfitHour * primePriceAPIData.prices[primePriceAPIData.prices.length - 1][1]
-        primeUSDDayresult = primeProfitDay * primePriceAPIData.prices[primePriceAPIData.prices.length - 1][1]
-        primeUSDWeekresult = primeProfitWeek * primePriceAPIData.prices[primePriceAPIData.prices.length - 1][1]
-        primeUSDMonthresult = primeProfitMonth * primePriceAPIData.prices[primePriceAPIData.prices.length - 1][1]
         
-        primeUSDHourFinal = numberShortener(primeUSDHourresult)
-        primeUSDDayFinal = numberShortener(primeUSDDayresult)
-        primeUSDWeekFinal = numberShortener(primeUSDWeekresult)
-        primeUSDMonthFinal = numberShortener(primeUSDMonthresult)
+        try {
+            primeUSDHourresult = primeHourresult * primePriceAPIData.prices[primePriceAPIData.prices.length - 1][1]
+        } catch(e) {
+            try {
+                primeUSDHourresult = primeHourresult * primePriceAPIData.prices[primePriceAPIData.prices.length - 1][1]
+            } catch(error) {
+                console.log(error)
+            }
+        }
         
-        SCPcalcHourUSD.innerHTML = primeUSDHourFinal
-        SCPcalcDayUSD.innerHTML = primeUSDDayFinal
-        SCPcalcWeekUSD.innerHTML = primeUSDWeekFinal
-        SCPcalcMonthUSD.innerHTML = primeUSDMonthFinal
+        try {
+            primeUSDDayresult = primeDayresult * primePriceAPIData.prices[primePriceAPIData.prices.length - 1][1]
+        } catch(e) {
+            try {
+                primeUSDDayresult = primeDayresult * primePriceAPIData.prices[primePriceAPIData.prices.length - 1][1]
+            } catch(error) {
+                console.log(error)
+            }
+        }
+        
+        try {
+            primeUSDWeekresult = primeWeekresult * primePriceAPIData.prices[primePriceAPIData.prices.length - 1][1]
+        } catch(e) {
+            try {
+                primeUSDWeekresult = primeWeekresult * primePriceAPIData.prices[primePriceAPIData.prices.length - 1][1]
+            } catch(error) {
+                console.log(error)
+            }
+        }
+        
+        try {
+            primeUSDMonthresult = primeMonthresult * primePriceAPIData.prices[primePriceAPIData.prices.length - 1][1]
+        } catch(e) {
+            try {
+                primeUSDMonthresult = primeMonthresult * primePriceAPIData.prices[primePriceAPIData.prices.length - 1][1]
+            } catch(error) {
+                console.log(error)
+            }
+        }
+        
+        SCPcalcHourUSD.innerHTML = numberShortener(primeUSDHourresult)
+        SCPcalcDayUSD.innerHTML = numberShortener(primeUSDDayresult)
+        SCPcalcWeekUSD.innerHTML = numberShortener(primeUSDWeekresult)
+        SCPcalcMonthUSD.innerHTML = numberShortener(primeUSDMonthresult)
 }
 
 function primePriceError() {
@@ -809,23 +1141,35 @@ function primePriceError() {
 
 function cash2(){
     
-    const CASH2APIDifficulty = cash2APIData.difficulty;
-    const CASH2APIheight = cash2APIData.height;
+    try {
+        CASH2APIDifficulty = cash2APIData.difficulty
+    } catch(e) {
+        try {
+            CASH2APIDifficulty = cash2APIData.difficulty
+        } catch(error) {
+            console.log(error)
+        }
+    }
+    
+    try {
+        CASH2APIheight = cash2APIData.height
+    } catch(e) {
+        try {
+            CASH2APIheight = cash2APIData.height
+        } catch(error) {
+            console.log(error)
+        }
+    }
     
     Cash2Hourresult = cash2Reward(CASH2APIDifficulty, hshrt, CASH2APIheight, hour)
     Cash2Dayresult = cash2Reward(CASH2APIDifficulty, hshrt, CASH2APIheight, day)
     Cash2Weekresult = cash2Reward(CASH2APIDifficulty, hshrt, CASH2APIheight, week)
     Cash2Monthresult = cash2Reward(CASH2APIDifficulty, hshrt, CASH2APIheight, month)
     
-    Cash2HourFinal = numberShortener(Cash2Hourresult)
-    Cash2DayFinal = numberShortener(Cash2Dayresult)
-    Cash2WeekFinal = numberShortener(Cash2Weekresult)
-    Cash2MonthFinal = numberShortener(Cash2Monthresult)
-    
-    Cash2calcHour.innerHTML = Cash2HourFinal
-    Cash2calcDay.innerHTML = Cash2DayFinal
-    Cash2calcWeek.innerHTML = Cash2WeekFinal
-    Cash2calcMonth.innerHTML = Cash2MonthFinal
+    Cash2calcHour.innerHTML = numberShortener(Cash2Hourresult)
+    Cash2calcDay.innerHTML = numberShortener(Cash2Dayresult)
+    Cash2calcWeek.innerHTML = numberShortener(Cash2Weekresult)
+    Cash2calcMonth.innerHTML = numberShortener(Cash2Monthresult)
     
 function getBlockReward(CASH2APIheight)
 {
@@ -839,95 +1183,129 @@ function getBlockReward(CASH2APIheight)
       return (15000000 - alreadyGeneratedCoins) / 16777216;
 }
 
-function cash2Reward(difficulty, hashrate, height, period){
-    return (hashrate/(CASH2APIDifficulty/cash2BlockTime)) * ((getBlockReward(CASH2APIheight + ((period/cash2BlockTime)/2)))  * (period/cash2BlockTime))
-
+    function cash2Reward(difficulty, hashrate, height, period) {
+        if (diffAdjust) {
+            return (hashrate / (((difficulty * 1099511627776) + hshrt * cash2blocktime) / cash2BlockTime)) * ((getBlockReward(height + ((period / cash2BlockTime) / 2))) * (period / cash2BlockTime))
+        } else {
+            return (hashrate / ((difficulty * 1099511627776) / cash2BlockTime)) * ((getBlockReward(height + ((period / cash2BlockTime) / 2))) * (period / cash2BlockTime))
+        }
 }
+
+function cash2Price() {
+        try {
+            Cash2USDHourresult = Cash2Hourresult * cash2PriceAPIData.prices[cash2PriceAPIData.prices.length - 1][1]
+        } catch(e) {
+            try {
+                Cash2USDHourresult = Cash2Hourresult * cash2PriceAPIData.prices[cash2APIData.prices.length - 1][1]
+            } catch(error) {
+                console.log(error)
+            }
+        }
+        
+        try {
+            Cash2USDDayresult = Cash2Dayresult * cash2PriceAPIData.prices[cash2PriceAPIData.prices.length - 1][1]
+        } catch(e) {
+            try {
+                Cash2USDDayresult = Cash2Dayresult * cash2PriceAPIData.prices[cash2PriceAPIData.prices.length - 1][1]
+            } catch(error) {
+                console.log(error)
+            }
+        }
+        
+        try {
+            Cash2USDWeekresult = Cash2Weekresult * cash2PriceAPIData.prices[cash2PriceAPIData.prices.length - 1][1]
+        } catch(e) {
+            try {
+                Cash2USDWeekresult = Cash2Weekresult * cash2PriceAPIData.prices[cash2PriceAPIData.prices.length - 1][1]
+            } catch(error) {
+                console.log(error)
+            }
+        }
+        
+        try {
+            Cash2USDMonthresult = Cash2Monthresult * cash2PriceAPIData.prices[cash2PriceAPIData.prices.length - 1][1]
+        } catch(e) {
+            try {
+                Cash2USDMonthresult = Cash2Monthresult * cash2PriceAPIData.prices[cash2PriceAPIData.prices.length - 1][1]
+            } catch(error) {
+                console.log(error)
+            }
+        }
+        
+        Cash2calcHourUSD.innerHTML = numberShortener(Cash2USDHourresult)
+        Cash2calcDayUSD.innerHTML = numberShortener(Cash2USDDayresult)
+        Cash2calcWeekUSD.innerHTML = numberShortener(Cash2USDWeekresult)
+        Cash2calcMonthUSD.innerHTML = numberShortener(Cash2USDMonthresult)
 }
 
 
 function calcProfit() {
-    if (poolFee.value >= 0 || elecCost.value >= 0 || powerConsumtion.value >= 0) {
-        hyperFeeHour = (hyperUSDHourresult - (hyperUSDHourresult * (poolFee.value / 100))) - (((powerConsumtion.value * 1) / 1000) * elecCost.value)
-        hyperFeeDay = (hyperUSDDayresult - (hyperUSDDayresult * (poolFee.value / 100))) - (((powerConsumtion.value * 24) / 1000) * elecCost.value)
-        hyperFeeWeek = (hyperUSDWeekresult - (hyperUSDWeekresult * (poolFee.value / 100))) - ((((powerConsumtion.value * 24) / 1000) * 7) * elecCost.value)
-        hyperFeeMonth = (hyperUSDMonthresult - (hyperUSDMonthresult * (poolFee.value / 100))) - ((((powerConsumtion.value * 24) / 1000) * 30) * elecCost.value)
+    if (poolFee.value >= 0 || elecCost.value >= 0 || powerConsumtion.value >= 0 || rejectRate.value >= 0) {
+        PowerCostHourResult = (((powerConsumtion.value * 1) / 1000) * elecCost.value) * -1
+        PowerCostDayResult = (((powerConsumtion.value * 24) / 1000) * elecCost.value) * -1
+        PowerCostWeekResult = ((((powerConsumtion.value * 24) / 1000) * 7) * elecCost.value) * -1
+        PowerCostMonthResult = ((((powerConsumtion.value * 24) / 1000) * 30) * elecCost.value) * -1
         
-        primeFeeHour = (primeUSDHourresult - (primeUSDHourresult * (poolFee.value / 100))) - (((powerConsumtion.value * 1) / 1000) * elecCost.value)
-        primeFeeDay = (primeUSDDayresult - (primeUSDDayresult * (poolFee.value / 100))) - (((powerConsumtion.value * 24) / 1000) * elecCost.value)
-        primeFeeWeek = (primeUSDWeekresult - (primeUSDWeekresult * (poolFee.value / 100))) - ((((powerConsumtion.value * 24) / 1000) * 7) * elecCost.value)
-        primeFeeMonth = (primeUSDMonthresult - (primeUSDMonthresult * (poolFee.value / 100))) - ((((powerConsumtion.value * 24) / 1000) * 30) * elecCost.value)
-        
-        classicFeeHour = sccUSDHourresult - (sccUSDHourresult * (poolFee.value / 100)) - (((powerConsumtion.value * 1) / 1000) * elecCost.value)
-        classicFeeDay = sccUSDDayresult - (sccUSDDayresult * (poolFee.value / 100)) - (((powerConsumtion.value * 24) / 1000) * elecCost.value)
-        classicFeeWeek = sccUSDWeekresult - (sccUSDWeekresult * (poolFee.value / 100)) - ((((powerConsumtion.value * 24) / 1000) * 7) * elecCost.value)
-        classicFeeMonth = sccUSDMonthresult - (sccUSDMonthresult * (poolFee.value / 100)) - ((((powerConsumtion.value * 24) / 1000) * 30) * elecCost.value)
-        
-        siaFeeHour = siaUSDHourresult - (siaUSDHourresult * (poolFee.value / 100)) - (((powerConsumtion.value * 1) / 1000) * elecCost.value)
-        siaFeeDay = siaUSDDayresult - (siaUSDDayresult * (poolFee.value / 100)) - (((powerConsumtion.value * 24) / 1000) * elecCost.value)
-        siaFeeWeek = siaUSDWeekresult - (siaUSDWeekresult * (poolFee.value / 100)) - ((((powerConsumtion.value * 24) / 1000) * 7) * elecCost.value)
-        siaFeeMonth = siaUSDMonthresult - (siaUSDMonthresult * (poolFee.value / 100)) - ((((powerConsumtion.value * 24) / 1000) * 30) * elecCost.value)
-        
-        Cash2FeeHour = (((powerConsumtion.value * 1) / 1000) * elecCost.value) * -1
-        Cash2FeeDay = (((powerConsumtion.value * 24) / 1000) * elecCost.value) * -1
-        Cash2FeeWeek = ((((powerConsumtion.value * 24) / 1000) * 7) * elecCost.value) * -1
-        Cash2FeeMonth = ((((powerConsumtion.value * 24) / 1000) * 30) * elecCost.value) * -1
+        //PowerCost
+        PowerCostHour.innerHTML = numberShortener(PowerCostHourResult)
+        PowerCostDay.innerHTML = numberShortener(PowerCostDayResult)
+        PowerCostWeek.innerHTML = numberShortener(PowerCostWeekResult)
+        PowerCostMonth.innerHTML = numberShortener(PowerCostMonthResult)
         
         //HyperSpace
-        hyperProfitHour = numberShortener(hyperFeeHour)
-        hyperProfitDay = numberShortener(hyperFeeDay)
-        hyperProfitWeek = numberShortener(hyperFeeWeek)
-        hyperProfitMonth = numberShortener(hyperFeeMonth)
+        XSCresultHourProfit.innerHTML = numberShortener(feeCalc(rejectCalc(hyperHourresult)))
+        XSCresultDayProfit.innerHTML = numberShortener(feeCalc(rejectCalc(hyperDayresult)))
+        XSCresultWeekProfit.innerHTML = numberShortener(feeCalc(rejectCalc(hyperWeekresult)))
+        XSCresultMonthProfit.innerHTML = numberShortener(feeCalc(rejectCalc(hyperMonthresult)))
         
-        XSCresultHourProfit.innerHTML = hyperProfitHour
-        XSCresultDayProfit.innerHTML = hyperProfitDay
-        XSCresultWeekProfit.innerHTML = hyperProfitWeek
-        XSCresultMonthProfit.innerHTML = hyperProfitMonth
+        XSCresultHourProfitUSD.innerHTML = numberShortener(rejectCalc(colorProfit(feeCalcUSD(hyperUSDHourresult, 1, 1), XSCresultHourProfitUSD)))
+        XSCresultDayProfitUSD.innerHTML = numberShortener(rejectCalc(colorProfit(feeCalcUSD(hyperUSDDayresult, 24, 1), XSCresultDayProfitUSD)))
+        XSCresultWeekProfitUSD.innerHTML = numberShortener(rejectCalc(colorProfit(feeCalcUSD(hyperUSDWeekresult, 24, 7), XSCresultWeekProfitUSD)))
+        XSCresultMonthProfitUSD.innerHTML = numberShortener(rejectCalc(colorProfit(feeCalcUSD(hyperUSDMonthresult, 24, 30), XSCresultMonthProfitUSD)))
         
         //SiaPrime
-        primeProfitHour = numberShortener(primeFeeHour)
-        primeProfitDay = numberShortener(primeFeeDay)
-        primeProfitWeek = numberShortener(primeFeeWeek)
-        primeProfitMonth = numberShortener(primeFeeMonth)
+        SCPresultHourProfit.innerHTML = numberShortener(feeCalc(rejectCalc(primeHourresult)))
+        SCPresultDayProfit.innerHTML = numberShortener(feeCalc(rejectCalc(primeDayresult)))
+        SCPresultWeekProfit.innerHTML = numberShortener(feeCalc(rejectCalc(primeWeekresult)))
+        SCPresultMonthProfit.innerHTML = numberShortener(feeCalc(rejectCalc(primeMonthresult)))
         
-        SCPresultHourProfit.innerHTML = primeProfitHour
-        SCPresultDayProfit.innerHTML = primeProfitDay
-        SCPresultWeekProfit.innerHTML = primeProfitWeek
-        SCPresultMonthProfit.innerHTML = primeProfitMonth
+        SCPresultHourProfitUSD.innerHTML = numberShortener(rejectCalc(colorProfit(feeCalcUSD(primeUSDHourresult, 1, 1), SCPresultHourProfitUSD)))
+        SCPresultDayProfitUSD.innerHTML = numberShortener(rejectCalc(colorProfit(feeCalcUSD(primeUSDDayresult, 24, 1), SCPresultDayProfitUSD)))
+        SCPresultWeekProfitUSD.innerHTML = numberShortener(rejectCalc(colorProfit(feeCalcUSD(primeUSDWeekresult, 24, 7), SCPresultWeekProfitUSD)))
+        SCPresultMonthProfitUSD.innerHTML = numberShortener(rejectCalc(colorProfit(feeCalcUSD(primeUSDMonthresult, 24, 30), SCPresultMonthProfitUSD)))
         
         //SiaClassic
-        classicProfitHour = numberShortener(classicFeeHour)
-        classicProfitDay = numberShortener(classicFeeDay)
-        classicProfitWeek = numberShortener(classicFeeWeek)
-        classicProfitMonth = numberShortener(classicFeeMonth)
+        SCCresultHourProfit.innerHTML = numberShortener(feeCalc(rejectCalc(sccHourresult)))
+        SCCresultDayProfit.innerHTML = numberShortener(feeCalc(rejectCalc(sccDayresult)))
+        SCCresultWeekProfit.innerHTML = numberShortener(feeCalc(rejectCalc(sccWeekresult)))
+        SCCresultMonthProfit.innerHTML = numberShortener(feeCalc(rejectCalc(sccMonthresult)))
         
-        SCCresultHourProfit.innerHTML = classicProfitHour
-        SCCresultDayProfit.innerHTML = classicProfitDay
-        SCCresultWeekProfit.innerHTML = classicProfitWeek
-        SCCresultMonthProfit.innerHTML = classicProfitMonth
-
+        SCCresultHourProfitUSD.innerHTML = numberShortener(rejectCalc(colorProfit(feeCalcUSD(sccUSDHourresult, 1, 1), SCCresultHourProfitUSD)))
+        SCCresultDayProfitUSD.innerHTML = numberShortener(rejectCalc(colorProfit(feeCalcUSD(sccUSDDayresult, 24, 1), SCCresultDayProfitUSD)))
+        SCCresultWeekProfitUSD.innerHTML = numberShortener(rejectCalc(colorProfit(feeCalcUSD(sccUSDWeekresult, 24, 7), SCCresultWeekProfitUSD)))
+        SCCresultMonthProfitUSD.innerHTML = numberShortener(rejectCalc(colorProfit(feeCalcUSD(sccUSDMonthresult, 24, 30), SCCresultMonthProfitUSD)))
+        
         //Sia
-        siaProfitHour = numberShortener(siaFeeHour)
-        siaProfitDay = numberShortener(siaFeeDay)
-        siaProfitWeek = numberShortener(siaFeeWeek)
-        siaProfitMonth = numberShortener(siaFeeMonth)
+        SiaresultHourProfit.innerHTML = numberShortener(feeCalc(rejectCalc(siaHourresult)))
+        SiaresultDayProfit.innerHTML = numberShortener(feeCalc(rejectCalc(siaDayresult)))
+        SiaresultWeekProfit.innerHTML = numberShortener(feeCalc(rejectCalc(siaWeekresult)))
+        SiaresultMonthProfit.innerHTML = numberShortener(feeCalc(rejectCalc(siaMonthresult)))
         
-        SiaresultHourProfit.innerHTML = siaProfitHour
-        SiaresultDayProfit.innerHTML = siaProfitDay
-        SiaresultWeekProfit.innerHTML = siaProfitWeek
-        SiaresultMonthProfit.innerHTML = siaProfitMonth
+        SiaresultHourProfitUSD.innerHTML = numberShortener(rejectCalc(colorProfit(feeCalcUSD(siaUSDHourresult, 1, 1), SiaresultHourProfitUSD)))
+        SiaresultDayProfitUSD.innerHTML = numberShortener(rejectCalc(colorProfit(feeCalcUSD(siaUSDDayresult, 24, 1), SiaresultDayProfitUSD)))
+        SiaresultWeekProfitUSD.innerHTML = numberShortener(rejectCalc(colorProfit(feeCalcUSD(siaUSDWeekresult, 24, 7), SiaresultWeekProfitUSD)))
+        SiaresultMonthProfitUSD.innerHTML = numberShortener(rejectCalc(colorProfit(feeCalcUSD(siaUSDMonthresult, 24, 30), SiaresultMonthProfitUSD)))
         
         //Cash2
-        Cash2ProfitHour = numberShortener(Cash2FeeHour)
-        Cash2ProfitDay = numberShortener(Cash2FeeDay)
-        Cash2ProfitWeek = numberShortener(Cash2FeeWeek)
-        Cash2ProfitMonth = numberShortener(Cash2FeeMonth)
+        Cash2resultHourProfit.innerHTML = numberShortener(feeCalc(rejectCalc(Cash2Hourresult)))
+        Cash2resultDayProfit.innerHTML = numberShortener(feeCalc(rejectCalc(Cash2Dayresult)))
+        Cash2resultWeekProfit.innerHTML = numberShortener(feeCalc(rejectCalc(Cash2Weekresult)))
+        Cash2resultMonthProfit.innerHTML = numberShortener(feeCalc(rejectCalc(Cash2Monthresult)))
         
-        Cash2resultHourProfit.innerHTML = Cash2ProfitHour
-        Cash2resultDayProfit.innerHTML = Cash2ProfitDay
-        Cash2resultWeekProfit.innerHTML = Cash2ProfitWeek
-        Cash2resultMonthProfit.innerHTML = Cash2ProfitMonth
-        
+        Cash2resultHourProfitUSD.innerHTML = numberShortener(rejectCalc(colorProfit(feeCalcUSD(Cash2USDHourresult, 1, 1), Cash2resultHourProfitUSD)))
+        Cash2resultDayProfitUSD.innerHTML = numberShortener(rejectCalc(colorProfit(feeCalcUSD(Cash2USDDayresult, 24, 1), Cash2resultDayProfitUSD)))
+        Cash2resultWeekProfitUSD.innerHTML = numberShortener(rejectCalc(colorProfit(feeCalcUSD(Cash2USDWeekresult, 24, 7), Cash2resultWeekProfitUSD)))
+        Cash2resultMonthProfitUSD.innerHTML = numberShortener(rejectCalc(colorProfit(feeCalcUSD(Cash2USDMonthresult, 24, 30), Cash2resultMonthProfitUSD)))
     }
 }
 
@@ -1040,12 +1418,12 @@ function presetUpdate() {
         
     //StrongU STU-U2
     if (StrongUpreset >= 1 && StrongUpreset < 999) {
-        StrongUpresetFinal = 7000 * StrongUpreset
+        StrongUpresetFinal = 5500 * StrongUpreset
         StrongUpresetPower = 1600 * StrongUpreset
     }
     else if (StrongUpreset >= 999) {
         StrongU.value = 999
-        StrongUpresetFinal = 7000 * StrongUpreset
+        StrongUpresetFinal = 5500 * StrongUpreset
         StrongUpresetPower = 1600 * StrongUpreset
     }
     else if (StrongUpreset <= 0){
@@ -1108,4 +1486,30 @@ function numberShortener(num) {
         }
         
         return tempNum
+}
+
+function rejectCalc(coin) {
+    if(rejectRate.value > 0) {
+        return coin - (coin * (rejectRate.value / 100))
+    } else {
+        return coin
+    }
+}
+
+function feeCalc(coin) {
+    return coin - (coin * (poolFee.value / 100))
+}
+
+function feeCalcUSD(coin, time1, time2) {
+    return (coin - (coin * (poolFee.value / 100))) - ((((powerConsumtion.value * time1) / 1000) * time2) * elecCost.value)
+}
+
+function colorProfit(coin, coinHTML) {
+    if (coin > 0) {
+        coinHTML.style.color = greenColor
+    } else {
+        coinHTML.style.color = redColor
+    }
+    
+    return coin
 }
