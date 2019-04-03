@@ -41,6 +41,7 @@ const month = day * 30; // assume month = 30 days
 const miningAPI = "https://keops.cc/dbs/pansia_current.json";
 var mineAPILoad = false
 
+
 const cash2API = "https://blocks.cash2.org:8080/getinfo";
 var cash2APILoad = false
 
@@ -49,6 +50,7 @@ var hyperPriceAPILoad = false
 
 const siaPriceAPI = "https://api.coingecko.com/api/v3/coins/siacoin/market_chart?vs_currency=usd&days=1"
 var siaPriceAPILoad = false
+
 
 const primePriceAPI = "https://api.coingecko.com/api/v3/coins/siaprime-coin/market_chart?vs_currency=usd&days=1"
 var primePriceAPILoad = false
@@ -59,10 +61,11 @@ var classicPriceAPILoad = false
 const cash2PriceAPI = "https://api.coingecko.com/api/v3/coins/cash2/market_chart?vs_currency=usd&days=1"
 var cash2PriceAPILoad = false
 
+var diffAdjust = false // Toggles adjusting difficulty for added hashrate
 let hshrt = 0
 
-const greenColor = "#30ff30"
-const redColor = "#ff0000"
+const greenColor = "#30fa30"
+const redColor = "#d20000"
 
 const PowerCostHour = document.querySelector("#PowerCostHour")
 const PowerCostDay = document.querySelector("#PowerCostDay")
@@ -75,6 +78,8 @@ let PowerCostWeekResult
 let PowerCostMonthResult
 
 //Hyperspace-------------------------------------------------------------------
+const XSCVolume = document.querySelector("#XSCVolumeValue")
+
 const XSCcalcHour = document.querySelector("#XSCresultHour")
 const XSCcalcDay = document.querySelector("#XSCresultDay")
 const XSCcalcWeek = document.querySelector("#XSCresultWeek")
@@ -109,6 +114,8 @@ let hyperUSDWeekresult
 let hyperUSDMonthresult
 
 //Sia Prime
+const SCPVolume = document.querySelector("#SCPVolumeValue")
+
 const SCPcalcHour = document.querySelector("#SCPresultHour")
 const SCPcalcDay = document.querySelector("#SCPresultDay")
 const SCPcalcWeek = document.querySelector("#SCPresultWeek")
@@ -143,6 +150,8 @@ let primeUSDWeekresult
 let primeUSDMonthresult
 
 //Sia Classic
+const SCCVolume = document.querySelector("#SCCVolumeValue")
+
 const SCCcalcHour = document.querySelector("#SCCresultHour")
 const SCCcalcDay = document.querySelector("#SCCresultDay")
 const SCCcalcWeek = document.querySelector("#SCCresultWeek")
@@ -177,6 +186,8 @@ let sccUSDWeekresult
 let sccUSDMonthresult
 
 //Sia
+const SiaVolume = document.querySelector("#SiaVolumeValue")
+
 const SiacalcHour = document.querySelector("#SiaresultHour")
 const SiacalcDay = document.querySelector("#SiaresultDay")
 const SiacalcWeek = document.querySelector("#SiaresultWeek")
@@ -211,6 +222,8 @@ let siaUSDWeekresult
 let siaUSDMonthresult
 
 //Cash2
+const Cash2Volume = document.querySelector("#Cash2VolumeValue")
+
 const Cash2calcHour = document.querySelector("#CASH2resultHour")
 const Cash2calcDay = document.querySelector("#CASH2resultDay")
 const Cash2calcWeek = document.querySelector("#CASH2resultWeek")
@@ -259,6 +272,7 @@ const calcMonth = document.querySelector("#resultMonth")
 const userHshrt = document.getElementById("hashrate")
 const hashPower = document.getElementById("hashPower")
 
+const rejectRate = document.getElementById("rejectRate")
 const poolFee = document.getElementById("poolFee")
 const elecCost = document.getElementById("elecCost")
 const powerConsumtion = document.getElementById("powerConsumtion")
@@ -296,6 +310,16 @@ let iBepresetPower = 0
 let S11presetPower = 0
 let SC1presetPower = 0
 let StrongUpresetPower = 0
+
+const logoDropdown = document.getElementById("logoDropdown")
+function changePage() {
+    if (logoDropdown.selectedIndex == 0) {
+        window.open("index.html", "_top");
+    } else if(logoDropdown.selectedIndex == 1) {
+        window.open("PoC.html", "_top");
+    }
+    
+}
 
 function BTCSet() {
     var coinAddress = "1DNEmupDWC873fDv4Lpy1xY2us6eYKwXTH"
@@ -449,6 +473,8 @@ fetch(cash2PriceAPI)
         cash2PriceAPIData = myJson
         cash2PriceAPILoad = true
         APILoaded += 1
+        Cash2Volume.innerHTML = Math.round((cash2PriceAPIData.total_volumes[cash2PriceAPIData.total_volumes.length - 1][1]) * 100) / 100
+        Cash2Volume.innerHTML = "$" + Cash2Volume.innerHTML.replace(/\B(?=(\d{3})+(?!\d))/g, ",")
         apiLoadVerify()
     })
     }
@@ -457,6 +483,8 @@ fetch(cash2PriceAPI)
     cash2PriceAPIData = myJson
     cash2PriceAPILoad = true
     APILoaded += 1
+    Cash2Volume.innerHTML = Math.round((cash2PriceAPIData.total_volumes[cash2PriceAPIData.total_volumes.length - 1][1]) * 100) / 100
+    Cash2Volume.innerHTML = "$" + Cash2Volume.innerHTML.replace(/\B(?=(\d{3})+(?!\d))/g, ",")
     apiLoadVerify()
 })
 
@@ -479,6 +507,8 @@ fetch(siaPriceAPI)
         siaPriceAPIData = myJson
         siaPriceAPILoad = true
         APILoaded += 1
+        SiaVolume.innerHTML = Math.round((siaPriceAPIData.total_volumes[siaPriceAPIData.total_volumes.length - 1][1]) * 100) / 100
+        SiaVolume.innerHTML = "$" + SiaVolume.innerHTML.replace(/\B(?=(\d{3})+(?!\d))/g, ",")
         apiLoadVerify()
     })
     }
@@ -487,6 +517,8 @@ fetch(siaPriceAPI)
     siaPriceAPIData = myJson
     siaPriceAPILoad = true
     APILoaded += 1
+    SiaVolume.innerHTML = Math.round((siaPriceAPIData.total_volumes[siaPriceAPIData.total_volumes.length - 1][1]) * 100) / 100
+    SiaVolume.innerHTML = "$" + SiaVolume.innerHTML.replace(/\B(?=(\d{3})+(?!\d))/g, ",")
     apiLoadVerify()
 })
 
@@ -509,6 +541,8 @@ fetch(hyperPriceAPI)
         hyperPriceAPIData = myJson
         hyperPriceAPILoad = true
         APILoaded += 1
+        XSCVolume.innerHTML = Math.round((hyperPriceAPIData.total_volumes[hyperPriceAPIData.total_volumes.length - 1][1]) * 100) / 100
+        XSCVolume.innerHTML = "$" + XSCVolume.innerHTML.replace(/\B(?=(\d{3})+(?!\d))/g, ",")
         apiLoadVerify()
     })
     }
@@ -517,6 +551,8 @@ fetch(hyperPriceAPI)
     hyperPriceAPIData = myJson
     hyperPriceAPILoad = true
     APILoaded += 1
+    XSCVolume.innerHTML = Math.round((hyperPriceAPIData.total_volumes[hyperPriceAPIData.total_volumes.length - 1][1]) * 100) / 100
+    XSCVolume.innerHTML = "$" + XSCVolume.innerHTML.replace(/\B(?=(\d{3})+(?!\d))/g, ",")
     apiLoadVerify()
 })
 
@@ -539,6 +575,8 @@ fetch(primePriceAPI)
         primePriceAPIData = myJson
         primePriceAPILoad = true
         APILoaded += 1
+        SCPVolume.innerHTML = Math.round(primePriceAPIData.total_volumes[primePriceAPIData.total_volumes.length - 1][1] * 100) / 100
+        SCPVolume.innerHTML = "$" + SCPVolume.innerHTML.replace(/\B(?=(\d{3})+(?!\d))/g, ",")
         apiLoadVerify()
     })
     }
@@ -547,8 +585,12 @@ fetch(primePriceAPI)
     primePriceAPIData = myJson
     primePriceAPILoad = true
     APILoaded += 1
+    SCPVolume.innerHTML = Math.round(primePriceAPIData.total_volumes[primePriceAPIData.total_volumes.length - 1][1] * 100) / 100
+    SCPVolume.innerHTML = "$" + SCPVolume.innerHTML.replace(/\B(?=(\d{3})+(?!\d))/g, ",")
     apiLoadVerify()
 })
+
+
 
 let classicPriceAPIData
 fetch(classicPriceAPI)
@@ -569,6 +611,8 @@ fetch(classicPriceAPI)
         classicPriceAPIData = myJson
         classicPriceAPILoad = true
         APILoaded += 1
+        SCCVolume.innerHTML = Math.round((classicPriceAPIData.total_volumes[classicPriceAPIData.total_volumes.length - 1][1]) * 100) / 100
+        SCCVolume.innerHTML = "$" + SCCVolume.innerHTML.replace(/\B(?=(\d{3})+(?!\d))/g, ",")
         apiLoadVerify()
     })
     }
@@ -577,6 +621,8 @@ fetch(classicPriceAPI)
     classicPriceAPIData = myJson
     classicPriceAPILoad = true
     APILoaded += 1
+    SCCVolume.innerHTML = Math.round((classicPriceAPIData.total_volumes[classicPriceAPIData.total_volumes.length - 1][1]) * 100) / 100
+    SCCVolume.innerHTML = "$" + SCCVolume.innerHTML.replace(/\B(?=(\d{3})+(?!\d))/g, ",")
     apiLoadVerify()
 })
 
@@ -589,6 +635,7 @@ function apiLoadVerify() {
 
 function liveHashrate() {
     userHshrt.value = splitInput(userHshrt.value)
+    rejectRate.value = splitInput(rejectRate.value)
     poolFee.value = splitInput(poolFee.value)
     elecCost.value = splitInput(elecCost.value)
     powerConsumtion.value = splitInput(powerConsumtion.value)
@@ -598,6 +645,10 @@ function liveHashrate() {
     }
     else {
         hshrt = userHshrt.value
+    }
+    
+    if (rejectRate.value > 100) {
+        rejectRate.value = 100
     }
     
     if (poolFee.value > 100) {
@@ -639,10 +690,10 @@ function liveHashrate() {
             cash2Price()
         }
     }
-    
     calcProfit()
 }
 
+rejectRate.value = 0
 poolFee.value = 1
 elecCost.value = 0.1
 const randomHshrt = [[815, 1275], [4300, 1350], [550, 500], [3830, 1380], [7000, 2100], [5500, 1600]]
@@ -700,6 +751,8 @@ function miningAPIError() {
         SCPcalcMonth.innerHTML = ""
 }
 
+
+
 function sia(){
         
         try {
@@ -732,8 +785,12 @@ function sia(){
         SiacalcWeek.innerHTML = numberShortener(siaWeekresult)
         SiacalcMonth.innerHTML = numberShortener(siaMonthresult)
 
-function siaReward(difficulty, hashrate, height, period){
-    return (hashrate/(difficulty/siaBlockTime)) * ((300000 - height - ((period/siaBlockTime)/2)) * (period/siaBlockTime));
+    function siaReward(difficulty, hashrate, height, period) {
+        if (diffAdjust) {
+            return (hashrate / ((difficulty + hshrt * siaBlockTime) / siaBlockTime)) * ((300000 - height - ((period / siaBlockTime) / 2)) * (period / siaBlockTime));
+        } else {
+            return (hashrate / (difficulty / siaBlockTime)) * ((300000 - height - ((period / siaBlockTime) / 2)) * (period / siaBlockTime));
+        }
 }
 }
 
@@ -825,7 +882,11 @@ function hyper(){
         XSCcalcMonth.innerHTML = numberShortener(hyperMonthresult)
     
 function hyperReward(difficulty, hashrate, height, period){
-    return (hashrate/(difficulty/hyperBlockTime)) * ((60000 - (height * 0.2) - ((period/hyperBlockTime)/2)) * (period/hyperBlockTime)) * 0.9;
+    if (diffAdjust) {
+        return (hashrate / ((difficulty + hshrt * hyperBlockTime) / hyperBlockTime)) * ((300000 - height - ((period / hyperBlockTime) / 2)) * (period / hyperBlockTime));
+    } else {
+        return (hashrate / (difficulty / hyperBlockTime)) * ((300000 - height - ((period / hyperBlockTime) / 2)) * (period / hyperBlockTime));
+    }
 }
 
     }
@@ -918,7 +979,11 @@ function classic(){
     
 
 function classicReward(difficulty, hashrate, height, period){
-    return (hashrate/(difficulty/classicBlockTime)) * ((300000 - height - ((period/classicBlockTime)/2)) * (period/classicBlockTime));
+    if (diffAdjust) {
+        return (hashrate / ((difficulty + hshrt * classicBlockTime) / classicBlockTime)) * ((300000 - height - ((period / classicBlockTime) / 2)) * (period / classicBlockTime));
+    } else {
+        return (hashrate / (difficulty / classicBlockTime)) * ((300000 - height - ((period / classicBlockTime) / 2)) * (period / classicBlockTime));
+    }
 }
 }
 
@@ -1011,7 +1076,11 @@ function prime(){
     SCPcalcMonth.innerHTML = numberShortener(primeMonthresult)
 
 function primeReward(difficulty, hashrate, height, period){
-    return (hashrate/(difficulty/primeBlockTime)) * ((300000 - height - ((period/primeBlockTime)/2)) * (period/primeBlockTime) * 0.8);
+    if (diffAdjust) {
+        return (hashrate / ((difficulty + hshrt * primeBlockTime) / primeBlockTime)) * ((300000 - height - ((period / primeBlockTime) / 2)) * (period / primeBlockTime));
+    } else {
+        return (hashrate / (difficulty / primeBlockTime)) * ((300000 - height - ((period / primeBlockTime) / 2)) * (period / primeBlockTime));
+    }
 }
 }
 
@@ -1114,9 +1183,12 @@ function getBlockReward(CASH2APIheight)
       return (15000000 - alreadyGeneratedCoins) / 16777216;
 }
 
-function cash2Reward(difficulty, hashrate, height, period){
-    return (hashrate/((CASH2APIDifficulty * 1099511627776)/cash2BlockTime)) * ((getBlockReward(CASH2APIheight + ((period/cash2BlockTime)/2)))  * (period/cash2BlockTime))
-}
+    function cash2Reward(difficulty, hashrate, height, period) {
+        if (diffAdjust) {
+            return (hashrate / (((difficulty * 1099511627776) + hshrt * cash2blocktime) / cash2BlockTime)) * ((getBlockReward(height + ((period / cash2BlockTime) / 2))) * (period / cash2BlockTime))
+        } else {
+            return (hashrate / ((difficulty * 1099511627776) / cash2BlockTime)) * ((getBlockReward(height + ((period / cash2BlockTime) / 2))) * (period / cash2BlockTime))
+        }
 }
 
 function cash2Price() {
@@ -1168,7 +1240,7 @@ function cash2Price() {
 
 
 function calcProfit() {
-    if (poolFee.value >= 0 || elecCost.value >= 0 || powerConsumtion.value >= 0) {
+    if (poolFee.value >= 0 || elecCost.value >= 0 || powerConsumtion.value >= 0 || rejectRate.value >= 0) {
         PowerCostHourResult = (((powerConsumtion.value * 1) / 1000) * elecCost.value) * -1
         PowerCostDayResult = (((powerConsumtion.value * 24) / 1000) * elecCost.value) * -1
         PowerCostWeekResult = ((((powerConsumtion.value * 24) / 1000) * 7) * elecCost.value) * -1
@@ -1181,59 +1253,59 @@ function calcProfit() {
         PowerCostMonth.innerHTML = numberShortener(PowerCostMonthResult)
         
         //HyperSpace
-        XSCresultHourProfit.innerHTML = numberShortener(feeCalc(hyperHourresult))
-        XSCresultDayProfit.innerHTML = numberShortener(feeCalc(hyperDayresult))
-        XSCresultWeekProfit.innerHTML = numberShortener(feeCalc(hyperWeekresult))
-        XSCresultMonthProfit.innerHTML = numberShortener(feeCalc(hyperMonthresult))
+        XSCresultHourProfit.innerHTML = numberShortener(feeCalc(rejectCalc(hyperHourresult)))
+        XSCresultDayProfit.innerHTML = numberShortener(feeCalc(rejectCalc(hyperDayresult)))
+        XSCresultWeekProfit.innerHTML = numberShortener(feeCalc(rejectCalc(hyperWeekresult)))
+        XSCresultMonthProfit.innerHTML = numberShortener(feeCalc(rejectCalc(hyperMonthresult)))
         
-        XSCresultHourProfitUSD.innerHTML = numberShortener(colorProfit(feeCalcUSD(hyperUSDHourresult, 1, 1), XSCresultHourProfitUSD))
-        XSCresultDayProfitUSD.innerHTML = numberShortener(colorProfit(feeCalcUSD(hyperUSDDayresult, 24, 1), XSCresultDayProfitUSD))
-        XSCresultWeekProfitUSD.innerHTML = numberShortener(colorProfit(feeCalcUSD(hyperUSDWeekresult, 24, 7), XSCresultWeekProfitUSD))
-        XSCresultMonthProfitUSD.innerHTML = numberShortener(colorProfit(feeCalcUSD(hyperUSDMonthresult, 24, 30), XSCresultMonthProfitUSD))
+        XSCresultHourProfitUSD.innerHTML = numberShortener(rejectCalc(colorProfit(feeCalcUSD(hyperUSDHourresult, 1, 1), XSCresultHourProfitUSD)))
+        XSCresultDayProfitUSD.innerHTML = numberShortener(rejectCalc(colorProfit(feeCalcUSD(hyperUSDDayresult, 24, 1), XSCresultDayProfitUSD)))
+        XSCresultWeekProfitUSD.innerHTML = numberShortener(rejectCalc(colorProfit(feeCalcUSD(hyperUSDWeekresult, 24, 7), XSCresultWeekProfitUSD)))
+        XSCresultMonthProfitUSD.innerHTML = numberShortener(rejectCalc(colorProfit(feeCalcUSD(hyperUSDMonthresult, 24, 30), XSCresultMonthProfitUSD)))
         
         //SiaPrime
-        SCPresultHourProfit.innerHTML = numberShortener(feeCalc(primeHourresult))
-        SCPresultDayProfit.innerHTML = numberShortener(feeCalc(primeDayresult))
-        SCPresultWeekProfit.innerHTML = numberShortener(feeCalc(primeWeekresult))
-        SCPresultMonthProfit.innerHTML = numberShortener(feeCalc(primeMonthresult))
+        SCPresultHourProfit.innerHTML = numberShortener(feeCalc(rejectCalc(primeHourresult)))
+        SCPresultDayProfit.innerHTML = numberShortener(feeCalc(rejectCalc(primeDayresult)))
+        SCPresultWeekProfit.innerHTML = numberShortener(feeCalc(rejectCalc(primeWeekresult)))
+        SCPresultMonthProfit.innerHTML = numberShortener(feeCalc(rejectCalc(primeMonthresult)))
         
-        SCPresultHourProfitUSD.innerHTML = numberShortener(colorProfit(feeCalcUSD(primeUSDHourresult, 1, 1), SCPresultHourProfitUSD))
-        SCPresultDayProfitUSD.innerHTML = numberShortener(colorProfit(feeCalcUSD(primeUSDDayresult, 24, 1), SCPresultDayProfitUSD))
-        SCPresultWeekProfitUSD.innerHTML = numberShortener(colorProfit(feeCalcUSD(primeUSDWeekresult, 24, 7), SCPresultWeekProfitUSD))
-        SCPresultMonthProfitUSD.innerHTML = numberShortener(colorProfit(feeCalcUSD(primeUSDMonthresult, 24, 30), SCPresultMonthProfitUSD))
+        SCPresultHourProfitUSD.innerHTML = numberShortener(rejectCalc(colorProfit(feeCalcUSD(primeUSDHourresult, 1, 1), SCPresultHourProfitUSD)))
+        SCPresultDayProfitUSD.innerHTML = numberShortener(rejectCalc(colorProfit(feeCalcUSD(primeUSDDayresult, 24, 1), SCPresultDayProfitUSD)))
+        SCPresultWeekProfitUSD.innerHTML = numberShortener(rejectCalc(colorProfit(feeCalcUSD(primeUSDWeekresult, 24, 7), SCPresultWeekProfitUSD)))
+        SCPresultMonthProfitUSD.innerHTML = numberShortener(rejectCalc(colorProfit(feeCalcUSD(primeUSDMonthresult, 24, 30), SCPresultMonthProfitUSD)))
         
         //SiaClassic
-        SCCresultHourProfit.innerHTML = numberShortener(feeCalc(sccHourresult))
-        SCCresultDayProfit.innerHTML = numberShortener(feeCalc(sccDayresult))
-        SCCresultWeekProfit.innerHTML = numberShortener(feeCalc(sccWeekresult))
-        SCCresultMonthProfit.innerHTML = numberShortener(feeCalc(sccMonthresult))
+        SCCresultHourProfit.innerHTML = numberShortener(feeCalc(rejectCalc(sccHourresult)))
+        SCCresultDayProfit.innerHTML = numberShortener(feeCalc(rejectCalc(sccDayresult)))
+        SCCresultWeekProfit.innerHTML = numberShortener(feeCalc(rejectCalc(sccWeekresult)))
+        SCCresultMonthProfit.innerHTML = numberShortener(feeCalc(rejectCalc(sccMonthresult)))
         
-        SCCresultHourProfitUSD.innerHTML = numberShortener(colorProfit(feeCalcUSD(sccUSDHourresult, 1, 1), SCCresultHourProfitUSD))
-        SCCresultDayProfitUSD.innerHTML = numberShortener(colorProfit(feeCalcUSD(sccUSDDayresult, 24, 1), SCCresultDayProfitUSD))
-        SCCresultWeekProfitUSD.innerHTML = numberShortener(colorProfit(feeCalcUSD(sccUSDWeekresult, 24, 7), SCCresultWeekProfitUSD))
-        SCCresultMonthProfitUSD.innerHTML = numberShortener(colorProfit(feeCalcUSD(sccUSDMonthresult, 24, 30), SCCresultMonthProfitUSD))
+        SCCresultHourProfitUSD.innerHTML = numberShortener(rejectCalc(colorProfit(feeCalcUSD(sccUSDHourresult, 1, 1), SCCresultHourProfitUSD)))
+        SCCresultDayProfitUSD.innerHTML = numberShortener(rejectCalc(colorProfit(feeCalcUSD(sccUSDDayresult, 24, 1), SCCresultDayProfitUSD)))
+        SCCresultWeekProfitUSD.innerHTML = numberShortener(rejectCalc(colorProfit(feeCalcUSD(sccUSDWeekresult, 24, 7), SCCresultWeekProfitUSD)))
+        SCCresultMonthProfitUSD.innerHTML = numberShortener(rejectCalc(colorProfit(feeCalcUSD(sccUSDMonthresult, 24, 30), SCCresultMonthProfitUSD)))
         
         //Sia
-        SiaresultHourProfit.innerHTML = numberShortener(feeCalc(siaHourresult))
-        SiaresultDayProfit.innerHTML = numberShortener(feeCalc(siaDayresult))
-        SiaresultWeekProfit.innerHTML = numberShortener(feeCalc(siaWeekresult))
-        SiaresultMonthProfit.innerHTML = numberShortener(feeCalc(siaMonthresult))
+        SiaresultHourProfit.innerHTML = numberShortener(feeCalc(rejectCalc(siaHourresult)))
+        SiaresultDayProfit.innerHTML = numberShortener(feeCalc(rejectCalc(siaDayresult)))
+        SiaresultWeekProfit.innerHTML = numberShortener(feeCalc(rejectCalc(siaWeekresult)))
+        SiaresultMonthProfit.innerHTML = numberShortener(feeCalc(rejectCalc(siaMonthresult)))
         
-        SiaresultHourProfitUSD.innerHTML = numberShortener(colorProfit(feeCalcUSD(siaUSDHourresult, 1, 1), SiaresultHourProfitUSD))
-        SiaresultDayProfitUSD.innerHTML = numberShortener(colorProfit(feeCalcUSD(siaUSDDayresult, 24, 1), SiaresultDayProfitUSD))
-        SiaresultWeekProfitUSD.innerHTML = numberShortener(colorProfit(feeCalcUSD(siaUSDWeekresult, 24, 7), SiaresultWeekProfitUSD))
-        SiaresultMonthProfitUSD.innerHTML = numberShortener(colorProfit(feeCalcUSD(siaUSDMonthresult, 24, 30), SiaresultMonthProfitUSD))
+        SiaresultHourProfitUSD.innerHTML = numberShortener(rejectCalc(colorProfit(feeCalcUSD(siaUSDHourresult, 1, 1), SiaresultHourProfitUSD)))
+        SiaresultDayProfitUSD.innerHTML = numberShortener(rejectCalc(colorProfit(feeCalcUSD(siaUSDDayresult, 24, 1), SiaresultDayProfitUSD)))
+        SiaresultWeekProfitUSD.innerHTML = numberShortener(rejectCalc(colorProfit(feeCalcUSD(siaUSDWeekresult, 24, 7), SiaresultWeekProfitUSD)))
+        SiaresultMonthProfitUSD.innerHTML = numberShortener(rejectCalc(colorProfit(feeCalcUSD(siaUSDMonthresult, 24, 30), SiaresultMonthProfitUSD)))
         
         //Cash2
-        Cash2resultHourProfit.innerHTML = numberShortener(feeCalc(Cash2Hourresult))
-        Cash2resultDayProfit.innerHTML = numberShortener(feeCalc(Cash2Dayresult))
-        Cash2resultWeekProfit.innerHTML = numberShortener(feeCalc(Cash2Weekresult))
-        Cash2resultMonthProfit.innerHTML = numberShortener(feeCalc(Cash2Monthresult))
+        Cash2resultHourProfit.innerHTML = numberShortener(feeCalc(rejectCalc(Cash2Hourresult)))
+        Cash2resultDayProfit.innerHTML = numberShortener(feeCalc(rejectCalc(Cash2Dayresult)))
+        Cash2resultWeekProfit.innerHTML = numberShortener(feeCalc(rejectCalc(Cash2Weekresult)))
+        Cash2resultMonthProfit.innerHTML = numberShortener(feeCalc(rejectCalc(Cash2Monthresult)))
         
-        Cash2resultHourProfitUSD.innerHTML = numberShortener(colorProfit(feeCalcUSD(Cash2USDHourresult, 1, 1), Cash2resultHourProfitUSD))
-        Cash2resultDayProfitUSD.innerHTML = numberShortener(colorProfit(feeCalcUSD(Cash2USDDayresult, 24, 1), Cash2resultDayProfitUSD))
-        Cash2resultWeekProfitUSD.innerHTML = numberShortener(colorProfit(feeCalcUSD(Cash2USDWeekresult, 24, 7), Cash2resultWeekProfitUSD))
-        Cash2resultMonthProfitUSD.innerHTML = numberShortener(colorProfit(feeCalcUSD(Cash2USDMonthresult, 24, 30), Cash2resultMonthProfitUSD))
+        Cash2resultHourProfitUSD.innerHTML = numberShortener(rejectCalc(colorProfit(feeCalcUSD(Cash2USDHourresult, 1, 1), Cash2resultHourProfitUSD)))
+        Cash2resultDayProfitUSD.innerHTML = numberShortener(rejectCalc(colorProfit(feeCalcUSD(Cash2USDDayresult, 24, 1), Cash2resultDayProfitUSD)))
+        Cash2resultWeekProfitUSD.innerHTML = numberShortener(rejectCalc(colorProfit(feeCalcUSD(Cash2USDWeekresult, 24, 7), Cash2resultWeekProfitUSD)))
+        Cash2resultMonthProfitUSD.innerHTML = numberShortener(rejectCalc(colorProfit(feeCalcUSD(Cash2USDMonthresult, 24, 30), Cash2resultMonthProfitUSD)))
     }
 }
 
@@ -1414,6 +1486,14 @@ function numberShortener(num) {
         }
         
         return tempNum
+}
+
+function rejectCalc(coin) {
+    if(rejectRate.value > 0) {
+        return coin - (coin * (rejectRate.value / 100))
+    } else {
+        return coin
+    }
 }
 
 function feeCalc(coin) {
