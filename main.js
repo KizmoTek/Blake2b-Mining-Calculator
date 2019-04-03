@@ -883,9 +883,9 @@ function hyper(){
     
 function hyperReward(difficulty, hashrate, height, period){
     if (diffAdjust) {
-        return (hashrate / ((difficulty + hshrt * hyperBlockTime) / hyperBlockTime)) * ((300000 - height - ((period / hyperBlockTime) / 2)) * (period / hyperBlockTime));
+        return (hashrate / ((difficulty + hshrt * hyperBlockTime) / hyperBlockTime)) * ((60000 - (height * 0.2) - ((period / hyperBlockTime) / 2)) * (period / hyperBlockTime)) * 0.9;
     } else {
-        return (hashrate / (difficulty / hyperBlockTime)) * ((300000 - height - ((period / hyperBlockTime) / 2)) * (period / hyperBlockTime));
+        return (hashrate / (difficulty / hyperBlockTime)) * ((60000 - (height * 0.2) - ((period / hyperBlockTime) / 2)) * (period / hyperBlockTime)) * 0.9;
     }
 }
 
@@ -1077,9 +1077,9 @@ function prime(){
 
 function primeReward(difficulty, hashrate, height, period){
     if (diffAdjust) {
-        return (hashrate / ((difficulty + hshrt * primeBlockTime) / primeBlockTime)) * ((300000 - height - ((period / primeBlockTime) / 2)) * (period / primeBlockTime));
+        return (hashrate / ((difficulty + hshrt * primeBlockTime) / primeBlockTime)) * ((300000 - height - ((period / primeBlockTime) / 2)) * (period / primeBlockTime) * 0.8);
     } else {
-        return (hashrate / (difficulty / primeBlockTime)) * ((300000 - height - ((period / primeBlockTime) / 2)) * (period / primeBlockTime));
+        return (hashrate / (difficulty / primeBlockTime)) * ((300000 - height - ((period / primeBlockTime) / 2)) * (period / primeBlockTime) * 0.8);
     }
 }
 }
