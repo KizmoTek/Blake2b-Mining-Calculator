@@ -1139,56 +1139,55 @@ function primePriceError() {
         SCPcalcMonthUSD.innerHTML = ""
 }
 
-function cash2(){
-    
+function cash2() {
+
     try {
         CASH2APIDifficulty = cash2APIData.difficulty
-    } catch(e) {
+    } catch (e) {
         try {
             CASH2APIDifficulty = cash2APIData.difficulty
-        } catch(error) {
+        } catch (error) {
             console.log(error)
         }
     }
-    
+
     try {
         CASH2APIheight = cash2APIData.height
-    } catch(e) {
+    } catch (e) {
         try {
             CASH2APIheight = cash2APIData.height
-        } catch(error) {
+        } catch (error) {
             console.log(error)
         }
     }
-    
+
     Cash2Hourresult = cash2Reward(CASH2APIDifficulty, hshrt, CASH2APIheight, hour)
     Cash2Dayresult = cash2Reward(CASH2APIDifficulty, hshrt, CASH2APIheight, day)
     Cash2Weekresult = cash2Reward(CASH2APIDifficulty, hshrt, CASH2APIheight, week)
     Cash2Monthresult = cash2Reward(CASH2APIDifficulty, hshrt, CASH2APIheight, month)
-    
+
     Cash2calcHour.innerHTML = numberShortener(Cash2Hourresult)
     Cash2calcDay.innerHTML = numberShortener(Cash2Dayresult)
     Cash2calcWeek.innerHTML = numberShortener(Cash2Weekresult)
     Cash2calcMonth.innerHTML = numberShortener(Cash2Monthresult)
-    
-function getBlockReward(CASH2APIheight)
-{
-      var alreadyGeneratedCoins = 0;
 
-      for (var i = 0; i < CASH2APIheight; i++)
-      {
-          alreadyGeneratedCoins += (15000000 - alreadyGeneratedCoins) / 16777216;
-      }
+    function getBlockReward(CASH2APIheight) {
+        var alreadyGeneratedCoins = 0;
 
-      return (15000000 - alreadyGeneratedCoins) / 16777216;
-}
+        for (var i = 0; i < CASH2APIheight; i++) {
+            alreadyGeneratedCoins += (15000000 - alreadyGeneratedCoins) / 16777216;
+        }
+
+        return (15000000 - alreadyGeneratedCoins) / 16777216;
+    }
 
     function cash2Reward(difficulty, hashrate, height, period) {
         if (diffAdjust) {
-            return (hashrate / (((difficulty * 1099511627776) + hshrt * cash2blocktime) / cash2BlockTime)) * ((getBlockReward(height + ((period / cash2BlockTime) / 2))) * (period / cash2BlockTime))
+            return (hashrate / (((difficulty * 1099511627776) + hshrt * cash2BlockTime) / cash2BlockTime)) * ((getBlockReward(height + ((period / cash2BlockTime) / 2))) * (period / cash2BlockTime))
         } else {
             return (hashrate / ((difficulty * 1099511627776) / cash2BlockTime)) * ((getBlockReward(height + ((period / cash2BlockTime) / 2))) * (period / cash2BlockTime))
         }
+    }
 }
 
 function cash2Price() {
