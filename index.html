@@ -31,6 +31,28 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <!-- Preview Meta Tags -->
+    <meta name="description" content="Calculate the profits for coins on the Blake2b algorithm.">
+    
+    <!-- Google / Search Engine Tags -->
+    <meta itemprop="name" content="Blake2b Mining Calculator">
+    <meta itemprop="description" content="Calculate the profits for coins on the Blake2b algorithm.">
+    <meta itemprop="image" content="">
+    
+    <!-- Facebook Meta Tags -->
+    <meta property="og:url" content="https://www.blakemining.com/">
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="Blake2b Mining Calculator">
+    <meta property="og:description" content="Calculate the profits for coins on the Blake2b algorithm.">
+    <meta property="og:image" content="">
+    
+    <!-- Twitter Meta Tags -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Blake2b Mining Calculator">
+    <meta name="twitter:description" content="Calculate the profits for coins on the Blake2b algorithm.">
+    <meta name="twitter:image" content="">
+    <!-- Preview Meta Tags end -->
+    
     <meta charset="UTF-8">
     <link rel="shortcut icon" href="Images/Calculator Icon.png" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -41,7 +63,17 @@
 </head>
 <body onload="setTimeout(liveHashrate, 4000)">
     <div class="TopLine">
-        <a href="index.html"><h1 class="logoName">Blake2b Mining Calculator</h1></a>
+        <div class="topFlex">
+            <a href="index.html"><h1 class="logoName">Blake2b Mining Calculator</h1></a>
+        <!--    <label class="switch2">
+                <input type="checkbox" id="diffToggleSwitch2" checked>
+                <span class="slider2 round2"></span>
+            </label> -->
+        </div>
+       <!-- <select id="logoDropdown" onInput="changePage()">
+                  <option value="Blake2b" selected="selected">Blake2b Mining Calculator</option>
+                  <option value="PoC">PoC Mining Calculator</option>
+        </select> -->
     </div>
     <div class="main">
     <div class="container">
@@ -120,7 +152,7 @@
                     
                     
             <div id="inputArea">
-                <h1>Enter Your Hashrate</h1>
+                <h1>Hashrate</h1>
                 <input type="text" id="hashrate" onInput="liveHashrate()" value="0">
                 
 
@@ -129,15 +161,32 @@
                   <option value="Giga">Gh/s</option>
                   <option value="Tera">Th/s</option>
                 </select>
+                <span class="diffAdd">
+                    <h2>Add to difficulty</h2>
+                    <label class="switch">
+                        <input type="checkbox" id="diffToggleSwitch" onInput="calcDiff()" checked>
+                        <span class="slider round"></span>
+                        <div class="tooltip5">
+                            <img src="Images/info.png" class="infoImg" style="position: absolute; left: 26px; bottom: 0px;">
+                            <span class="tooltiptext5">If enabled, your hashrate is added to the current difficulty to give a better estimate.</span>
+                        </div>
+                    </label>
+                </span>
+                <h1>Reject Rate (%)</h1>
+                <input type ="text" id="rejectRate" onInput="liveHashrate()">
                 
                 <h1>Pool Fee (%)</h1>
                 <input type ="text" id="poolFee" onInput="liveHashrate()">
                 
-                <h1>Electricity Cost per KWh ($)</h1>
+                <h1>Power Cost (USD $/kW·h)</h1>
                 <input type ="text" id="elecCost" onInput="liveHashrate()">
                 
-                <h1>Power consumption (w)</h1>
+                <h1>Power (W)</h1>
                 <input type ="text" id="powerConsumtion" onInput="liveHashrate()">
+                <br>
+                <input type="button" class="customPresetButton" onClick="saveData()" value="Save Custom Preset"/>
+                <br>
+                <input type="button" class="customPresetButton2" onClick="deleteData()" value="Delete Custom Preset"/>
             </div>
             <div class="totalResult">
                 <div class="PowerResult">
@@ -155,11 +204,14 @@
                 <div class="Result">
                     <table class="resultTable">
                          <tr>
-                            <th class="tableCoin" colspan="5">
+                            <th class="tableCoin" colspan="2" style="padding:0px;">
                                 <img src="Images/hyperLogo.png" class="coinLogo">
                                 <a href="https://hspace.app/" target="_blank" class="coinName" id="hyperName">Hyperspace</a>
                             </th>
-                            <th class="tableCoinPool">
+                            <th class="tableVolume" colspan="3">
+                                <a href="https://www.coingecko.com/en/coins/hyperspace" target="_blank" class="" id="coinVolume">24 hr Volume: <span id="XSCVolumeValue">$0</span></a>
+                            </th>
+                            <th class="tableCoinPool" style="padding:0px;">
                                 <a href="https://miningpoolstats.stream/spacecash" target="_blank" class="coinPoolList">Pools</a>
                             </th>
                         </tr>
@@ -204,11 +256,14 @@
                         </tr>
                         
                          <tr>
-                            <th class="tableCoin" colspan="5">
+                            <th class="tableCoin" colspan="2" style="padding:0px;">
                                 <img src="Images/primeLogo.png" class="coinLogo">
                                 <a href="https://siaprime.net/" target="_blank" class="coinName" id="primeName">SiaPrime</a>
                             </th>
-                            <th class="tableCoinPool">
+                            <th class="tableVolume" colspan="3">
+                                <a href="https://www.coingecko.com/en/coins/siaprime-coin" target="_blank" class="" id="coinVolume">24 hr Volume: <span id="SCPVolumeValue">$0</span></a>
+                            </th>
+                            <th class="tableCoinPool" style="padding:0px;">
                                 <a href="https://miningpoolstats.stream/siaprime" target="_blank" class="coinPoolList">Pools</a>
                             </th>
                         </tr>
@@ -253,11 +308,14 @@
                         
                         
                         <tr>
-                            <th class="tableCoin" colspan="5">
+                            <th class="tableCoin" colspan="2" style="padding:0px;">
                                 <img src="Images/classicLogo.png" class="classicLogo">
                                 <a href="https://siaclassic.org/" target="_blank" class="coinName">SiaClassic</a>
                             </th>
-                            <th class="tableCoinPool">
+                            <th class="tableVolume" colspan="3">
+                                <a href="https://www.coingecko.com/en/coins/siaclassic" target="_blank" class="" id="coinVolume">24 hr Volume: <span id="SCCVolumeValue">$0</span></a>
+                            </th>
+                            <th class="tableCoinPool" style="padding:0px;">
                                 <a href="https://miningpoolstats.stream/siaclassic" target="_blank" class="coinPoolList">Pools</a>
                             </th>
                         </tr>
@@ -300,7 +358,7 @@
                             <td id="SCCresultMonthProfitUSD" class="bold">0.00</td>
                         </tr>
                         
-                        <th class="tableCoin" colspan="5">
+                        <th class="tableCoin" colspan="2" style="padding:0px;">
                                 <img src="Images/cash2.png" class="Cash2Logo">
                                 <a href="https://cash2.org/" target="_blank" class="coinName" id="cash2Name">Cash2</a>
                                 <div class="tooltip4">
@@ -308,7 +366,10 @@
                                     <span class="tooltiptext4">To accurately calculate Cash2 profitability, input your hashrate recorded by the Cash2 pool.</span>
                                 </div>
                             </th>
-                            <th class="tableCoinPool">
+                            <th class="tableVolume" colspan="3">
+                                <a href="https://www.coingecko.com/en/coins/cash2" target="_blank" class="" id="coinVolume">24 hr Volume: <span id="Cash2VolumeValue">$0</span></a>
+                            </th>
+                            <th class="tableCoinPool" style="padding:0px;">
                                 <a href="https://cash2.org/#miningInformation" target="_blank" class="coinPoolList">Pools</a>
                             </th>
 
@@ -357,7 +418,7 @@
                 <div id="resultSia">
                     <table class="resultTable">
                         <tr>
-                            <th class="tableCoin" colspan="5">
+                            <th class="tableCoin" colspan="2" style="padding:0px;">
                                 <img src="Images/siaLogo.png" class="coinLogo">
                                 <a href="https://www.sia.tech/" target="_blank" class="coinName">Sia</a>
                                 <div class="tooltip">
@@ -365,7 +426,10 @@
                                     <span class="tooltiptext">Keep in mind that only Obelisk SC1's are able to mine Sia.</span>
                                 </div>
                             </th>
-                            <th class="tableCoinPool">
+                            <th class="tableVolume" colspan="3">
+                                <a href="https://www.coingecko.com/en/coins/siacoin" target="_blank" class="" id="coinVolume">24 hr Volume: <span id="SiaVolumeValue">$0</span></a>
+                            </th>
+                            <th class="tableCoinPool" style="padding:0px;">
                                 <a href="https://miningpoolstats.stream/siacoin" target="_blank" class="coinPoolList">Pools</a>
                             </th>
     

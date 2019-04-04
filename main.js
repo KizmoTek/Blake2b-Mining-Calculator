@@ -25,8 +25,6 @@
  */
 
 
-
-
 const siaBlockTime = 600; // all time done in seconds
 const hyperBlockTime = 600;
 const primeBlockTime = 600;
@@ -61,7 +59,8 @@ var classicPriceAPILoad = false
 const cash2PriceAPI = "https://api.coingecko.com/api/v3/coins/cash2/market_chart?vs_currency=usd&days=1"
 var cash2PriceAPILoad = false
 
-var diffAdjust = false // Toggles adjusting difficulty for added hashrate
+let diffToggle = document.getElementById("diffToggleSwitch")
+var diffAdjust = true // Toggles adjusting difficulty for added hashrate
 let hshrt = 0
 
 const greenColor = "#30fa30"
@@ -698,8 +697,27 @@ poolFee.value = 1
 elecCost.value = 0.1
 const randomHshrt = [[815, 1275], [4300, 1350], [550, 500], [3830, 1380], [7000, 2100], [5500, 1600]]
 const randomizer = randomHshrt[Math.floor(Math.random()*randomHshrt.length)]
-userHshrt.value = randomizer[0]
-powerConsumtion.value = randomizer[1]
+if (localStorage.getItem('mainData') == null) {
+    userHshrt.value = randomizer[0]
+    powerConsumtion.value = randomizer[1]
+} else {
+    var data = localStorage.getItem('mainData')
+    var newData = JSON.parse(data)
+    console.log(newData.DifficultyAdjust)
+    userHshrt.value = newData.Hashrate
+    hashPower.value = newData.HashPower
+    diffToggle.checked = newData.DifficultyAdjust
+    if (diffToggle.checked == true) {
+        diffAdjust = true
+    } else {
+        diffAdjust = false
+    }
+    rejectRate.value = newData.RejectRate
+    poolFee.value = newData.PoolFee
+    elecCost.value = newData.ElectricityCost
+    powerConsumtion.value = newData.PowerConsumption
+}
+    
 
 
 function splitInput(number) {
@@ -712,6 +730,16 @@ function splitInput(number) {
         return tempHshrt.replace(/[^1234567890.]|\-/g, "")
     }
     return number.replace(/[^1234567890.]|\-/g, "")
+}
+
+function calcDiff() {
+    if (diffToggle.checked) {
+        diffAdjust = true
+        liveHashrate()
+    } else {
+        diffAdjust = false
+        liveHashrate()
+    }
 }
 
 function miningAPIError() {
@@ -1511,4 +1539,14 @@ function colorProfit(coin, coinHTML) {
     }
     
     return coin
+}
+
+function saveData() {
+    var data = {Hashrate: userHshrt.value, HashPower: hashPower.value, DifficultyAdjust: diffToggle.checked, RejectRate: rejectRate.value, PoolFee: poolFee.value, ElectricityCost: elecCost.value, PowerConsumption: powerConsumtion.value}
+    var strData = JSON.stringify(data)
+    localStorage.setItem('mainData', strData);
+}
+
+function deleteData() {
+    localStorage.removeItem('mainData');
 }
