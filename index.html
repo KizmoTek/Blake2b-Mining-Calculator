@@ -153,11 +153,11 @@
                     
             <div id="inputArea">
                 <h1>Hashrate</h1>
-                <input type="text" id="hashrate" onInput="liveHashrate()" value="0">
+                <input type="text" id="hashrate" onInput="liveHashrate(); clearPreset();" value="0">
                 
 
                 
-                <select id="hashPower" onInput="liveHashrate()">
+                <select id="hashPower" onInput="liveHashrate(); clearPreset();">
                   <option value="Giga">Gh/s</option>
                   <option value="Tera">Th/s</option>
                 </select>
@@ -176,13 +176,13 @@
                 <input type ="text" id="rejectRate" onInput="liveHashrate()">
                 
                 <h1>Pool Fee (%)</h1>
-                <input type ="text" id="poolFee" onInput="liveHashrate()">
+                <input type ="text" id="poolFee" onInput="liveHashrate();">
                 
                 <h1>Power Cost (USD $/kW·h)</h1>
-                <input type ="text" id="elecCost" onInput="liveHashrate()">
+                <input type ="text" id="elecCost" onInput="liveHashrate();">
                 
                 <h1>Power (W)</h1>
-                <input type ="text" id="powerConsumtion" onInput="liveHashrate()">
+                <input type ="text" id="powerConsumtion" onInput="liveHashrate(); clearPreset();">
                 <br>
                 <input type="button" class="customPresetButton" onClick="saveData()" value="Save Custom Preset"/>
                 <br>

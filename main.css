@@ -956,13 +956,15 @@
                 -moz-user-select: none;     /* Firefox all */
                 -ms-user-select: none;      /* IE 10+ */
                 user-select: none;          /* Likely future */
+                transition: transform 0.2s;
+                box-shadow: 2px 4px 6px #888888;
         }
         .customPresetButton:hover {
         	background-color:#757575;
+        	transform: scale(1.1);
         }
         .customPresetButton:active {
-        	position:relative;
-        	top:1px;
+        	transform: scale(1);
         }
         
         /* Delete Preset Button */
@@ -987,13 +989,15 @@
                 -moz-user-select: none;     /* Firefox all */
                 -ms-user-select: none;      /* IE 10+ */
                 user-select: none;          /* Likely future */
+                transition: transform 0.2s;
+                box-shadow: 2px 4px 6px #888888;
         }
         .customPresetButton2:hover {
         	background-color:#757575;
+        	transform: scale(1.1);
         }
         .customPresetButton2:active {
-        	position:relative;
-        	top:1px;
+        	transform: scale(1);
         }
 }
 
@@ -1841,13 +1845,15 @@
                 -moz-user-select: none;     /* Firefox all */
                 -ms-user-select: none;      /* IE 10+ */
                 user-select: none;          /* Likely future */
+                transition: transform 0.2s;
+                box-shadow: 2px 4px 6px #888888;
         }
         .customPresetButton:hover {
         	background-color:#757575;
+        	transform: scale(1.1);
         }
         .customPresetButton:active {
-        	position:relative;
-        	top:1px;
+        	transform: scale(1);
         }
         
         /* Delete Preset Button */
@@ -1872,13 +1878,15 @@
                 -moz-user-select: none;     /* Firefox all */
                 -ms-user-select: none;      /* IE 10+ */
                 user-select: none;          /* Likely future */
+                transition: transform 0.2s;
+                box-shadow: 2px 4px 6px #888888;
         }
         .customPresetButton2:hover {
         	background-color:#757575;
+        	transform: scale(1.1);
         }
         .customPresetButton2:active {
-        	position:relative;
-        	top:1px;
+        	transform: scale(1);
         }
 }
 
@@ -2698,13 +2706,15 @@
                 -moz-user-select: none;     /* Firefox all */
                 -ms-user-select: none;      /* IE 10+ */
                 user-select: none;          /* Likely future */
+                transition: transform 0.2s;
+                box-shadow: 2px 4px 6px #888888;
         }
         .customPresetButton:hover {
         	background-color:#757575;
+        	transform: scale(1.1);
         }
         .customPresetButton:active {
-        	position:relative;
-        	top:1px;
+        	transform: scale(1);
         }
         
         /* Delete Preset Button */
@@ -2729,13 +2739,15 @@
                 -moz-user-select: none;     /* Firefox all */
                 -ms-user-select: none;      /* IE 10+ */
                 user-select: none;          /* Likely future */
+                transition: transform 0.2s;
+                box-shadow: 2px 4px 6px #888888;
         }
         .customPresetButton2:hover {
         	background-color:#757575;
+        	transform: scale(1.1);
         }
         .customPresetButton2:active {
-        	position:relative;
-        	top:1px;
+        	transform: scale(1);
         }
 }
 
@@ -3521,13 +3533,15 @@
                 -moz-user-select: none;     /* Firefox all */
                 -ms-user-select: none;      /* IE 10+ */
                 user-select: none;          /* Likely future */
+                transition: transform 0.2s;
+                box-shadow: 2px 4px 6px #888888;
         }
         .customPresetButton:hover {
         	background-color:#757575;
+        	transform: scale(1.1);
         }
         .customPresetButton:active {
-        	position:relative;
-        	top:1px;
+        	transform: scale(1);
         }
         
         /* Delete Preset Button */
@@ -3551,14 +3565,16 @@
         	-webkit-user-select: none;  /* Chrome all / Safari all */
                 -moz-user-select: none;     /* Firefox all */
                 -ms-user-select: none;      /* IE 10+ */
-                user-select: none;          /* Likely future */  
+                user-select: none;          /* Likely future */
+                transition: transform 0.2s;
+                box-shadow: 2px 4px 6px #888888;
         }
         .customPresetButton2:hover {
         	background-color:#757575;
+        	transform: scale(1.1);
         }
         .customPresetButton2:active {
-        	position:relative;
-        	top:1px;
+        	transform: scale(1);
         }
 
 }

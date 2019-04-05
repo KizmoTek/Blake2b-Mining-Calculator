@@ -53,11 +53,17 @@ var siaPriceAPILoad = false
 const primePriceAPI = "https://api.coingecko.com/api/v3/coins/siaprime-coin/market_chart?vs_currency=usd&days=1"
 var primePriceAPILoad = false
 
+const CBprimePriceAPI = "https://api.crypto-bridge.org/api/v1/ticker/BTC_SCP"
+var CBprimePriceAPILoad = false
+
 const classicPriceAPI = "https://api.coingecko.com/api/v3/coins/siaclassic/market_chart?vs_currency=usd&days=1"
 var classicPriceAPILoad = false
 
 const cash2PriceAPI = "https://api.coingecko.com/api/v3/coins/cash2/market_chart?vs_currency=usd&days=1"
 var cash2PriceAPILoad = false
+
+const btcPriceAPI = "https://api.coingecko.com/api/v3/coins/bitcoin/market_chart?vs_currency=usd&days=1"
+var btcPriceAPILoad = false
 
 let diffToggle = document.getElementById("diffToggleSwitch")
 var diffAdjust = true // Toggles adjusting difficulty for added hashrate
@@ -589,6 +595,36 @@ fetch(primePriceAPI)
     apiLoadVerify()
 })
 
+let CBprimePriceAPIData
+fetch(CBprimePriceAPI)
+    .then(function(response) {
+    if (response.ok == true) {
+        return response.json();
+    } else {
+        fetch(CBprimePriceAPI)
+    .then(function(response) {
+    if (response.ok == true) {
+        return response.json();
+    } else {
+        alert("Error with loading SiaPrime API from Coingecko.")
+        CBprimePriceAPILoad = false
+    }
+    })
+    .then(function(myJson){
+        CBprimePriceAPIData = myJson
+        CBprimePriceAPILoad = true
+        APILoaded += 1
+        apiLoadVerify()
+    })
+    }
+})
+.then(function(myJson){
+    CBprimePriceAPIData = myJson
+    CBprimePriceAPILoad = true
+    APILoaded += 1
+    apiLoadVerify()
+})
+
 
 
 let classicPriceAPIData
@@ -625,8 +661,38 @@ fetch(classicPriceAPI)
     apiLoadVerify()
 })
 
+let btcPriceAPIData
+fetch(btcPriceAPI)
+    .then(function(response) {
+    if (response.ok == true) {
+        return response.json();
+    } else {
+        fetch(btcPriceAPI)
+    .then(function(response) {
+    if (response.ok == true) {
+        return response.json();
+    } else {
+        btcPriceAPIData = false
+        alert("Error with loading Bitcoin API from Coingecko.")
+    }
+    })
+    .then(function(myJson){
+        btcPriceAPIData = myJson
+        btcPriceAPILoad = true
+        APILoaded += 1
+        apiLoadVerify()
+    })
+    }
+})
+.then(function(myJson){
+    btcPriceAPIData = myJson
+    btcPriceAPILoad = true
+    APILoaded += 1
+    apiLoadVerify()
+})
+
 function apiLoadVerify() {
-    if(APILoaded >= 7) {
+    if(APILoaded >= 9) {
         console.log(APILoaded + " API's loaded")
         liveHashrate()
     }
@@ -689,17 +755,45 @@ function liveHashrate() {
             cash2Price()
         }
     }
+    
+    
+    
     calcProfit()
+}
+
+function clearPreset() {
+    A3.value = 0
+    A3preset = 0
+    
+    Baik.value = 0
+    Baikpreset = 0
+    
+    B52.value = 0
+    B52presetPower = 0
+    
+    iBe.value = 0
+    iBepreset = 0
+    
+    S11.value = 0
+    S11preset = 0
+    
+    StrongU.value = 0
+    StrongUpreset = 0
+    
+    SC1.value = 0
+    SC1preset = 0
 }
 
 rejectRate.value = 0
 poolFee.value = 1
 elecCost.value = 0.1
-const randomHshrt = [[815, 1275], [4300, 1350], [550, 500], [3830, 1380], [7000, 2100], [5500, 1600]]
-const randomizer = randomHshrt[Math.floor(Math.random()*randomHshrt.length)]
+//const randomHshrt = [[815, 1275], [4300, 1350], [550, 500], [3830, 1380], [7000, 2100], [5500, 1600]]
+//const randomizer = randomHshrt[Math.floor(Math.random()*randomHshrt.length)]
 if (localStorage.getItem('mainData') == null) {
-    userHshrt.value = randomizer[0]
-    powerConsumtion.value = randomizer[1]
+    //userHshrt.value = randomizer[0]
+    //powerConsumtion.value = randomizer[1]
+    S11.value = 1
+    presetUpdate()
 } else {
     var data = localStorage.getItem('mainData')
     var newData = JSON.parse(data)
@@ -716,6 +810,13 @@ if (localStorage.getItem('mainData') == null) {
     poolFee.value = newData.PoolFee
     elecCost.value = newData.ElectricityCost
     powerConsumtion.value = newData.PowerConsumption
+    A3.value = newData.A3
+    Baik.value = newData.Baik
+    B52.value = newData.B52
+    iBe.value = newData.iBe
+    S11.value = newData.S11
+    StrongU.value = newData.StrongU
+    SC1.value = newData.SC1
 }
     
 
@@ -1115,40 +1216,48 @@ function primeReward(difficulty, hashrate, height, period){
 function primePrice() {
         
         try {
-            primeUSDHourresult = primeHourresult * primePriceAPIData.prices[primePriceAPIData.prices.length - 1][1]
+            //primeUSDHourresult = primeHourresult * primePriceAPIData.prices[primePriceAPIData.prices.length - 1][1]
+            primeUSDHourresult = primeHourresult * ((1 / CBprimePriceAPIData.last) * btcPriceAPIData.prices[btcPriceAPIData.prices.length - 1][1])
         } catch(e) {
             try {
-                primeUSDHourresult = primeHourresult * primePriceAPIData.prices[primePriceAPIData.prices.length - 1][1]
+                //primeUSDHourresult = primeHourresult * primePriceAPIData.prices[primePriceAPIData.prices.length - 1][1]
+                primeUSDHourresult = primeHourresult * ((1 / CBprimePriceAPIData.last) * btcPriceAPIData.prices[btcPriceAPIData.prices.length - 1][1])
             } catch(error) {
                 console.log(error)
             }
         }
         
         try {
-            primeUSDDayresult = primeDayresult * primePriceAPIData.prices[primePriceAPIData.prices.length - 1][1]
+            //primeUSDDayresult = primeDayresult * primePriceAPIData.prices[primePriceAPIData.prices.length - 1][1]
+            primeUSDDayresult = primeDayresult * ((1 / CBprimePriceAPIData.last) * btcPriceAPIData.prices[btcPriceAPIData.prices.length - 1][1])
         } catch(e) {
             try {
-                primeUSDDayresult = primeDayresult * primePriceAPIData.prices[primePriceAPIData.prices.length - 1][1]
+                //primeUSDDayresult = primeDayresult * primePriceAPIData.prices[primePriceAPIData.prices.length - 1][1]
+                primeUSDDayresult = primeDayresult * ((1 / CBprimePriceAPIData.last) * btcPriceAPIData.prices[btcPriceAPIData.prices.length - 1][1])
             } catch(error) {
                 console.log(error)
             }
         }
         
         try {
-            primeUSDWeekresult = primeWeekresult * primePriceAPIData.prices[primePriceAPIData.prices.length - 1][1]
+            //primeUSDWeekresult = primeWeekresult * primePriceAPIData.prices[primePriceAPIData.prices.length - 1][1]
+            primeUSDWeekresult = primeWeekresult * ((1 / CBprimePriceAPIData.last) * btcPriceAPIData.prices[btcPriceAPIData.prices.length - 1][1])
         } catch(e) {
             try {
-                primeUSDWeekresult = primeWeekresult * primePriceAPIData.prices[primePriceAPIData.prices.length - 1][1]
+                //primeUSDWeekresult = primeWeekresult * primePriceAPIData.prices[primePriceAPIData.prices.length - 1][1]
+                primeUSDWeekresult = primeWeekresult * ((1 / CBprimePriceAPIData.last) * btcPriceAPIData.prices[btcPriceAPIData.prices.length - 1][1])
             } catch(error) {
                 console.log(error)
             }
         }
         
         try {
-            primeUSDMonthresult = primeMonthresult * primePriceAPIData.prices[primePriceAPIData.prices.length - 1][1]
+            //primeUSDMonthresult = primeMonthresult * primePriceAPIData.prices[primePriceAPIData.prices.length - 1][1]
+            primeUSDMonthresult = primeMonthresult * ((1 / CBprimePriceAPIData.last) * btcPriceAPIData.prices[btcPriceAPIData.prices.length - 1][1])
         } catch(e) {
             try {
-                primeUSDMonthresult = primeMonthresult * primePriceAPIData.prices[primePriceAPIData.prices.length - 1][1]
+                //primeUSDMonthresult = primeMonthresult * primePriceAPIData.prices[primePriceAPIData.prices.length - 1][1]
+                primeUSDMonthresult = primeMonthresult * ((1 / CBprimePriceAPIData.last) * btcPriceAPIData.prices[btcPriceAPIData.prices.length - 1][1])
             } catch(error) {
                 console.log(error)
             }
@@ -1542,7 +1651,7 @@ function colorProfit(coin, coinHTML) {
 }
 
 function saveData() {
-    var data = {Hashrate: userHshrt.value, HashPower: hashPower.value, DifficultyAdjust: diffToggle.checked, RejectRate: rejectRate.value, PoolFee: poolFee.value, ElectricityCost: elecCost.value, PowerConsumption: powerConsumtion.value}
+    var data = {Hashrate: userHshrt.value, HashPower: hashPower.value, DifficultyAdjust: diffToggle.checked, RejectRate: rejectRate.value, PoolFee: poolFee.value, ElectricityCost: elecCost.value, PowerConsumption: powerConsumtion.value, A3: A3.value, Baik: Baik.value, B52: B52.value, iBe: iBe.value, S11: S11.value, StrongU: StrongU.value, SC1: SC1.value}
     var strData = JSON.stringify(data)
     localStorage.setItem('mainData', strData);
 }
