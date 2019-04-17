@@ -65,13 +65,15 @@
     <div class="TopLine">
         <div class="topFlex">
             <a href="index.html"><h1 class="logoName">Blake2b Mining Calculator</h1></a>
-        <!--    <label class="switch2">
-                <input type="checkbox" id="diffToggleSwitch2" checked>
-                <span class="slider2 round2"></span>
-            </label> -->
+            <label class="switch2">
+                        <input type="checkbox" id="diffToggleSwitch2" onInput=" ChangeTheme()">
+                        <span class="slider2 round2"></span>
+                        
+                    </label>
         </div>
-       <!-- <select id="logoDropdown" onInput="changePage()">
+        <!-- <select id="logoDropdown" onInput="changePage()">
                   <option value="Blake2b" selected="selected">Blake2b Mining Calculator</option>
+                  <option value="Grin">Grin Mining Calculator</option>
                   <option value="PoC">PoC Mining Calculator</option>
         </select> -->
     </div>
@@ -139,7 +141,7 @@
                                 <th class="presetMiners">
                                     Obelisk SC1
                                     <div class="tooltip2">
-                                        <img src="Images/info.png" class="infoImg2">
+                                        <img src="Images/info.png" class="infoImg2 tooltipJS">
                                     <span class="tooltiptext2">The Obelisk SC1 is the only miner that can mine Sia.</span>
                                 </div>
                                 </th>
@@ -153,7 +155,7 @@
                     
             <div id="inputArea">
                 <h1>Hashrate</h1>
-                <input type="text" id="hashrate" onInput="liveHashrate(); clearPreset();" value="0">
+                <input type="text" id="hashrate" class="inputThemeJS" onInput="liveHashrate(); clearPreset();" value="0">
                 
 
                 
@@ -167,22 +169,22 @@
                         <input type="checkbox" id="diffToggleSwitch" onInput="calcDiff()" checked>
                         <span class="slider round"></span>
                         <div class="tooltip5">
-                            <img src="Images/info.png" class="infoImg" style="position: absolute; left: 26px; bottom: 0px;">
+                            <img src="Images/info.png" class="infoImg tooltipJS" style="position: absolute; left: 26px; bottom: 0px;">
                             <span class="tooltiptext5">If enabled, your hashrate is added to the current difficulty to give a better estimate.</span>
                         </div>
                     </label>
                 </span>
                 <h1>Reject Rate (%)</h1>
-                <input type ="text" id="rejectRate" onInput="liveHashrate()">
+                <input type ="text" id="rejectRate" class="inputThemeJS" onInput="liveHashrate()">
                 
                 <h1>Pool Fee (%)</h1>
-                <input type ="text" id="poolFee" onInput="liveHashrate();">
+                <input type ="text" id="poolFee" class="inputThemeJS" onInput="liveHashrate();">
                 
                 <h1>Power Cost (USD $/kW·h)</h1>
-                <input type ="text" id="elecCost" onInput="liveHashrate();">
+                <input type ="text" id="elecCost" class="inputThemeJS" onInput="liveHashrate();">
                 
                 <h1>Power (W)</h1>
-                <input type ="text" id="powerConsumtion" onInput="liveHashrate(); clearPreset();">
+                <input type ="text" id="powerConsumtion" class="inputThemeJS" onInput="liveHashrate(); clearPreset();">
                 <br>
                 <input type="button" class="customPresetButton" onClick="saveData()" value="Save Custom Preset"/>
                 <br>
@@ -357,12 +359,12 @@
                             <td id="SCCresultWeekProfitUSD" class="bold">0.00</td>
                             <td id="SCCresultMonthProfitUSD" class="bold">0.00</td>
                         </tr>
-                        
+                        <tr>
                         <th class="tableCoin" colspan="2" style="padding:0px;">
                                 <img src="Images/cash2.png" class="Cash2Logo">
                                 <a href="https://cash2.org/" target="_blank" class="coinName" id="cash2Name">Cash2</a>
                                 <div class="tooltip4">
-                                    <img src="Images/info.png" class="infoImg">
+                                    <img src="Images/info.png" class="infoImg tooltipJS">
                                     <span class="tooltiptext4">To accurately calculate Cash2 profitability, input your hashrate recorded by the Cash2 pool.</span>
                                 </div>
                             </th>
@@ -372,6 +374,7 @@
                             <th class="tableCoinPool" style="padding:0px;">
                                 <a href="https://cash2.org/#miningInformation" target="_blank" class="coinPoolList">Pools</a>
                             </th>
+                            </tr>
 
                         <tr class="time">
                             <td></td>
@@ -422,7 +425,7 @@
                                 <img src="Images/siaLogo.png" class="coinLogo">
                                 <a href="https://www.sia.tech/" target="_blank" class="coinName">Sia</a>
                                 <div class="tooltip">
-                                    <img src="Images/info.png" class="infoImg">
+                                    <img src="Images/info.png" class="infoImg tooltipJS">
                                     <span class="tooltiptext">Keep in mind that only Obelisk SC1's are able to mine Sia.</span>
                                 </div>
                             </th>
@@ -494,7 +497,12 @@
         </div>
         </div>
         <div>
-           <a href="advertisementInfo.html"><img src="Images/AdvertisementImg.png" id="advert"></a>
+           <a href="http://bit.ly/FluxPool" target="_blank"><img src="Images/AdvertisementImg.png" id="advert"></a>
+           <a href="advertisementInfo.html">
+               <div class="tooltip6">
+               <img src="Images/info.png" class="infoImg tooltipJS">
+                </div>
+            </a>
         </div>
         <div id="bottomText">
             <h3 id="bottomText">GamingRadar101: HTML, CSS, and JavaScript</h3>

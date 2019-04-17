@@ -72,10 +72,10 @@ let hshrt = 0
 const greenColor = "#30fa30"
 const redColor = "#d20000"
 
-const PowerCostHour = document.querySelector("#PowerCostHour")
-const PowerCostDay = document.querySelector("#PowerCostDay")
-const PowerCostWeek = document.querySelector("#PowerCostWeek")
-const PowerCostMonth = document.querySelector("#PowerCostMonth")
+var PowerCostHour = document.querySelector("#PowerCostHour")
+var PowerCostDay = document.querySelector("#PowerCostDay")
+var PowerCostWeek = document.querySelector("#PowerCostWeek")
+var PowerCostMonth = document.querySelector("#PowerCostMonth")
 
 let PowerCostHourResult
 let PowerCostDayResult
@@ -83,27 +83,27 @@ let PowerCostWeekResult
 let PowerCostMonthResult
 
 //Hyperspace-------------------------------------------------------------------
-const XSCVolume = document.querySelector("#XSCVolumeValue")
+var XSCVolume = document.querySelector("#XSCVolumeValue")
 
-const XSCcalcHour = document.querySelector("#XSCresultHour")
-const XSCcalcDay = document.querySelector("#XSCresultDay")
-const XSCcalcWeek = document.querySelector("#XSCresultWeek")
-const XSCcalcMonth = document.querySelector("#XSCresultMonth")
+var XSCcalcHour = document.querySelector("#XSCresultHour")
+var XSCcalcDay = document.querySelector("#XSCresultDay")
+var XSCcalcWeek = document.querySelector("#XSCresultWeek")
+var XSCcalcMonth = document.querySelector("#XSCresultMonth")
 
-const XSCcalcHourUSD = document.querySelector("#XSCresultHourUSD")
-const XSCcalcDayUSD = document.querySelector("#XSCresultDayUSD")
-const XSCcalcWeekUSD = document.querySelector("#XSCresultWeekUSD")
-const XSCcalcMonthUSD = document.querySelector("#XSCresultMonthUSD")
+var XSCcalcHourUSD = document.querySelector("#XSCresultHourUSD")
+var XSCcalcDayUSD = document.querySelector("#XSCresultDayUSD")
+var XSCcalcWeekUSD = document.querySelector("#XSCresultWeekUSD")
+var XSCcalcMonthUSD = document.querySelector("#XSCresultMonthUSD")
 
-const XSCresultHourProfit = document.querySelector("#XSCresultHourProfit")
-const XSCresultDayProfit = document.querySelector("#XSCresultDayProfit")
-const XSCresultWeekProfit = document.querySelector("#XSCresultWeekProfit")
-const XSCresultMonthProfit = document.querySelector("#XSCresultMonthProfit")
+var XSCresultHourProfit = document.querySelector("#XSCresultHourProfit")
+var XSCresultDayProfit = document.querySelector("#XSCresultDayProfit")
+var XSCresultWeekProfit = document.querySelector("#XSCresultWeekProfit")
+var XSCresultMonthProfit = document.querySelector("#XSCresultMonthProfit")
 
-const XSCresultHourProfitUSD = document.querySelector("#XSCresultHourProfitUSD")
-const XSCresultDayProfitUSD = document.querySelector("#XSCresultDayProfitUSD")
-const XSCresultWeekProfitUSD = document.querySelector("#XSCresultWeekProfitUSD")
-const XSCresultMonthProfitUSD = document.querySelector("#XSCresultMonthProfitUSD")
+var XSCresultHourProfitUSD = document.querySelector("#XSCresultHourProfitUSD")
+var XSCresultDayProfitUSD = document.querySelector("#XSCresultDayProfitUSD")
+var XSCresultWeekProfitUSD = document.querySelector("#XSCresultWeekProfitUSD")
+var XSCresultMonthProfitUSD = document.querySelector("#XSCresultMonthProfitUSD")
 
 var hyperAPIDifficulty
 var hyperAPIheight
@@ -119,27 +119,27 @@ let hyperUSDWeekresult
 let hyperUSDMonthresult
 
 //Sia Prime
-const SCPVolume = document.querySelector("#SCPVolumeValue")
+var SCPVolume = document.querySelector("#SCPVolumeValue")
 
-const SCPcalcHour = document.querySelector("#SCPresultHour")
-const SCPcalcDay = document.querySelector("#SCPresultDay")
-const SCPcalcWeek = document.querySelector("#SCPresultWeek")
-const SCPcalcMonth = document.querySelector("#SCPresultMonth")
+var SCPcalcHour = document.querySelector("#SCPresultHour")
+var SCPcalcDay = document.querySelector("#SCPresultDay")
+var SCPcalcWeek = document.querySelector("#SCPresultWeek")
+var SCPcalcMonth = document.querySelector("#SCPresultMonth")
 
-const SCPcalcHourUSD = document.querySelector("#SCPresultHourUSD")
-const SCPcalcDayUSD = document.querySelector("#SCPresultDayUSD")
-const SCPcalcWeekUSD = document.querySelector("#SCPresultWeekUSD")
-const SCPcalcMonthUSD = document.querySelector("#SCPresultMonthUSD")
+var SCPcalcHourUSD = document.querySelector("#SCPresultHourUSD")
+var SCPcalcDayUSD = document.querySelector("#SCPresultDayUSD")
+var SCPcalcWeekUSD = document.querySelector("#SCPresultWeekUSD")
+var SCPcalcMonthUSD = document.querySelector("#SCPresultMonthUSD")
 
-const SCPresultHourProfit = document.querySelector("#SCPresultHourProfit")
-const SCPresultDayProfit = document.querySelector("#SCPresultDayProfit")
-const SCPresultWeekProfit = document.querySelector("#SCPresultWeekProfit")
-const SCPresultMonthProfit = document.querySelector("#SCPresultMonthProfit")
+var SCPresultHourProfit = document.querySelector("#SCPresultHourProfit")
+var SCPresultDayProfit = document.querySelector("#SCPresultDayProfit")
+var SCPresultWeekProfit = document.querySelector("#SCPresultWeekProfit")
+var SCPresultMonthProfit = document.querySelector("#SCPresultMonthProfit")
 
-const SCPresultHourProfitUSD = document.querySelector("#SCPresultHourProfitUSD")
-const SCPresultDayProfitUSD = document.querySelector("#SCPresultDayProfitUSD")
-const SCPresultWeekProfitUSD = document.querySelector("#SCPresultWeekProfitUSD")
-const SCPresultMonthProfitUSD = document.querySelector("#SCPresultMonthProfitUSD")
+var SCPresultHourProfitUSD = document.querySelector("#SCPresultHourProfitUSD")
+var SCPresultDayProfitUSD = document.querySelector("#SCPresultDayProfitUSD")
+var SCPresultWeekProfitUSD = document.querySelector("#SCPresultWeekProfitUSD")
+var SCPresultMonthProfitUSD = document.querySelector("#SCPresultMonthProfitUSD")
 
 var primeAPIDifficulty
 var primeAPIheight
@@ -155,27 +155,27 @@ let primeUSDWeekresult
 let primeUSDMonthresult
 
 //Sia Classic
-const SCCVolume = document.querySelector("#SCCVolumeValue")
+var SCCVolume = document.querySelector("#SCCVolumeValue")
 
-const SCCcalcHour = document.querySelector("#SCCresultHour")
-const SCCcalcDay = document.querySelector("#SCCresultDay")
-const SCCcalcWeek = document.querySelector("#SCCresultWeek")
-const SCCcalcMonth = document.querySelector("#SCCresultMonth")
+var SCCcalcHour = document.querySelector("#SCCresultHour")
+var SCCcalcDay = document.querySelector("#SCCresultDay")
+var SCCcalcWeek = document.querySelector("#SCCresultWeek")
+var SCCcalcMonth = document.querySelector("#SCCresultMonth")
 
-const SCCcalcHourUSD = document.querySelector("#SCCresultHourUSD")
-const SCCcalcDayUSD = document.querySelector("#SCCresultDayUSD")
-const SCCcalcWeekUSD = document.querySelector("#SCCresultWeekUSD")
-const SCCcalcMonthUSD = document.querySelector("#SCCresultMonthUSD")
+var SCCcalcHourUSD = document.querySelector("#SCCresultHourUSD")
+var SCCcalcDayUSD = document.querySelector("#SCCresultDayUSD")
+var SCCcalcWeekUSD = document.querySelector("#SCCresultWeekUSD")
+var SCCcalcMonthUSD = document.querySelector("#SCCresultMonthUSD")
 
-const SCCresultHourProfit = document.querySelector("#SCCresultHourProfit")
-const SCCresultDayProfit = document.querySelector("#SCCresultDayProfit")
-const SCCresultWeekProfit = document.querySelector("#SCCresultWeekProfit")
-const SCCresultMonthProfit = document.querySelector("#SCCresultMonthProfit")
+var SCCresultHourProfit = document.querySelector("#SCCresultHourProfit")
+var SCCresultDayProfit = document.querySelector("#SCCresultDayProfit")
+var SCCresultWeekProfit = document.querySelector("#SCCresultWeekProfit")
+var SCCresultMonthProfit = document.querySelector("#SCCresultMonthProfit")
 
-const SCCresultHourProfitUSD = document.querySelector("#SCCresultHourProfitUSD")
-const SCCresultDayProfitUSD = document.querySelector("#SCCresultDayProfitUSD")
-const SCCresultWeekProfitUSD = document.querySelector("#SCCresultWeekProfitUSD")
-const SCCresultMonthProfitUSD = document.querySelector("#SCCresultMonthProfitUSD")
+var SCCresultHourProfitUSD = document.querySelector("#SCCresultHourProfitUSD")
+var SCCresultDayProfitUSD = document.querySelector("#SCCresultDayProfitUSD")
+var SCCresultWeekProfitUSD = document.querySelector("#SCCresultWeekProfitUSD")
+var SCCresultMonthProfitUSD = document.querySelector("#SCCresultMonthProfitUSD")
 
 var classicAPIDifficulty
 var classicAPIheight
@@ -191,27 +191,27 @@ let sccUSDWeekresult
 let sccUSDMonthresult
 
 //Sia
-const SiaVolume = document.querySelector("#SiaVolumeValue")
+var SiaVolume = document.querySelector("#SiaVolumeValue")
 
-const SiacalcHour = document.querySelector("#SiaresultHour")
-const SiacalcDay = document.querySelector("#SiaresultDay")
-const SiacalcWeek = document.querySelector("#SiaresultWeek")
-const SiacalcMonth = document.querySelector("#SiaresultMonth")
+var SiacalcHour = document.querySelector("#SiaresultHour")
+var SiacalcDay = document.querySelector("#SiaresultDay")
+var SiacalcWeek = document.querySelector("#SiaresultWeek")
+var SiacalcMonth = document.querySelector("#SiaresultMonth")
 
-const SiacalcHourUSD = document.querySelector("#SiaresultHourUSD")
-const SiacalcDayUSD = document.querySelector("#SiaresultDayUSD")
-const SiacalcWeekUSD = document.querySelector("#SiaresultWeekUSD")
-const SiacalcMonthUSD = document.querySelector("#SiaresultMonthUSD")
+var SiacalcHourUSD = document.querySelector("#SiaresultHourUSD")
+var SiacalcDayUSD = document.querySelector("#SiaresultDayUSD")
+var SiacalcWeekUSD = document.querySelector("#SiaresultWeekUSD")
+var SiacalcMonthUSD = document.querySelector("#SiaresultMonthUSD")
 
-const SiaresultHourProfit = document.querySelector("#SiaresultHourProfit")
-const SiaresultDayProfit = document.querySelector("#SiaresultDayProfit")
-const SiaresultWeekProfit = document.querySelector("#SiaresultWeekProfit")
-const SiaresultMonthProfit = document.querySelector("#SiaresultMonthProfit")
+var SiaresultHourProfit = document.querySelector("#SiaresultHourProfit")
+var SiaresultDayProfit = document.querySelector("#SiaresultDayProfit")
+var SiaresultWeekProfit = document.querySelector("#SiaresultWeekProfit")
+var SiaresultMonthProfit = document.querySelector("#SiaresultMonthProfit")
 
-const SiaresultHourProfitUSD = document.querySelector("#SiaresultHourProfitUSD")
-const SiaresultDayProfitUSD = document.querySelector("#SiaresultDayProfitUSD")
-const SiaresultWeekProfitUSD = document.querySelector("#SiaresultWeekProfitUSD")
-const SiaresultMonthProfitUSD = document.querySelector("#SiaresultMonthProfitUSD")
+var SiaresultHourProfitUSD = document.querySelector("#SiaresultHourProfitUSD")
+var SiaresultDayProfitUSD = document.querySelector("#SiaresultDayProfitUSD")
+var SiaresultWeekProfitUSD = document.querySelector("#SiaresultWeekProfitUSD")
+var SiaresultMonthProfitUSD = document.querySelector("#SiaresultMonthProfitUSD")
 
 var siaAPIDifficulty
 var siaAPIheight
@@ -227,28 +227,28 @@ let siaUSDWeekresult
 let siaUSDMonthresult
 
 //Cash2
-const Cash2Volume = document.querySelector("#Cash2VolumeValue")
+var Cash2Volume = document.querySelector("#Cash2VolumeValue")
 
-const Cash2calcHour = document.querySelector("#CASH2resultHour")
-const Cash2calcDay = document.querySelector("#CASH2resultDay")
-const Cash2calcWeek = document.querySelector("#CASH2resultWeek")
-const Cash2calcMonth = document.querySelector("#CASH2resultMonth")
+var Cash2calcHour = document.querySelector("#CASH2resultHour")
+var Cash2calcDay = document.querySelector("#CASH2resultDay")
+var Cash2calcWeek = document.querySelector("#CASH2resultWeek")
+var Cash2calcMonth = document.querySelector("#CASH2resultMonth")
 
-const Cash2calcHourUSD = document.querySelector("#CASH2resultHourUSD")
-const Cash2calcDayUSD = document.querySelector("#CASH2resultDayUSD")
-const Cash2calcWeekUSD = document.querySelector("#CASH2resultWeekUSD")
-const Cash2calcMonthUSD = document.querySelector("#CASH2resultMonthUSD")
+var Cash2calcHourUSD = document.querySelector("#CASH2resultHourUSD")
+var Cash2calcDayUSD = document.querySelector("#CASH2resultDayUSD")
+var Cash2calcWeekUSD = document.querySelector("#CASH2resultWeekUSD")
+var Cash2calcMonthUSD = document.querySelector("#CASH2resultMonthUSD")
 
-const Cash2resultHourProfit = document.querySelector("#CASH2resultHourProfit")
-const Cash2resultDayProfit = document.querySelector("#CASH2resultDayProfit")
-const Cash2resultWeekProfit = document.querySelector("#CASH2resultWeekProfit")
-const Cash2resultMonthProfit = document.querySelector("#CASH2resultMonthProfit")
+var Cash2resultHourProfit = document.querySelector("#CASH2resultHourProfit")
+var Cash2resultDayProfit = document.querySelector("#CASH2resultDayProfit")
+var Cash2resultWeekProfit = document.querySelector("#CASH2resultWeekProfit")
+var Cash2resultMonthProfit = document.querySelector("#CASH2resultMonthProfit")
 
 
-const Cash2resultHourProfitUSD = document.querySelector("#CASH2resultHourProfitUSD")
-const Cash2resultDayProfitUSD = document.querySelector("#CASH2resultDayProfitUSD")
-const Cash2resultWeekProfitUSD = document.querySelector("#CASH2resultWeekProfitUSD")
-const Cash2resultMonthProfitUSD = document.querySelector("#CASH2resultMonthProfitUSD")
+var Cash2resultHourProfitUSD = document.querySelector("#CASH2resultHourProfitUSD")
+var Cash2resultDayProfitUSD = document.querySelector("#CASH2resultDayProfitUSD")
+var Cash2resultWeekProfitUSD = document.querySelector("#CASH2resultWeekProfitUSD")
+var Cash2resultMonthProfitUSD = document.querySelector("#CASH2resultMonthProfitUSD")
 
 
 var CASH2APIDifficulty
@@ -269,26 +269,26 @@ let Cash2USDWeekresult
 let Cash2USDMonthresult
 
 //----------------------------------------------------------------------------
-const calcHour = document.querySelector("#resultHour")
-const calcDay = document.querySelector("#resultDay")
-const calcWeek = document.querySelector("#resultWeek")
-const calcMonth = document.querySelector("#resultMonth")
+var calcHour = document.querySelector("#resultHour")
+var calcDay = document.querySelector("#resultDay")
+var calcWeek = document.querySelector("#resultWeek")
+var calcMonth = document.querySelector("#resultMonth")
 
-const userHshrt = document.getElementById("hashrate")
-const hashPower = document.getElementById("hashPower")
+var userHshrt = document.getElementById("hashrate")
+var hashPower = document.getElementById("hashPower")
 
-const rejectRate = document.getElementById("rejectRate")
-const poolFee = document.getElementById("poolFee")
-const elecCost = document.getElementById("elecCost")
-const powerConsumtion = document.getElementById("powerConsumtion")
+var rejectRate = document.getElementById("rejectRate")
+var poolFee = document.getElementById("poolFee")
+var elecCost = document.getElementById("elecCost")
+var powerConsumtion = document.getElementById("powerConsumtion")
 
-const A3 = document.getElementById("A3")
-const Baik = document.getElementById("Baik")
-const B52 = document.getElementById("B52")
-const iBe = document.getElementById("iBe")
-const S11 = document.getElementById("S11")
-const SC1 = document.getElementById("SC1")
-const StrongU = document.getElementById("StrongU")
+var A3 = document.getElementById("A3")
+var Baik = document.getElementById("Baik")
+var B52 = document.getElementById("B52")
+var iBe = document.getElementById("iBe")
+var S11 = document.getElementById("S11")
+var SC1 = document.getElementById("SC1")
+var StrongU = document.getElementById("StrongU")
 let totalPresetHashrate
 let totalPresetPower
 
@@ -316,11 +316,14 @@ let S11presetPower = 0
 let SC1presetPower = 0
 let StrongUpresetPower = 0
 
-const logoDropdown = document.getElementById("logoDropdown")
+
 function changePage() {
+    const logoDropdown = document.getElementById("logoDropdown")
     if (logoDropdown.selectedIndex == 0) {
         window.open("index.html", "_top");
     } else if(logoDropdown.selectedIndex == 1) {
+        window.open("Grin.html", "_top");
+    } else if(logoDropdown.selectedIndex == 2) {
         window.open("PoC.html", "_top");
     }
     
@@ -695,6 +698,7 @@ function apiLoadVerify() {
     if(APILoaded >= 9) {
         console.log(APILoaded + " API's loaded")
         liveHashrate()
+        presetUpdate()
     }
 }
 
@@ -793,11 +797,9 @@ if (localStorage.getItem('mainData') == null) {
     //userHshrt.value = randomizer[0]
     //powerConsumtion.value = randomizer[1]
     S11.value = 1
-    presetUpdate()
 } else {
     var data = localStorage.getItem('mainData')
     var newData = JSON.parse(data)
-    console.log(newData.DifficultyAdjust)
     userHshrt.value = newData.Hashrate
     hashPower.value = newData.HashPower
     diffToggle.checked = newData.DifficultyAdjust
@@ -810,15 +812,60 @@ if (localStorage.getItem('mainData') == null) {
     poolFee.value = newData.PoolFee
     elecCost.value = newData.ElectricityCost
     powerConsumtion.value = newData.PowerConsumption
-    A3.value = newData.A3
-    Baik.value = newData.Baik
-    B52.value = newData.B52
-    iBe.value = newData.iBe
-    S11.value = newData.S11
-    StrongU.value = newData.StrongU
-    SC1.value = newData.SC1
+    
+    if (newData.A3 == undefined) {
+        A3.value = 0
+    } else {
+        A3.value = newData.A3
+    }
+    
+    if (newData.Baik == undefined) {
+        Baik.value = 0
+    } else {
+        Baik.value = newData.Baik
+    }
+    
+    if (newData.B52 == undefined) {
+        B52.value = 0
+    } else {
+        B52.value = newData.B52
+    }
+    
+    if (newData.iBe == undefined) {
+        iBe.value = 0
+    } else {
+        iBe.value = newData.iBe
+    }
+    
+    if (newData.S11 == undefined) {
+        S11.value = 1
+    } else {
+        S11.value = newData.S11
+    }
+    
+    if (newData.StrongU == undefined) {
+        StrongU.value = 0
+    } else {
+        StrongU.value = newData.StrongU
+    }
+    
+    if (newData.SC1 == undefined) {
+        SC1.value = 0
+    } else {
+        SC1.value = newData.SC1
+    }
+    
 }
     
+var themeToggle = document.getElementById("diffToggleSwitch2")
+if (localStorage.getItem('theme') == null) {
+    themeToggle.checked = false
+} else {
+    var data = localStorage.getItem('theme')
+    var newData = JSON.parse(data)
+    themeToggle.checked = newData.Toggle
+    ChangeTheme()
+}
 
 
 function splitInput(number) {
@@ -1469,8 +1516,8 @@ function presetUpdate() {
     }
     else if (A3preset >= 999) {
         A3.value = 999
-        A3presetFinal = 815 * A3preset
-        A3presetPower = 1275 * A3preset
+        A3presetFinal = 815 * 999
+        A3presetPower = 1275 * 999
     }
     else if (A3preset <= 0){
         A3presetFinal = 0
@@ -1484,8 +1531,8 @@ function presetUpdate() {
     }
     else if (Baikpreset >= 999) {
         Baik.value = 999
-        BaikpresetFinal = 160 * Baikpreset
-        BaikpresetPower = 410 * Baikpreset
+        BaikpresetFinal = 160 * 999
+        BaikpresetPower = 410 * 999
     }
     else if (Baikpreset <= 0){
         BaikpresetFinal = 0
@@ -1499,8 +1546,8 @@ function presetUpdate() {
     }
     else if (B52preset >= 999) {
         B52.value = 999
-        B52presetFinal = 3830 * B52preset
-        B52presetPower = 1380 * B52preset
+        B52presetFinal = 3830 * 999
+        B52presetPower = 1380 * 999
     }
     else if (B52preset <= 0){
         B52presetFinal = 0
@@ -1514,8 +1561,8 @@ function presetUpdate() {
     }
     else if (iBepreset >= 999) {
         iBe.value = 999
-        iBepresetFinal = 7000 * iBepreset
-        iBepresetPower = 2100 * iBepreset
+        iBepresetFinal = 7000 * 999
+        iBepresetPower = 2100 * 999
     }
     else if (iBepreset <= 0){
         iBepresetFinal = 0
@@ -1529,8 +1576,8 @@ function presetUpdate() {
     }
     else if (S11preset >= 999) {
         S11.value = 999
-        S11presetFinal = 4300 * S11preset
-        S11presetPower = 1350 * S11preset
+        S11presetFinal = 4300 * 999
+        S11presetPower = 1350 * 999
     }
     else if (S11preset <= 0){
         S11presetFinal = 0
@@ -1544,8 +1591,8 @@ function presetUpdate() {
     }
     else if (SC1preset >= 999) {
         SC1.value = 999
-        SC1presetFinal = 550 * SC1preset
-        SC1presetPower = 500 * SC1preset
+        SC1presetFinal = 550 * 999
+        SC1presetPower = 500 * 999
     }
     else if (SC1preset <= 0){
         SC1presetFinal = 0
@@ -1559,8 +1606,8 @@ function presetUpdate() {
     }
     else if (StrongUpreset >= 999) {
         StrongU.value = 999
-        StrongUpresetFinal = 5500 * StrongUpreset
-        StrongUpresetPower = 1600 * StrongUpreset
+        StrongUpresetFinal = 5500 * 999
+        StrongUpresetPower = 1600 * 999
     }
     else if (StrongUpreset <= 0){
         StrongUpresetFinal = 0
@@ -1618,7 +1665,7 @@ function numberShortener(num) {
             tempNum = -99.99 + "+ B"
         }
         else {
-            tempNum = "NaN"
+            tempNum = "0.00"
         }
         
         return tempNum
@@ -1641,12 +1688,15 @@ function feeCalcUSD(coin, time1, time2) {
 }
 
 function colorProfit(coin, coinHTML) {
-    if (coin > 0) {
-        coinHTML.style.color = greenColor
+    if (themeToggle.checked == false) {
+        if (coin > 0) {
+            coinHTML.style.color = greenColor
+        } else {
+            coinHTML.style.color = redColor
+        }
     } else {
-        coinHTML.style.color = redColor
+        coinHTML.style.color = "white"
     }
-    
     return coin
 }
 
@@ -1658,4 +1708,77 @@ function saveData() {
 
 function deleteData() {
     localStorage.removeItem('mainData');
+}
+
+
+function ChangeTheme() {
+    var inputsTheme = document.getElementsByClassName("inputThemeJS");
+    var poolLinkTheme = document.getElementsByClassName("coinPoolList");
+    var presetDataTheme = document.getElementsByClassName("presetData");
+    var tooltipIMG = document.getElementsByClassName("tooltipJS");
+    
+    if (themeToggle.checked == true) {
+        
+        var data = {Toggle: themeToggle.checked}
+        var strData = JSON.stringify(data)
+        localStorage.setItem('theme', strData);
+        calcProfit()
+        var currentTheme = document.body.children
+        for (var i = 0; i < currentTheme.length; i++) {
+            currentTheme[i].style.color = "white";
+        }
+        currentTheme[0].style.backgroundColor = "#3b3d3f"
+        currentTheme[1].style.backgroundColor = "#535659"
+        currentTheme[1].children[0].children[0].children[0].style.backgroundColor = "#404244"
+        //currentTheme[1].children[0].children[0].children[2].children[1].style.backgroundColor = "rgb(50, 58, 73, 0.6)"
+        currentTheme[2].style.backgroundColor = "#3b3d3f"
+        document.body.style.background = "#535659";
+        currentTheme[2].style.borderColor = "#28292b"
+        for (var i = 0; i < inputsTheme.length; i++) {
+            inputsTheme[i].style.backgroundColor = "#90969b"
+            inputsTheme[i].style.color = "white"
+        }
+        for (var i = 0; i < poolLinkTheme.length; i++) {
+            poolLinkTheme[i].style.color = "#669fff"
+        }
+        for (var i = 0; i < presetDataTheme.length; i++) {
+            presetDataTheme[i].style.color = "white"
+        }
+        
+        for (var i = 0; i < tooltipIMG.length; i++) {
+            tooltipIMG[i].style.filter = "invert(1)"
+            
+        }
+        
+    } else {
+        var data = {Toggle: themeToggle.checked}
+        var strData = JSON.stringify(data)
+        localStorage.setItem('theme', strData);
+        calcProfit()
+        var currentTheme = document.body.children
+        for (var i = 0; i < currentTheme.length; i++) {
+            currentTheme[i].style.removeProperty("color")
+            currentTheme[i].style.removeProperty("background-color")
+            currentTheme[i].style.removeProperty("border-color")
+        }
+        currentTheme[1].children[0].children[0].children[0].style.removeProperty("background-color")
+        document.body.style.removeProperty("background-color")
+        currentTheme[1].children[0].children[0].children[2].children[1].style.removeProperty("background-color")
+        for (var i = 0; i < inputsTheme.length; i++) {
+            inputsTheme[i].style.removeProperty("background-color")
+            inputsTheme[i].style.removeProperty("color")
+        }
+        for (var i = 0; i < poolLinkTheme.length; i++) {
+            poolLinkTheme[i].style.removeProperty("color")
+        }
+        for (var i = 0; i < presetDataTheme.length; i++) {
+            presetDataTheme[i].style.removeProperty("color")
+        }
+        for (var i = 0; i < tooltipIMG.length; i++) {
+            tooltipIMG[i].style.removeProperty("filter")
+        }
+    }
+    
+    
+    
 }

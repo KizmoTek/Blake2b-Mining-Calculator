@@ -67,68 +67,6 @@
                 margin:auto;
         }
         
-        .switch2 {
-                position: relative;
-                display: inline-block;
-                width: 54px;
-                height: 25px;
-                margin-top:22px;
-                margin-left: 10px;
-        }
-        
-        .switch2 input { 
-          opacity: 0;
-          width: 0;
-          height: 0;
-        }
-        
-        .slider2 {
-          position: absolute;
-          cursor: pointer;
-          top: 0;
-          left: 0;
-          right: 0;
-          bottom: 0;
-          background-color: #ccc;
-          -webkit-transition: .2s;
-          transition: .2s;
-        }
-        
-        .slider2:before {
-          position: absolute;
-          content: "";
-          height: 20px;
-          width: 20px;
-          left: 4px;
-          bottom: 2.5px;
-          background-color: white;
-          -webkit-transition: .2s;
-          transition: .2s;
-        }
-        
-        input2:checked + .slider2 {
-          background-color: #2196F3;
-        }
-        
-        input2:focus + .slider2 {
-          box-shadow: 0 0 1px #2196F3;
-        }
-        
-        input2:checked + .slider2:before {
-          -webkit-transform: translateX(26px);
-          -ms-transform: translateX(26px);
-          transform: translateX(26px);
-        }
-        
-        /* Rounded sliders */
-        .slider2.round2 {
-          border-radius: 34px;
-        }
-        
-        .slider2.round2:before {
-          border-radius: 50%;
-        }
-        
         footer {
                 width: 100%;
                 bottom: 0px;
@@ -412,6 +350,34 @@
                 visibility: visible;
         }
         
+        .tooltip6 {
+                position: relative;
+                display: inline-block;
+                bottom: 75px;
+                left: 4px;
+        }
+
+        .tooltip6 .tooltiptext6 {
+                visibility: hidden;
+                width: 260px;
+                font-size: 18px;
+                background-color: rgb(76, 89, 112, 0.8);
+                color: white;
+                text-align: center;
+                border-radius: 6px;
+                padding: 5px 0;
+                margin-bottom: 100px;
+
+                /* Position the tooltip */
+                position: absolute;
+                top: -60px;
+                z-index: 1;
+        }
+
+        .tooltip6:hover .tooltiptext6 {
+                visibility: visible;
+        }
+        
         /* 1 */
         .popup {
           position: relative;
@@ -643,7 +609,8 @@
         
         #rules {
                 text-align: left;
-                margin-left:223px;
+                margin: auto;
+                width: 600px;
         }
         
         a {
@@ -776,7 +743,8 @@
         input:focus,
         select:focus,
         textarea:focus,
-        button:focus {
+        button:focus,
+        checkbox:focus{
                 outline: none;
         }
 
@@ -935,6 +903,75 @@
           border-radius: 50%;
         }
         
+        /* Day/Light Theme Switch */
+        
+        .switch2 {
+                position: relative;
+                display: inline-block;
+                width: 56px;
+                height: 27px;
+                position: absolute;
+                right: 0;
+                margin-right: 10px;
+                margin-top: 5px;
+        }
+        
+        .switch2 input { 
+          opacity: 0;
+          width: 0;
+          height: 0;
+        }
+        
+        .slider2 {
+          position: absolute;
+          cursor: pointer;
+          top: 0;
+          left: 0;
+          right: 0;
+          bottom: 0;
+          background-color: #ffffff;
+          -webkit-transition: .4s;
+          transition: .4s;
+        }
+        
+        .slider2:before {
+          position: absolute;
+          content: "";
+          height: 22px;
+          width: 22px;
+          left: 4px;
+          bottom: 2.5px;
+          background-color: white;
+          -webkit-transition: .4s;
+          transition: .4s;
+        }
+        
+        input:checked + .slider2 {
+          background-color: #000000;
+        }
+        
+        input:focus + .slider2 {
+          box-shadow: 0 0 1px #2196F3;
+        }
+        
+        input:checked + .slider2:before {
+          -webkit-transform: translateX(26px);
+          -ms-transform: translateX(26px);
+          transform: translateX(26px);
+          background-color:white;
+        }
+        
+        /* Rounded sliders */
+        .slider2.round2 {
+          border-radius: 34px;
+          
+        }
+        
+        .slider2.round2:before {
+          border-radius: 50%;
+          background-color:black;
+        }
+        
         /* Custom Preset Button */
                 .customPresetButton {
         	background-color:#a8a8a8;
@@ -950,7 +987,6 @@
         	font-weight:bold;
         	padding:12px 8px;
         	text-decoration:none;
-        	text-shadow:0px 1px 0px #000000;
         	margin-top:20px;
         	-webkit-user-select: none;  /* Chrome all / Safari all */
                 -moz-user-select: none;     /* Firefox all */
@@ -983,7 +1019,6 @@
         	font-weight:bold;
         	padding:10px 6px;
         	text-decoration:none;
-        	text-shadow:0px 1px 0px #000000;
         	margin-top:14px;
         	-webkit-user-select: none;  /* Chrome all / Safari all */
                 -moz-user-select: none;     /* Firefox all */
@@ -1004,7 +1039,11 @@
 
 /* Mobile Scaling */ 
 
-@media only screen and (max-width: 500px) {
+@media only screen and (max-width: 580px) {
+        html {
+                width: 448px;
+        }
+        
         body {
                 margin: 0px;
                 padding: 0px;
@@ -1029,6 +1068,13 @@
         
         .TopLine>h1 {
                 margin-top: 0;
+        }
+        
+        .topFlex {
+                display: flex;
+                width:450px;
+                margin:auto;
+                height: 32px;
         }
         
         footer {
@@ -1299,6 +1345,34 @@
                 visibility: visible;
         }
         
+        .tooltip6 {
+                position: relative;
+                display: inline-block;
+                bottom: 75px;
+                left: 4px;
+        }
+
+        .tooltip6 .tooltiptext6 {
+                visibility: hidden;
+                width: 260px;
+                font-size: 18px;
+                background-color: rgb(76, 89, 112, 0.8);
+                color: white;
+                text-align: center;
+                border-radius: 6px;
+                padding: 5px 0;
+                margin-bottom: 100px;
+
+                /* Position the tooltip */
+                position: absolute;
+                top: -60px;
+                z-index: 1;
+        }
+
+        .tooltip6:hover .tooltiptext6 {
+                visibility: visible;
+        }
+        
         /* 1 */
         .popup {
           position: relative;
@@ -1531,7 +1605,8 @@
         
         #rules {
                 text-align: left;
-                margin-left:15px;
+                margin: auto;
+                width: 600px;
         }
         
         .tooltip:hover .tooltiptext {
@@ -1677,7 +1752,8 @@
         input:focus,
         select:focus,
         textarea:focus,
-        button:focus {
+        button:focus,
+        checkbox:focus{
                 outline: none;
         }
         
@@ -1716,6 +1792,9 @@
         
         .logoName {
                 margin: 0px;
+                width: 380px;
+                margin:auto;
+                font-size:20px;
         }
         
         #Obelisk {
@@ -1824,6 +1903,75 @@
           border-radius: 50%;
         }
         
+         /* Day/Light Theme Switch */
+        
+        .switch2 {
+                position: relative;
+                display: inline-block;
+                width: 39px;
+                height: 19px;
+                position: absolute;
+                right: 0;
+                margin-right: 10px;
+                margin-top: 2px;
+        }
+        
+        .switch2 input { 
+          opacity: 0;
+          width: 0;
+          height: 0;
+        }
+        
+        .slider2 {
+          position: absolute;
+          cursor: pointer;
+          top: 0;
+          left: 0;
+          right: 0;
+          bottom: 0;
+          background-color: #ffffff;
+          -webkit-transition: .4s;
+          transition: .4s;
+        }
+        
+        .slider2:before {
+          position: absolute;
+          content: "";
+          height: 15px;
+          width: 15px;
+          left: 3px;
+          bottom: 2.2px;
+          background-color: white;
+          -webkit-transition: .4s;
+          transition: .4s;
+        }
+        
+        input:checked + .slider2 {
+          background-color: #000000;
+        }
+        
+        input:focus + .slider2 {
+          box-shadow: 0 0 1px #2196F3;
+        }
+        
+        input:checked + .slider2:before {
+          -webkit-transform: translateX(18px);
+          -ms-transform: translateX(18px);
+          transform: translateX(18px);
+          background-color:white;
+        }
+        
+        /* Rounded sliders */
+        .slider2.round2 {
+          border-radius: 34px;
+          
+        }
+        
+        .slider2.round2:before {
+          border-radius: 50%;
+          background-color:black;
+        }
+        
         /* Custom Preset Button */
                 .customPresetButton {
         	background-color:#a8a8a8;
@@ -1839,7 +1987,6 @@
         	font-weight:bold;
         	padding:12px 8px;
         	text-decoration:none;
-        	text-shadow:0px 1px 0px #000000;
         	margin-top:20px;
         	-webkit-user-select: none;  /* Chrome all / Safari all */
                 -moz-user-select: none;     /* Firefox all */
@@ -1872,7 +2019,6 @@
         	font-weight:bold;
         	padding:10px 6px;
         	text-decoration:none;
-        	text-shadow:0px 1px 0px #000000;
         	margin-top:14px;
         	-webkit-user-select: none;  /* Chrome all / Safari all */
                 -moz-user-select: none;     /* Firefox all */
@@ -1892,7 +2038,7 @@
 
 /* Mobile Wide */ 
 
-@media only screen and (max-width: 1199px) and (min-width: 500px) {
+@media only screen and (max-width: 1199px) and (min-width: 580px) {
         body {
                 margin: 0px;
                 padding: 0px;
@@ -1918,6 +2064,13 @@
         
         .TopLine>h1 {
                 margin-top: 0;
+        }
+        
+        .topFlex {
+                display: flex;
+                width:450px;
+                margin:auto;
+                height: 32px;
         }
         
         footer {
@@ -2165,6 +2318,34 @@
                 visibility: visible;
         }
         
+        .tooltip6 {
+                position: relative;
+                display: inline-block;
+                bottom: 75px;
+                left: 4px;
+        }
+
+        .tooltip6 .tooltiptext6 {
+                visibility: hidden;
+                width: 260px;
+                font-size: 18px;
+                background-color: rgb(76, 89, 112, 0.8);
+                color: white;
+                text-align: center;
+                border-radius: 6px;
+                padding: 5px 0;
+                margin-bottom: 100px;
+
+                /* Position the tooltip */
+                position: absolute;
+                top: -60px;
+                z-index: 1;
+        }
+
+        .tooltip6:hover .tooltiptext6 {
+                visibility: visible;
+        }
+        
         /* 1 */
         .popup {
           position: relative;
@@ -2392,7 +2573,8 @@
         
         #rules {
                 text-align: left;
-                margin-left:15px;
+                margin: auto;
+                width: 600px;
         }
         
         .tooltip:hover .tooltiptext {
@@ -2538,7 +2720,8 @@
         input:focus,
         select:focus,
         textarea:focus,
-        button:focus {
+        button:focus,
+        checkbox:focus{
                 outline: none;
         }
         
@@ -2577,6 +2760,9 @@
         
         .logoName {
                 margin: 0px;
+                width: 380px;
+                margin:auto;
+                font-size:24px;
         }
         
         #Obelisk {
@@ -2685,6 +2871,75 @@
           border-radius: 50%;
         }
         
+         /* Day/Light Theme Switch */
+        
+        .switch2 {
+                position: relative;
+                display: inline-block;
+                width: 56px;
+                height: 27px;
+                position: absolute;
+                right: 0;
+                margin-right: 10px;
+                margin-top: 2px;
+        }
+        
+        .switch2 input { 
+          opacity: 0;
+          width: 0;
+          height: 0;
+        }
+        
+        .slider2 {
+          position: absolute;
+          cursor: pointer;
+          top: 0;
+          left: 0;
+          right: 0;
+          bottom: 0;
+          background-color: #ffffff;
+          -webkit-transition: .4s;
+          transition: .4s;
+        }
+        
+        .slider2:before {
+          position: absolute;
+          content: "";
+          height: 22px;
+          width: 22px;
+          left: 4px;
+          bottom: 2.5px;
+          background-color: white;
+          -webkit-transition: .4s;
+          transition: .4s;
+        }
+        
+        input:checked + .slider2 {
+          background-color: #000000;
+        }
+        
+        input:focus + .slider2 {
+          box-shadow: 0 0 1px #2196F3;
+        }
+        
+        input:checked + .slider2:before {
+          -webkit-transform: translateX(26px);
+          -ms-transform: translateX(26px);
+          transform: translateX(26px);
+          background-color:white;
+        }
+        
+        /* Rounded sliders */
+        .slider2.round2 {
+          border-radius: 34px;
+          
+        }
+        
+        .slider2.round2:before {
+          border-radius: 50%;
+          background-color:black;
+        }
+        
         /* Custom Preset Button */
                 .customPresetButton {
         	background-color:#a8a8a8;
@@ -2700,7 +2955,6 @@
         	font-weight:bold;
         	padding:12px 8px;
         	text-decoration:none;
-        	text-shadow:0px 1px 0px #000000;
         	margin-top:20px;
         	-webkit-user-select: none;  /* Chrome all / Safari all */
                 -moz-user-select: none;     /* Firefox all */
@@ -2733,7 +2987,6 @@
         	font-weight:bold;
         	padding:10px 6px;
         	text-decoration:none;
-        	text-shadow:0px 1px 0px #000000;
         	margin-top:14px;
         	-webkit-user-select: none;  /* Chrome all / Safari all */
                 -moz-user-select: none;     /* Firefox all */
@@ -2779,6 +3032,13 @@
         .TopLine>h1 {
                 margin-top: 0;
         }
+        
+        .topFlex {
+                display: flex;
+                width:450px;
+                margin:auto;
+        }
+        
         footer {
                 position: absolute;
                 width: 100%;
@@ -3054,6 +3314,34 @@
                 visibility: visible;
         }
         
+        .tooltip6 {
+                position: relative;
+                display: inline-block;
+                bottom: 75px;
+                left: 4px;
+        }
+
+        .tooltip6 .tooltiptext6 {
+                visibility: hidden;
+                width: 260px;
+                font-size: 18px;
+                background-color: rgb(76, 89, 112, 0.8);
+                color: white;
+                text-align: center;
+                border-radius: 6px;
+                padding: 5px 0;
+                margin-bottom: 100px;
+
+                /* Position the tooltip */
+                position: absolute;
+                top: -60px;
+                z-index: 1;
+        }
+
+        .tooltip6:hover .tooltiptext6 {
+                visibility: visible;
+        }
+        
         /* 1 */
         .popup {
           position: relative;
@@ -3237,7 +3525,8 @@
         
         #rules {
                 text-align: left;
-                margin-left:223px;
+                margin: auto;
+                width: 600px;
         }
         
         a {
@@ -3368,7 +3657,8 @@
         input:focus,
         select:focus,
         textarea:focus,
-        button:focus {
+        button:focus,
+        checkbox:focus{
                 outline: none;
         }
 
@@ -3404,6 +3694,8 @@
 
         .logoName {
                 margin: 0px;
+                width: 380px;
+                margin:auto;
         }
 
         #Obelisk {
@@ -3512,6 +3804,75 @@
           border-radius: 50%;
         }
         
+         /* Day/Light Theme Switch */
+        
+        .switch2 {
+                position: relative;
+                display: inline-block;
+                width: 56px;
+                height: 27px;
+                position: absolute;
+                right: 0;
+                margin-right: 10px;
+                margin-top: 5px;
+        }
+        
+        .switch2 input { 
+          opacity: 0;
+          width: 0;
+          height: 0;
+        }
+        
+        .slider2 {
+          position: absolute;
+          cursor: pointer;
+          top: 0;
+          left: 0;
+          right: 0;
+          bottom: 0;
+          background-color: #ffffff;
+          -webkit-transition: .4s;
+          transition: .4s;
+        }
+        
+        .slider2:before {
+          position: absolute;
+          content: "";
+          height: 22px;
+          width: 22px;
+          left: 4px;
+          bottom: 2.5px;
+          background-color: white;
+          -webkit-transition: .4s;
+          transition: .4s;
+        }
+        
+        input:checked + .slider2 {
+          background-color: #000000;
+        }
+        
+        input:focus + .slider2 {
+          box-shadow: 0 0 1px #2196F3;
+        }
+        
+        input:checked + .slider2:before {
+          -webkit-transform: translateX(26px);
+          -ms-transform: translateX(26px);
+          transform: translateX(26px);
+          background-color:white;
+        }
+        
+        /* Rounded sliders */
+        .slider2.round2 {
+          border-radius: 34px;
+          
+        }
+        
+        .slider2.round2:before {
+          border-radius: 50%;
+          background-color:black;
+        }
+        
         /* Custom Preset Button */
                 .customPresetButton {
         	background-color:#a8a8a8;
@@ -3527,7 +3888,6 @@
         	font-weight:bold;
         	padding:12px 8px;
         	text-decoration:none;
-        	text-shadow:0px 1px 0px #000000;
         	margin-top:20px;
         	-webkit-user-select: none;  /* Chrome all / Safari all */
                 -moz-user-select: none;     /* Firefox all */
@@ -3560,7 +3920,6 @@
         	font-weight:bold;
         	padding:10px 6px;
         	text-decoration:none;
-        	text-shadow:0px 1px 0px #000000;
         	margin-top:14px;
         	-webkit-user-select: none;  /* Chrome all / Safari all */
                 -moz-user-select: none;     /* Firefox all */
