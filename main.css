@@ -782,7 +782,7 @@
                 text-align-last: center;
                 font-size:25px;
                 color:#008eaf;
-                width:340px;
+                width:370px;
                 margin:auto;
                 padding-right: 10px;
         }
@@ -801,6 +801,7 @@
         #Obelisk {
                 background-color: rgba(115, 132, 142, 0.4)
         }
+        
         .github {
                 font-size:12px;
         }

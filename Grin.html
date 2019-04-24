@@ -1,0 +1,310 @@
+<!-- 
+ * Copyright (c) 2018 by Michael Galstyan <mike505222@gmail.com>
+ * All rights reserved.
+ *
+ * License: 
+ * Redistribution and use in source and binary forms, with or without
+ * modification, are permitted provided that the following conditions are met:
+ *
+ *   - Redistributions of source code must retain the above copyright notice, this
+ *     list of conditions and the following disclaimer.
+ *
+ *   - Redistributions in binary form must reproduce the above copyright notice,
+ *     this list of conditions and the following disclaimer in the documentation
+ *     and/or other materials provided with the distribution.
+ *
+ * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
+ * AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
+ * IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
+ * DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE
+ * FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL
+ * DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR
+ * SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER
+ * CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY,
+ * OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
+ * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+-->
+
+
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- Preview Meta Tags -->
+    <meta name="description" content="Calculate the profits for coins on the Blake2b algorithm.">
+    
+    <!-- Google / Search Engine Tags -->
+    <meta itemprop="name" content="Blake2b Mining Calculator">
+    <meta itemprop="description" content="Calculate the profits for coins on the Blake2b algorithm.">
+    <meta itemprop="image" content="">
+    
+    <!-- Facebook Meta Tags -->
+    <meta property="og:url" content="https://www.blakemining.com/">
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="Blake2b Mining Calculator">
+    <meta property="og:description" content="Calculate the profits for coins on the Blake2b algorithm.">
+    <meta property="og:image" content="">
+    
+    <!-- Twitter Meta Tags -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Blake2b Mining Calculator">
+    <meta name="twitter:description" content="Calculate the profits for coins on the Blake2b algorithm.">
+    <meta name="twitter:image" content="">
+    <!-- Preview Meta Tags end -->
+    
+    <meta charset="UTF-8">
+    <link rel="shortcut icon" href="Images/Calculator Icon.png" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="Grin.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.min.css" rel="stylesheet">
+    <link href='https://fonts.googleapis.com/css?family=Roboto:300' rel='stylesheet'>
+    <title>Blake2b Mining Calculator</title>
+</head>
+<body onload="changeMode()">
+    <div class="TopLine">
+        <div class="topFlex">
+            <!-- <a href="index.html"><h1 class="logoName">Blake2b Mining Calculator</h1></a> -->
+            <label class="switch2">
+                        <input type="checkbox" id="diffToggleSwitch2" onInput=" ChangeTheme()">
+                        <span class="slider2 round2"></span>
+                        
+                    </label>
+        </div>
+       <select id="logoDropdown" onInput="changePage()">
+                  <option value="Blake2b" selected="selected">Blake2b Mining Calculator</option>
+                  <option value="Grin" selected="selected">Grin31/32 Mining Calculator</option>
+                  <!-- <option value="PoC">PoC Mining Calculator</option> -->
+        </select>
+    </div>
+    <div class="main">
+        <div class="container">
+            <div class="outer">
+                <div class="mainInput">
+                    <table class="preset">
+                            <tbody>
+                                <tr>
+                                    <th class="presetWord" colspan="5">
+                                        Preset Miners
+                                    </th>
+                                </tr>
+                                <tr>
+                                    <th class="presetMiners">
+                                        Obelisk GRN1-Mini
+                                    </th>
+                                    <td>
+                                    <input type="text" id="GRN1-Mini" onInput="presetUpdate()" value="0" class="presetData">
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <th class="presetMiners">
+                                        Obelisk GRN1
+                                    </th>
+                                    <td>
+                                    <input type="text" id="GRN1" onInput="presetUpdate()" value="0" class="presetData">
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <th class="presetMiners">
+                                        Obelisk GRN1-Immersion
+                                    </th>
+                                    <td>
+                                    <input type="text" id="GRN1-Immersion" onInput="presetUpdate()" value="0" class="presetData">
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <th class="presetMiners">
+                                        Innosilicon G32-Mini
+                                    </th>
+                                    <td>
+                                    <input type="text" id="G32-Mini" onInput="presetUpdate()" value="0" class="presetData">
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <th class="presetMiners">
+                                        Innosilicon G32-500
+                                    </th>
+                                    <td>
+                                    <input type="text" id="G32" onInput="presetUpdate()" value="0" class="presetData">
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <th class="presetMiners">
+                                        Innosilicon G32-1800
+                                    </th>
+                                    <td>
+                                    <input type="text" id="G32-1800" onInput="presetUpdate()" value="0" class="presetData">
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    
+                    <div id="inputArea">
+                        <div style="display:flex; flex-direction:row; justify-content:center;">
+                            <h2 id="simple" style="transition: transform 0.5s ease 0s;">Simple</h2>
+                            <label class="switch" style="margin: 0px; margin-top: 24px; margin-left: 15px; margin-right: 15px;">
+                                    <input type="checkbox" id="modeToggle" onInput="changeMode();">
+                                    <span class="slider round"></span>
+                            </label>
+                            <h2 id="advanced" style="transition: transform 0.5s ease 0s;">Advanced</h2>
+                        </div>
+                        <h2>Graphs Per Second</h2>
+                        <input type="text" id="hashrate" class="inputThemeJS" onInput="liveHashrate();"/>
+                        <div id="networkDifficulty">
+                            <h3>Network Graphs Per Second</h3>
+                            <input type="text" id="networkHashrate" class="inputThemeJS" onInput="liveHashrate();"/>
+                        </div>
+                        <span class="diffAdd">
+                            <h3>Increase Difficulty</h3>
+                            <label class="switch" style="display:block;">
+                                <input type="checkbox" id="diffToggleSwitch" onInput="liveHashrate();" checked>
+                                <span class="slider round"></span>
+                                <div class="tooltip5">
+                                    <img src="Images/info.png" class="infoImg tooltipJS" style="position: absolute; left: 26px; bottom: 0px;">
+                                    <span class="tooltiptext5">If enabled, the difficulty will go up by 2% every month to give a better estimate assuming that more miners go onto the network overtime.</span>
+                                </div>
+                            </label>
+                        </span>
+                        
+                        <span class="Grin32Add" id="Grin32Span">
+                            <h3>Include GrinCuckatoo32</h3>
+                            <label class="switch" style="display:block;">
+                                <input type="checkbox" id="Grin32ToggleSwitch" onInput="liveHashrate();" checked>
+                                <span class="slider round"></span>
+                                <div class="tooltip5">
+                                    <img src="Images/info.png" class="infoImg tooltipJS" style="position: absolute; left: 26px; bottom: 0px;">
+                                    <span class="tooltiptext5">On January 2020, Grin will modify the algorithm from GrinCuckatoo31 to GrinCuckatoo32. If the toggle is enabled, it will include the change in the miner's performance and the profitability.</span>
+                                </div>
+                            </label>
+                        </span>
+                        
+                        <h2>Pool Fee (%)</h2>
+                        <input type="text" id="poolFee" class="inputThemeJS" onInput="liveHashrate();"/>
+                        <div id="powerDiv">
+                            <h3 class="inputMargin" style="margin-left:10px;">Power Cost (USD $/kW·h)</h3>
+                            <input type ="text" id="elecCost" class="inputThemeJS" onInput="liveHashrate();" style="margin-right:5px;"/>
+                            <h3 class="inputMargin" style="margin-left:40px;">Power Consumption (W)</h3>
+                            <input type="text" id="powerConsumtion" class="inputThemeJS" onInput="liveHashrate();" style="margin-right:auto;"/>
+                        </div>
+                        <div id="dateDiv">
+                            <h3 class="inputMargin">Start Date</h3>
+                            <input type="date" id="startDate" class="date inputThemeJS" onInput="liveHashrate();"/>
+                            <h3 class="inputMargin" style="margin-left:40px;">End Date</h3>
+                            <input type="date" id="endDate" class="date inputThemeJS" onInput="liveHashrate();" style="margin-right:auto;"/>
+                        </div>
+                    </div>
+                    
+                    <table class="minersSold">
+                            <tbody>
+                                <tr>
+                                    <th class="minersSoldWord" colspan="4">
+                                        Miners Sold
+                                    </th>
+                                </tr>
+                                <tr>
+                                    <th class="minersSoldMiners" colspan="3">
+                                        Obelisk GRN1-Mini:
+                                    </th>
+                                    <td id="GRN1-MiniSale" colspan="1">
+                                        0
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <th class="minersSoldMiners" colspan="3">
+                                        Obelisk GRN1:
+                                    </th>
+                                    <td id="GRN1Sale" colspan="1">
+                                        0
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <th class="minersSoldMiners" colspan="3">
+                                        Obelisk GRN1-Immersion:
+                                    </th>
+                                    <td id="GRN1-IMMSale" colspan="1">
+                                        0
+                                    </td>
+                                </tr>
+                                
+                                <tr>
+                                    <th class="minersTotalSoldMiners">
+                                        Total Miners:
+                                    </th>
+                                    <td id="totalMiners" style="font-size: 14px; width:10px;">
+                                        0
+                                    </td>
+                                    <th class="minersTotalSoldMiners">
+                                        Total Hashrate:
+                                    </th>
+                                    <td id="totalHashrate" style="font-size: 14px; width:10px;">
+                                        0
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <th colspan="4" style="font-size: 12px; color:#910000;">
+                                        Innosilicon does not provide sale numbers
+                                    </th>
+                                </tr>
+                            </tbody>
+                        </table>
+                </div>
+                <div id="chart">
+                    <canvas id="ctx" width="800" height="200" style="display:inline;"></canvas>
+
+                </div>
+            </div>
+        </div>
+    </div>
+    <footer>
+        <div id="API">
+        <div>
+            <img src="Images/API.png" class="apiLogo">
+        </div>
+        <div>
+            <a href="https://www.coingecko.com/api/docs/v3" target="_blank">Coin Gecko</a>
+            <br>
+            <a href="https://github.com/ImTooLazyToWriteAUsername/BlakeMining" target="_blank" class="github">Github Repository</a>
+            <br>
+            <a href="https://www.blakemining.com/zodiac.html" target="_blank" class="zodiacLink">Zodiac Calculator</a>
+        </div>
+        </div>
+        <div>
+           <a href="advertisementInfo.html"><img src="Images/AdvertisementImgOG.png" id="advert"></a>
+        </div>
+        <div id="bottomText">
+            <h3 id="bottomText">GamingRadar101: HTML, CSS, and JavaScript</h3>
+            <h3 id="bottomText">SiaBillionaire: JavaScript Math</h3>
+        </div>
+        <div id="DonationMain">
+            <h4 id="DonationWord">Donation<br>Addresses:</h4>
+            <div id="donation">
+                <div class="popup">
+                    <span class="popuptext" id="myPopup">Address Copied</span>
+                    <img src="Images/BTC.png" id="address" class="BTC" onclick="BTCSet()">
+                </div>
+                <div class="popup2">
+                    <span class="popuptext2" id="myPopup2">Address Copied</span>
+                    <img src="Images/siaLogo.png" id="address" class="SIA" onclick="SIASet()">
+                </div>
+                <div class="popup3">
+                    <span class="popuptext3" id="myPopup3">Address Copied</span>
+                    <img src="Images/hyperLogo.png" id="address" class="XSC" onclick="XSCSet()">
+                </div>
+                <br>
+                <div class="popup4">
+                    <span class="popuptext4" id="myPopup4">Address Copied</span>
+                    <img src="Images/primeLogo.png" id="address" class="SCP" onclick="SCPSet()">
+                </div>
+                <div class="popup5">
+                    <span class="popuptext5" id="myPopup5">Address Copied</span>
+                    <img src="Images/cash2.png" id="address" class="Cash2" onclick="Cash2Set()">
+                </div>
+            </div>
+        </div>
+    </footer>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.min.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment-with-locales.js"></script>
+    <script type="text/javascript" src="Grin.js"></script>
+</body>
+</html>
