@@ -33,7 +33,7 @@
 }
 
 /* Desktop Scaling */ 
-@media only screen and (min-width: 1200px) {
+/*@media only screen and (min-width: 1200px) {*/
         body {
                 margin: 0px;
                 padding: 0px;
@@ -593,7 +593,7 @@
                 position: absolute;
                 right: 0;
                 margin-right: 10px;
-                margin-top: 5px;
+                margin-top: 2px;
         }
         
         .switch2 input { 
@@ -763,4 +763,35 @@
         .minersTotalSoldMiners {
           font-size: 14px;
         }
-}
+
+        #totalResult {
+          display: flex;
+          width: 600px;
+          margin:auto;
+          height:30px;
+          
+        }
+        
+        #totalResult h3 {
+          margin:5px;
+        }
+
+        #totalCoins {
+          display: flex;
+          width: 300px;
+        }
+
+        #totalCoinsNumber {
+          color:rgb(162, 165, 28);
+        }
+
+        #totalProfit {
+          display: flex;
+          width: 300px;
+          text-align: right;
+        }
+
+        #totalProfitNumber {
+          color:rgb(29, 153, 48);
+        }
+/*}*/

@@ -32,24 +32,24 @@
 <html lang="en">
 <head>
     <!-- Preview Meta Tags -->
-    <meta name="description" content="Calculate the profits for coins on the Blake2b algorithm.">
+    <meta name="description" content="Simulate the profits for GrinCuckatoo31/32.">
     
     <!-- Google / Search Engine Tags -->
-    <meta itemprop="name" content="Blake2b Mining Calculator">
+    <meta itemprop="name" content="GrinCuckatoo31/32 Mining Simulator">
     <meta itemprop="description" content="Calculate the profits for coins on the Blake2b algorithm.">
     <meta itemprop="image" content="">
     
     <!-- Facebook Meta Tags -->
     <meta property="og:url" content="https://www.blakemining.com/">
     <meta property="og:type" content="website">
-    <meta property="og:title" content="Blake2b Mining Calculator">
-    <meta property="og:description" content="Calculate the profits for coins on the Blake2b algorithm.">
+    <meta property="og:title" content="GrinCuckatoo31/32 Mining Simulator">
+    <meta property="og:description" content="Simulate the profits for GrinCuckatoo31/32.">
     <meta property="og:image" content="">
     
     <!-- Twitter Meta Tags -->
     <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:title" content="Blake2b Mining Calculator">
-    <meta name="twitter:description" content="Calculate the profits for coins on the Blake2b algorithm.">
+    <meta name="twitter:title" content="GrinCuckatoo31/32 Mining Simulator">
+    <meta name="twitter:description" content="Simulate the profits for GrinCuckatoo31/32.">
     <meta name="twitter:image" content="">
     <!-- Preview Meta Tags end -->
     
@@ -74,13 +74,14 @@
         </div>
        <select id="logoDropdown" onInput="changePage()">
                   <option value="Blake2b" selected="selected">Blake2b Mining Calculator</option>
-                  <option value="Grin" selected="selected">Grin31/32 Mining Calculator</option>
+                  <option value="Grin" selected="selected">Grin31/32 Mining Simulator</option>
                   <!-- <option value="PoC">PoC Mining Calculator</option> -->
         </select>
     </div>
     <div class="main">
         <div class="container">
             <div class="outer">
+               <h3 style="color:#c60000;">Domain name will be changed when I setup a homepage. Mobile scaling is not implemented yet.</h3>
                 <div class="mainInput">
                     <table class="preset">
                             <tbody>
@@ -168,13 +169,13 @@
                         </span>
                         
                         <span class="Grin32Add" id="Grin32Span">
-                            <h3>Include GrinCuckatoo32</h3>
+                            <h3>Include Grin Phasing</h3>
                             <label class="switch" style="display:block;">
                                 <input type="checkbox" id="Grin32ToggleSwitch" onInput="liveHashrate();" checked>
                                 <span class="slider round"></span>
                                 <div class="tooltip5">
                                     <img src="Images/info.png" class="infoImg tooltipJS" style="position: absolute; left: 26px; bottom: 0px;">
-                                    <span class="tooltiptext5">On January 2020, Grin will modify the algorithm from GrinCuckatoo31 to GrinCuckatoo32. If the toggle is enabled, it will include the change in the miner's performance and the profitability.</span>
+                                    <span class="tooltiptext5">The Grin block reward is split between algorithm's and the percentage changes overtime, if the toggle is enabled, the calcualtor will include the math for the phasing.</span>
                                 </div>
                             </label>
                         </span>
@@ -248,6 +249,17 @@
                                 </tr>
                             </tbody>
                         </table>
+                </div>
+                <h4 style="color:#c60000;">Calculator may have bugs, please message @Gaming Radar101#3404 on discord if you run into any issues.</h4>
+                <div id="totalResult">
+                  <div id="totalCoins">
+                    <h3>Total Coins:</h3>
+                    <h3 id="totalCoinsNumber">0</h3>
+                  </div>
+                  <div id="totalProfit">
+                    <h3>Total Profit(USD):</h3>
+                    <h3 id="totalProfitNumber">0</h3>
+                  </div>
                 </div>
                 <div id="chart">
                     <canvas id="ctx" width="800" height="200" style="display:inline;"></canvas>
