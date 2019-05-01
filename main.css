@@ -907,7 +907,6 @@
         /* Day/Light Theme Switch */
         
         .switch2 {
-                position: relative;
                 display: inline-block;
                 width: 56px;
                 height: 27px;
@@ -1783,7 +1782,19 @@
                 font-size: 18px;
         }
         
-        
+        #logoDropdown {
+                background-color: rgba(181, 184, 188, 0.8);
+                border: 1px solid rgba(120, 120, 120, 0.8);
+                border-radius: 2px;
+                font-size: 18px;
+                text-align: justify;
+                text-align-last: center;
+                font-size:25px;
+                color:#008eaf;
+                width:370px;
+                margin:auto;
+                padding-right: 10px;
+        }
         
         #inputArea {
                 padding: 10px;
@@ -1907,7 +1918,6 @@
          /* Day/Light Theme Switch */
         
         .switch2 {
-                position: relative;
                 display: inline-block;
                 width: 39px;
                 height: 19px;
@@ -2751,7 +2761,19 @@
                 font-size: 18px;
         }
         
-        
+        #logoDropdown {
+                background-color: rgba(181, 184, 188, 0.8);
+                border: 1px solid rgba(120, 120, 120, 0.8);
+                border-radius: 2px;
+                font-size: 18px;
+                text-align: justify;
+                text-align-last: center;
+                font-size:25px;
+                color:#008eaf;
+                width:370px;
+                margin:auto;
+                padding-right: 10px;
+        }
         
         #inputArea {
                 padding: 10px;
@@ -2875,7 +2897,6 @@
          /* Day/Light Theme Switch */
         
         .switch2 {
-                position: relative;
                 display: inline-block;
                 width: 56px;
                 height: 27px;
@@ -3688,6 +3709,20 @@
                 font-size: 18px;
         }
 
+        #logoDropdown {
+                background-color: rgba(181, 184, 188, 0.8);
+                border: 1px solid rgba(120, 120, 120, 0.8);
+                border-radius: 2px;
+                font-size: 18px;
+                text-align: justify;
+                text-align-last: center;
+                font-size:25px;
+                color:#008eaf;
+                width:370px;
+                margin:auto;
+                padding-right: 10px;
+        }
+
         #inputArea {
                 padding: 10px;
                 width: 430px;
@@ -3808,14 +3843,13 @@
          /* Day/Light Theme Switch */
         
         .switch2 {
-                position: relative;
                 display: inline-block;
                 width: 56px;
                 height: 27px;
                 position: absolute;
                 right: 0;
                 margin-right: 10px;
-                margin-top: 5px;
+                margin-top: 2px;
         }
         
         .switch2 input { 
