@@ -1,3 +1,31 @@
+/*
+ * Copyright (c) 2018 by KizmoTek <KizmoTek@gmail.com>
+ * All rights reserved.
+ *
+ * License: 
+ * Redistribution and use in source and binary forms, with or without
+ * modification, are permitted provided that the following conditions are met:
+ *
+ *   - Redistributions of source code must retain the above copyright notice, this
+ *     list of conditions and the following disclaimer.
+ *
+ *   - Redistributions in binary form must reproduce the above copyright notice,
+ *     this list of conditions and the following disclaimer in the documentation
+ *     and/or other materials provided with the distribution.
+ *
+ * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
+ * AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
+ * IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
+ * DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE
+ * FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL
+ * DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR
+ * SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER
+ * CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY,
+ * OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
+ * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+*/
+
+
 moment().format();
 
 const grinPriceAPI = "https://api.coingecko.com/api/v3/coins/grin/market_chart?vs_currency=usd&days=1"
@@ -10,7 +38,8 @@ var GRN1Sale = document.getElementById("GRN1Sale")
 var GRN1IMMSale = document.getElementById("GRN1-IMMSale")
 var totalHashrate = document.getElementById("totalHashrate")
 var totalMiners = document.getElementById("totalMiners")
-
+var diffPercentageInput = document.getElementById("diffPercentage")
+var difficultyAddPercentage
 
 var APILoaded = 0
 
@@ -140,13 +169,14 @@ var today = new Date();
 var dd = String(today.getDate()).padStart(2, '0');
 var mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
 var yyyy = today.getFullYear();
+var newToday = yyyy + '-' + mm + '-' + dd
 
 if (mm < 8 && yyyy == 2019) {
     startDateInput.value = "2019" + '-' + "08" + '-' + "01"
     
     endDateInput.value = "2019" + '-' + "09" + '-' + "01";
 } else {
-    startDateInput.value = yyyy + '-' + mm + '-' + dd;
+    startDateInput.value = newToday;
     
     if (mm == 1) {
         var tempYear = Number(yyyy)
@@ -155,6 +185,41 @@ if (mm < 8 && yyyy == 2019) {
         var tempMonth = String(today.getMonth() + 2).padStart(2, '0');
         endDateInput.value = yyyy + '-' + tempMonth + '-' + dd;
     }
+}
+
+var prevDateEnd = endDateInput.value
+var prevDateStart = startDateInput.value
+
+function dateCheck() {
+  if (startDateInput.value < newToday) {
+    if (startDateInput.value == "") {
+      startDateInput.value = prevDateStart
+    } else {
+      startDateInput.value = newToday
+    }
+  }
+  if (endDateInput.value <= startDateInput.value) {
+    if (endDateInput.value == "") {
+      endDateInput.value = prevDateEnd
+    } else {
+      var newStartingDate = startDateInput.value.split("-")
+      var newDay = parseInt(newStartingDate[2]) + 1
+      
+      if(newDay > 9 && newDay < 32) {
+        newStartingDate[2] = newDay
+      } else if(newDay <= 31){
+        newStartingDate[2] = "0" + (parseInt(newStartingDate[2]) + 1)
+      } else {
+        newStartingDate[2] = 31
+      }
+      newStartingDate = newStartingDate.join("-")
+      endDateInput.value = newStartingDate
+    }
+  }
+
+  prevDateEnd = endDateInput.value
+  prevDateStart = startDateInput.value
+  liveHashrate()
 }
 
 function formatNumber(num) {
@@ -201,7 +266,7 @@ function secondaryPowRatio(height) {
     return Math.max(0, result)
 }
 
-function getSharePercent(blockHeight, currDate) {
+function getSharePercent(blockHeight, currDate, currAlgo) {
   if (Grin32Toggle.checked == true) {
       const afShare = (100 - secondaryPowRatio(Math.floor(blockHeight))) / 100
 
@@ -214,7 +279,11 @@ function getSharePercent(blockHeight, currDate) {
         }
       }
 
-      return cc31Share * afShare
+      if (currAlgo === 'cc31') {
+        return cc31Share * afShare
+      } else {
+        return (1 - cc31Share) * afShare
+      }
   } else {
       return (100 - secondaryPowRatio(Math.floor(blockHeight))) / 100
   }
@@ -225,6 +294,86 @@ var dayProfit = 0
 var newState
 var newPhaseOut
 var hoursPerDataPoint
+
+function dataPoint(totalData) {
+  var result
+  if (totalData / 30 > 0.8) {
+    if(totalData >= 744 && totalData < 1464) {
+      hoursPerDataPoint = totalData / 30
+      result = hoursPerDataPoint * 60
+    } else if(totalData >= 1464 && totalData < 2208) {
+      hoursPerDataPoint = totalData / 40
+      result = hoursPerDataPoint * 60
+    } else if(totalData >= 2208 && totalData < 2928) {
+      hoursPerDataPoint = totalData / 50
+      result = hoursPerDataPoint * 60
+    } else if(totalData >= 2928 && totalData < 3672) {
+      hoursPerDataPoint = totalData / 60
+      result = hoursPerDataPoint * 60
+    } else if(totalData >= 3672 && totalData < 4416) {
+      hoursPerDataPoint = totalData / 70
+      result = hoursPerDataPoint * 60
+    } else if(totalData >= 4416 && totalData < 5112) {
+      hoursPerDataPoint = totalData / 80
+      result = hoursPerDataPoint * 60
+    } else if(totalData >= 5112 && totalData < 5856) {
+      hoursPerDataPoint = totalData / 90
+      result = hoursPerDataPoint * 60
+    } else if(totalData >= 5856 && totalData < 6576) {
+      hoursPerDataPoint = totalData / 100
+      result = hoursPerDataPoint * 60
+    } else if(totalData >= 6576 && totalData < 7320) {
+      hoursPerDataPoint = totalData / 110
+      result = hoursPerDataPoint * 60
+    } else if(totalData >= 7320 && totalData < 8040) {
+      hoursPerDataPoint = totalData / 120
+      result = hoursPerDataPoint * 60
+    } else if(totalData >= 8040 && totalData < 8784) {
+      hoursPerDataPoint = totalData / 130
+      result = hoursPerDataPoint * 60
+    } else if(totalData >= 8784 && totalData < 9528) {
+      hoursPerDataPoint = totalData / 140
+      result = hoursPerDataPoint * 60
+    } else if(totalData >= 9528 && totalData < 10248) {
+      hoursPerDataPoint = totalData / 150
+      result = hoursPerDataPoint * 60
+    } else if(totalData >= 10248 && totalData < 10992) {
+      hoursPerDataPoint = totalData / 160
+      result = hoursPerDataPoint * 60
+    } else if(totalData >= 10992 && totalData < 11712) {
+      hoursPerDataPoint = totalData / 170
+      result = hoursPerDataPoint * 60
+    } else if(totalData >= 11712 && totalData < 12456) {
+      hoursPerDataPoint = totalData / 180
+      result = hoursPerDataPoint * 60
+    } else if(totalData >= 12456 && totalData < 13200) {
+      hoursPerDataPoint = totalData / 190
+      result = hoursPerDataPoint * 60
+    } else if(totalData >= 13200 && totalData < 13872) {
+      hoursPerDataPoint = totalData / 200
+      result = hoursPerDataPoint * 60
+    } else if(totalData >= 13872 && totalData < 14616) {
+      hoursPerDataPoint = totalData / 210
+      result = hoursPerDataPoint * 60
+    } else if(totalData >= 14616 && totalData < 15336) {
+      hoursPerDataPoint = totalData / 220
+      result = hoursPerDataPoint * 60
+    } else if(totalData >= 15336 && totalData < 16080) {
+      hoursPerDataPoint = totalData / 230
+      result = hoursPerDataPoint * 60
+    } else if(totalData >= 16080) {
+      hoursPerDataPoint = totalData / 240
+      result = hoursPerDataPoint * 60
+    } else { //Incase if the statements above dont work
+      hoursPerDataPoint = totalData / 30
+      result = hoursPerDataPoint * 60
+    }
+  } else {
+    hoursPerDataPoint = 1
+    result = 60
+  }
+  return Math.round(result)
+}
 
 const getProfits = (state) => {
 
@@ -240,6 +389,17 @@ const getProfits = (state) => {
   //       step over time in integer values.
   let currDate = moment(state.startDate).unix()
   const endDate = moment(state.endDate).unix()
+
+  var newStartDate = new Date(state.startDate)
+  var newEndDate = new Date(state.endDate)
+
+  var updateTime = 0
+
+  var totalDatapoints = Math.round(Math.abs((newStartDate.getTime() - newEndDate.getTime())/(1*60*60*1000 /*hours*minutes*seconds*milliseconds*/)))
+  var currMonth = 0
+  var previouseDate
+
+  updateTime = dataPoint(totalDatapoints)
 
   let pointNum = 0
   // const genesisBlockDate = moment(new Date('2019-01-15T17:38:05')).unix()
@@ -257,56 +417,52 @@ const getProfits = (state) => {
 
   // NOTE: Figure out what the percentage of the block reward goes to the current algo (e.g., what
   //       percentage goes to Cuckatoo31 on the current date?).
-  let algoSharePercent = getSharePercent(currBlockHeight, currDate)
+  let cc31 = getSharePercent(currBlockHeight, currDate, "cc31")
+  let cc32 = getSharePercent(currBlockHeight, currDate, "cc32")
 
   // NOTE: We iterate from the start date to the end date one minute at a time and figure out how much of
   //       the block reward goes to us.
-  var updateTime = 0
 
-  var newStartDate = new Date(state.startDate)
-  var newEndDate = new Date(state.endDate)
-
-  var totalDatapoints = Math.round(Math.abs((newStartDate.getTime() - newEndDate.getTime())/(1*60*60*1000 /*hours*minutes*seconds*milliseconds*/)))
-  //console.log(totalDatapoints)
-  var totalMonths = Math.round(Math.abs((newStartDate.getTime() - newEndDate.getTime())/(30*24*60*60*1000 /*days*hours*minutes*seconds*milliseconds*/)))
-  
-  hoursPerDataPoint = totalDatapoints / 30
-  if (totalDatapoints / 30 >= 0.8) { //remove the = and hourly will work, however i need to fix the error i get when doing that
-    updateTime = 1440
-    hoursPerDataPoint = 24
-  } else {
-    updateTime = 60
-    hoursPerDataPoint = 1
-  }
+  var normalProfit
+  var difficultyProfit
+  var poolFeeProfit
 
   while (currDate <= endDate) {
+    //if (newStartDate)
     // Step one block
-    const totalCoinsThisBlock = 60 * algoSharePercent
+    const totalCoinsCC31 = 60 * cc31
+    const totalCoinsCC32 = 60 * cc32
 
     // My percent
     // NOTE: Again, the state contains the inputs from the user like myGPS and networkGPS
-    const mySharePercent = state.myGPS / state.networkGPS
-    var tempProfit = 0
-    if (newPhaseOut.cc31[newPhaseOut.cc31.length - 1].y > 0) {
-      if (diffToggle.checked == true) {
-        
-        dayProfit += ((totalCoinsThisBlock * mySharePercent) - ((totalCoinsThisBlock * mySharePercent) * (totalMonths / 100))) - (((totalCoinsThisBlock * mySharePercent) - ((totalCoinsThisBlock * mySharePercent) * (totalMonths / 100))) * poolFee.value / 100)
-        tempProfit = ((totalCoinsThisBlock * mySharePercent) - ((totalCoinsThisBlock * mySharePercent) * (totalMonths / 100)))
-      } else {
-        dayProfit += ((totalCoinsThisBlock * mySharePercent) - ((totalCoinsThisBlock * mySharePercent) * poolFee.value / 100))
-      }
+    var mySharePercent
+    if(cc31 < 0.2 && cc31 > 0) {
+      mySharePercent = obelTotal / state.networkGPS
+      normalProfit = (totalCoinsCC31 * mySharePercent) + (totalCoinsCC32 * (innoTotal * 0.2 / state.networkGPS))
+    } else if(cc31 == 0) {
+      mySharePercent = (innoTotal * 0.2) / state.networkGPS
+      normalProfit = totalCoinsCC32 * mySharePercent
     } else {
-      dayProfit += ((totalCoinsThisBlock * mySharePercent) - ((totalCoinsThisBlock * mySharePercent) * poolFee.value / 100))
+      mySharePercent = state.myGPS / state.networkGPS
+      normalProfit = totalCoinsCC31 * mySharePercent
     }
+     
+    
+    
+    difficultyProfit = normalProfit - (normalProfit * (difficultyAddPercentage * currMonth / 100))
+    poolFeeProfit = difficultyProfit - (difficultyProfit * (poolFee.value / 100))
+    
+    dayProfit += poolFeeProfit
     
     // NOTE: If we added a data point every minute, the graph gets way too much data and the graph
     //       becomes unbearably slow to renderr, so we only show one point per day (every 1440 seconds).
 
-    // Add a data point once a day only to avoid too many data points for the graph
+    // Add a data point once a day only to avoid too many data points for the graph 
     if (pointNum % updateTime === 0) {
       dayIndex += 1
       profitInfo.totalCoinsEarned += dayProfit 
       dayProfit = 0
+      
       profitInfo.data[0].push({
         x: new Date(currDate * 1000), // NOTE: We multiply by 1000, because dates are in milliseconds, not seconds
         y: profitInfo.totalCoinsEarned * state.priceAtEndDate,
@@ -316,13 +472,20 @@ const getProfits = (state) => {
       // NOTE: This should probably be moved so it is done every block, but it probably doesn't make
       //       much difference.  Could just move it out of the loop.
       // Update ASIC share of the POW (secondary algo is the GPU friendly one)
-      algoSharePercent = getSharePercent(currBlockHeight, currDate)
+      cc31 = getSharePercent(currBlockHeight, currDate, "cc31")
+      cc32 = getSharePercent(currBlockHeight, currDate, "cc32")
     }
     pointNum++
     currBlockHeight++
 
     // Add one minute per block
+    previouseDate = new Date(currDate * 1000)
+    
     currDate += 60
+    var tempDate = new Date(currDate * 1000)
+    if (previouseDate.getMonth() != tempDate.getMonth()) {
+      currMonth += 1
+    }
   }
 
   // NOTE: In case data ends at a data point that is not a multiple of 1440, we add in one last data point.
@@ -344,6 +507,14 @@ const getProfits = (state) => {
 const getPhaseOut = (state) => {
   let currDate = moment(state.startDate).unix()
   const endDate = moment(state.endDate).unix()
+
+  var newStartDate = new Date(state.startDate)
+  var newEndDate = new Date(state.endDate)
+
+  var updateTime = 0
+
+  var totalDatapoints = Math.round(Math.abs((newStartDate.getTime() - newEndDate.getTime())/(1*60*60*1000 /*hours*minutes*seconds*milliseconds*/)))
+  updateTime = dataPoint(totalDatapoints)
 
   const phaseOutInfo = {
     cc31: [],
@@ -379,7 +550,7 @@ const getPhaseOut = (state) => {
     cc32Share *= afShare
     cc31Share *= afShare
 
-    if (pointNum % 1440 === 0) {
+    if (pointNum % updateTime === 0) {
       phaseOutInfo.cc31.push({x: new Date(currDate * 1000), y: cc31Share})
       phaseOutInfo.cc32.push({x: new Date(currDate * 1000), y: cc32Share})
     }
@@ -468,7 +639,8 @@ function createChart() {
           }]
        },
        options: {
-          responsive: false,
+          responsive: true,
+          maintainAspectRatio: false,
           tooltips: {
              intersect: false,
              mode: 'label',
@@ -531,6 +703,7 @@ if (localStorage.getItem('theme') == null) {
 var modeToggle = document.getElementById("modeToggle")
 if (localStorage.getItem("mode") == null) {
     modeToggle.checked = false
+    difficultyAddPercentage = 2
 } else {
     var data = localStorage.getItem('mode')
     var newData = JSON.parse(data)
@@ -545,6 +718,7 @@ function liveHashrate() {
     poolFee.value = splitInput(poolFee.value)
     elecCost.value = splitInput(elecCost.value)
     powerConsumtion.value = splitInput(powerConsumtion.value)
+    diffPercentageInput.value = splitInput(diffPercentageInput.value)
     
     if (userHshrt.value == ".") {
         hshrt = 0
@@ -556,15 +730,28 @@ function liveHashrate() {
     if (poolFee.value > 100) {
         poolFee.value = 100
     }
-    
+
+    if (diffPercentageInput.value > 100) {
+        diffPercentageInput.value = 100
+    }
+
+    if (diffToggle.checked == false) {
+      difficultyAddPercentage = 0
+    } else {
+      difficultyAddPercentage = diffPercentageInput.value
+    }
+
     newState = {startDate: startDateInput.value, endDate: endDateInput.value}
     newPhaseOut = getPhaseOut(newState)
-    state = {startDate: startDateInput.value, endDate: endDateInput.value, priceAtEndDate: grinPriceAPIData.prices[grinPriceAPIData.prices.length - 1][1], myGPS: userHshrt.value, networkGPS: networkHshrt.value}
+    
+    state = {startDate: startDateInput.value, endDate: endDateInput.value, priceAtEndDate: grinPriceAPIData.prices[grinPriceAPIData.prices.length - 1][1],    myGPS: userHshrt.value, networkGPS: networkHshrt.value}
     var newProfit = getProfits(state)
+    
+    
     months = 0
     
     chartLabel = arrDateCreator(newProfit.data[0])
-    chartArr = arrCoinsCreator(newProfit.data[1], newPhaseOut)
+    chartArr = arrCoinsCreator(newProfit.data[1])
     chartProfitArr = arrProfitCreator(newProfit.data[0])
     
     updateChart()
@@ -576,45 +763,30 @@ function arrDateCreator(data) {
         "July", "August", "September", "October", "November", "December"
     ];
     var newArr = []
-    var count = 1
     var oldMonth = data[0].x.getMonth() 
     for (var i = 0; i < data.length - 1; i++) {
-        if (count == 1) {
-            newArr.push(monthNames[data[i].x.getMonth()] + " " + data[i].x.getDate() + ", " + data[i].x.getFullYear())
-            count = 0
-            /*if (diffToggle.checked == true) {
-                
-                if (oldMonth != data[i].x.getMonth()) {
-                    months += 1
-                    
-                    oldMonth = data[i].x.getMonth() 
-                }
-                diffArr.push(0 + .02 * months)
-            } else {
-                months = 0
-                diffArr.push(0)
-            } */
-        }
-        count += 1
+      if (hoursPerDataPoint == 1) {
+        newArr.push(data[i].x.getHours() + ":" + "00, " + monthNames[data[i].x.getMonth()] + " " + data[i].x.getDate())
+      } else {
+        newArr.push(monthNames[data[i].x.getMonth()] + " " + data[i].x.getDate() + ", " + data[i].x.getFullYear())
+      }
     }
     return newArr
 }
 
-function arrCoinsCreator(data, phaseData) {
+function arrCoinsCreator(data) {
     var fee = poolFee.value / 100
     if (poolFee.value == ".") {
         fee = 0
     }
     var newArr = []
     for (var i = 0; i < data.length - 1; i++) {
-        //newArr.push(Math.round(((((data[i].y) * phaseData.cc31[i].y) - ((data[i].y) * fee)) - ((data[i].y) - ((data[i].y) * fee)) * diffArr[i]) * 100) / 100)
-        //console.log("((((" + data[i].y + ") * " + phaseData.cc31[i].y + ") - ((" + data[i].y + ") * " + fee + ")) - ((" + data[i].y + ") - ((" + data[i].y + ") * " + fee + ")) * " + diffArr[i] + ")")
-        //newArr.push(Math.round((((data[i].y) - ((data[i].y) * fee)) - ((data[i].y) - ((data[i].y) * fee)) * diffArr[i]) * 100) / 100)
         newArr.push(Math.round(data[i].y * 100) / 100)
     }
     totalCoinsNumber.innerHTML = (Math.round(newArr[newArr.length - 1] * 100) / 100).toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1,')
     return newArr
 }
+
 function arrProfitCreator(data) {
     var fee = poolFee.value / 100
     if (poolFee.value == ".") {
@@ -623,18 +795,23 @@ function arrProfitCreator(data) {
     
     var newArr = []
     var tempProfit
+    var tempPower
+    var tempI
     for (var i = 0; i < data.length - 1; i++) {
+
       if(newPhaseOut.cc31[i].y > 0 || Grin32Toggle.checked == false) {
-          newArr.push(Math.round((((data[i].y) - ((data[i].y) * fee)) - ((((powerConsumtion.value * hoursPerDataPoint/*24 = 1 day*/) * i) * elecCost.value) / 1000)) * 100) / 100)
-          tempProfit = Math.round((((data[i].y) - ((data[i].y) * fee)) - ((((powerConsumtion.value * hoursPerDataPoint/*24 = 1 day*/) * i) * elecCost.value) / 1000)) * 100) / 100 //Optimize code
+          newArr.push(Math.round(((data[i].y) - ((((powerConsumtion.value * hoursPerDataPoint/*24 = 1 day*/) * i) * elecCost.value) / 1000)) * 100) / 100)
+          tempPower = (((powerConsumtion.value * hoursPerDataPoint/*24 = 1 day*/) * i) * elecCost.value) / 1000
+          tempI = i
+          tempProfit = Math.round(((data[i].y) - tempPower) * 100) / 100 //Optimize code
+      } else if(innoTotal > 0) {
+        var tempPower2 = (((innoPower * hoursPerDataPoint/*24 = 1 day*/) * (i - tempI)) * elecCost.value) / 1000
+        newArr.push(Math.round(((data[i].y) - (tempPower2 + tempPower)) * 100) / 100)
       } else {
         newArr.push(tempProfit)
       }
-      
-      //newArr.push(Math.round(((((data[i].y) - ((data[i].y) * diffArr[i])) - ((data[i].y) * fee)) - ((((powerConsumtion.value * 24) * i) * elecCost.value) / 1000)) * 100) / 100)
     }
-    if ((Math.round((((data[i].y) - ((data[i].y) * fee)) - ((((powerConsumtion.value * hoursPerDataPoint/*24 = 1 day*/) * i) * elecCost.value) / 1000)) * 100) / 100) < 0) {
-        
+    if (tempProfit <= 0) {
         USDChartColor = "rgb(153, 29, 29, 0.8)"
         USDChartBorderColor = "#842727"
     } else {
@@ -786,129 +963,14 @@ function presetUpdate() {
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-function changePage() {
-    const logoDropdown = document.getElementById("logoDropdown")
-    if (logoDropdown.selectedIndex == 0) {
-        window.open("index.html", "_top");
-    } else if(logoDropdown.selectedIndex == 1) {
-        window.open("Grin.html", "_top");
-    } else if(logoDropdown.selectedIndex == 2) {
-        window.open("PoC.html", "_top");
-    }
-    
-}
-
-function BTCSet() {
-    var coinAddress = "1DNEmupDWC873fDv4Lpy1xY2us6eYKwXTH"
-    var coin = "BTC"
-    var popup = document.getElementById("myPopup");
-    const el = document.createElement('textarea');
-    el.value = coinAddress;
-    document.body.appendChild(el);
-    el.select();
-    document.execCommand('copy');
-    document.body.removeChild(el);
-    popup.classList.toggle("show");
-    setTimeout( () => {popup.classList.toggle("show")}, 3000);
-}
-
-function SIASet() {
-    var coinAddress = "f7e6b31b7fbfd78894964d81e418ad0d1b9f0a8ae59be37e932e5853670feb89e0f4021df521"
-    var coin = "SIA"
-    var popup = document.getElementById("myPopup2");
-    const el = document.createElement('textarea');
-    el.value = coinAddress;
-    document.body.appendChild(el);
-    el.select();
-    document.execCommand('copy');
-    document.body.removeChild(el);
-    popup.classList.toggle("show");
-    setTimeout( () => {popup.classList.toggle("show")}, 3000);
-}
-
-function XSCSet() {
-    var coinAddress = "ebe11b2258f11caba02e7d2c1a5766b94175a5155d9e620a7f77a95d4bd1f5856fdb2d513cb3"
-    var coin = "XSC"
-    var popup = document.getElementById("myPopup3");
-    const el = document.createElement('textarea');
-    el.value = coinAddress;
-    document.body.appendChild(el);
-    el.select();
-    document.execCommand('copy');
-    document.body.removeChild(el);
-    popup.classList.toggle("show");
-    setTimeout( () => {popup.classList.toggle("show")}, 3000);
-}
-
-function SCPSet() {
-    var coinAddress = "bd187fa1c247a297e364d67ee59b66a4cbecec2d4a3cf2c01d4d5540c9d6a03f6279d40657a3"
-    var coin = "SCP"
-    var popup = document.getElementById("myPopup4");
-    const el = document.createElement('textarea');
-    el.value = coinAddress;
-    document.body.appendChild(el);
-    el.select();
-    document.execCommand('copy');
-    document.body.removeChild(el);
-    popup.classList.toggle("show");
-    setTimeout( () => {popup.classList.toggle("show")}, 3000);
-}
-
-function Cash2Set() {
-    var coinAddress = "27xnv8XecrsRBnVau4xinb5kuyMAbthiihVVPmZMJvsJ7Q2bKxwmRC2SaY6tGz57iBXieRarHcoGLFFWzQuVJbYdB2nCD1J"
-    var coin = "Cash2"
-    var popup = document.getElementById("myPopup5");
-    const el = document.createElement('textarea');
-    el.value = coinAddress;
-    document.body.appendChild(el);
-    el.select();
-    document.execCommand('copy');
-    document.body.removeChild(el);
-    popup.classList.toggle("show");
-    setTimeout( () => {popup.classList.toggle("show")}, 3000);
-}
-
 function changeMode() {
     var simple = document.getElementById("simple");
     var advanced = document.getElementById("advanced")
     var networkDifficulty = document.getElementById("networkDifficulty")
     var Grin32Span = document.getElementById("Grin32Span")
+    var diffPercentage = document.getElementById("diffPercentageDiv")
+    var diffLabel = document.getElementById("diffLabel")
+    var diffSpan = document.getElementById("diffPercentageSpan")
     
     if (modeToggle.checked == true) {
         var data = {Toggle: modeToggle.checked}
@@ -919,6 +981,12 @@ function changeMode() {
         advanced.style.transform = "scale(1.2)"
         networkDifficulty.style.removeProperty("display")
         Grin32Span.style.removeProperty("display")
+        diffPercentage.style.removeProperty("display")
+        diffLabel.style.display = "none"
+        diffSpan.style.width = "146px"
+        diffPercentageInput.value = 2
+        difficultyAddPercentage = diffPercentageInput.value
+        //liveHashrate()
     } else {
         var data = {Toggle: modeToggle.checked}
         var strData = JSON.stringify(data)
@@ -927,6 +995,12 @@ function changeMode() {
         advanced.style.transform = "scale(.9)"
         networkDifficulty.style.display = "none"
         Grin32Span.style.display = "none"
+        diffPercentage.style.display = "none"
+        diffLabel.style.removeProperty("display")
+        diffSpan.style.removeProperty("width")
+        diffPercentageInput.value = 2
+        difficultyAddPercentage = 2
+        //liveHashrate()
     }
 }
 
@@ -935,6 +1009,9 @@ function ChangeTheme() {
     var poolLinkTheme = document.getElementsByClassName("coinPoolList");
     var presetDataTheme = document.getElementsByClassName("presetData");
     var tooltipIMG = document.getElementsByClassName("tooltipJS");
+    var HomeIMG = document.getElementsByClassName("HomeIMG")
+    var PresetTable = document.getElementsByClassName("preset")[0]
+    var minersSoldTable = document.getElementsByClassName("minersSold")[0]
     
     if (themeToggle.checked == true) {
         tickColor = "white"
@@ -955,8 +1032,9 @@ function ChangeTheme() {
         currentTheme[2].style.backgroundColor = "#3b3d3f"
         document.body.style.background = "#535659";
         currentTheme[2].style.borderColor = "#28292b"
-        currentTheme[1].children[0].children[0].children[1].children[0].style.backgroundColor = "rgb(64, 66, 68)"
-        currentTheme[1].children[0].children[0].children[1].children[2].style.backgroundColor = "rgb(64, 66, 68)"
+        HomeIMG[0].style.filter = "invert(1)"
+        PresetTable.style.backgroundColor = "rgb(64, 66, 68)"
+        minersSoldTable.style.backgroundColor = "rgb(64, 66, 68)"
         for (var i = 0; i < inputsTheme.length; i++) {
             inputsTheme[i].style.backgroundColor = "#90969b"
             inputsTheme[i].style.color = "white"
@@ -984,8 +1062,9 @@ function ChangeTheme() {
         var strData = JSON.stringify(data)
         localStorage.setItem('theme', strData);
         var currentTheme = document.body.children
-        currentTheme[1].children[0].children[0].children[1].children[2].style.removeProperty("background-color")
-        currentTheme[1].children[0].children[0].children[1].children[0].style.removeProperty("background-color")
+        HomeIMG[0].style.removeProperty("filter")
+        PresetTable.style.removeProperty("background-Color")
+        minersSoldTable.style.removeProperty("background-Color")
         for (var i = 0; i < currentTheme.length; i++) {
             currentTheme[i].style.removeProperty("color")
             currentTheme[i].style.removeProperty("background-color")

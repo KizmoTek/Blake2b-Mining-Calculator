@@ -1,5 +1,5 @@
 <!-- 
- * Copyright (c) 2018 by Michael Galstyan <mike505222@gmail.com>
+ * Copyright (c) 2018 by KizmoTek <KizmoTek@gmail.com>
  * All rights reserved.
  *
  * License: 
@@ -24,79 +24,3 @@
  * OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 -->
-
-
-
-
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <link rel="shortcut icon" href="Images/Calculator Icon.png" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <link rel="stylesheet" href="main.css">
-    <link href='https://fonts.googleapis.com/css?family=Roboto:300' rel='stylesheet'>
-    <title>Blake2b Mining Calculator</title>
-</head>
-<body onload="setTimeout(liveHashrate, 4000)">
-    <div class="TopLine">
-       <!-- <a href="index.html"><h1 class="logoName">PoC Mining Calculator</h1></a> -->
-        <select id="logoDropdown" onInput="changePage()">
-                  <option value="Blake2b">Blake2b Mining Calculator</option>
-                  <option value="PoC" selected="selected">PoC Mining Calculator</option>
-        </select>
-    </div>
-
-    <footer>
-        <div id="API">
-        <div>
-            <img src="Images/API.png" class="apiLogo">
-        </div>
-        <div>
-            <a href="https://keops.cc/" target="_blank">Keops</a>
-            <br>
-            <a href="https://www.coingecko.com/api/docs/v3" target="_blank">Coin Gecko</a>
-            <br>
-            <a href="https://github.com/ImTooLazyToWriteAUsername/BlakeMining" target="_blank" class="github">Github Repository</a>
-            <br>
-            <a href="https://www.blakemining.com/zodiac.html" target="_blank" class="zodiacLink">Zodiac Calculator</a>
-        </div>
-        </div>
-        <div>
-           <a href="advertisementInfo.html"><img src="Images/AdvertisementImg.png" id="advert"></a>
-        </div>
-        <div id="bottomText">
-            <h3 id="bottomText">GamingRadar101: HTML, CSS, and JavaScript</h3>
-            <h3 id="bottomText">MasterHW: JavaScript Math</h3>
-        </div>
-        <div id="DonationMain">
-            <h4 id="DonationWord">Donation<br>Addresses:</h4>
-            <div id="donation">
-                <div class="popup">
-                    <span class="popuptext" id="myPopup">Address Copied</span>
-                    <img src="Images/BTC.png" id="address" class="BTC" onclick="BTCSet()">
-                </div>
-                <div class="popup2">
-                    <span class="popuptext2" id="myPopup2">Address Copied</span>
-                    <img src="Images/siaLogo.png" id="address" class="SIA" onclick="SIASet()">
-                </div>
-                <div class="popup3">
-                    <span class="popuptext3" id="myPopup3">Address Copied</span>
-                    <img src="Images/hyperLogo.png" id="address" class="XSC" onclick="XSCSet()">
-                </div>
-                <br>
-                <div class="popup4">
-                    <span class="popuptext4" id="myPopup4">Address Copied</span>
-                    <img src="Images/primeLogo.png" id="address" class="SCP" onclick="SCPSet()">
-                </div>
-                <div class="popup5">
-                    <span class="popuptext5" id="myPopup5">Address Copied</span>
-                    <img src="Images/cash2.png" id="address" class="Cash2" onclick="Cash2Set()">
-                </div>
-            </div>
-        </div>
-    </footer>
-    <script type="text/javascript" src="main.js"></script>
-</body>
-</html>
