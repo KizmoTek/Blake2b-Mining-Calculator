@@ -158,11 +158,11 @@
                     
             <div id="inputArea">
                 <h1>Hashrate</h1>
-                <input type="text" id="hashrate" class="inputThemeJS" onInput="liveHashrate(); clearPreset();" value="0">
+                <input type="text" id="hashrate" class="inputThemeJS" onInput="clearPreset(); liveHashrate();" value="0">
                 
 
                 
-                <select id="hashPower" onInput="liveHashrate(); clearPreset();">
+                <select id="hashPower" onInput="clearPreset(); liveHashrate();">
                   <option value="Giga">Gh/s</option>
                   <option value="Tera">Th/s</option>
                 </select>
@@ -189,15 +189,16 @@
                 <h1>Power (W)</h1>
                 <input type ="text" id="powerConsumtion" class="inputThemeJS" onInput="liveHashrate(); clearPreset();">
                 <br>
-                <input type="button" class="customPresetButton" onClick="saveData()" value="Save Custom Preset"/>
+                <input type="button" class="customPresetButton" onClick="saveData()" value="Save Custom Data to Browser"/>
                 <br>
-                <input type="button" class="customPresetButton2" onClick="deleteData()" value="Delete Custom Preset"/>
+                <input type="button" class="customPresetButton2" onClick="deleteData()" value="Delete Custom Data from Browser"/>
             </div>
             <div class="totalResult">
                 <div class="PowerResult">
                     <table>
                         <tr class="powerNumbers">
                             <th>Power($)</th>
+                            <th></th>
                             <td id="PowerCostHour">0.00</td>
                             <td id="PowerCostDay">0.00</td>
                             <td id="PowerCostWeek">0.00</td>
@@ -418,6 +419,58 @@
                             <td id="CASH2resultWeekProfitUSD" class="bold">0.00</td>
                             <td id="CASH2resultMonthProfitUSD" class="bold">0.00</td>
                         </tr>
+
+                        <!-- <th class="tableCoin" colspan="2" style="padding:0px;">
+                                <img src="Images/tnetLogo.png" class="Cash2Logo">
+                                <a href="https://cash2.org/" target="_blank" class="coinName" id="cash2Name">TNET</a>
+                            </th>
+                            <th class="tableVolume" colspan="3">
+                                <a href="https://www.coingecko.com/en/coins/cash2" target="_blank" class="" id="coinVolume">24 hr Volume: <span id="Cash2VolumeValue">$0</span></a>
+                            </th>
+                            <th class="tableCoinPool" style="padding:0px;">
+                                <a href="https://cash2.org/#miningInformation" target="_blank" class="coinPoolList">Pools</a>
+                            </th>
+                            </tr>
+
+                        <tr class="time">
+                            <td></td>
+                            <td></td>
+                            <th>Hour</th>
+                            <th>Day</th>
+                            <th>Week</th>
+                            <th>Month</th>
+                        </tr>
+                        <tr class="calcNumbers">
+                            <th rowspan="2" id="hideBorder">Income</th>
+                            <th class="smallName" id="noPad2">TNET</th>
+                            <td id="CASH2resultHour">0.00</td>
+                            <td id="CASH2resultDay">0.00</td>
+                            <td id="CASH2resultWeek">0.00</td>
+                            <td id="CASH2resultMonth">0.00</td>
+                        </tr>
+                        <tr class="calcNumbers" id="lineDivider">
+                            <th class="smallName">USD</th>
+                            <td id="CASH2resultHourUSD">0.00</td>
+                            <td id="CASH2resultDayUSD">0.00</td>
+                            <td id="CASH2resultWeekUSD">0.00</td>
+                            <td id="CASH2resultMonthUSD">0.00</td>
+                        </tr>
+                        <tr></tr>
+                        <tr class="calcNumbers">
+                            <th rowspan="2">Profit</th>
+                            <th class="smallName" id="noPad2">TNET</th>
+                            <td id="CASH2resultHourProfit" class="bold">0.00</td>
+                            <td id="CASH2resultDayProfit" class="bold">0.00</td>
+                            <td id="CASH2resultWeekProfit" class="bold">0.00</td>
+                            <td id="CASH2resultMonthProfit" class="bold">0.00</td>
+                        </tr>
+                        <tr class="calcNumbers">
+                            <th class="smallName">USD</th>
+                            <td id="CASH2resultHourProfitUSD" class="bold">0.00</td>
+                            <td id="CASH2resultDayProfitUSD" class="bold">0.00</td>
+                            <td id="CASH2resultWeekProfitUSD" class="bold">0.00</td>
+                            <td id="CASH2resultMonthProfitUSD" class="bold">0.00</td>
+                        </tr> -->
                     </table>
                 </div>
                 
@@ -495,8 +548,6 @@
             <a href="https://www.coingecko.com/api/docs/v3" target="_blank">Coin Gecko</a>
             <br>
             <a href="https://github.com/ImTooLazyToWriteAUsername/BlakeMining" target="_blank" class="github">Github Repository</a>
-            <br>
-            <a href="https://www.blakemining.com/zodiac.html" target="_blank" class="zodiacLink">Zodiac Calculator</a>
         </div>
         </div>
         <div>

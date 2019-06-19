@@ -53,8 +53,8 @@ var siaPriceAPILoad = false
 const primePriceAPI = "https://api.coingecko.com/api/v3/coins/siaprime-coin/market_chart?vs_currency=usd&days=1"
 var primePriceAPILoad = false
 
-const CBprimePriceAPI = "https://api.crypto-bridge.org/api/v1/ticker/BTC_SCP"
-var CBprimePriceAPILoad = false
+//const CBprimePriceAPI = "https://api.crypto-bridge.org/api/v1/ticker/BTC_SCP"
+//var CBprimePriceAPILoad = false
 
 const classicPriceAPI = "https://api.coingecko.com/api/v3/coins/siaclassic/market_chart?vs_currency=usd&days=1"
 var classicPriceAPILoad = false
@@ -62,8 +62,8 @@ var classicPriceAPILoad = false
 const cash2PriceAPI = "https://api.coingecko.com/api/v3/coins/cash2/market_chart?vs_currency=usd&days=1"
 var cash2PriceAPILoad = false
 
-const btcPriceAPI = "https://api.coingecko.com/api/v3/coins/bitcoin/market_chart?vs_currency=usd&days=1"
-var btcPriceAPILoad = false
+//const btcPriceAPI = "https://api.coingecko.com/api/v3/coins/bitcoin/market_chart?vs_currency=usd&days=1"
+//var btcPriceAPILoad = false
 
 let diffToggle = document.getElementById("diffToggleSwitch")
 var diffAdjust = true // Toggles adjusting difficulty for added hashrate
@@ -71,6 +71,9 @@ let hshrt = 0
 
 const greenColor = "#30fa30"
 const redColor = "#d20000"
+const greenColorDark = "#22b522"
+const redColorDark = "#d86161"
+
 
 var PowerCostHour = document.querySelector("#PowerCostHour")
 var PowerCostDay = document.querySelector("#PowerCostDay")
@@ -290,7 +293,12 @@ var S11 = document.getElementById("S11")
 var SC1 = document.getElementById("SC1")
 var StrongU = document.getElementById("StrongU")
 let totalPresetHashrate
+let totalBlake2bHashrate
+let totalBlake2bPower
+let totalObeliskHashrate
+let totalObeliskPower
 let totalPresetPower
+let usingPreset
 
 let A3preset = 0
 let Baikpreset = 0
@@ -518,6 +526,7 @@ fetch(primePriceAPI)
     apiLoadVerify()
 })
 
+/*
 let CBprimePriceAPIData
 fetch(CBprimePriceAPI)
     .then(function(response) {
@@ -546,7 +555,7 @@ fetch(CBprimePriceAPI)
     CBprimePriceAPILoad = true
     APILoaded += 1
     apiLoadVerify()
-})
+}) */
 
 
 
@@ -584,6 +593,7 @@ fetch(classicPriceAPI)
     apiLoadVerify()
 })
 
+/*
 let btcPriceAPIData
 fetch(btcPriceAPI)
     .then(function(response) {
@@ -612,10 +622,10 @@ fetch(btcPriceAPI)
     btcPriceAPILoad = true
     APILoaded += 1
     apiLoadVerify()
-})
+}) */
 
 function apiLoadVerify() {
-    if(APILoaded >= 9) {
+    if(APILoaded >= 7) {
         console.log(APILoaded + " API's loaded")
         liveHashrate()
         presetUpdate()
@@ -686,6 +696,8 @@ function liveHashrate() {
 }
 
 function clearPreset() {
+    usingPreset = false
+
     A3.value = 0
     A3preset = 0
     
@@ -850,7 +862,6 @@ function miningAPIError() {
 
 
 function sia(){
-        
         try {
             siaAPIDifficulty = miningAPIData[0].difficulty
         } catch(e) {
@@ -870,11 +881,17 @@ function sia(){
                 console.log(error)
             }
         }
-        
-        siaHourresult = siaReward(siaAPIDifficulty, hshrt, siaAPIheight, hour)
-        siaDayresult = siaReward(siaAPIDifficulty, hshrt, siaAPIheight, day)
-        siaWeekresult = siaReward(siaAPIDifficulty, hshrt, siaAPIheight, week)
-        siaMonthresult = siaReward(siaAPIDifficulty, hshrt, siaAPIheight, month)
+        if (usingPreset == true) {
+          siaHourresult = siaReward(siaAPIDifficulty, totalObeliskHashrate  * 1e9, siaAPIheight, hour)
+          siaDayresult = siaReward(siaAPIDifficulty, totalObeliskHashrate * 1e9, siaAPIheight, day)
+          siaWeekresult = siaReward(siaAPIDifficulty, totalObeliskHashrate * 1e9, siaAPIheight, week)
+          siaMonthresult = siaReward(siaAPIDifficulty, totalObeliskHashrate * 1e9, siaAPIheight, month)
+        } else {
+          siaHourresult = siaReward(siaAPIDifficulty, hshrt, siaAPIheight, hour)
+          siaDayresult = siaReward(siaAPIDifficulty, hshrt, siaAPIheight, day)
+          siaWeekresult = siaReward(siaAPIDifficulty, hshrt, siaAPIheight, week)
+          siaMonthresult = siaReward(siaAPIDifficulty, hshrt, siaAPIheight, month)
+        }
 
         SiacalcHour.innerHTML = numberShortener(siaHourresult)
         SiacalcDay.innerHTML = numberShortener(siaDayresult)
@@ -883,7 +900,7 @@ function sia(){
 
     function siaReward(difficulty, hashrate, height, period) {
         if (diffAdjust) {
-            return (hashrate / ((difficulty + hshrt * siaBlockTime) / siaBlockTime)) * ((300000 - height - ((period / siaBlockTime) / 2)) * (period / siaBlockTime));
+            return (hashrate / ((difficulty + hashrate * siaBlockTime) / siaBlockTime)) * ((300000 - height - ((period / siaBlockTime) / 2)) * (period / siaBlockTime));
         } else {
             return (hashrate / (difficulty / siaBlockTime)) * ((300000 - height - ((period / siaBlockTime) / 2)) * (period / siaBlockTime));
         }
@@ -1087,38 +1104,14 @@ function classicPrice() {
         
         try {
             sccUSDHourresult = sccHourresult * classicPriceAPIData.prices[classicPriceAPIData.prices.length - 1][1]
-        } catch(e) {
-            try {
-                sccUSDHourresult = sccHourresult * classicPriceAPIData.prices[classicPriceAPIData.prices.length - 1][1]
-            } catch(error) {
-                console.log(error)
-            }
-        }
-        
-        try {
             sccUSDDayresult = sccDayresult * classicPriceAPIData.prices[classicPriceAPIData.prices.length - 1][1]
-        } catch(e) {
-            try {
-                sccUSDDayresult = sccDayresult * classicPriceAPIData.prices[classicPriceAPIData.prices.length - 1][1]
-            } catch(error) {
-                console.log(error)
-            }
-        }
-        
-        try {
             sccUSDWeekresult = sccWeekresult * classicPriceAPIData.prices[classicPriceAPIData.prices.length - 1][1]
-        } catch(e) {
-            try {
-                sccUSDWeekresult = sccWeekresult * classicPriceAPIData.prices[classicPriceAPIData.prices.length - 1][1]
-            } catch(error) {
-                console.log(error)
-            }
-        }
-        
-        try {
             sccUSDMonthresult = sccMonthresult * classicPriceAPIData.prices[classicPriceAPIData.prices.length - 1][1]
         } catch(e) {
             try {
+                sccUSDHourresult = sccHourresult * classicPriceAPIData.prices[classicPriceAPIData.prices.length - 1][1]
+                sccUSDDayresult = sccDayresult * classicPriceAPIData.prices[classicPriceAPIData.prices.length - 1][1]
+                sccUSDWeekresult = sccWeekresult * classicPriceAPIData.prices[classicPriceAPIData.prices.length - 1][1]
                 sccUSDMonthresult = sccMonthresult * classicPriceAPIData.prices[classicPriceAPIData.prices.length - 1][1]
             } catch(error) {
                 console.log(error)
@@ -1183,48 +1176,48 @@ function primeReward(difficulty, hashrate, height, period){
 function primePrice() {
         
         try {
-            //primeUSDHourresult = primeHourresult * primePriceAPIData.prices[primePriceAPIData.prices.length - 1][1]
-            primeUSDHourresult = primeHourresult * ((1 / CBprimePriceAPIData.last) * btcPriceAPIData.prices[btcPriceAPIData.prices.length - 1][1])
+            primeUSDHourresult = primeHourresult * primePriceAPIData.prices[primePriceAPIData.prices.length - 1][1]
+            //primeUSDHourresult = primeHourresult * ((1 / CBprimePriceAPIData.last) * btcPriceAPIData.prices[btcPriceAPIData.prices.length - 1][1])
         } catch(e) {
             try {
-                //primeUSDHourresult = primeHourresult * primePriceAPIData.prices[primePriceAPIData.prices.length - 1][1]
-                primeUSDHourresult = primeHourresult * ((1 / CBprimePriceAPIData.last) * btcPriceAPIData.prices[btcPriceAPIData.prices.length - 1][1])
+                primeUSDHourresult = primeHourresult * primePriceAPIData.prices[primePriceAPIData.prices.length - 1][1]
+                //primeUSDHourresult = primeHourresult * ((1 / CBprimePriceAPIData.last) * btcPriceAPIData.prices[btcPriceAPIData.prices.length - 1][1])
             } catch(error) {
                 console.log(error)
             }
         }
         
         try {
-            //primeUSDDayresult = primeDayresult * primePriceAPIData.prices[primePriceAPIData.prices.length - 1][1]
-            primeUSDDayresult = primeDayresult * ((1 / CBprimePriceAPIData.last) * btcPriceAPIData.prices[btcPriceAPIData.prices.length - 1][1])
+            primeUSDDayresult = primeDayresult * primePriceAPIData.prices[primePriceAPIData.prices.length - 1][1]
+            //primeUSDDayresult = primeDayresult * ((1 / CBprimePriceAPIData.last) * btcPriceAPIData.prices[btcPriceAPIData.prices.length - 1][1])
         } catch(e) {
             try {
-                //primeUSDDayresult = primeDayresult * primePriceAPIData.prices[primePriceAPIData.prices.length - 1][1]
-                primeUSDDayresult = primeDayresult * ((1 / CBprimePriceAPIData.last) * btcPriceAPIData.prices[btcPriceAPIData.prices.length - 1][1])
+                primeUSDDayresult = primeDayresult * primePriceAPIData.prices[primePriceAPIData.prices.length - 1][1]
+                //primeUSDDayresult = primeDayresult * ((1 / CBprimePriceAPIData.last) * btcPriceAPIData.prices[btcPriceAPIData.prices.length - 1][1])
             } catch(error) {
                 console.log(error)
             }
         }
         
         try {
-            //primeUSDWeekresult = primeWeekresult * primePriceAPIData.prices[primePriceAPIData.prices.length - 1][1]
-            primeUSDWeekresult = primeWeekresult * ((1 / CBprimePriceAPIData.last) * btcPriceAPIData.prices[btcPriceAPIData.prices.length - 1][1])
+            primeUSDWeekresult = primeWeekresult * primePriceAPIData.prices[primePriceAPIData.prices.length - 1][1]
+            //primeUSDWeekresult = primeWeekresult * ((1 / CBprimePriceAPIData.last) * btcPriceAPIData.prices[btcPriceAPIData.prices.length - 1][1])
         } catch(e) {
             try {
-                //primeUSDWeekresult = primeWeekresult * primePriceAPIData.prices[primePriceAPIData.prices.length - 1][1]
-                primeUSDWeekresult = primeWeekresult * ((1 / CBprimePriceAPIData.last) * btcPriceAPIData.prices[btcPriceAPIData.prices.length - 1][1])
+                primeUSDWeekresult = primeWeekresult * primePriceAPIData.prices[primePriceAPIData.prices.length - 1][1]
+                //primeUSDWeekresult = primeWeekresult * ((1 / CBprimePriceAPIData.last) * btcPriceAPIData.prices[btcPriceAPIData.prices.length - 1][1])
             } catch(error) {
                 console.log(error)
             }
         }
         
         try {
-            //primeUSDMonthresult = primeMonthresult * primePriceAPIData.prices[primePriceAPIData.prices.length - 1][1]
-            primeUSDMonthresult = primeMonthresult * ((1 / CBprimePriceAPIData.last) * btcPriceAPIData.prices[btcPriceAPIData.prices.length - 1][1])
+            primeUSDMonthresult = primeMonthresult * primePriceAPIData.prices[primePriceAPIData.prices.length - 1][1]
+            //primeUSDMonthresult = primeMonthresult * ((1 / CBprimePriceAPIData.last) * btcPriceAPIData.prices[btcPriceAPIData.prices.length - 1][1])
         } catch(e) {
             try {
-                //primeUSDMonthresult = primeMonthresult * primePriceAPIData.prices[primePriceAPIData.prices.length - 1][1]
-                primeUSDMonthresult = primeMonthresult * ((1 / CBprimePriceAPIData.last) * btcPriceAPIData.prices[btcPriceAPIData.prices.length - 1][1])
+                primeUSDMonthresult = primeMonthresult * primePriceAPIData.prices[primePriceAPIData.prices.length - 1][1]
+                //primeUSDMonthresult = primeMonthresult * ((1 / CBprimePriceAPIData.last) * btcPriceAPIData.prices[btcPriceAPIData.prices.length - 1][1])
             } catch(error) {
                 console.log(error)
             }
@@ -1394,10 +1387,10 @@ function calcProfit() {
         SiaresultWeekProfit.innerHTML = numberShortener(feeCalc(rejectCalc(siaWeekresult)))
         SiaresultMonthProfit.innerHTML = numberShortener(feeCalc(rejectCalc(siaMonthresult)))
         
-        SiaresultHourProfitUSD.innerHTML = numberShortener(rejectCalc(colorProfit(feeCalcUSD(siaUSDHourresult, 1, 1), SiaresultHourProfitUSD)))
-        SiaresultDayProfitUSD.innerHTML = numberShortener(rejectCalc(colorProfit(feeCalcUSD(siaUSDDayresult, 24, 1), SiaresultDayProfitUSD)))
-        SiaresultWeekProfitUSD.innerHTML = numberShortener(rejectCalc(colorProfit(feeCalcUSD(siaUSDWeekresult, 24, 7), SiaresultWeekProfitUSD)))
-        SiaresultMonthProfitUSD.innerHTML = numberShortener(rejectCalc(colorProfit(feeCalcUSD(siaUSDMonthresult, 24, 30), SiaresultMonthProfitUSD)))
+        SiaresultHourProfitUSD.innerHTML = numberShortener(rejectCalc(colorProfit(feeCalcObelisk(siaUSDHourresult, 1, 1), SiaresultHourProfitUSD)))
+        SiaresultDayProfitUSD.innerHTML = numberShortener(rejectCalc(colorProfit(feeCalcObelisk(siaUSDDayresult, 24, 1), SiaresultDayProfitUSD)))
+        SiaresultWeekProfitUSD.innerHTML = numberShortener(rejectCalc(colorProfit(feeCalcObelisk(siaUSDWeekresult, 24, 7), SiaresultWeekProfitUSD)))
+        SiaresultMonthProfitUSD.innerHTML = numberShortener(rejectCalc(colorProfit(feeCalcObelisk(siaUSDMonthresult, 24, 30), SiaresultMonthProfitUSD)))
         
         //Cash2
         Cash2resultHourProfit.innerHTML = numberShortener(feeCalc(rejectCalc(Cash2Hourresult)))
@@ -1534,7 +1527,10 @@ function presetUpdate() {
         StrongUpresetPower = 0
     }
     
-    totalPresetHashrate = A3presetFinal + BaikpresetFinal + B52presetFinal + iBepresetFinal + S11presetFinal + SC1presetFinal + StrongUpresetFinal
+    totalBlake2bHashrate = A3presetFinal + BaikpresetFinal + B52presetFinal + iBepresetFinal + S11presetFinal + StrongUpresetFinal
+    totalObeliskHashrate = SC1presetFinal
+
+    totalPresetHashrate = totalBlake2bHashrate + totalObeliskHashrate
     
     if (totalPresetHashrate >= 1000) {
         totalPresetHashrate = totalPresetHashrate / 1000
@@ -1544,10 +1540,12 @@ function presetUpdate() {
         hashPower.selectedIndex = 0
     }
     
-    totalPresetPower = A3presetPower + BaikpresetPower + B52presetPower + iBepresetPower + S11presetPower + SC1presetPower + StrongUpresetPower
+    totalBlake2bPower = A3presetPower + BaikpresetPower + B52presetPower + iBepresetPower + S11presetPower + StrongUpresetPower
+    totalObeliskPower = SC1presetPower
+    totalPresetPower = totalObeliskPower + totalBlake2bPower
     userHshrt.value = totalPresetHashrate.toFixed(2)
     powerConsumtion.value = totalPresetPower.toFixed(2)
-    
+    usingPreset = true
     liveHashrate()
 }
 
@@ -1607,6 +1605,10 @@ function feeCalcUSD(coin, time1, time2) {
     return (coin - (coin * (poolFee.value / 100))) - ((((powerConsumtion.value * time1) / 1000) * time2) * elecCost.value)
 }
 
+function feeCalcObelisk(coin, time1, time2) {
+    return (coin - (coin * (poolFee.value / 100))) - ((((totalObeliskPower * time1) / 1000) * time2) * elecCost.value)
+}
+
 function colorProfit(coin, coinHTML) {
     if (themeToggle.checked == false) {
         if (coin > 0) {
@@ -1615,7 +1617,11 @@ function colorProfit(coin, coinHTML) {
             coinHTML.style.color = redColor
         }
     } else {
-        coinHTML.style.color = "white"
+        if (coin > 0) {
+            coinHTML.style.color = greenColorDark
+        } else {
+            coinHTML.style.color = redColorDark
+        }
     }
     return coin
 }
@@ -1651,6 +1657,7 @@ function ChangeTheme() {
         currentTheme[0].style.backgroundColor = "#3b3d3f"
         currentTheme[1].style.backgroundColor = "#535659"
         currentTheme[1].children[0].children[0].children[0].style.backgroundColor = "#404244"
+        currentTheme[1].children[0].children[0].children[2].children[1].style.backgroundColor = "rgb(64, 72, 86, 0.6)"
         currentTheme[2].style.backgroundColor = "#3b3d3f"
         document.body.style.background = "#535659"
         currentTheme[2].style.borderColor = "#28292b"

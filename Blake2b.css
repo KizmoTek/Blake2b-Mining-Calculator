@@ -176,6 +176,10 @@
         .powerNumbers {
                 font-size: 15px;
         }
+
+        .powerNumbers td {
+          width:100px;
+        }
         
         .siaInfo {
                 font-size: 10px;
@@ -1164,10 +1168,6 @@
                 width:100%;
         }
         
-        .powerNumbers {
-                font-size: 15px;
-        }
-        
         .tableCoin {
                 color: white;
                 font-size: 25px;
@@ -1238,6 +1238,10 @@
         
         .powerNumbers {
                 font-size: 11px;
+        }
+
+        .powerNumbers td {
+          width:100px;
         }
         
         .siaInfo {
@@ -2270,6 +2274,10 @@
         .powerNumbers {
                 font-size: 11px;
         }
+
+        .powerNumbers td {
+          width:100px;
+        }
         
         .siaInfo {
                 font-size: 10px;
@@ -3297,6 +3305,10 @@
         
         .powerNumbers {
                 font-size: 15px;
+        }
+
+        .powerNumbers td {
+          width:100px;
         }
         
         .siaInfo {

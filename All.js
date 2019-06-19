@@ -25,7 +25,7 @@
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 */
 
-window.onload = function () {
+/*window.onload = function () {
   if (localStorage.getItem('socialPopUp') == null) {
       createPopUp()
   } else {
@@ -35,7 +35,8 @@ window.onload = function () {
         createPopUp()
       }
   }
-}
+}*/
+
 function createPopUp() {
   var mainDiv = document.getElementsByClassName("main")[0]
   var body = document.getElementsByTagName("BODY")[0]
