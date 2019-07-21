@@ -69,16 +69,21 @@
                 <input type="checkbox" id="diffToggleSwitch2" onInput=" ChangeTheme()">
                 <span class="slider2 round2"></span>
               </label>
-              <a href="https://www.kizmotek.com/index.html" style="height:0px;">
+              <a href="https://www.kizmotek.com" style="height:0px;">
                 <img src="Images/HomeIMG.png" class="HomeIMG">
               </a>
-              <select id="logoDropdown" onInput="changePage()">
+             <!-- <select id="logoDropdown" onInput="changePage()">
                 <option value="Blake2b" selected="selected">Blake2b Mining Calculator</option>
                 <option value="Grin">Grin31/32 Mining Simulator</option>
-                <!-- <option value="PoC">PoC Mining Calculator</option> -->
-              </select>
+                <option value="PoC">PoC Mining Calculator</option>
+              </select> -->
+              <div style="margin:auto; display:flex;">
+                <a href="https://www.blakemining.com/" id="Blake2bLink"><h2 id="Blake2bLinkText" class="noselect">Blake2b Calculator</h2></a>
+                <a href="https://www.kizmotek.com/Grin.html" id="GrinLink"><h2 id="GrinLinkText" class="noselect">GrinCC31/32 Simulator</h2></a>
+                <a id="PoCLink"><h2 id="PoCLinkText" class="noselect"><div style="position:relative;"><img src="Images/Locked.png" id="PoCLocked"></div>PoC Calculator</h2></a>
+              </div>
         </div>
-        
+        <h3 id="Disclaimer">The numbers for USD conversions presented here are taken from Coingecko, they are believed to be true but no warranty of correctness and usability can be assumed.<br>PLEASE DO YOUR OWN RESEARCH BEFORE INVESTING ANY MONEY!</h3>
     </div>
     <div class="main">
     <div class="container">
@@ -207,19 +212,22 @@
                     </table>
                 </div>
                 
-                <div class="Result">
+                <div class="ResultXSC">
                     <table class="resultTable">
                          <tr>
-                            <th class="tableCoin" colspan="2" style="padding:0px;">
+                            <th class="tableCoin" colspan="2" style="padding:0px; padding-top:15px;">
                                 <img src="Images/hyperLogo.png" class="coinLogo">
                                 <a href="https://hspace.app/" target="_blank" class="coinName" id="hyperName">Hyperspace</a>
                             </th>
                             <th class="tableVolume" colspan="3">
-                                <a href="https://www.coingecko.com/en/coins/hyperspace" target="_blank" class="" id="coinVolume">24 hr Volume: <span id="XSCVolumeValue">$0</span></a>
+                                <a href="https://www.coingecko.com/en/coins/hyperspace" target="_blank" id="XSCVolume" class="coinVolume">24 hr Volume: <span id="XSCVolumeValue">$0</span></a>
                             </th>
                             <th class="tableCoinPool" style="padding:0px;">
                                 <a href="https://miningpoolstats.stream/spacecash" target="_blank" class="coinPoolList">Pools</a>
                             </th>
+                            <div class="tooltipDisclaimer">
+                              <span class="tooltiptextDisclaimer" id="XSCDisclaimerText">Very low volume, Inactive developer</span>
+                            </div>
                         </tr>
                         <tr class="time">
                             <td></td>
@@ -260,18 +268,25 @@
                             <td id="XSCresultWeekProfitUSD" class="bold">0.00</td>
                             <td id="XSCresultMonthProfitUSD" class="bold">0.00</td>
                         </tr>
+                      </table>
+                    </div>
                         
+                    <div class="resultSCP">
+                      <table class="resultTable">
                          <tr>
                             <th class="tableCoin" colspan="2" style="padding:0px;">
                                 <img src="Images/primeLogo.png" class="coinLogo">
                                 <a href="https://siaprime.net/" target="_blank" class="coinName" id="primeName">SiaPrime</a>
                             </th>
                             <th class="tableVolume" colspan="3">
-                                <a href="https://www.coingecko.com/en/coins/siaprime-coin" target="_blank" class="" id="coinVolume">24 hr Volume: <span id="SCPVolumeValue">$0</span></a>
+                                <a href="https://www.coingecko.com/en/coins/siaprime-coin" target="_blank" id="SCPVolume" class="coinVolume">24 hr Volume: <span id="SCPVolumeValue">$0</span></a>
                             </th>
                             <th class="tableCoinPool" style="padding:0px;">
                                 <a href="https://miningpoolstats.stream/siaprime" target="_blank" class="coinPoolList">Pools</a>
                             </th>
+                           <div class="tooltipDisclaimer">
+                              <span class="tooltiptextDisclaimer" id="SCPDisclaimerText">Low volume</span>
+                            </div>
                         </tr>
                         <tr class="time">
                             <td></td>
@@ -311,19 +326,25 @@
                             <td id="SCPresultWeekProfitUSD" class="bold">0.00</td>
                             <td id="SCPresultMonthProfitUSD" class="bold">0.00</td>
                         </tr>
+                      </table>
+                    </div>
                         
-                        
+                    <div class="resultSCC">
+                      <table class="resultTable">
                         <tr>
                             <th class="tableCoin" colspan="2" style="padding:0px;">
                                 <img src="Images/classicLogo.png" class="classicLogo">
                                 <a href="https://siaclassic.org/" target="_blank" class="coinName">SiaClassic</a>
                             </th>
                             <th class="tableVolume" colspan="3">
-                                <a href="https://www.coingecko.com/en/coins/siaclassic" target="_blank" class="" id="coinVolume">24 hr Volume: <span id="SCCVolumeValue">$0</span></a>
+                                <a href="https://www.coingecko.com/en/coins/siaclassic" target="_blank" id="SCCVolume" class="coinVolume">24 hr Volume: <span id="SCCVolumeValue">$0</span></a>
                             </th>
                             <th class="tableCoinPool" style="padding:0px;">
                                 <a href="https://miningpoolstats.stream/siaclassic" target="_blank" class="coinPoolList">Pools</a>
                             </th>
+                            <div class="tooltipDisclaimer">
+                              <span class="tooltiptextDisclaimer" id="SCCDisclaimerText">Inactive developer, Wallet not functional</span>
+                            </div>
                         </tr>
                         <tr class="time">
                             <td></td>
@@ -363,6 +384,11 @@
                             <td id="SCCresultWeekProfitUSD" class="bold">0.00</td>
                             <td id="SCCresultMonthProfitUSD" class="bold">0.00</td>
                         </tr>
+                      </table>
+                    </div>
+
+                    <div class="resultCash2">
+                      <table class="resultTable">
                         <tr>
                         <th class="tableCoin" colspan="2" style="padding:0px;">
                                 <img src="Images/cash2.png" class="Cash2Logo">
@@ -373,11 +399,14 @@
                                 </div>
                             </th>
                             <th class="tableVolume" colspan="3">
-                                <a href="https://www.coingecko.com/en/coins/cash2" target="_blank" class="" id="coinVolume">24 hr Volume: <span id="Cash2VolumeValue">$0</span></a>
+                                <a href="https://www.coingecko.com/en/coins/cash2" target="_blank" id="Cash2Volume" class="coinVolume">24 hr Volume: <span id="Cash2VolumeValue">$0</span></a>
                             </th>
                             <th class="tableCoinPool" style="padding:0px;">
                                 <a href="https://cash2.org/#miningInformation" target="_blank" class="coinPoolList">Pools</a>
                             </th>
+                            <div class="tooltipDisclaimer">
+                              <span class="tooltiptextDisclaimer" id="Cash2DisclaimerText">Very low volume, Only one exchange</span>
+                            </div>
                             </tr>
 
                         <tr class="time">
@@ -419,13 +448,14 @@
                             <td id="CASH2resultWeekProfitUSD" class="bold">0.00</td>
                             <td id="CASH2resultMonthProfitUSD" class="bold">0.00</td>
                         </tr>
-
+                      </table>
+                    </div>
                         <!-- <th class="tableCoin" colspan="2" style="padding:0px;">
                                 <img src="Images/tnetLogo.png" class="Cash2Logo">
                                 <a href="https://cash2.org/" target="_blank" class="coinName" id="cash2Name">TNET</a>
                             </th>
                             <th class="tableVolume" colspan="3">
-                                <a href="https://www.coingecko.com/en/coins/cash2" target="_blank" class="" id="coinVolume">24 hr Volume: <span id="Cash2VolumeValue">$0</span></a>
+                                <a href="https://www.coingecko.com/en/coins/cash2" target="_blank" id="TNETVolume" class="coinVolume">24 hr Volume: <span id="Cash2VolumeValue">$0</span></a>
                             </th>
                             <th class="tableCoinPool" style="padding:0px;">
                                 <a href="https://cash2.org/#miningInformation" target="_blank" class="coinPoolList">Pools</a>
@@ -471,8 +501,7 @@
                             <td id="CASH2resultWeekProfitUSD" class="bold">0.00</td>
                             <td id="CASH2resultMonthProfitUSD" class="bold">0.00</td>
                         </tr> -->
-                    </table>
-                </div>
+                    
                 
                 <div id="resultSia">
                     <table class="resultTable">
@@ -486,12 +515,14 @@
                                 </div>
                             </th>
                             <th class="tableVolume" colspan="3">
-                                <a href="https://www.coingecko.com/en/coins/siacoin" target="_blank" class="" id="coinVolume">24 hr Volume: <span id="SiaVolumeValue">$0</span></a>
+                                <a href="https://www.coingecko.com/en/coins/siacoin" target="_blank" id="SCVolume" class="coinVolume">24 hr Volume: <span id="SiaVolumeValue">$0</span></a>
                             </th>
                             <th class="tableCoinPool" style="padding:0px;">
                                 <a href="https://miningpoolstats.stream/siacoin" target="_blank" class="coinPoolList">Pools</a>
                             </th>
-    
+                            <div class="tooltipDisclaimer">
+                              <span class="tooltiptextDisclaimer" id="SCDisclaimerText">Only mineable with Obelisk SC1</span>
+                            </div>
                         </tr>
                         <tr class="time">
                             <td></td>

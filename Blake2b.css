@@ -63,8 +63,59 @@
         
         .topFlex {
                 display: flex;
-                width:450px;
+                width:800px;
                 margin:auto;
+        }
+
+        #Blake2bLink {
+          background-color: #bbbfc4;
+          border: solid 2px #a7abb0;
+          border-top: 0px;
+          border-radius: 0px 0px 15px 15px;
+          margin-right: 20px;
+          height:60px;
+          display: flex;
+          align-items: center;
+          transform: scale(0.9);
+          transform-origin: top;
+          transition: transform 0.4s, filter 0.4s;
+        }
+
+        #Blake2bLink:hover {
+          transform: scale(1);
+        }
+
+        #Blake2bLinkText {
+          color:white;
+          padding:0px 10px 0px 10px;
+        }
+
+        #GrinLink {
+          background-color: #808387;
+          border: solid 2px #6b6d70;
+          border-top: 0px;
+          border-radius: 0px 0px 15px 15px;
+          margin-right: 20px;
+          height:60px;
+          display: flex;
+          align-items: center;
+          transform-origin: top;
+          transition: transform 0.4s, filter 0.4s;
+        }
+
+        #GrinLink:hover {
+          transform: scale(1.05);
+          filter: brightness(110%);
+        }
+
+        #GrinLink:active {
+          transform: scale(1);
+          filter: brightness(100%);
+        }
+
+        #GrinLinkText {
+          color:white;
+          padding:0px 10px 0px 10px;
         }
         
         footer {
@@ -80,15 +131,6 @@
                 background-color: #d8d8d8;
         }
 
-        .Result {
-                background-color: rgb(104, 122, 153, 0.6);
-                border: 2px rgb(112, 132, 165) solid;
-                flex-wrap: nowrap;
-                border-top:0px;
-                border-bottom:0px;
-                width: 575px;
-        }
-
         .tableCoin {
                 color: white;
                 font-size: 25px;
@@ -102,9 +144,10 @@
         .tableVolume {
                 text-align: center;
                 font-size: 16px;
+                padding-top: 20px;
         }
         
-        #coinVolume {
+        .coinVolume {
                 color:white;
         }
 
@@ -118,8 +161,17 @@
                 display: flex;
                 flex-direction:column;
         }
+
+        .ResultXSC {
+                background-color: rgb(104, 122, 153, 0.6);
+                border: 2px rgb(112, 132, 165) solid;
+                flex-wrap: nowrap;
+                border-top:0px;
+                border-bottom:0px;
+                width: 575px;
+        }
         
-        .Result th {
+        .ResultXSC th {
                 padding-left: 26px;
                 padding-right: 26px;
         }
@@ -131,9 +183,55 @@
                 border-radius: 0px 0px 10px 10px;
                 border-top: 0px solid;
                 width: 575px;
+                padding-top: 10px;
         }
         
         #resultSia th {
+                padding-left: 26px;
+                padding-right: 26px;
+        }
+
+        .resultSCP {
+                background-color: rgb(104, 122, 153, 0.6);
+                border: 2px rgb(112, 132, 165) solid;
+                flex-wrap: nowrap;
+                border-top:0px;
+                border-bottom:0px;
+                width: 575px;
+                padding-top: 10px;
+        }
+        
+        .resultSCP th {
+                padding-left: 26px;
+                padding-right: 26px;
+        }
+
+        .resultSCC {
+                background-color: rgb(104, 122, 153, 0.6);
+                border: 2px rgb(112, 132, 165) solid;
+                flex-wrap: nowrap;
+                border-top:0px;
+                border-bottom:0px;
+                width: 575px;
+                padding-top: 10px;
+        }
+        
+        .resultSCC th {
+                padding-left: 26px;
+                padding-right: 26px;
+        }
+
+        .resultCash2 {
+                background-color: rgb(104, 122, 153, 0.6);
+                border: 2px rgb(112, 132, 165) solid;
+                flex-wrap: nowrap;
+                border-top:0px;
+                border-bottom:0px;
+                width: 575px;
+                padding-top: 10px;
+        }
+        
+        .resultCash2 th {
                 padding-left: 26px;
                 padding-right: 26px;
         }
@@ -220,6 +318,12 @@
         
         .coinName {
                 color:white;
+                transition: filter 0.2s;
+        }
+
+
+        .coinName:hover {
+              filter:brightness(85%);
         }
         
         .coinPoolList {
@@ -380,6 +484,67 @@
 
         .tooltip6:hover .tooltiptext6 {
                 visibility: visible;
+        }
+
+        .tooltipDisclaimer {
+                position: relative;
+                display: inline-block;
+        }
+
+        .tooltipDisclaimer .tooltiptextDisclaimer {
+                
+                font-size: 18px;
+                background-color: rgb(100, 119, 153, 0.8);
+                color: white;
+                text-align: center;
+                border-radius: 6px;
+                padding: 4px 0px;
+
+                /* Position the tooltip */
+                position: absolute;
+
+                z-index: 1;
+        }
+
+        .tooltipDisclaimer .tooltiptextDisclaimer::after {
+          content: "";
+          position: absolute;
+          margin-left: -5px;
+          border-width: 5px;
+          border-style: solid;
+          border-color: rgb(100, 119, 153, 0.8) transparent transparent transparent;
+          top: 100%;
+          left: 10%;
+        }
+
+        .tooltipDisclaimer #XSCDisclaimerText {
+            width: 320px;
+            top: -10px;
+            right:-40px;
+        }
+
+        .tooltipDisclaimer #SCPDisclaimerText {
+            width: 160px;
+            top: -20px;
+            right:60px;
+        }
+
+        .tooltipDisclaimer #SCCDisclaimerText {
+            width: 320px;
+            top: -22px;
+            right:-40px;
+        }
+
+        .tooltipDisclaimer #Cash2DisclaimerText {
+            width: 320px;
+            top: -22px;
+            right:-40px;
+        }
+
+        .tooltipDisclaimer #SCDisclaimerText {
+            width: 300px;
+            top: -20px;
+            right:-40px;
         }
         
         /* 1 */
@@ -1115,12 +1280,56 @@
         .TopLine>h1 {
                 margin-top: 0;
         }
-        
+
         .topFlex {
                 display: flex;
                 width:280px;
                 margin:auto;
                 height: 32px;
+        }
+
+        #Blake2bLink {
+          background-color: #bbbfc4;
+          border: solid 2px #a7abb0;
+          border-top: 0px;
+          border-radius: 0px 0px 15px 15px;
+          margin-right: 20px;
+          height:35px;
+          display: flex;
+          align-items: center;
+          transform: scale(0.9);
+          transform-origin: top;
+          transition: transform 0.4s, filter 0.4s;
+        }
+
+        #Blake2bLinkText {
+          font-size: 10px;
+          color:white;
+          padding:0px 10px 0px 10px;
+        }
+
+        #GrinLink {
+          background-color: #808387;
+          border: solid 2px #6b6d70;
+          border-top: 0px;
+          border-radius: 0px 0px 15px 15px;
+          margin-right: 20px;
+          height:35px;
+          display: flex;
+          align-items: center;
+          transform-origin: top;
+          transition: transform 0.4s, filter 0.4s;
+        }
+
+        #GrinLink:hover {
+          transform: scale(0.9);
+          filter: brightness(110%);
+        }
+
+        #GrinLinkText {
+          font-size: 10px;
+          color:white;
+          padding:0px 10px 0px 10px;
         }
         
         footer {
@@ -1136,15 +1345,6 @@
         
         .main {
                 background-color: #d8d8d8;
-        }
-        
-        .Result {
-                background-color: rgb(104, 122, 153, 0.6);
-                border: 2px rgb(112, 132, 165) solid;
-                flex-wrap: nowrap;
-                margin-left: auto;
-                border-bottom:0px;
-                border-top:0px;
         }
         
         .PowerResult {
@@ -1183,7 +1383,7 @@
                 font-size: 16px;
         }
         
-        #coinVolume {
+        .coinVolume {
                 color:white;
         }
         
@@ -1193,11 +1393,19 @@
         
         }
         
-        .Result th {
-                padding-left: 2px;
-                padding-right: 2px;
-                font-size: 12px;
+        .ResultXSC {
+                background-color: rgb(104, 122, 153, 0.6);
+                border: 2px rgb(112, 132, 165) solid;
+                flex-wrap: nowrap;
+                border-top:0px;
+                border-bottom:0px;
+                margin: auto;
+        }
         
+        .ResultXSC th {
+                padding-left: 26px;
+                padding-right: 26px;
+                font-size: 12px;
         }
         
         #resultSia {
@@ -1206,12 +1414,56 @@
                 flex-wrap: nowrap;
                 border-radius: 0px 0px 10px 10px;
                 border-top: 0px solid;
-                margin:auto;
         }
         
         #resultSia th {
-                padding-left: 2px;
-                padding-right: 2px;
+                padding-left: 26px;
+                padding-right: 26px;
+                font-size: 12px;
+        }
+
+        .resultSCP {
+                background-color: rgb(104, 122, 153, 0.6);
+                border: 2px rgb(112, 132, 165) solid;
+                flex-wrap: nowrap;
+                border-top:0px;
+                border-bottom:0px;
+                padding-top: 10px;
+        }
+        
+        .resultSCP th {
+                padding-left: 26px;
+                padding-right: 26px;
+                font-size: 12px;
+        }
+
+        .resultSCC {
+                background-color: rgb(104, 122, 153, 0.6);
+                border: 2px rgb(112, 132, 165) solid;
+                flex-wrap: nowrap;
+                border-top:0px;
+                border-bottom:0px;
+                padding-top: 10px;
+        }
+        
+        .resultSCC th {
+                padding-left: 26px;
+                padding-right: 26px;
+                font-size: 12px;
+        }
+
+        .resultCash2 {
+                background-color: rgb(104, 122, 153, 0.6);
+                border: 2px rgb(112, 132, 165) solid;
+                flex-wrap: nowrap;
+                border-top:0px;
+                border-bottom:0px;
+                padding-top: 10px;
+        }
+        
+        .resultCash2 th {
+                padding-left: 26px;
+                padding-right: 26px;
                 font-size: 12px;
         }
         
@@ -1417,6 +1669,67 @@
 
         .tooltip6:hover .tooltiptext6 {
                 visibility: visible;
+        }
+
+        .tooltipDisclaimer {
+                position: relative;
+                display: inline-block;
+        }
+
+        .tooltipDisclaimer .tooltiptextDisclaimer {
+                
+                font-size: 10px;
+                background-color: rgb(100, 119, 153, 0.8);
+                color: white;
+                text-align: center;
+                border-radius: 6px;
+                padding: 4px 0px;
+
+                /* Position the tooltip */
+                position: absolute;
+
+                z-index: 1;
+        }
+
+        .tooltipDisclaimer .tooltiptextDisclaimer::after {
+          content: "";
+          position: absolute;
+          margin-left: -5px;
+          border-width: 5px;
+          border-style: solid;
+          border-color: rgb(100, 119, 153, 0.8) transparent transparent transparent;
+          top: 100%;
+          left: 10%;
+        }
+
+        .tooltipDisclaimer #XSCDisclaimerText {
+            width: 200px;
+            top: 0px;
+            right:-10px;
+        }
+
+        .tooltipDisclaimer #SCPDisclaimerText {
+            width: 120px;
+            top: -15px;
+            right:60px;
+        }
+
+        .tooltipDisclaimer #SCCDisclaimerText {
+            width: 200px;
+            top: -15px;
+            right:-10px;
+        }
+
+        .tooltipDisclaimer #Cash2DisclaimerText {
+            width: 200px;
+            top: -15px;
+            right:-10px;
+        }
+
+        .tooltipDisclaimer #SCDisclaimerText {
+            width: 160px;
+            top: -15px;
+            right:30px;
         }
         
         /* 1 */
@@ -2142,7 +2455,7 @@
 
 /* Mobile Wide */ 
 
-@media only screen and (max-width: 1199px) and (min-width: 580px) {
+@media only screen and (max-width: 1200px) and (min-width: 580px) {
         body {
                 margin: 0px;
                 padding: 0px;
@@ -2174,7 +2487,51 @@
                 display: flex;
                 width:320px;
                 margin:auto;
-                height: 32px;
+                height: 40px;
+        }
+
+        #Blake2bLink {
+          background-color: #bbbfc4;
+          border: solid 2px #a7abb0;
+          border-top: 0px;
+          border-radius: 0px 0px 15px 15px;
+          margin-right: 20px;
+          height:40px;
+          display: flex;
+          align-items: center;
+          transform: scale(0.9);
+          transform-origin: top;
+          transition: transform 0.4s, filter 0.4s;
+        }
+
+        #Blake2bLinkText {
+          font-size: 14px;
+          color:white;
+          padding:0px 10px 0px 10px;
+        }
+
+        #GrinLink {
+          background-color: #808387;
+          border: solid 2px #6b6d70;
+          border-top: 0px;
+          border-radius: 0px 0px 15px 15px;
+          margin-right: 20px;
+          height:40px;
+          display: flex;
+          align-items: center;
+          transform-origin: top;
+          transition: transform 0.4s, filter 0.4s;
+        }
+
+        #GrinLink:hover {
+          transform: scale(0.9);
+          filter: brightness(110%);
+        }
+
+        #GrinLinkText {
+          font-size: 14px;
+          color:white;
+          padding:0px 10px 0px 10px;
         }
         
         footer {
@@ -2192,16 +2549,6 @@
                 background-color: #d8d8d8;
         }
         
-        .Result {
-                background-color: rgb(104, 122, 153, 0.6);
-                border: 2px rgb(112, 132, 165) solid;
-                flex-wrap: nowrap;
-                margin: auto;
-                width: 575px;
-                border-top:0px;
-                border-bottom: 0px;
-        }
-        
         .tableCoin {
                 color: white;
                 font-size: 25px;
@@ -2217,7 +2564,7 @@
                 font-size: 16px;
         }
         
-        #coinVolume {
+        .coinVolume {
                 color:white;
         }
         
@@ -2227,9 +2574,19 @@
         
         }
         
-        .Result th {
-                padding-left: 2px;
-                padding-right: 2px;
+        .ResultXSC {
+                background-color: rgb(104, 122, 153, 0.6);
+                border: 2px rgb(112, 132, 165) solid;
+                flex-wrap: nowrap;
+                border-top:0px;
+                border-bottom:0px;
+                width: 575px;
+                margin: auto;
+        }
+        
+        .ResultXSC th {
+                padding-left: 26px;
+                padding-right: 26px;
                 font-size: 12px;
         }
         
@@ -2240,12 +2597,63 @@
                 border-radius: 0px 0px 10px 10px;
                 border-top: 0px solid;
                 width: 575px;
-                margin:auto;
+                margin: auto;
         }
         
         #resultSia th {
-                padding-left: 2px;
-                padding-right: 2px;
+                padding-left: 26px;
+                padding-right: 26px;
+                font-size: 12px;
+        }
+
+        .resultSCP {
+                background-color: rgb(104, 122, 153, 0.6);
+                border: 2px rgb(112, 132, 165) solid;
+                flex-wrap: nowrap;
+                border-top:0px;
+                border-bottom:0px;
+                width: 575px;
+                padding-top: 10px;
+                margin: auto;
+        }
+        
+        .resultSCP th {
+                padding-left: 26px;
+                padding-right: 26px;
+                font-size: 12px;
+        }
+
+        .resultSCC {
+                background-color: rgb(104, 122, 153, 0.6);
+                border: 2px rgb(112, 132, 165) solid;
+                flex-wrap: nowrap;
+                border-top:0px;
+                border-bottom:0px;
+                width: 575px;
+                padding-top: 10px;
+                margin: auto;
+        }
+        
+        .resultSCC th {
+                padding-left: 26px;
+                padding-right: 26px;
+                font-size: 12px;
+        }
+
+        .resultCash2 {
+                background-color: rgb(104, 122, 153, 0.6);
+                border: 2px rgb(112, 132, 165) solid;
+                flex-wrap: nowrap;
+                border-top:0px;
+                border-bottom:0px;
+                width: 575px;
+                padding-top: 10px;
+                margin: auto;
+        }
+        
+        .resultCash2 th {
+                padding-left: 26px;
+                padding-right: 26px;
                 font-size: 12px;
         }
         
@@ -2452,6 +2860,67 @@
 
         .tooltip6:hover .tooltiptext6 {
                 visibility: visible;
+        }
+
+        .tooltipDisclaimer {
+                position: relative;
+                display: inline-block;
+        }
+
+        .tooltipDisclaimer .tooltiptextDisclaimer {
+                
+                font-size: 10px;
+                background-color: rgb(100, 119, 153, 0.8);
+                color: white;
+                text-align: center;
+                border-radius: 6px;
+                padding: 4px 0px;
+
+                /* Position the tooltip */
+                position: absolute;
+
+                z-index: 1;
+        }
+
+        .tooltipDisclaimer .tooltiptextDisclaimer::after {
+          content: "";
+          position: absolute;
+          margin-left: -5px;
+          border-width: 5px;
+          border-style: solid;
+          border-color: rgb(100, 119, 153, 0.8) transparent transparent transparent;
+          top: 100%;
+          left: 10%;
+        }
+
+        .tooltipDisclaimer #XSCDisclaimerText {
+            width: 200px;
+            top: 0px;
+            right:60px;
+        }
+
+        .tooltipDisclaimer #SCPDisclaimerText {
+            width: 120px;
+            top: -15px;
+            right:120px;
+        }
+
+        .tooltipDisclaimer #SCCDisclaimerText {
+            width: 200px;
+            top: -15px;
+            right:50px;
+        }
+
+        .tooltipDisclaimer #Cash2DisclaimerText {
+            width: 200px;
+            top: -15px;
+            right:60px;
+        }
+
+        .tooltipDisclaimer #SCDisclaimerText {
+            width: 160px;
+            top: -15px;
+            right:110px;
         }
         
         /* 1 */
@@ -3171,7 +3640,7 @@
 }
 
 /* Desktop Large Monitor Scaling */ 
-@media only screen and (min-width: 1200px) and (min-height: 1100px) {
+@media only screen and (min-width: 1200px) and (min-height: 1270px) {
         body {
                 margin: 0px;
                 padding: 0px;
@@ -3199,9 +3668,14 @@
                 margin-top: 0;
         }
         
-        .topFlex {
+        .topFlexMain {
                 display: flex;
                 width:450px;
+                margin:auto;
+        }
+
+        .topFlex {
+                display: flex;
                 margin:auto;
         }
         
@@ -3218,31 +3692,6 @@
         .main {
                 background-color: #d8d8d8;
         }
-
-        .Result {
-                background-color: rgb(104, 122, 153, 0.6);
-                border: 2px rgb(112, 132, 165) solid;
-                flex-wrap: nowrap;
-                margin-left: auto;
-                width: 575px;
-                border-radius: 0px 0px 0px 0px;
-                border-top:0px;
-                border-bottom: 0px;
-        }
-        
-        #resultSia {
-                background-color: rgb(76, 89, 112, 0.6);
-                border: 2px rgb(112, 132, 165) solid;
-                flex-wrap: nowrap;
-                border-radius: 0px 0px 10px 10px;
-                border-top: 0px solid;
-                width: 575px;
-        }
-        
-        #resultSia th {
-                padding-left: 26px;
-                padding-right: 26px;
-        }
         
 
         .tableCoin {
@@ -3258,9 +3707,10 @@
         .tableVolume {
                 text-align: center;
                 font-size: 16px;
+                padding-top: 20px;
         }
         
-        #coinVolume {
+        .coinVolume {
                 color:white;
         }
         
@@ -3270,13 +3720,76 @@
 
         }
         
-        .Result th {
+        .ResultXSC {
+                background-color: rgb(104, 122, 153, 0.6);
+                border: 2px rgb(112, 132, 165) solid;
+                flex-wrap: nowrap;
+                border-top:0px;
+                border-bottom:0px;
+                width: 575px;
+        }
+        
+        .ResultXSC th {
                 padding-left: 26px;
                 padding-right: 26px;
-
+        }
+        
+        #resultSia {
+                background-color: rgb(76, 89, 112, 0.6);
+                border: 2px rgb(112, 132, 165) solid;
+                flex-wrap: nowrap;
+                border-radius: 0px 0px 10px 10px;
+                border-top: 0px solid;
+                width: 575px;
+                padding-top: 10px;
         }
         
         #resultSia th {
+                padding-left: 26px;
+                padding-right: 26px;
+        }
+
+        .resultSCP {
+                background-color: rgb(104, 122, 153, 0.6);
+                border: 2px rgb(112, 132, 165) solid;
+                flex-wrap: nowrap;
+                border-top:0px;
+                border-bottom:0px;
+                width: 575px;
+                padding-top: 10px;
+        }
+        
+        .resultSCP th {
+                padding-left: 26px;
+                padding-right: 26px;
+        }
+
+        .resultSCC {
+                background-color: rgb(104, 122, 153, 0.6);
+                border: 2px rgb(112, 132, 165) solid;
+                flex-wrap: nowrap;
+                border-top:0px;
+                border-bottom:0px;
+                width: 575px;
+                padding-top: 10px;
+        }
+        
+        .resultSCC th {
+                padding-left: 26px;
+                padding-right: 26px;
+        }
+
+        .resultCash2 {
+                background-color: rgb(104, 122, 153, 0.6);
+                border: 2px rgb(112, 132, 165) solid;
+                flex-wrap: nowrap;
+                border-top:0px;
+                border-bottom:0px;
+                width: 575px;
+                padding-top: 10px;
+        }
+        
+        .resultCash2 th {
                 padding-left: 26px;
                 padding-right: 26px;
         }
@@ -3350,6 +3863,12 @@
         
         .coinName {
                 color:white;
+                transition: filter 0.2s;
+        }
+
+
+        .coinName:hover {
+              filter:brightness(85%);
         }
         
         .coinPoolList {
@@ -3510,6 +4029,67 @@
 
         .tooltip6:hover .tooltiptext6 {
                 visibility: visible;
+        }
+
+        .tooltipDisclaimer {
+                position: relative;
+                display: inline-block;
+        }
+
+        .tooltipDisclaimer .tooltiptextDisclaimer {
+                
+                font-size: 18px;
+                background-color: rgb(100, 119, 153, 0.8);
+                color: white;
+                text-align: center;
+                border-radius: 6px;
+                padding: 4px 0px;
+
+                /* Position the tooltip */
+                position: absolute;
+
+                z-index: 1;
+        }
+
+        .tooltipDisclaimer .tooltiptextDisclaimer::after {
+          content: "";
+          position: absolute;
+          margin-left: -5px;
+          border-width: 5px;
+          border-style: solid;
+          border-color: rgb(100, 119, 153, 0.8) transparent transparent transparent;
+          top: 100%;
+          left: 10%;
+        }
+
+        .tooltipDisclaimer #XSCDisclaimerText {
+            width: 320px;
+            top: -10px;
+            right:-40px;
+        }
+
+        .tooltipDisclaimer #SCPDisclaimerText {
+            width: 160px;
+            top: -20px;
+            right:60px;
+        }
+
+        .tooltipDisclaimer #SCCDisclaimerText {
+            width: 320px;
+            top: -22px;
+            right:-40px;
+        }
+
+        .tooltipDisclaimer #Cash2DisclaimerText {
+            width: 320px;
+            top: -22px;
+            right:-40px;
+        }
+
+        .tooltipDisclaimer #SCDisclaimerText {
+            width: 300px;
+            top: -20px;
+            right:-40px;
         }
         
         /* 1 */

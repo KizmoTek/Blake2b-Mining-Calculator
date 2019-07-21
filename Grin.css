@@ -63,7 +63,7 @@
         
         .topFlex {
                 display: flex;
-                width:450px;
+                width:800px;
                 margin:auto;
         }
         
@@ -729,7 +729,7 @@
         .preset {
                 background-color: rgba(185, 185, 185, 0.6);
                 border: 2px #7f7f7f solid;
-                height: 260px;
+                height: 170px;
                 width: 240px;
                 border-radius: 10px;
                 margin-top:40px;
@@ -870,11 +870,61 @@
           transform: scale(1.1);
         }
 
+        #Blake2bLink {
+          background-color: #808387;
+          border: solid 2px #6b6d70;
+          border-top: 0px;
+          border-radius: 0px 0px 15px 15px;
+          margin-right: 20px;
+          height:60px;
+          display: flex;
+          align-items: center;
+          transform-origin: top;
+          transition: transform 0.4s, filter 0.4s;
+        }
+
+        #Blake2bLink:hover {
+          transform: scale(1.05);
+          filter: brightness(110%);
+        }
+
+        #Blake2bLink:active {
+          transform: scale(1);
+          filter: brightness(100%);
+        }
+
+        #Blake2bLinkText {
+          color:white;
+          padding:0px 10px 0px 10px;
+        }
+
+        #GrinLink {
+          background-color: #bbbfc4;
+          border: solid 2px #a7abb0;
+          border-top: 0px;
+          border-radius: 0px 0px 15px 15px;
+          margin-right: 20px;
+          height:60px;
+          display: flex;
+          align-items: center;
+          transform: scale(0.9);
+          transform-origin: top;
+          transition: transform 0.4s, filter 0.4s;
+        }
+
+        #GrinLink:hover {
+          transform: scale(1);
+        }
+
+        #GrinLinkText {
+          color:white;
+          padding:0px 10px 0px 10px;
+        }
         
 }
 
 /* Desktop Wide Scaling */
-@media only screen and (min-width: 1200px) and (min-height: 1100px) {
+@media only screen and (min-width: 1200px) and (min-height: 1050px) {
         body {
                 margin: 0px;
                 padding: 0px;
@@ -895,7 +945,6 @@
                 border-bottom: 2px #b1b6bc solid;
                 background-color: #cbd0d6;
                 margin-top: 0;
-
         }
 
         .TopLine>h1 {
@@ -904,7 +953,7 @@
         
         .topFlex {
                 display: flex;
-                width:450px;
+                width:800px;
                 margin:auto;
         }
         
@@ -1569,7 +1618,7 @@
         .preset {
                 background-color: rgba(185, 185, 185, 0.6);
                 border: 2px #7f7f7f solid;
-                height: 260px;
+                height: 170px;
                 width: 240px;
                 border-radius: 10px;
                 margin-top:40px;
@@ -1748,6 +1797,50 @@
                 width:280px;
                 margin:auto;
                 height: 32px;
+        }
+
+        #Blake2bLink {
+          background-color: #bbbfc4;
+          border: solid 2px #a7abb0;
+          border-top: 0px;
+          border-radius: 0px 0px 15px 15px;
+          margin-right: 20px;
+          height:35px;
+          display: flex;
+          align-items: center;
+          transform: scale(0.9);
+          transform-origin: top;
+          transition: transform 0.4s, filter 0.4s;
+        }
+
+        #Blake2bLinkText {
+          font-size: 10px;
+          color:white;
+          padding:0px 10px 0px 10px;
+        }
+
+        #GrinLink {
+          background-color: #808387;
+          border: solid 2px #6b6d70;
+          border-top: 0px;
+          border-radius: 0px 0px 15px 15px;
+          margin-right: 20px;
+          height:35px;
+          display: flex;
+          align-items: center;
+          transform-origin: top;
+          transition: transform 0.4s, filter 0.4s;
+        }
+
+        #GrinLink:hover {
+          transform: scale(0.9);
+          filter: brightness(110%);
+        }
+
+        #GrinLinkText {
+          font-size: 10px;
+          color:white;
+          padding:0px 10px 0px 10px;
         }
         
         footer {
@@ -2403,7 +2496,7 @@
         .preset {
                 background-color: rgba(185, 185, 185, 0.6);
                 border: 2px #7f7f7f solid;
-                height: 260px;
+                height: 170px;
                 width: 240px;
                 border-radius: 10px;
                 margin:auto;

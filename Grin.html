@@ -70,14 +70,22 @@
                 <input type="checkbox" id="diffToggleSwitch2" onInput=" ChangeTheme()">
                 <span class="slider2 round2"></span>
               </label>
-              <a href="https://www.kizmotek.com/index.html" style="height:0px;">
+              <a href="https://www.kizmotek.com" style="height:0px;">
                 <img src="Images/HomeIMG.png" class="HomeIMG">
               </a>
-              <select id="logoDropdown" onInput="changePage()">
+              <!--<select id="logoDropdown" onInput="changePage()">
                 <option value="Blake2b" selected="selected">Blake2b Mining Calculator</option>
                 <option value="Grin" selected="selected">Grin31/32 Mining Simulator</option>
-                <!-- <option value="PoC">PoC Mining Calculator</option> -->
-              </select>
+                <option value="PoC">PoC Mining Calculator</option>
+              </select> -->
+              <div style="margin:auto; display:flex;">
+                <a href="https://www.blakemining.com/" id="Blake2bLink"><h2 id="Blake2bLinkText" class="noselect">Blake2b Calculator</h2></a>
+                <a href="https://www.kizmotek.com/Grin.html" id="GrinLink"><h2 id="GrinLinkText" class="noselect">GrinCC31/32 Simulator</h2></a>
+                <a id="PoCLink"><h2 id="PoCLinkText" class="noselect"><div style="position:relative;"><img src="Images/Locked.png" id="PoCLocked"></div>PoC Calculator</h2></a>
+              </div>
+              </div>
+                <h3 id="Disclaimer">The numbers for USD conversions presented here are taken from Coingecko, they are believed to be true but no warranty of correctness and usability can be assumed.<br>PLEASE DO YOUR OWN RESEARCH BEFORE INVESTING ANY MONEY!</h3>
+              </div>
         </div>
        
     </div>
@@ -91,30 +99,6 @@
                                     <th class="presetWord" colspan="5">
                                         Preset Miners
                                     </th>
-                                </tr>
-                                <tr>
-                                    <th class="presetMiners">
-                                        Obelisk GRN1-Mini
-                                    </th>
-                                    <td>
-                                    <input type="text" id="GRN1-Mini" onInput="presetUpdate()" value="0" class="presetData">
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <th class="presetMiners">
-                                        Obelisk GRN1
-                                    </th>
-                                    <td>
-                                    <input type="text" id="GRN1" onInput="presetUpdate()" value="0" class="presetData">
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <th class="presetMiners">
-                                        Obelisk GRN1-Immersion
-                                    </th>
-                                    <td>
-                                    <input type="text" id="GRN1-Immersion" onInput="presetUpdate()" value="0" class="presetData">
-                                    </td>
                                 </tr>
                                 <tr>
                                     <th class="presetMiners">
@@ -204,7 +188,7 @@
                         </div>
                     </div>
                     
-                    <table class="minersSold">
+                    <table class="minersSold" style="display:none;">
                             <tbody>
                                 <tr>
                                     <th class="minersSoldWord" colspan="4">
@@ -284,8 +268,6 @@
             <a href="https://www.coingecko.com/api/docs/v3" target="_blank">Coin Gecko</a>
             <br>
             <a href="https://github.com/ImTooLazyToWriteAUsername/BlakeMining" target="_blank" class="github">Github Repository</a>
-            <br>
-            <a href="https://www.blakemining.com/zodiac.html" target="_blank" class="zodiacLink">Zodiac Calculator</a>
         </div>
         </div>
         <div>

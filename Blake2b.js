@@ -49,7 +49,6 @@ var hyperPriceAPILoad = false
 const siaPriceAPI = "https://api.coingecko.com/api/v3/coins/siacoin/market_chart?vs_currency=usd&days=1"
 var siaPriceAPILoad = false
 
-
 const primePriceAPI = "https://api.coingecko.com/api/v3/coins/siaprime-coin/market_chart?vs_currency=usd&days=1"
 var primePriceAPILoad = false
 
@@ -86,7 +85,7 @@ let PowerCostWeekResult
 let PowerCostMonthResult
 
 //Hyperspace-------------------------------------------------------------------
-var XSCVolume = document.querySelector("#XSCVolumeValue")
+var XSCVolumeValue = document.querySelector("#XSCVolumeValue")
 
 var XSCcalcHour = document.querySelector("#XSCresultHour")
 var XSCcalcDay = document.querySelector("#XSCresultDay")
@@ -122,7 +121,7 @@ let hyperUSDWeekresult
 let hyperUSDMonthresult
 
 //Sia Prime
-var SCPVolume = document.querySelector("#SCPVolumeValue")
+var SCPVolumeValue = document.querySelector("#SCPVolumeValue")
 
 var SCPcalcHour = document.querySelector("#SCPresultHour")
 var SCPcalcDay = document.querySelector("#SCPresultDay")
@@ -158,7 +157,7 @@ let primeUSDWeekresult
 let primeUSDMonthresult
 
 //Sia Classic
-var SCCVolume = document.querySelector("#SCCVolumeValue")
+var SCCVolumeValue = document.querySelector("#SCCVolumeValue")
 
 var SCCcalcHour = document.querySelector("#SCCresultHour")
 var SCCcalcDay = document.querySelector("#SCCresultDay")
@@ -194,7 +193,7 @@ let sccUSDWeekresult
 let sccUSDMonthresult
 
 //Sia
-var SiaVolume = document.querySelector("#SiaVolumeValue")
+var SiaVolumeValue = document.querySelector("#SiaVolumeValue")
 
 var SiacalcHour = document.querySelector("#SiaresultHour")
 var SiacalcDay = document.querySelector("#SiaresultDay")
@@ -230,7 +229,7 @@ let siaUSDWeekresult
 let siaUSDMonthresult
 
 //Cash2
-var Cash2Volume = document.querySelector("#Cash2VolumeValue")
+var Cash2VolumeValue = document.querySelector("#Cash2VolumeValue")
 
 var Cash2calcHour = document.querySelector("#CASH2resultHour")
 var Cash2calcDay = document.querySelector("#CASH2resultDay")
@@ -328,6 +327,7 @@ let StrongUpresetPower = 0
 
 
 var APILoaded = 0
+var APINeeded = 7
 
 let miningAPIData = 0
 fetch(miningAPI)
@@ -359,6 +359,12 @@ fetch(miningAPI)
     APILoaded += 1
     apiLoadVerify()
 })
+.catch(function(err) {
+  console.log('Failed to load Keops API: ', err);
+  APINeeded =- 1
+  apiLoadVerify()
+})
+
 
 let cash2APIData = 0
 fetch(cash2API)
@@ -368,6 +374,7 @@ fetch(cash2API)
     } else {
     fetch(cash2API)
     .then(function(response) {
+      console.log(response.ok)
     if (response.ok == true) {
         return response.json();
     } else {
@@ -389,6 +396,11 @@ fetch(cash2API)
     APILoaded += 1
     apiLoadVerify()
 })
+.catch(function(err) {
+  console.log('Failed to load Cash2 API: ', err);
+  APINeeded =- 1
+  apiLoadVerify()
+})
 
 let cash2PriceAPIData = 0
 fetch(cash2PriceAPI)
@@ -409,8 +421,12 @@ fetch(cash2PriceAPI)
         cash2PriceAPIData = myJson
         cash2PriceAPILoad = true
         APILoaded += 1
-        Cash2Volume.innerHTML = Math.round((cash2PriceAPIData.total_volumes[cash2PriceAPIData.total_volumes.length - 1][1]) * 100) / 100
-        Cash2Volume.innerHTML = "$" + Cash2Volume.innerHTML.replace(/\B(?=(\d{3})+(?!\d))/g, ",")
+        var volume = Math.round((cash2PriceAPIData.total_volumes[cash2PriceAPIData.total_volumes.length - 1][1]) * 100) / 100
+        Cash2VolumeValue.innerHTML = volume
+        if(volume < 100) {
+          Cash2VolumeValue.style.color = redColor
+        }
+        Cash2VolumeValue.innerHTML = "$" + Cash2VolumeValue.innerHTML.replace(/\B(?=(\d{3})+(?!\d))/g, ",")
         apiLoadVerify()
     })
     }
@@ -419,9 +435,18 @@ fetch(cash2PriceAPI)
     cash2PriceAPIData = myJson
     cash2PriceAPILoad = true
     APILoaded += 1
-    Cash2Volume.innerHTML = Math.round((cash2PriceAPIData.total_volumes[cash2PriceAPIData.total_volumes.length - 1][1]) * 100) / 100
-    Cash2Volume.innerHTML = "$" + Cash2Volume.innerHTML.replace(/\B(?=(\d{3})+(?!\d))/g, ",")
+    var volume = Math.round((cash2PriceAPIData.total_volumes[cash2PriceAPIData.total_volumes.length - 1][1]) * 100) / 100
+    Cash2VolumeValue.innerHTML = volume
+    if(volume < 100) {
+      Cash2VolumeValue.style.color = redColor
+    }
+    Cash2VolumeValue.innerHTML = "$" + Cash2VolumeValue.innerHTML.replace(/\B(?=(\d{3})+(?!\d))/g, ",")
     apiLoadVerify()
+})
+.catch(function(err) {
+  console.log('Failed to load Cash2 Price API: ', err);
+  APINeeded =- 1
+  apiLoadVerify()
 })
 
 let siaPriceAPIData
@@ -443,8 +468,12 @@ fetch(siaPriceAPI)
         siaPriceAPIData = myJson
         siaPriceAPILoad = true
         APILoaded += 1
-        SiaVolume.innerHTML = Math.round((siaPriceAPIData.total_volumes[siaPriceAPIData.total_volumes.length - 1][1]) * 100) / 100
-        SiaVolume.innerHTML = "$" + SiaVolume.innerHTML.replace(/\B(?=(\d{3})+(?!\d))/g, ",")
+        var volume = Math.round((siaPriceAPIData.total_volumes[siaPriceAPIData.total_volumes.length - 1][1]) * 100) / 100
+        SiaVolumeValue.innerHTML = volume
+        if(volume < 100) {
+          SiaVolumeValue.style.color = redColor
+        }
+        SiaVolumeValue.innerHTML = "$" + SiaVolumeValue.innerHTML.replace(/\B(?=(\d{3})+(?!\d))/g, ",")
         apiLoadVerify()
     })
     }
@@ -453,9 +482,18 @@ fetch(siaPriceAPI)
     siaPriceAPIData = myJson
     siaPriceAPILoad = true
     APILoaded += 1
-    SiaVolume.innerHTML = Math.round((siaPriceAPIData.total_volumes[siaPriceAPIData.total_volumes.length - 1][1]) * 100) / 100
-    SiaVolume.innerHTML = "$" + SiaVolume.innerHTML.replace(/\B(?=(\d{3})+(?!\d))/g, ",")
+    var volume = Math.round((siaPriceAPIData.total_volumes[siaPriceAPIData.total_volumes.length - 1][1]) * 100) / 100
+    SiaVolumeValue.innerHTML = volume
+    if(volume < 100) {
+      SiaVolumeValue.style.color = redColor
+    }
+    SiaVolumeValue.innerHTML = "$" + SiaVolumeValue.innerHTML.replace(/\B(?=(\d{3})+(?!\d))/g, ",")
     apiLoadVerify()
+})
+.catch(function(err) {
+  console.log('Failed to load Sia Price API: ', err);
+  APINeeded =- 1
+  apiLoadVerify()
 })
 
 let hyperPriceAPIData
@@ -477,8 +515,12 @@ fetch(hyperPriceAPI)
         hyperPriceAPIData = myJson
         hyperPriceAPILoad = true
         APILoaded += 1
-        XSCVolume.innerHTML = Math.round((hyperPriceAPIData.total_volumes[hyperPriceAPIData.total_volumes.length - 1][1]) * 100) / 100
-        XSCVolume.innerHTML = "$" + XSCVolume.innerHTML.replace(/\B(?=(\d{3})+(?!\d))/g, ",")
+        var volume = Math.round((hyperPriceAPIData.total_volumes[hyperPriceAPIData.total_volumes.length - 1][1]) * 100) / 100
+        XSCVolumeValue.innerHTML = volume
+        if(volume < 100) {
+          XSCVolumeValue.style.color = redColor
+        }
+        XSCVolumeValue.innerHTML = "$" + XSCVolumeValue.innerHTML.replace(/\B(?=(\d{3})+(?!\d))/g, ",")
         apiLoadVerify()
     })
     }
@@ -487,9 +529,18 @@ fetch(hyperPriceAPI)
     hyperPriceAPIData = myJson
     hyperPriceAPILoad = true
     APILoaded += 1
-    XSCVolume.innerHTML = Math.round((hyperPriceAPIData.total_volumes[hyperPriceAPIData.total_volumes.length - 1][1]) * 100) / 100
-    XSCVolume.innerHTML = "$" + XSCVolume.innerHTML.replace(/\B(?=(\d{3})+(?!\d))/g, ",")
+    var volume = Math.round((hyperPriceAPIData.total_volumes[hyperPriceAPIData.total_volumes.length - 1][1]) * 100) / 100
+    XSCVolumeValue.innerHTML = volume
+    if(volume < 100) {
+      XSCVolumeValue.style.color = redColor
+    }
+    XSCVolumeValue.innerHTML = "$" + XSCVolumeValue.innerHTML.replace(/\B(?=(\d{3})+(?!\d))/g, ",")
     apiLoadVerify()
+})
+.catch(function(err) {
+  console.log('Failed to load Hyperspace Price API: ', err);
+  APINeeded =- 1
+  apiLoadVerify()
 })
 
 let primePriceAPIData
@@ -511,8 +562,12 @@ fetch(primePriceAPI)
         primePriceAPIData = myJson
         primePriceAPILoad = true
         APILoaded += 1
-        SCPVolume.innerHTML = Math.round(primePriceAPIData.total_volumes[primePriceAPIData.total_volumes.length - 1][1] * 100) / 100
-        SCPVolume.innerHTML = "$" + SCPVolume.innerHTML.replace(/\B(?=(\d{3})+(?!\d))/g, ",")
+        var volume = Math.round(primePriceAPIData.total_volumes[primePriceAPIData.total_volumes.length - 1][1] * 100) / 100
+        SCPVolumeValue.innerHTML = volume
+        if(volume < 100) {
+          SCPVolumeValue.style.color = redColor
+        }
+        SCPVolumeValue.innerHTML = "$" + SCPVolumeValue.innerHTML.replace(/\B(?=(\d{3})+(?!\d))/g, ",")
         apiLoadVerify()
     })
     }
@@ -521,9 +576,18 @@ fetch(primePriceAPI)
     primePriceAPIData = myJson
     primePriceAPILoad = true
     APILoaded += 1
-    SCPVolume.innerHTML = Math.round(primePriceAPIData.total_volumes[primePriceAPIData.total_volumes.length - 1][1] * 100) / 100
-    SCPVolume.innerHTML = "$" + SCPVolume.innerHTML.replace(/\B(?=(\d{3})+(?!\d))/g, ",")
+    var volume = Math.round(primePriceAPIData.total_volumes[primePriceAPIData.total_volumes.length - 1][1] * 100) / 100
+    SCPVolumeValue.innerHTML = volume
+    if(volume < 100) {
+      SCPVolumeValue.style.color = redColor
+    }
+    SCPVolumeValue.innerHTML = "$" + SCPVolumeValue.innerHTML.replace(/\B(?=(\d{3})+(?!\d))/g, ",")
     apiLoadVerify()
+})
+.catch(function(err) {
+  console.log('Failed to load SiaPrime Price API: ', err);
+  APINeeded =- 1
+  apiLoadVerify()
 })
 
 /*
@@ -578,8 +642,12 @@ fetch(classicPriceAPI)
         classicPriceAPIData = myJson
         classicPriceAPILoad = true
         APILoaded += 1
-        SCCVolume.innerHTML = Math.round((classicPriceAPIData.total_volumes[classicPriceAPIData.total_volumes.length - 1][1]) * 100) / 100
-        SCCVolume.innerHTML = "$" + SCCVolume.innerHTML.replace(/\B(?=(\d{3})+(?!\d))/g, ",")
+        var volume = Math.round((classicPriceAPIData.total_volumes[classicPriceAPIData.total_volumes.length - 1][1]) * 100) / 100
+        SCCVolumeValue.innerHTML = volume
+        if(volume < 100) {
+          SCCVolumeValue.style.color = redColor
+        }
+        SCCVolumeValue.innerHTML = "$" + SCCVolumeValue.innerHTML.replace(/\B(?=(\d{3})+(?!\d))/g, ",")
         apiLoadVerify()
     })
     }
@@ -588,9 +656,18 @@ fetch(classicPriceAPI)
     classicPriceAPIData = myJson
     classicPriceAPILoad = true
     APILoaded += 1
-    SCCVolume.innerHTML = Math.round((classicPriceAPIData.total_volumes[classicPriceAPIData.total_volumes.length - 1][1]) * 100) / 100
-    SCCVolume.innerHTML = "$" + SCCVolume.innerHTML.replace(/\B(?=(\d{3})+(?!\d))/g, ",")
+    var volume = Math.round((classicPriceAPIData.total_volumes[classicPriceAPIData.total_volumes.length - 1][1]) * 100) / 100
+    SCCVolumeValue.innerHTML = volume
+    if(volume < 100) {
+      SCCVolumeValue.style.color = redColor
+    }
+    SCCVolumeValue.innerHTML = "$" + SCCVolumeValue.innerHTML.replace(/\B(?=(\d{3})+(?!\d))/g, ",")
     apiLoadVerify()
+})
+.catch(function(err) {
+  console.log('Failed to load SiaClassic Price API: ', err);
+  APINeeded =- 1
+  apiLoadVerify()
 })
 
 /*
@@ -625,8 +702,9 @@ fetch(btcPriceAPI)
 }) */
 
 function apiLoadVerify() {
-    if(APILoaded >= 7) {
+    if(APILoaded >= APINeeded) {
         console.log(APILoaded + " API's loaded")
+        ChangeTheme()
         liveHashrate()
         presetUpdate()
     }
@@ -881,6 +959,7 @@ function sia(){
                 console.log(error)
             }
         }
+
         if (usingPreset == true) {
           siaHourresult = siaReward(siaAPIDifficulty, totalObeliskHashrate  * 1e9, siaAPIheight, hour)
           siaDayresult = siaReward(siaAPIDifficulty, totalObeliskHashrate * 1e9, siaAPIheight, day)
@@ -1257,11 +1336,17 @@ function cash2() {
             console.log(error)
         }
     }
-
-    Cash2Hourresult = cash2Reward(CASH2APIDifficulty, hshrt, CASH2APIheight, hour)
-    Cash2Dayresult = cash2Reward(CASH2APIDifficulty, hshrt, CASH2APIheight, day)
-    Cash2Weekresult = cash2Reward(CASH2APIDifficulty, hshrt, CASH2APIheight, week)
-    Cash2Monthresult = cash2Reward(CASH2APIDifficulty, hshrt, CASH2APIheight, month)
+    if (usingPreset == true) {
+      Cash2Hourresult = cash2Reward(CASH2APIDifficulty, hshrt * 0.72, CASH2APIheight, hour)
+      Cash2Dayresult = cash2Reward(CASH2APIDifficulty, hshrt * 0.72, CASH2APIheight, day)
+      Cash2Weekresult = cash2Reward(CASH2APIDifficulty, hshrt * 0.72, CASH2APIheight, week)
+      Cash2Monthresult = cash2Reward(CASH2APIDifficulty, hshrt * 0.72, CASH2APIheight, month)
+    } else {
+      Cash2Hourresult = cash2Reward(CASH2APIDifficulty, hshrt, CASH2APIheight, hour)
+      Cash2Dayresult = cash2Reward(CASH2APIDifficulty, hshrt, CASH2APIheight, day)
+      Cash2Weekresult = cash2Reward(CASH2APIDifficulty, hshrt, CASH2APIheight, week)
+      Cash2Monthresult = cash2Reward(CASH2APIDifficulty, hshrt, CASH2APIheight, month)
+    }
 
     Cash2calcHour.innerHTML = numberShortener(Cash2Hourresult)
     Cash2calcDay.innerHTML = numberShortener(Cash2Dayresult)
@@ -1514,12 +1599,12 @@ function presetUpdate() {
         
     //StrongU STU-U2
     if (StrongUpreset >= 1 && StrongUpreset < 999) {
-        StrongUpresetFinal = 5500 * StrongUpreset
+        StrongUpresetFinal = 6000 * StrongUpreset
         StrongUpresetPower = 1600 * StrongUpreset
     }
     else if (StrongUpreset >= 999) {
         StrongU.value = 999
-        StrongUpresetFinal = 5500 * 999
+        StrongUpresetFinal = 6000 * 999
         StrongUpresetPower = 1600 * 999
     }
     else if (StrongUpreset <= 0){
@@ -1645,7 +1730,6 @@ function ChangeTheme() {
     var HomeIMG = document.getElementsByClassName("HomeIMG")
     
     if (themeToggle.checked == true) {
-        
         var data = {Toggle: themeToggle.checked}
         var strData = JSON.stringify(data)
         localStorage.setItem('theme', strData);
@@ -1654,10 +1738,48 @@ function ChangeTheme() {
         for (var i = 0; i < currentTheme.length; i++) {
             currentTheme[i].style.color = "white";
         }
+
+        if(splitInput(SiaVolumeValue.innerHTML) < 100) {
+          SiaVolumeValue.style.color = redColorDark
+        } else {
+          SiaVolumeValue.style.color = "white"
+        }
+
+
+        if(splitInput(XSCVolumeValue.innerHTML) < 100) {
+          XSCVolumeValue.style.color = redColorDark
+        } else {
+          XSCVolumeValue.style.color = "white"
+        }
+
+
+        if(splitInput(SCPVolumeValue.innerHTML) < 100) {
+          SCPVolumeValue.style.color = redColorDark
+        } else {
+          SCPVolumeValue.style.color = "white"
+        }
+
+
+        if(splitInput(SCCVolumeValue.innerHTML) < 100) {
+          SCCVolumeValue.style.color = redColorDark
+        } else {
+          SCCVolumeValue.style.color = "white"
+        }
+
+
+        if(splitInput(Cash2VolumeValue.innerHTML) < 100) {
+          Cash2VolumeValue.style.color = redColorDark
+        } else {
+          Cash2VolumeValue.style.color = "white"
+        }
+        
         currentTheme[0].style.backgroundColor = "#3b3d3f"
         currentTheme[1].style.backgroundColor = "#535659"
         currentTheme[1].children[0].children[0].children[0].style.backgroundColor = "#404244"
         currentTheme[1].children[0].children[0].children[2].children[1].style.backgroundColor = "rgb(64, 72, 86, 0.6)"
+        currentTheme[1].children[0].children[0].children[2].children[2].style.backgroundColor = "rgb(64, 72, 86, 0.6)"
+        currentTheme[1].children[0].children[0].children[2].children[3].style.backgroundColor = "rgb(64, 72, 86, 0.6)"
+        currentTheme[1].children[0].children[0].children[2].children[4].style.backgroundColor = "rgb(64, 72, 86, 0.6)"
         currentTheme[2].style.backgroundColor = "#3b3d3f"
         document.body.style.background = "#535659"
         currentTheme[2].style.borderColor = "#28292b"
@@ -1689,9 +1811,44 @@ function ChangeTheme() {
             currentTheme[i].style.removeProperty("background-color")
             currentTheme[i].style.removeProperty("border-color")
         }
+        
+        if(splitInput(SiaVolumeValue.innerHTML) < 100) {
+          SiaVolumeValue.style.color = redColor
+        } else {
+          SiaVolumeValue.style.color = "white"
+        }
+
+        if(splitInput(XSCVolumeValue.innerHTML) < 100) {
+          XSCVolumeValue.style.color = redColor
+        } else {
+          XSCVolumeValue.style.color = "white"
+        }
+
+        if(splitInput(SCPVolumeValue.innerHTML) < 100) {
+          SCPVolumeValue.style.color = redColor
+        } else {
+          SCPVolumeValue.style.color = "white"
+        }
+
+        if(splitInput(SCCVolumeValue.innerHTML) < 100) {
+          SCCVolumeValue.style.color = redColor
+        } else {
+          SCCVolumeValue.style.color = "white"
+        }
+
+        if(splitInput(Cash2VolumeValue.innerHTML) < 100) {
+          Cash2VolumeValue.style.color = redColor
+        } else {
+          Cash2VolumeValue.style.color = "white"
+        }
+
+        
         currentTheme[1].children[0].children[0].children[0].style.removeProperty("background-color")
         document.body.style.removeProperty("background-color")
         currentTheme[1].children[0].children[0].children[2].children[1].style.removeProperty("background-color")
+        currentTheme[1].children[0].children[0].children[2].children[2].style.removeProperty("background-color")
+        currentTheme[1].children[0].children[0].children[2].children[3].style.removeProperty("background-color")
+        currentTheme[1].children[0].children[0].children[2].children[4].style.removeProperty("background-color")
         HomeIMG[0].style.removeProperty("filter")
         for (var i = 0; i < inputsTheme.length; i++) {
             inputsTheme[i].style.removeProperty("background-color")

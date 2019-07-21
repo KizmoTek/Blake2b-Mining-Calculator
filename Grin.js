@@ -28,6 +28,8 @@
 
 moment().format();
 
+var proxyUrl = 'https://cors-anywhere.herokuapp.com/'
+
 const grinPriceAPI = "https://api.coingecko.com/api/v3/coins/grin/market_chart?vs_currency=usd&days=1"
 var grinPriceAPILoad
 
@@ -44,12 +46,12 @@ var difficultyAddPercentage
 var APILoaded = 0
 
 let grinPriceAPIData = 0
-fetch(grinPriceAPI)
+fetch(proxyUrl + grinPriceAPI)
     .then(function(response) {
     if (response.ok == true) {
         return response.json();
     } else {
-    fetch(grinPriceAPI)
+    fetch(proxyUrl + grinPriceAPI)
         .then(function(response) {
             if (response.ok == true) {
                 return response.json();
@@ -72,41 +74,6 @@ fetch(grinPriceAPI)
     grinPriceAPILoad = true
     APILoaded += 1
     apiLoadVerify()
-})
-
-let obeliskSaleAPIData = 0
-fetch(obeliskSaleAPI)
-    .then(function(response) {
-    if (response.ok == true) {
-        return response.json();
-    } else {
-    fetch(obeliskSaleAPI)
-        .then(function(response) {
-            if (response.ok == true) {
-                return response.json();
-            } else {
-                obeliskSaleAPILoad = false
-                alert("Error with loading Keops API data for Hyperspace, SiaPrime, SiaClassic, and Sia.")
-            }
-        })
-        .then(function(myJson){
-            obeliskSaleAPIData = myJson
-            obeliskSaleAPILoad = true
-            GRN1MiniSale.innerHTML = obeliskSaleAPIData.counts["GRN1-MINI"]
-            GRN1Sale.innerHTML = obeliskSaleAPIData.counts["GRN1"] + obeliskSaleAPIData.counts["GRN1-B1"]
-            GRN1IMMSale.innerHTML = obeliskSaleAPIData.counts["GRN1-IMM"]
-        })
-    }
-        
-})
-.then(function(myJson){
-    obeliskSaleAPIData = myJson
-    obeliskSaleAPILoad = true
-    GRN1MiniSale.innerHTML = obeliskSaleAPIData.counts["GRN1-MINI"]
-    GRN1Sale.innerHTML = obeliskSaleAPIData.counts["GRN1"] + obeliskSaleAPIData.counts["GRN1-B1"]
-    GRN1IMMSale.innerHTML = obeliskSaleAPIData.counts["GRN1-IMM"]
-    totalMiners.innerHTML = obeliskSaleAPIData.counts["GRN1-MINI"] + obeliskSaleAPIData.counts["GRN1"] + obeliskSaleAPIData.counts["GRN1-B1"] + obeliskSaleAPIData.counts["GRN1-IMM"]
-    totalHashrate.innerHTML = (obeliskSaleAPIData.counts["GRN1-MINI"] * 70) + ((obeliskSaleAPIData.counts["GRN1"] + obeliskSaleAPIData.counts["GRN1-B1"]) * 420) + (obeliskSaleAPIData.counts["GRN1-IMM"] * 840)
 })
 
 function apiLoadVerify() {
@@ -134,29 +101,14 @@ var endDateInput = document.getElementById("endDate")
 var USDChartColor = "rgb(29, 153, 48, 0.8)"
 var USDChartBorderColor = "#27842e"
 
-var GRN1Mini = document.getElementById("GRN1-Mini")
-var GRN1MiniPreset = 0
-var GRN1MiniPresetPower = 0
-var GRN1MiniPresetFinal = 0
-
-var GRN1 = document.getElementById("GRN1")
-GRN1.value = 1
-var GRN1Preset = 0
-var GRN1PresetPower = 0
-var GRN1PresetFinal = 0
-
-var GRN1Immersion = document.getElementById("GRN1-Immersion")
-var GRN1ImmersionPreset = 0
-var GRN1ImmersionPresetPower = 0
-var GRN1ImmersionPresetFinal = 0
-
 var G32Mini = document.getElementById("G32-Mini")
 var G32MiniPreset = 0
 var G32MiniPresetPower = 0
 var G32MiniPresetFinal = 0
 
 var G32 = document.getElementById("G32")
-var G32Preset = 0
+G32.value = 1
+var G32Preset = 1
 var G32PresetPower = 0
 var G32PresetFinal = 0
 
@@ -842,64 +794,13 @@ var innoTotal
 var innoPower
 
 function presetUpdate() {
-    GRN1Mini.value = GRN1Mini.value.replace(/[^1234567890]/g, "")
-    GRN1.value = GRN1.value.replace(/[^1234567890]/g, "")
-    GRN1Immersion.value = GRN1Immersion.value.replace(/[^1234567890]/g, "")
     G32Mini.value = G32Mini.value.replace(/[^1234567890]/g, "")
     G32.value = G32.value.replace(/[^1234567890]/g, "")
     G321800.value = G321800.value.replace(/[^1234567890]/g, "")
     
-    GRN1MiniPreset = GRN1Mini.value
-    GRN1Preset = GRN1.value
-    GRN1ImmersionPreset = GRN1Immersion.value
     G32MiniPreset = G32Mini.value
     G32Preset = G32.value
     G321800Preset = G321800.value
-    
-    //Obelisk GRN1-Mini
-    if (GRN1MiniPreset >= 1 && GRN1MiniPreset < 999) {
-        GRN1MiniPresetFinal = 70 * GRN1MiniPreset
-        GRN1MiniPresetPower = 400 * GRN1MiniPreset
-    }
-    else if (GRN1MiniPreset >= 999) {
-        GRN1Mini.value = 999
-        GRN1MiniPresetFinal = 70 * 999
-        GRN1MiniPresetPower = 400 * 999
-    }
-    else if (GRN1MiniPreset <= 0){
-        GRN1MiniPresetFinal = 0
-        GRN1MiniPresetPower = 0
-    }
-    
-    //Obelisk GRN1
-    if (GRN1Preset >= 1 && GRN1Preset < 999) {
-        GRN1PresetFinal = 420 * GRN1Preset
-        GRN1PresetPower = 2200 * GRN1Preset
-    }
-    else if (GRN1Preset >= 999) {
-        GRN1.value = 999
-        GRN1PresetFinal = 420 * 999
-        GRN1PresetPower = 2200 * 999
-    }
-    else if (GRN1Preset <= 0){
-        GRN1PresetFinal = 0
-        GRN1PresetPower = 0
-    }
-    
-    //Obelisk GRN1-Immersion
-    if (GRN1ImmersionPreset >= 1 && GRN1ImmersionPreset < 999) {
-        GRN1ImmersionPresetFinal = 840 * GRN1ImmersionPreset
-        GRN1ImmersionPresetPower = 4400 * GRN1ImmersionPreset
-    }
-    else if (GRN1ImmersionPreset >= 999) {
-        GRN1Immersion.value = 999
-        GRN1ImmersionPresetFinal = 840 * 999
-        GRN1ImmersionPresetPower = 4400 * 999
-    }
-    else if (GRN1ImmersionPreset <= 0){
-        GRN1ImmersionPresetFinal = 0
-        GRN1ImmersionPresetPower = 0
-    }
     
     //Innosilicon G32-Mini
     if (G32MiniPreset >= 1 && G32MiniPreset < 999) {
@@ -947,8 +848,8 @@ function presetUpdate() {
     }
     
     
-    obelTotal = GRN1MiniPresetFinal + GRN1PresetFinal + GRN1ImmersionPresetFinal
-    obelPower = GRN1MiniPresetPower + GRN1PresetPower + GRN1ImmersionPresetPower
+    obelTotal = 0
+    obelPower = 0
     
     innoTotal = G32MiniPresetFinal + G32PresetFinal + G321800PresetFinal
     innoPower = G32MiniPresetPower + G32PresetPower + G321800PresetPower

@@ -8,6 +8,31 @@
     margin-left: -200px;
     margin-top: 20px;
   }
+
+  #PoCLink {
+          background-color: #808387;
+          border: solid 2px #6b6d70;
+          border-top: 0px;
+          border-radius: 0px 0px 15px 15px;
+          margin-right: 20px;
+          height:60px;
+          display: flex;
+          align-items: center;
+          filter: brightness(80%);
+          cursor:not-allowed;
+        }
+
+        #PoCLinkText {
+          color:white;
+          padding:0px 10px 0px 10px;
+        }
+
+        #PoCLocked {
+          width:50px;
+          position: absolute;
+          left: 55px;
+          top: -10px;
+        }
 }
 
 /* Mobile */
@@ -19,6 +44,37 @@
     margin-left: -40%;
     margin-top: 5px;
   }
+
+  #PoCLink {
+          background-color: #808387;
+          border: solid 2px #6b6d70;
+          border-top: 0px;
+          border-radius: 0px 0px 15px 15px;
+          margin-right: 20px;
+          height:35px;
+          display: flex;
+          align-items: center;
+          filter: brightness(80%);
+        }
+
+        #PoCLinkText {
+          font-size: 10px;
+          color:white;
+          padding:0px 10px 0px 10px;
+        }
+
+        #PoCLocked {
+          width:25px;
+          position: absolute;
+          left: 10px;
+          top: -3px;
+        }
+}
+
+#Disclaimer {
+    margin-top: 5px;
+    margin-bottom: 0px;
+    color:red;
 }
 
 #close {
@@ -28,8 +84,8 @@
   width: 30px;
   height: 30px;
   opacity: 0.3;
-  
 }
+
 #close:hover {
   opacity: 1;
   cursor: pointer;
@@ -85,4 +141,13 @@
 
 #DontShowAgainButton:active {
   transform: scale(1);
+}
+
+.noselect {
+  -webkit-touch-callout: none; /* iOS Safari */
+  -webkit-user-select: none; /* Safari */
+  -khtml-user-select: none; /* Konqueror HTML */
+  -moz-user-select: none; /* Firefox */
+  -ms-user-select: none; /* Internet Explorer/Edge */
+  user-select: none; /* Non-prefixed version, currently supported by Chrome and Opera */
 }
