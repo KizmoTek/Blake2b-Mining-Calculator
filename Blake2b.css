@@ -3640,7 +3640,7 @@
 }
 
 /* Desktop Large Monitor Scaling */ 
-@media only screen and (min-width: 1200px) and (min-height: 1270px) {
+@media only screen and (min-width: 1200px) and (min-height: 1300px) {
         body {
                 margin: 0px;
                 padding: 0px;

@@ -32,6 +32,58 @@
         100% {opacity: 0}
 }
 
+@keyframes topToBottom {
+  0% {
+      height: 0px;
+  }
+  100% {
+      height: 40px;
+  }
+}
+
+@keyframes opacityTransition {
+  0% {
+      opacity: 0;
+  }
+  100% {
+      opacity: 1;
+  }
+}
+
+.infoImg {
+  width: 14px;
+  margin-bottom: 8px;
+  margin-left: -5px;
+        }
+
+.tooltip6 {
+  position: relative;
+  display: inline-block;
+  bottom: 75px;
+  left: 4px;
+}
+
+.tooltip6 .tooltiptext6 {
+  visibility: hidden;
+  width: 260px;
+  font-size: 18px;
+  background-color: rgb(76, 89, 112, 0.8);
+  color: white;
+  text-align: center;
+  border-radius: 6px;
+  padding: 5px 0;
+  margin-bottom: 100px;
+
+  /* Position the tooltip */
+  position: absolute;
+  top: -60px;
+  z-index: 1;
+}
+
+.tooltip6:hover .tooltiptext6 {
+  visibility: visible;
+}
+
 /* Desktop Scaling */ 
 @media only screen and (min-width: 1199px) {
         body {
@@ -63,7 +115,8 @@
                 border-bottom: 2px #b1b6bc solid;
                 background-color: #cbd0d6;
                 margin-top: 0;
-
+                animation: 1s ease-out 0s 1 topToBottom;
+                animation-fill-mode: forwards;
         }
 
         .TopLine>h1 {
@@ -79,6 +132,10 @@
                 display: flex;
                 width:155px;
                 margin:auto;
+                opacity: 0;
+                animation: 0.8s ease-out 0s 1 opacityTransition;
+                animation-fill-mode: forwards;
+                animation-delay: 0.8s;
         }
         
         footer {
@@ -805,6 +862,10 @@
                 display: flex;
                 width:155px;
                 margin:auto;
+                opacity: 0;
+                animation: 0.8s ease-out 0s 1 opacityTransition;
+                animation-fill-mode: forwards;
+                animation-delay: 0.8s;
         }
         
         footer {
@@ -1533,6 +1594,10 @@
                 display: flex;
                 width:155px;
                 margin:auto;
+                opacity: 0;
+                animation: 0.8s ease-out 0s 1 opacityTransition;
+                animation-fill-mode: forwards;
+                animation-delay: 0.8s;
         }
         
         footer {
