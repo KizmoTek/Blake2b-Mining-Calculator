@@ -143,6 +143,8 @@ var SCPresultDayProfitUSD = document.querySelector("#SCPresultDayProfitUSD")
 var SCPresultWeekProfitUSD = document.querySelector("#SCPresultWeekProfitUSD")
 var SCPresultMonthProfitUSD = document.querySelector("#SCPresultMonthProfitUSD")
 
+var SCPInfoText = document.querySelector("#SCPDisclaimerText")
+
 var primeAPIDifficulty
 var primeAPIheight
 
@@ -252,6 +254,7 @@ var Cash2resultDayProfitUSD = document.querySelector("#CASH2resultDayProfitUSD")
 var Cash2resultWeekProfitUSD = document.querySelector("#CASH2resultWeekProfitUSD")
 var Cash2resultMonthProfitUSD = document.querySelector("#CASH2resultMonthProfitUSD")
 
+var Cash2InfoText = document.querySelector("#Cash2DisclaimerText")
 
 var CASH2APIDifficulty
 var CASH2APIheight
@@ -425,12 +428,13 @@ fetch(cash2PriceAPI)
         Cash2VolumeValue.innerHTML = volume
         if(volume < 100) {
           Cash2VolumeValue.style.color = redColor
+          Cash2InfoText.innerHTML = "Very Low Volume"
         }
         Cash2VolumeValue.innerHTML = "$" + Cash2VolumeValue.innerHTML.replace(/\B(?=(\d{3})+(?!\d))/g, ",")
         apiLoadVerify()
     })
     }
-})
+}) 
 .then(function(myJson){
     cash2PriceAPIData = myJson
     cash2PriceAPILoad = true
@@ -439,6 +443,7 @@ fetch(cash2PriceAPI)
     Cash2VolumeValue.innerHTML = volume
     if(volume < 100) {
       Cash2VolumeValue.style.color = redColor
+      Cash2InfoText.innerHTML = "Very Low Volume"
     }
     Cash2VolumeValue.innerHTML = "$" + Cash2VolumeValue.innerHTML.replace(/\B(?=(\d{3})+(?!\d))/g, ",")
     apiLoadVerify()
@@ -566,6 +571,7 @@ fetch(primePriceAPI)
         SCPVolumeValue.innerHTML = volume
         if(volume < 100) {
           SCPVolumeValue.style.color = redColor
+          SCPInfoText.innerHTML = "Very Low Volume"
         }
         SCPVolumeValue.innerHTML = "$" + SCPVolumeValue.innerHTML.replace(/\B(?=(\d{3})+(?!\d))/g, ",")
         apiLoadVerify()
@@ -580,6 +586,7 @@ fetch(primePriceAPI)
     SCPVolumeValue.innerHTML = volume
     if(volume < 100) {
       SCPVolumeValue.style.color = redColor
+      SCPInfoText.innerHTML = "Very Low Volume"
     }
     SCPVolumeValue.innerHTML = "$" + SCPVolumeValue.innerHTML.replace(/\B(?=(\d{3})+(?!\d))/g, ",")
     apiLoadVerify()
