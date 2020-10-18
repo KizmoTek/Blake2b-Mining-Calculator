@@ -140,8 +140,10 @@ footer a {
 }
 
 #apiLinks {
+        margin-top: 40px;
         display: flex;
         flex-direction: column;
+        justify-content: center;
 }
 
 #apiLinks a {
@@ -207,6 +209,9 @@ article {
         #calcPosition {
                 margin: auto;
                 height: 1200px;
+        }
+        #apiLinks {
+                margin-top: 0;
         }
         #rightBar {
                 height: 200px;
