@@ -1,198 +1,444 @@
-<!-- 
- * Copyright (c) 2018 by KizmoTek <KizmoTek@gmail.com>
- * All rights reserved.
- *
- * License: 
- * Redistribution and use in source and binary forms, with or without
- * modification, are permitted provided that the following conditions are met:
- *
- *   - Redistributions of source code must retain the above copyright notice, this
- *     list of conditions and the following disclaimer.
- *
- *   - Redistributions in binary form must reproduce the above copyright notice,
- *     this list of conditions and the following disclaimer in the documentation
- *     and/or other materials provided with the distribution.
- *
- * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
- * AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
- * IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
- * DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE
- * FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL
- * DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR
- * SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER
- * CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY,
- * OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
- * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
--->
-
-
-
-
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" translate="no">
+
 <head>
+    <!-- Preview Meta Tags -->
+    <meta name="description" content="Calculate the mining profitability for coins on the Blake2b algorithm.">
+
     <!-- Google / Search Engine Tags -->
-    <meta itemprop="name" content="KizmoTek">
-    <meta itemprop="image" content="">
-    
+    <meta itemprop="name" content="Blake2b Mining Calculator">
+    <meta itemprop="description" content="Calculate the mining profitability for coins on the Blake2b algorithm.">
+    <meta itemprop="image" content="https://www.blakemining.com/Images/Blake2bIMG.jpg">
+
     <!-- Facebook Meta Tags -->
-    <meta property="og:url" content="https://www.kizmotek.com/">
+    <meta property="og:url" content="https://www.blakemining.com/">
     <meta property="og:type" content="website">
-    <meta property="og:title" content="KizmoTek">
-    <meta property="og:image" content="">
-    
+    <meta property="og:title" content="Blake2b Mining Calculator">
+    <meta property="og:description" content="Calculate the mining profitability for coins on the Blake2b algorithm.">
+    <meta property="og:image" content="https://www.blakemining.com/Images/Blake2bIMG.jpg">
+
     <!-- Twitter Meta Tags -->
     <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:title" content="KizmoTek">
-    <meta name="twitter:image" content="">
+    <meta name="twitter:title" content="Blake2b Mining Calculator">
+    <meta name="twitter:description" content="Calculate the mining profitability for coins on the Blake2b algorithm.">
+    <meta name="twitter:image" content="https://www.blakemining.com/Images/Blake2bIMG.jpg">
+    <meta name="twitter:image:alt" content="Profitability for coins on the Blake2b Algorithm">
     <!-- Preview Meta Tags end -->
-    
+
     <meta charset="UTF-8">
     <link rel="shortcut icon" href="Images/Calculator Icon.png" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <link rel="stylesheet" href="index.css">
-    <link rel="stylesheet" href="All.css">
+    <link rel="stylesheet" href="style.css">
     <link href='https://fonts.googleapis.com/css?family=Roboto:300' rel='stylesheet'>
-    <title>KizmoTek</title>
-
-    <!--<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-    <script>
-      (adsbygoogle = window.adsbygoogle || []).push({
-        google_ad_client: "ca-pub-2208671282632963",
-        enable_page_level_ads: true
-      });
-    </script> -->
-    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-    <script>
-        (adsbygoogle = window.adsbygoogle || []).push({
-              google_ad_client: "ca-pub-2208671282632963",
-              enable_page_level_ads: true
-        });
-    </script>
+    <title>Blake2b Mining Calculator</title>
 </head>
-<body>
-    <div class="TopLine">
-       <div class="topFlex">
-            <label class="switch2">
-                <input type="checkbox" id="diffToggleSwitch2" onInput=" ChangeTheme()">
-                <span class="slider2 round2"></span>
-              </label>
-              <a href="index.html"><h1 class="logoName">KizmoTek</h1></a>
+
+<body onload="setTimeout(liveHashrate, 4000)">
+    <nav>
+        <a href="https://www.kizmotek.com/" target="_none"><img src="Images/Calculator Icon.png"></a>
+        <a href="https://www.blakemining.com/">
+            <h1>Blake2b Mining Calculator</h1>
+        </a>
+        <div id="api">
+            <h2>API Status: </h2>
+            <h2 id="apiStatus">Loading</h2>
         </div>
-    </div>
-    <div class="main">
-      <div class="container">
-        <div class="outer">
-          <div class="layering">
-            <div class="Blake2b TileSize noselect">
-              <a href="https://www.blakemining.com/">
-                <img src="Images/Blake2bIMG.jpg" id="Blake2bBlurIMG" class="TileSize" draggable="false">
-                <img src="Images/Blake2bIMG.jpg" id="Blake2bIMG" class="TileSize" draggable="false">
-                <div class="topText">
-                  <h2 class="CalcName">Blake2b Mining Calculator</h2>
-                  <h4 id="Blake2bDesc" class="descText">Calculate the profitability for coins on the Blake2b algorithm.</h4>
+    </nav>
+
+    <main>
+        <div id="calcPosition">
+            <!-- Preset Miners -->
+            <h2 style="font-size: 32px;">Preset Miners</h2>
+            <div id="presetMiners">
+
+                <div class="minerRow">
+                    <div class="miners">
+                        <h3>Antminer A3</h3>
+                        <input type="text" value="0" oninput="presetUpdate()">
+                    </div>
+                    <div class="miners">
+                        <h3>Baikal BK-B</h3>
+                        <input type="text" value="0" oninput="presetUpdate()">
+                    </div>
+                    <div class="miners">
+                        <h3>Dragonmint B52</h3>
+                        <input type="text" value="0" oninput="presetUpdate()">
+                    </div>
+                    <div class="miners">
+                        <h3>iBeLink DSM7T</h3>
+                        <input type="text" value="0" oninput="presetUpdate()">
+                    </div>
                 </div>
-              </a>
-            </div>
-            <div class="Grin TileSize noselect">
-              <a href="https://www.kizmotek.com/Grin.html">
-                <img src="Images/GrinCalcIMG.jpg" id="GrinIMGBlurIMG" class="TileSize" draggable="false">
-                <img src="Images/GrinCalcIMG.jpg" id="GrinIMG" class="TileSize" draggable="false">
-                <div class="topText">
-                  <h2 class="CalcName">GrinCuckatoo31/32 Mining Simulator</h2>
-                  <h4 id="GrinDesc" class="descText">Simulate the profitability for mining Grin using an asic on the GrinCuckatoo31/32 algorithm.</h4>
-                </div>
-              </a>
-            </div>
-          </div>
-          <div class="layering">
-            <div class="PoC TileSize noselect">
-                <img src="Images/Locked.png" id="LockedIMG" draggable="false">
-                <img src="Images/PoCIMG.jpg" id="PoCIMGBlurIMG" class="TileSize" draggable="false">
-                <img src="Images/PoCIMG.jpg" id="PoCIMG" class="TileSize" draggable="false">
-                <div class="topText">
-                  <h2 class="CalcName">PoC Mining Calculator</h2>
-                  <h4 id="PoCDesc" class="descText">Calculate the profitability of dual mining Burst and BHD using your hard drive.<br><br>This calculator is currently work in progress. The image is a concept design, actual calculator may look different.</h4>
+                <div class="minerRow">
+                    <div class="miners">
+                        <h3>Innosilicon S11</h3>
+                        <input type="text" value="0" oninput="presetUpdate()">
+                    </div>
+                    <div class="miners">
+                        <h3>StrongU STU-U2</h3>
+                        <input type="text" value="0" oninput="presetUpdate()">
+                    </div>
+                    <div class="miners siaMiner">
+                        <h3>Obelisk SC1</h3>
+                        <input type="text" value="0" oninput="presetUpdate()">
+                    </div>
+                    <div class="miners siaMiner">
+                        <h3>ePic SC200</h3>
+                        <input type="text" value="0" oninput="presetUpdate()">
+                    </div>
                 </div>
             </div>
-            <div class="Zodiac TileSize noselect">
-              <a href="https://www.kizmotek.com/zodiac.html">
-                <img src="Images/ZodiacIMG.jpg" id="ZodiacBlurIMG" class="TileSize" draggable="false">
-                <img src="Images/ZodiacIMG.jpg" id="ZodiacIMG" class="TileSize" draggable="false">
-                <div class="topText">
-                  <h2 class="CalcName">Zodiac Calculator</h2>
-                  <h4 id="ZodiacDesc" class="descText">Find out what Chinese Zodiac you were born under and understand what it means.</h4>
+
+            <!-- <hr style="width: 100vw; position: absolute; left: 0; background-color: #3c3c3c; border: none; height: 1px; margin-top: 15px;"> -->
+
+            <!-- Custom Values -->
+            <div id="customValues">
+                <div class="customRow">
+                    <div class="customInput">
+                        <h3>Hashrate</h3>
+                        <input type="text" value="0" style="border-radius: 4px 0 0 4px;" oninput="clearPreset(); liveHashrate();">
+                        <select oninput="clearPreset(); liveHashrate();">
+                            <option value="Giga">Gh/s</option>
+                            <option value="Tera">Th/s</option>
+                        </select>
+                    </div>
+                    <div class="customInput">
+                        <h3>Add to difficulty</h3>
+                        <input type="checkbox" id="difficultyToggle" checked oninput="calcDiff();">
+                    </div>
+                    <div class="customInput">
+                        <h3>Reject Rate (%)</h3>
+                        <input type="text" value="0" oninput="liveHashrate();">
+                    </div>
                 </div>
-              </a>
+                <div class="customRow">
+                    <div class="customInput">
+                        <h3>Pool Fee (%)</h3>
+                        <input type="text" value="1" oninput="liveHashrate();">
+                    </div>
+                    <div class="customInput">
+                        <h3>Cost per kWh ($)</h3>
+                        <input type="text" value="0.10" oninput="liveHashrate();">
+                    </div>
+                    <div class="customInput">
+                        <h3>Power (W)</h3>
+                        <input type="text" value="0" id="powerWatts" oninput="liveHashrate();">
+                    </div>
+                </div>
             </div>
-          </div>
+
+            <div id="mainDisclaimer">
+                <h3>The results are calculated from live data</h3>
+                <p>Keep in mind that if a coin with low volume has sudden price increases, it may appear artificially profitable.<br>Please do your research before investing!</p>
+            </div>
+
+            <div id="currencyToggle">
+                <h2>Currency</h2>
+                <div>
+                    <h2>USD</h2>
+                    <input type="checkbox" id="currencyToggleSwitch" oninput="toggleCurrency()">
+                    <h2>BTC</h2>
+                </div>
+            </div>
+
+            <!-- Results -->
+            <div id="results">
+                <div id="resultTabs">
+                    <div id="showAllTab" class="selectedTab" onclick="changeTab('showAll')">
+                        <h2>Show All</h2>
+                    </div>
+                    <div id="scpTab" class="selectedTab" onclick="changeTab('scp')">
+                        <h2>ScPrime</h2>
+                    </div>
+                    <div id="cash2Tab" class="selectedTab" onclick="changeTab('cash2')">
+                        <h2>Cash2</h2>
+                    </div>
+                    <div id="xscTab" class="selectedTab" onclick="changeTab('xsc')">
+                        <h2>Hyperspace</h2>
+                    </div>
+                    <div id="sccTab" class="selectedTab" onclick="changeTab('scc')">
+                        <h2>Sia Classic</h2>
+                    </div>
+                    <div id="siaTab" class="selectedTab" onclick="changeTab('sia')">
+                        <h2>Sia</h2>
+                    </div>
+                </div>
+                <div id="resultDisplay">
+                    <div id="resultTableInfo">
+                        <div class="coinName">
+                            <h2>Coin Name</h2>
+                            <h4>(Tag)</h4>
+                        </div>
+                        <div>
+                            <h3>Block Reward</h3>
+                            <h4>Block Height</h4>
+                            <h5>Block Time</h5>
+                        </div>
+                        <div>
+                            <h3>Network Hashrate</h3>
+                            <h4>Difficulty</h4>
+                        </div>
+                        <div>
+                            <h3>Exchange Rate</h3>
+                            <h4>24Hr Volume</h4>
+                            <h5>Market Cap</h5>
+                        </div>
+                        <div>
+                            <h3>Income</h3>
+                            <h3>Hour | Day</h3>
+                            <h3>Week | Month</h3>
+                        </div>
+                        <div>
+                            <h3>Income</h3>
+                            <h3>Hour | Day</h3>
+                            <h3>Week | Month</h3>
+                        </div>
+                        <div>
+                            <h3>Profit</h3>
+                            <h3>Hour | Day</h3>
+                            <h3>Week | Month</h3>
+                        </div>
+                    </div>
+                    <div class="resultPositioning" id="SCP">
+                        <a href="https://scpri.me/" target="_none" class="coinName">
+                            <img src="Images/primeLogo.png">
+                            <h2>ScPrime</h2>
+                            <h4>(SCP)</h4>
+                        </a>
+                        <a href="https://www.coingecko.com/en/coins/scprime" target="_none">
+                            <h3>0</h3>
+                            <h4>0</h4>
+                            <h5>10 minutes</h5>
+                        </a>
+                        <a href="https://miningpoolstats.stream/scprime" target="_none">
+                            <h3>0</h3>
+                            <h4>0</h4>
+                        </a>
+                        <a href="https://www.coingecko.com/en/coins/scprime" target="_none">
+                            <h3>0</h3>
+                            <h4>0</h4>
+                            <h5>0</h5>
+                        </a>
+                        <div>
+                            <h3>0 | 0</h3>
+                            <h3>0 | 0</h3>
+                            <h4>SCP</h4>
+                        </div>
+                        <div>
+                            <h3>0 | 0</h3>
+                            <h3>0 | 0</h3>
+                            <h4 class="currencyText"></h4>
+                        </div>
+                        <div>
+                            <h3>0 | 0</h3>
+                            <h3>0 | 0</h3>
+                            <h4 class="currencyText"></h4>
+                        </div>
+                    </div>
+                    <div class="resultPositioning" id="CASH2">
+                        <a href="https://cash2.org/" target="_none" class="coinName">
+                            <h4 class="disclaimer">Low Volume</h4>
+                            <img src="Images/cash2.png">
+                            <h2>Cash2</h2>
+                            <h4>(CASH2)</h4>
+                        </a>
+                        <a href="https://www.coingecko.com/en/coins/cash2" target="_none">
+                            <h3>0</h3>
+                            <h4>0</h4>
+                            <h5>9 Seconds</h5>
+                        </a>
+                        <a href="https://miningpoolstats.stream/cash2" target="_none">
+                            <h3 style="color: red;">Not Implemented</h3>
+                            <h4>0</h4>
+                        </a>
+                        <a href="https://www.coingecko.com/en/coins/cash2" target="_none">
+                            <h3>0</h3>
+                            <h4>0</h4>
+                            <h5>0</h5>
+                        </a>
+                        <div>
+                            <h3>0 | 0</h3>
+                            <h3>0 | 0</h3>
+                            <h4>Cash2</h4>
+                        </div>
+                        <div>
+                            <h3>0 | 0</h3>
+                            <h3>0 | 0</h3>
+                            <h4 class="currencyText"></h4>
+                        </div>
+                        <div>
+                            <h3>0 | 0</h3>
+                            <h3>0 | 0</h3>
+                            <h4 class="currencyText"></h4>
+                        </div>
+                    </div>
+                    <div class="resultPositioning" id="XSC">
+                        <a href="https://github.com/HyperspaceApp" target="_none" class="coinName">
+                            <h4 class="disclaimer">Inactive Developer</h4>
+                            <img src="Images/hyperLogo.png">
+                            <h2>Hyperspace</h2>
+                            <h4>(XSC)</h4>
+                        </a>
+                        <a href="https://www.coingecko.com/en/coins/hyperspace" target="_none">
+                            <h3>0</h3>
+                            <h4>0</h4>
+                            <h5>10 minutes</h5>
+                        </a>
+                        <a href="https://miningpoolstats.stream/hyperspace" target="_none">
+                            <h3>0</h3>
+                            <h4>0</h4>
+                        </a>
+                        <a href="https://www.coingecko.com/en/coins/hyperspace" target="_none">
+                            <h3>0</h3>
+                            <h4>0</h4>
+                            <h5>0</h5>
+                        </a>
+                        <div>
+                            <h3>0 | 0</h3>
+                            <h3>0 | 0</h3>
+                            <h4>XSC</h4>
+                        </div>
+                        <div>
+                            <h3>0 | 0</h3>
+                            <h3>0 | 0</h3>
+                            <h4 class="currencyText"></h4>
+                        </div>
+                        <div>
+                            <h3>0 | 0</h3>
+                            <h3>0 | 0</h3>
+                            <h4 class="currencyText"></h4>
+                        </div>
+                    </div>
+                    <div class="resultPositioning" id="SCC">
+                        <a href="https://gitlab.com/SiaClassic-Foundation" target="_none" class="coinName">
+                            <h4 class="disclaimer">Inactive Developer</h4>
+                            <img src="Images/classicLogo.png" style="background-color: white; border-radius: 10px; padding: 1px;">
+                            <h2>SiaClassic</h2>
+                            <h4>(SCC)</h4>
+                        </a>
+                        <a href="https://www.coingecko.com/en/coins/siaclassic" target="_none">
+                            <h3>0</h3>
+                            <h4>0</h4>
+                            <h5>10 minutes</h5>
+                        </a>
+                        <a href="https://miningpoolstats.stream/siaclassic" target="_none">
+                            <h3>0</h3>
+                            <h4>0</h4>
+                        </a>
+                        <a href="https://www.coingecko.com/en/coins/siaclassic" target="_none">
+                            <h3>0</h3>
+                            <h4>0</h4>
+                            <h5>0</h5>
+                        </a>
+                        <div>
+                            <h3>0 | 0</h3>
+                            <h3>0 | 0</h3>
+                            <h4>SCC</h4>
+                        </div>
+                        <div>
+                            <h3>0 | 0</h3>
+                            <h3>0 | 0</h3>
+                            <h4 class="currencyText"></h4>
+                        </div>
+                        <div>
+                            <h3>0 | 0</h3>
+                            <h3>0 | 0</h3>
+                            <h4 class="currencyText"></h4>
+                        </div>
+                    </div>
+                    <div class="resultPositioning" id="SC">
+                        <a href="https://sia.tech/" target="_none" class="coinName">
+                            <img src="Images/siaLogo.png">
+                            <h2>Sia</h2>
+                            <h4>(SC)</h4>
+                        </a>
+                        <a href="https://www.coingecko.com/en/coins/siacoin" target="_none">
+                            <h3>0</h3>
+                            <h4>0</h4>
+                            <h5>10 minutes</h5>
+                        </a>
+                        <a href="https://miningpoolstats.stream/siacoin" target="_none">
+                            <h3>0</h3>
+                            <h4>0</h4>
+                        </a>
+                        <a href="https://www.coingecko.com/en/coins/siacoin" target="_none">
+                            <h3>0</h3>
+                            <h4>0</h4>
+                            <h5>0</h5>
+                        </a>
+                        <div>
+                            <h3>0 | 0</h3>
+                            <h3>0 | 0</h3>
+                            <h4>SC</h4>
+                        </div>
+                        <div>
+                            <h3>0 | 0</h3>
+                            <h3>0 | 0</h3>
+                            <h4 class="currencyText"></h4>
+                        </div>
+                        <div>
+                            <h3>0 | 0</h3>
+                            <h3>0 | 0</h3>
+                            <h4 class="currencyText"></h4>
+                        </div>
+                    </div>
+
+                    <div class="resultPositioning">
+                        <div id="PowerCost">
+                            <div class="coinName">
+                                <img src="Images/electricityIcon.png">
+                                <h2>Power Cost</h4>
+                            </div>
+                            <div>
+                                <h3>0 | 0</h3>
+                                <h3>0 | 0</h3>
+                                <h4 class="currencyText">USD</h4>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+
+            </div>
         </div>
-      </div>
-    </div>
-    <footer>
-        <div>
-           <!--<a href="https://www.kizmotek.com/advertisementInfo.html"><img src="Images/AdvertisementImgOG.png" id="advert"></a>-->
-           <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-<!-- Bottom Ad -->
-<ins class="adsbygoogle"
-     style="display:inline-block;width:200px;height:100px"
-     data-ad-client="ca-pub-2208671282632963"
-     data-ad-slot="8068751074"></ins>
-<script>
-     (adsbygoogle = window.adsbygoogle || []).push({});
-</script>
-<a href="https://www.kizmotek.com/advertisementInfo.html">
-               <div class="tooltip6">
-               <img src="Images/info.png" class="infoImg tooltipJS">
-                </div>
-            </a>
-        </div>
-          <div id="bottomText">
-              <h3 id="bottomText">KizmoTek: HTML, CSS, and JavaScript</h3>
-          </div>
-          <div id="social">
-          <h2 style="margin-bottom:0px; margin-top:10px;">Social Media</h2>
-            <span id="socialLinks">
-              <a href="https://twitter.com/KizmoTek" target="_blank">
-                    <img src="Images/twitter.png" id="twitterIMG" class="socialIMGMargin">
+        <div id="rightBar">
+            <div>
+                <h3 style="margin-bottom: 5px; color: red;">DISCLAIMER</h3>
+                <p id="disclaimerText">The numbers used for USD and BTC conversions are taken from Coingecko.<br>They are believed to be true but no warranty of correctness and usability can be assumed.<br>Please do your research before investing!</p>
+            </div>
+            <article>
+
+                <a href="https://bit.ly/336zKeZ" target="_none" style="display: none !important;">
+                    <div class="aBar">
+                        <div class="sText">Sponsored</div>
+                        <img src="Images/cash2casino.png" class="aSpot">
+                    </div>
                 </a>
-              <a href="https://www.instagram.com/kizmotek/" target="_blank">
-                  <img src="Images/instagram.png" id="instagramIMG" class="socialIMGMargin">
-              </a>
-              <a href="https://discord.gg/vBWhVWT" target="_blank">
-                  <img src="Images/discord.png" id="discordIMG" class="socialIMGMargin">
-              </a>
-            </span>
-          </div>
-        <div id="DonationMain">
-            <h4 id="DonationWord">Donation<br>Addresses:</h4>
-            <div id="donation">
-                <div class="popup">
-                    <span class="popuptext" id="myPopup">Address Copied</span>
-                    <img src="Images/BTC.png" id="address" class="BTC" onclick="BTCSet()">
-                </div>
-                <div class="popup2">
-                    <span class="popuptext2" id="myPopup2">Address Copied</span>
-                    <img src="Images/siaLogo.png" id="address" class="SIA" onclick="SIASet()">
-                </div>
-                <div class="popup3">
-                    <span class="popuptext3" id="myPopup3">Address Copied</span>
-                    <img src="Images/hyperLogo.png" id="address" class="XSC" onclick="XSCSet()">
-                </div>
-                <br>
-                <div class="popup4">
-                    <span class="popuptext4" id="myPopup4">Address Copied</span>
-                    <img src="Images/primeLogo.png" id="address" class="SCP" onclick="SCPSet()">
-                </div>
-                <div class="popup5">
-                    <span class="popuptext5" id="myPopup5">Address Copied</span>
-                    <img src="Images/cash2.png" id="address" class="Cash2" onclick="Cash2Set()">
-                </div>
+
+                <a href="https://siagear.tech/" target="_none">
+                    <div class="aBar">
+                        <div class="sText">Sponsored</div>
+                        <img src="Images/siagear.png" class="aSpot">
+                    </div>
+                </a>
+
+            </article>
+            <div id="apiLinks">
+                <p>API's used on this website</p>
+                <a href="https://keops.cc/" target="_none">Keops</a>
+                <a href="https://www.coingecko.com/en/api" target="_none">Coin Gecko</a>
+                <a href="https://blocks.cash2.org/" target="_none">Cash2 Block Explorer</a>
             </div>
         </div>
+    </main>
+    <footer>
+        <p>Website designed and created by <a href="https://www.kizmotek.com/" target="_none">KizmoTek</a></p>
+        <p>Credit to <a href="https://github.com/MasterHW" target="_none">MasterHW</a> for helping with calculations and <a href="https://keops.cc/" target="_none">Hakkane</a> for the API Setup</p>
     </footer>
-    <script type="text/javascript" src="All.js"></script>
-    <script type="text/javascript" src="index.js"></script>
 </body>
+<script src="moment.js"></script>
+<script src="script.js"></script>
+<script src="tabs.js"></script>
+
 </html>

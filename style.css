@@ -1,0 +1,868 @@
+/* Copyright (c) 2018 by KizmoTek <KizmoTek@gmail.com>
+ * All rights reserved.
+ *
+ * License: 
+ * Redistribution and use in source and binary forms, with or without
+ * modification, are permitted provided that the following conditions are met:
+ *
+ *   - Redistributions of source code must retain the above copyright notice, this
+ *     list of conditions and the following disclaimer.
+ *
+ *   - Redistributions in binary form must reproduce the above copyright notice,
+ *     this list of conditions and the following disclaimer in the documentation
+ *     and/or other materials provided with the distribution.
+ *
+ * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
+ * AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
+ * IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
+ * DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE
+ * FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL
+ * DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR
+ * SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER
+ * CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY,
+ * OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
+ * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+ */
+
+body {
+        margin: 0;
+        padding: 0;
+        text-align: center;
+        color: white;
+        background-color: #1c1d1f;
+        height: 100%;
+        font-family: 'Roboto';
+        overflow-x: hidden;
+}
+
+a {
+        color: white;
+        text-decoration: none;
+        -webkit-user-select: none;
+        -webkit-user-drag: none;
+        -webkit-app-region: no-drag;
+}
+
+.noClick {
+        pointer-events: none;
+}
+
+nav {
+        width: 100%;
+        height: 50px;
+        border-bottom: 4px black solid;
+        background-color: #1c1d1f;
+        box-shadow: 0 5px 10px rgba(0, 0, 0, 0.9);
+        position: relative;
+}
+
+nav img {
+        width: 45px;
+        position: absolute;
+        left: 10px;
+}
+
+nav h1 {
+        position: absolute;
+        margin: 0;
+        top: 50%;
+        margin-top: -25px;
+        left: 50%;
+        margin-left: -225px;
+        font-size: 40px;
+}
+
+footer {
+        width: 100%;
+        height: 80px;
+        border-top: 4px black solid;
+        background-color: #1c1d1f;
+        box-shadow: 0 -5px 10px rgba(0, 0, 0, 0.9);
+        position: relative;
+}
+
+footer p {
+        font-size: 18px;
+        margin: 10px;
+}
+
+footer a {
+        color: #2AD1C8;
+        font-weight: bold;
+}
+
+#api {
+        display: flex;
+        position: absolute;
+        width: 220px;
+        right: 0;
+        margin-top: 12px;
+        cursor: default;
+}
+
+#api h2 {
+        margin-top: 0;
+        margin-bottom: 0;
+}
+
+#apiStatus {
+        margin-left: 10px;
+}
+
+.apiActive {
+        color: rgb(30, 214, 96);
+}
+
+.apiError {
+        color: red;
+}
+
+#api::after {
+        display: block;
+        opacity: 0;
+        content: attr(data-value);
+        color: red;
+        background-color: black;
+        position: absolute;
+        top: 40px;
+        right: 20px;
+        font-size: 20px;
+        padding: 5px;
+        border-radius: 5px;
+        transition: opacity 0.5s;
+        transition-delay: 0.5s;
+}
+
+#api:hover::after {
+        opacity: 1;
+        transition: opacity 0.2s;
+        transition-delay: 0s;
+}
+
+#apiLinks {
+        display: flex;
+        flex-direction: column;
+}
+
+#apiLinks a {
+        color: #2AD1C8;
+}
+
+main {
+        width: 100%;
+        max-width: 1700px;
+        margin: auto;
+        margin-top: 20px;
+        position: relative;
+        display: flex;
+        flex-direction: row;
+}
+
+/* Right Bar */
+
+#rightBar {
+        width: 18%;
+        padding-bottom: 20px;
+        background-color: black;
+        position: absolute;
+        right: 0;
+        top: 80px;
+}
+
+.sText {
+        width: 94%;
+        padding-left: 2%;
+        padding-right: 2%;
+        margin: auto;
+        margin-top: 10px;
+        color: #e69135;
+        font-weight: bold;
+        font-size: 12px;
+        text-align: left;
+        background-color: #ffe4c7;
+        border: 1px solid #e69135;
+        border-radius: 5px 5px 0 0;
+}
+
+.aSpot {
+        width: 98%;
+        margin: auto;
+        border: 1px solid #e69135;
+}
+
+article {
+        width: 100%;
+}
+
+/* Calculator Positioning */
+
+#calcPosition {
+        position: relative;
+}
+
+@media only screen and (max-width: 1700px) {
+        main {
+                flex-direction: column;
+        }
+        #calcPosition {
+                margin: auto;
+                height: 1200px;
+        }
+        #rightBar {
+                height: 200px;
+                width: 100%;
+                max-width: 1350px;
+                margin: auto;
+                margin-bottom: 20px;
+                display: flex;
+                flex-direction: row;
+                background-color: black;
+                position: static;
+        }
+        .aBar {
+                height: 100%;
+        }
+        .sText {
+                width: 60%;
+                margin-top: 0;
+        }
+        .aSpot {
+                width: inherit;
+                height: 90%;
+        }
+        article {
+                width: 100%;
+                height: 100%;
+                padding: 10px;
+                display: flex;
+                flex-direction: row;
+        }
+}
+
+/* Preset Miners */
+
+#presetMiners {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        width: 100%;
+        max-width: 1150px;
+        height: 140px;
+        margin: auto;
+}
+
+#presetMiners h2 {
+        margin: 0;
+        font-size: 36px;
+}
+
+.minerRow {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+}
+
+.miners {
+        display: flex;
+        flex-direction: row;
+        width: 250px;
+        height: 50px;
+        background-color: black;
+        border-radius: 5px;
+        border-left: solid 5px #3c3c3c;
+}
+
+.siaMiner {
+        border-left-color: rgb(30, 214, 96) !important;
+}
+
+.miners h3 {
+        font-size: 22px;
+        margin: auto;
+}
+
+.miners input {
+        font-size: 22px;
+        width: 70px;
+        height: 92%;
+        color: white;
+        background-color: #3c3c3c;
+        border: solid 1px black;
+        border-radius: 4px;
+}
+
+/* Custom Values */
+
+#customValues {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        width: 100%;
+        max-width: 820px;
+        height: 140px;
+        margin: auto;
+        margin-top: 40px;
+}
+
+.customRow {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+}
+
+.customInput {
+        display: flex;
+        flex-direction: row;
+        width: 250px;
+        height: 50px;
+        background-color: black;
+        border-radius: 5px;
+}
+
+.customInput h3 {
+        font-size: 22px;
+        margin: auto;
+}
+
+.customInput input {
+        font-size: 22px;
+        width: 70px;
+        height: 92%;
+        color: white;
+        background-color: #3c3c3c;
+        border: solid 1px black;
+        border-radius: 4px;
+}
+
+.customInput select {
+        font-size: 22px;
+        width: 70px;
+        height: 100%;
+        color: white;
+        background-color: #3c3c3c;
+        border: solid 1px black;
+        border-left: none;
+        border-radius: 0px 4px 4px 0;
+        outline-width: 0;
+}
+
+#powerWatts {
+        width: 120px;
+}
+
+/* Toggle Switch for "Add to Difficulty" */
+
+input[type="checkbox"] {
+        -webkit-appearance: none;
+        -moz-appearance: none;
+        appearance: none;
+        -webkit-tap-highlight-color: transparent;
+        cursor: pointer;
+}
+
+input[type="checkbox"]:focus {
+        outline: 0;
+}
+
+#difficultyToggle {
+        height: 32px;
+        width: 52px;
+        border-radius: 16px;
+        display: inline-block;
+        position: relative;
+        margin: auto;
+        border: 2px solid #474755;
+        background: linear-gradient(180deg, #2D2F39 0%, #1F2027 100%);
+        transition: all 0.2s ease;
+}
+
+#difficultyToggle:after {
+        content: "";
+        position: absolute;
+        top: 2px;
+        left: 2px;
+        width: 24px;
+        height: 24px;
+        border-radius: 50%;
+        background: white;
+        box-shadow: 0 1px 2px rgba(44, 44, 44, 0.2);
+        transition: all 0.2s cubic-bezier(0.5, 0.1, 0.75, 1.35);
+}
+
+#difficultyToggle:checked {
+        border-color: rgb(30, 214, 96);
+}
+
+#difficultyToggle:checked:after {
+        transform: translatex(20px);
+        background-color: rgba(30, 214, 96, 0.9);
+}
+
+/* Currency Toggle */
+
+#currencyToggle {
+        position: absolute;
+        right: 0;
+        margin-top: -10px;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        width: 180px;
+        height: 70px;
+        background-color: black;
+        padding: 10px;
+        border-radius: 5px;
+}
+
+#currencyToggle h2 {
+        margin: 0;
+}
+
+#currencyToggle div {
+        display: flex;
+        flex-direction: row;
+}
+
+#currencyToggleSwitch {
+        height: 32px;
+        width: 52px;
+        border-radius: 16px;
+        display: inline-block;
+        position: relative;
+        margin: auto;
+        border: 2px solid #474755;
+        background: linear-gradient(180deg, #2D2F39 0%, #1F2027 100%);
+        transition: all 0.2s ease;
+}
+
+#currencyToggleSwitch:after {
+        content: "";
+        position: absolute;
+        top: 2px;
+        left: 2px;
+        width: 24px;
+        height: 24px;
+        border-radius: 50%;
+        background-color: rgba(30, 214, 96, 0.9);
+        box-shadow: 0 1px 2px rgba(44, 44, 44, 0.2);
+        transition: all 0.2s cubic-bezier(0.5, 0.1, 0.75, 1.35);
+}
+
+#currencyToggleSwitch:checked:after {
+        transform: translatex(20px);
+        background-color: orange;
+}
+
+/* Results */
+
+#results {
+        width: 100%;
+        min-width: 1310px;
+        height: 1000px;
+        margin: auto;
+        margin-top: 40px;
+}
+
+#resultTabs {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        width: 100%;
+        max-width: 950px;
+}
+
+#resultTabs div {
+        background-color: #3c3c3c;
+        border: solid 2px #3c3c3c;
+        border-radius: 10px 10px 0 0;
+        width: 140px;
+        height: 40px;
+        transition: all 0.2s;
+        transform-origin: bottom;
+        transform: scale(0.95);
+        opacity: 0.6;
+}
+
+#resultTabs div:hover {
+        cursor: pointer;
+}
+
+.selectedTab {
+        transform: scale(1) !important;
+        opacity: 1 !important;
+        border-bottom: none !important;
+}
+
+#siaTab:not(.notSelectedTab) {
+        border: solid 2px rgb(30, 214, 96) !important;
+}
+
+#scpTab:not(.notSelectedTab) {
+        border: solid 2px rgb(32, 116, 238) !important;
+}
+
+#cash2Tab:not(.notSelectedTab) {
+        border: solid 2px rgb(255, 0, 0) !important;
+}
+
+#xscTab:not(.notSelectedTab) {
+        border: solid 2px rgb(150, 92, 213) !important;
+}
+
+#sccTab:not(.notSelectedTab) {
+        border: solid 2px black !important;
+}
+
+#resultTabs h2 {
+        margin: 5px 0 0 0;
+}
+
+#resultDisplay {
+        width: 100%;
+        /* Height should change based off the coins it shows */
+        margin: auto;
+        /* background-color: black; */
+        border-bottom: solid 2px #3c3c3c;
+        border-radius: 5px;
+        display: flex;
+        flex-direction: column;
+}
+
+#resultDisplay div {
+        background-color: black;
+}
+
+#SC {
+        border-right: solid 4px rgb(30, 214, 96);
+        border-left: solid 4px rgb(30, 214, 96);
+        border-radius: 10px;
+}
+
+#SCP {
+        border-right: solid 4px rgb(32, 116, 238);
+        border-left: solid 4px rgb(32, 116, 238);
+        border-radius: 10px;
+}
+
+#CASH2 {
+        border-right: solid 4px rgb(255, 0, 0);
+        border-left: solid 4px rgb(255, 0, 0);
+        border-radius: 10px;
+}
+
+#XSC {
+        border-right: solid 4px rgb(150, 92, 213);
+        border-left: solid 4px rgb(150, 92, 213);
+        border-radius: 10px;
+}
+
+#SCC {
+        border-right: solid 4px black;
+        border-left: solid 4px black;
+        border-radius: 10px;
+}
+
+#mainDisclaimer {
+        color: red;
+        background-color: black;
+        width: 100%;
+        max-width: 800px;
+        padding: 10px;
+        margin: auto;
+        margin-top: 40px;
+        border-radius: 5px;
+}
+
+#mainDisclaimer h3 {
+        margin-top: 0;
+        margin-bottom: 5px;
+}
+
+#mainDisclaimer p {
+        margin: 0;
+}
+
+.disclaimer {
+        position: absolute;
+        color: red;
+}
+
+#disclaimerText {
+        font-weight: bold;
+        color: red;
+        margin: 0;
+        padding: 15px;
+        font-size: 16px;
+        text-align: center;
+}
+
+.coinName {
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        padding-left: 10px;
+}
+
+.coinName h2 {
+        height: 30px;
+        margin: auto;
+        margin-left: 0;
+        margin-right: 0;
+}
+
+.coinName h4 {
+        height: 20px;
+        margin: auto !important;
+        margin-left: 5px !important;
+}
+
+#resultTableInfo {
+        display: flex;
+        flex-direction: row;
+        padding-top: 10px;
+        border-bottom: solid 4px #3c3c3c;
+        border-right: solid 4px #3c3c3c;
+        border-left: solid 4px #3c3c3c;
+        border-radius: 0 0 10px 10px;
+}
+
+#resultTableInfo div, .resultPositioning div, .resultPositioning a {
+        width: 190px;
+        position: relative;
+        transition: background-color 0.2s;
+        border-radius: 5px;
+}
+
+.resultPositioning a:hover {
+        background-color: rgba(255, 255, 255, 0.1);
+}
+
+#resultTableInfo h3, #resultTableInfo h4, .resultPositioning h3, .resultPositioning h4, #resultTableInfo h5, .resultPositioning h5 {
+        margin-top: 0;
+        margin-bottom: 6px;
+}
+
+.resultPositioning {
+        display: flex;
+        flex-direction: row;
+        border-bottom: solid 2px #3c3c3c;
+        padding-top: 5px;
+        padding-bottom: 5px;
+        opacity: 1;
+}
+
+.warningPopup:after {
+        width: 132px;
+        position: absolute;
+        top: -30px;
+        left: 50%;
+        margin-left: -66px;
+        opacity: 0;
+        background-color: #1c1d1f;
+        padding: 5px;
+        border-radius: 5px;
+        transition: opacity 0.2s;
+        content: "Low Volume";
+}
+
+.warningPopup:hover:after {
+        opacity: 0.95;
+        transition-delay: 0s;
+}
+
+.resultPositioning img {
+        width: 30px;
+        height: 30px;
+        margin: auto;
+        margin-right: 5px;
+        margin-left: 5px;
+}
+
+#PowerCost {
+        display: flex;
+        flex-direction: row;
+        width: 500px;
+        margin: auto;
+        border-bottom: none;
+}
+
+#PowerCost div {
+        margin: auto;
+        width: 50%;
+}
+
+/* Mobile Scaling */
+
+@media only screen and (max-width: 1390px) {
+        #calcPosition {
+                width: 100%;
+        }
+        #results {
+                min-width: auto;
+        }
+        #resultTableInfo div, .resultPositioning div, .resultPositioning a {
+                width: 14.2%;
+        }
+}
+
+@media only screen and (max-width: 1200px) {
+        #calcPosition {
+                height: initial;
+        }
+        #presetMiners {
+                height: 240px;
+                width: 100%;
+                max-width: 700px;
+                flex-direction: row;
+        }
+        .minerRow {
+                flex-direction: column;
+        }
+        #currencyToggle {
+                margin-top: 15px;
+                margin-right: -100px;
+                /* Minus half of width to make it center */
+                right: 50%;
+        }
+        #results {
+                margin-top: 120px;
+        }
+        #resultTabs {
+                max-width: none;
+        }
+}
+
+@media only screen and (max-width: 950px) {
+        nav {
+                height: 30px;
+        }
+        nav h1 {
+                font-size: 18px;
+                left: 280px;
+                margin-top: -11px;
+        }
+        nav img {
+                width: 30px;
+        }
+        #api {
+                width: 140px;
+                margin-top: 6px;
+        }
+        #api h2 {
+                font-size: 14px;
+        }
+        #customValues {
+                height: 180px;
+                flex-direction: row;
+        }
+        .customRow {
+                flex-direction: column;
+        }
+        #resultTabs {
+                max-width: 700px;
+        }
+        #resultTabs div {
+                width: 90px;
+                height: 30px;
+        }
+        #resultTabs h2 {
+                font-size: 16px;
+        }
+        #resultDisplay {
+                overflow-x: scroll;
+        }
+        .resultPositioning, #resultTableInfo {
+                min-width: 1300px;
+        }
+        /* Scrollbar styles */
+        ::-webkit-scrollbar {
+                width: 12px;
+                height: 12px;
+        }
+        ::-webkit-scrollbar-track {
+                box-shadow: inset 0 0 10px gray;
+                border-radius: 10px;
+        }
+        ::-webkit-scrollbar-thumb {
+                border-radius: 10px;
+                background: #2AD1C8;
+                box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.5);
+        }
+        ::-webkit-scrollbar-thumb:hover {
+                background: #2AD1C8;
+        }
+        
+        #rightBar {
+                width: 100%;
+                height: auto;
+                flex-direction: column;
+        }
+        .aBar {
+                width: 99%;
+                margin: auto;
+                max-width: 500px;
+        }
+        .sText {
+                width: 95%;
+                margin-top: 0;
+        }
+        .aSpot {
+                width: inherit;
+                height: 90%;
+        }
+        article {
+                padding: 0;
+                flex-direction: column;
+        }
+}
+
+@media only screen and (max-width: 530px) {
+        #api {
+                flex-direction: column;
+                margin: 0;
+        }
+        #api h2 {
+                font-size: 12px;
+        }
+        #presetMiners {
+                width: 255px;
+                height: 480px;
+                flex-direction: column;
+                margin: auto;
+        }
+        #presetMiners, #customValues {
+                background-color: #262626;
+                padding: 10px;
+                border-radius: 10px;
+        }
+        .miners {
+                margin-top: 10px;
+        }
+        #customValues {
+                width: 250px;
+                height: 360px;
+                flex-direction: column;
+                margin: auto;
+                margin-top: 20px;
+        }
+        .customInput {
+                margin-top: 10px;
+        }
+        #resultTabs {
+                width: 120px;
+                max-width: none;
+                margin: auto;
+                margin-bottom: 20px;
+                flex-direction: column;
+                justify-content: center;
+        }
+        #resultTabs div {
+                width: 120px;
+                height: 35px;
+                margin-top: 10px;
+                border-radius: 10px;
+        }
+        #resultTabs h2 {
+                font-size: 20px;
+        }
+}
