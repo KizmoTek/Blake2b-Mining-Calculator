@@ -1,8 +1,26 @@
 const tabs = document.getElementById("resultTabs").childNodes
 const resultCoins = document.getElementsByClassName("resultPositioning")
 
-changeTab("xsc")
-changeTab("scc")
+
+const urlString = window.location.search.toLowerCase();
+const urlParams = new URLSearchParams(urlString);
+const coin = urlParams.get('coin')
+
+console.log(coin);
+
+if(coin == "scp" || coin == "scprime" || coin == "siaprime") {
+    changeTab("sia")
+    changeTab("cash2")
+} else if(coin == "sc" || coin == "sia" || coin == "siacoin"){
+    changeTab("cash2")
+    changeTab("scp")
+} else if(coin == "cash2" || coin == "c2" || coin == "cash"){
+    changeTab("sia")
+    changeTab("scp")
+} else {
+    changeTab("cash2")
+}
+
 
 function changeTab(tab) {
     if (tab == "showAll") {
@@ -11,7 +29,7 @@ function changeTab(tab) {
             tabs[i].classList.remove("notSelectedTab");
         }
 
-        for (t = 3; t <= 11; t += 2) {
+        for (t = 3; t <= 9; t += 2) {
             for (x = 0; x <= 4; x++) {
                 checkTab(t, x, "open")
             }
@@ -21,12 +39,8 @@ function changeTab(tab) {
         checkTab(3, 0)
     } else if (tab == "cash2") {
         checkTab(5, 1)
-    } else if (tab == "xsc") {
-        checkTab(7, 2)
-    } else if (tab == "scc") {
-        checkTab(9, 3)
     } else if (tab == "sia") {
-        checkTab(11, 4)
+        checkTab(7, 2)
     }
 }
 

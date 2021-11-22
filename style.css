@@ -254,6 +254,7 @@ article {
         max-width: 1150px;
         height: 140px;
         margin: auto;
+        margin-bottom: 40px;
 }
 
 #presetMiners h2 {
@@ -265,6 +266,13 @@ article {
         display: flex;
         flex-direction: row;
         justify-content: space-between;
+}
+
+.Goldshell {
+        width: 75%;
+        margin: auto;
+        margin-bottom: 0;
+        margin-top: 0;
 }
 
 .miners {
@@ -306,7 +314,12 @@ article {
         max-width: 820px;
         height: 140px;
         margin: auto;
-        margin-top: 40px;
+        margin-top: 20px;
+}
+
+#customValuesText {
+        margin: 0;
+        margin-top: 20px;
 }
 
 .customRow {
@@ -719,6 +732,15 @@ input[type="checkbox"]:focus {
                 width: 100%;
                 max-width: 700px;
                 flex-direction: row;
+                margin-bottom: 10px;
+        }
+        .Goldshell {
+                margin: auto;
+                width: 100%;
+                max-width: 700px;
+                flex-direction: row !important;
+                flex-wrap: wrap;
+                height: 120px;
         }
         .minerRow {
                 flex-direction: column;
@@ -838,7 +860,24 @@ input[type="checkbox"]:focus {
         #presetMiners, #customValues {
                 background-color: #262626;
                 padding: 10px;
-                border-radius: 10px;
+                border-radius: 10px 10px 0 0;
+                padding-bottom: 0;
+        }
+        #customValues {
+                border-radius: 10px !important;
+                padding-bottom: 10px !important;
+                padding-top: 0 !important;
+        }
+        .Goldshell {
+                margin: auto;
+                width: 255px;
+                padding: 10px;
+                border-radius: 0 0 10px 10px;
+                flex-direction: column;
+                height: 180px;
+                background-color: #262626;
+                padding-top: 0;
+                border-top: 0;
         }
         .miners {
                 margin-top: 10px;

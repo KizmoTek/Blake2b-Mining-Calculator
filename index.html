@@ -88,11 +88,25 @@
                         <input type="text" value="0" oninput="presetUpdate()">
                     </div>
                 </div>
+                
+            </div>
+            <div class="minerRow Goldshell">
+                <div class="miners siaMiner">
+                    <h3>Goldshell HS3-SE</h3>
+                    <input type="text" value="0" oninput="presetUpdate()">
+                </div>
+                <div class="miners siaMiner">
+                    <h3>Goldshell HS3</h3>
+                    <input type="text" value="0" oninput="presetUpdate()">
+                </div>
+                <div class="miners siaMiner">
+                    <h3>Goldshell HS5</h3>
+                    <input type="text" value="0" oninput="presetUpdate()">
+                </div>
             </div>
 
-            <!-- <hr style="width: 100vw; position: absolute; left: 0; background-color: #3c3c3c; border: none; height: 1px; margin-top: 15px;"> -->
-
             <!-- Custom Values -->
+            <h2 style="font-size: 32px;" id="customValuesText">Mining Values</h2>
             <div id="customValues">
                 <div class="customRow">
                     <div class="customInput">
@@ -153,12 +167,6 @@
                     </div>
                     <div id="cash2Tab" class="selectedTab" onclick="changeTab('cash2')">
                         <h2>Cash2</h2>
-                    </div>
-                    <div id="xscTab" class="selectedTab" onclick="changeTab('xsc')">
-                        <h2>Hyperspace</h2>
-                    </div>
-                    <div id="sccTab" class="selectedTab" onclick="changeTab('scc')">
-                        <h2>Sia Classic</h2>
                     </div>
                     <div id="siaTab" class="selectedTab" onclick="changeTab('sia')">
                         <h2>Sia</h2>
@@ -273,80 +281,6 @@
                             <h4 class="currencyText"></h4>
                         </div>
                     </div>
-                    <div class="resultPositioning" id="XSC">
-                        <a href="https://github.com/HyperspaceApp" target="_none" class="coinName">
-                            <h4 class="disclaimer">Inactive Developer</h4>
-                            <img src="Images/hyperLogo.png">
-                            <h2>Hyperspace</h2>
-                            <h4>(XSC)</h4>
-                        </a>
-                        <a href="https://www.coingecko.com/en/coins/hyperspace" target="_none">
-                            <h3>0</h3>
-                            <h4>0</h4>
-                            <h5>10 minutes</h5>
-                        </a>
-                        <a href="https://miningpoolstats.stream/hyperspace" target="_none">
-                            <h3>0</h3>
-                            <h4>0</h4>
-                        </a>
-                        <a href="https://www.coingecko.com/en/coins/hyperspace" target="_none">
-                            <h3>0</h3>
-                            <h4>0</h4>
-                            <h5>0</h5>
-                        </a>
-                        <div>
-                            <h3>0 | 0</h3>
-                            <h3>0 | 0</h3>
-                            <h4>XSC</h4>
-                        </div>
-                        <div>
-                            <h3>0 | 0</h3>
-                            <h3>0 | 0</h3>
-                            <h4 class="currencyText"></h4>
-                        </div>
-                        <div>
-                            <h3>0 | 0</h3>
-                            <h3>0 | 0</h3>
-                            <h4 class="currencyText"></h4>
-                        </div>
-                    </div>
-                    <div class="resultPositioning" id="SCC">
-                        <a href="https://gitlab.com/SiaClassic-Foundation" target="_none" class="coinName">
-                            <h4 class="disclaimer">Inactive Developer</h4>
-                            <img src="Images/classicLogo.png" style="background-color: white; border-radius: 10px; padding: 1px;">
-                            <h2>SiaClassic</h2>
-                            <h4>(SCC)</h4>
-                        </a>
-                        <a href="https://www.coingecko.com/en/coins/siaclassic" target="_none">
-                            <h3>0</h3>
-                            <h4>0</h4>
-                            <h5>10 minutes</h5>
-                        </a>
-                        <a href="https://miningpoolstats.stream/siaclassic" target="_none">
-                            <h3>0</h3>
-                            <h4>0</h4>
-                        </a>
-                        <a href="https://www.coingecko.com/en/coins/siaclassic" target="_none">
-                            <h3>0</h3>
-                            <h4>0</h4>
-                            <h5>0</h5>
-                        </a>
-                        <div>
-                            <h3>0 | 0</h3>
-                            <h3>0 | 0</h3>
-                            <h4>SCC</h4>
-                        </div>
-                        <div>
-                            <h3>0 | 0</h3>
-                            <h3>0 | 0</h3>
-                            <h4 class="currencyText"></h4>
-                        </div>
-                        <div>
-                            <h3>0 | 0</h3>
-                            <h3>0 | 0</h3>
-                            <h4 class="currencyText"></h4>
-                        </div>
-                    </div>
                     <div class="resultPositioning" id="SC">
                         <a href="https://sia.tech/" target="_none" class="coinName">
                             <img src="Images/siaLogo.png">
@@ -437,7 +371,10 @@
     </footer>
 </body>
 <script src="moment.js"></script>
-<script src="script.js"></script>
+
+<!-- <script src="sia.js"></script> -->
+<script src="scp.js"></script>
+<!-- <script src="cash2.js"></script> -->
 <script src="tabs.js"></script>
 
 </html>
